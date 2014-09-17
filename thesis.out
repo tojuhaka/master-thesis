@@ -1,44 +1,43 @@
-\BOOKMARK [0][]{chapter.1}{1 Sanasto}{}% 1
-\BOOKMARK [0][]{chapter.2}{2 Johdanto}{}% 2
-\BOOKMARK [1][]{section.2.1}{2.1 Tausta}{chapter.2}% 3
-\BOOKMARK [1][]{section.2.2}{2.2 Tutkimuskysymys}{chapter.2}% 4
-\BOOKMARK [1][]{section.2.3}{2.3 Aiheen rajaus}{chapter.2}% 5
-\BOOKMARK [0][]{chapter.3}{3 Tutkimuksen Rakenne}{}% 6
-\BOOKMARK [0][]{chapter.4}{4 Kirjallisuuskatsaus}{}% 7
-\BOOKMARK [1][]{section.4.1}{4.1 Toteutus}{chapter.4}% 8
-\BOOKMARK [1][]{section.4.2}{4.2 MVC}{chapter.4}% 9
-\BOOKMARK [1][]{section.4.3}{4.3 Web-sovelluskehykset}{chapter.4}% 10
-\BOOKMARK [0][]{chapter.5}{5 MVC}{}% 11
-\BOOKMARK [1][]{section.5.1}{5.1 Historia}{chapter.5}% 12
-\BOOKMARK [1][]{section.5.2}{5.2 Malli \(Model\)}{chapter.5}% 13
-\BOOKMARK [1][]{section.5.3}{5.3 N\344kym\344 \(View\)}{chapter.5}% 14
-\BOOKMARK [1][]{section.5.4}{5.4 Ohjain \(Controller\)}{chapter.5}% 15
-\BOOKMARK [1][]{section.5.5}{5.5 Esimerkkiohjelma}{chapter.5}% 16
-\BOOKMARK [0][]{chapter.6}{6 Web-sovelluskehykset}{}% 17
-\BOOKMARK [1][]{section.6.1}{6.1 Tausta \046 Teoria}{chapter.6}% 18
-\BOOKMARK [1][]{section.6.2}{6.2 Pyramid}{chapter.6}% 19
-\BOOKMARK [1][]{section.6.3}{6.3 Django}{chapter.6}% 20
-\BOOKMARK [1][]{section.6.4}{6.4 Plone}{chapter.6}% 21
-\BOOKMARK [1][]{section.6.5}{6.5 Flask}{chapter.6}% 22
-\BOOKMARK [0][]{chapter.7}{7 MVC:n toteutus web-sovelluskehyksiss\344}{}% 23
-\BOOKMARK [1][]{section.7.1}{7.1 Yleist\344}{chapter.7}% 24
-\BOOKMARK [1][]{section.7.2}{7.2 Pyramid}{chapter.7}% 25
-\BOOKMARK [1][]{section.7.3}{7.3 Django}{chapter.7}% 26
-\BOOKMARK [1][]{section.7.4}{7.4 Plone}{chapter.7}% 27
-\BOOKMARK [0][]{chapter.8}{8 MVC and Flask}{}% 28
-\BOOKMARK [1][]{section.8.1}{8.1 Esimerkkiohjelma}{chapter.8}% 29
-\BOOKMARK [1][]{section.8.2}{8.2 Pohdinta}{chapter.8}% 30
-\BOOKMARK [1][]{section.8.3}{8.3 Yhteenveto}{chapter.8}% 31
-\BOOKMARK [0][]{chapter.9}{9 Johtop\344\344t\366kset}{}% 32
-\BOOKMARK [0][]{chapter.10}{10 Tutkielman rakenne}{}% 33
-\BOOKMARK [1][]{section.10.1}{10.1 Teoriaosa}{chapter.10}% 34
-\BOOKMARK [1][]{section.10.2}{10.2 Teorian j\344lkeen}{chapter.10}% 35
-\BOOKMARK [0][]{chapter.11}{11 L\344hteiden k\344ytt\366}{}% 36
-\BOOKMARK [1][]{section.11.1}{11.1 L\344hdeviittaukset}{chapter.11}% 37
-\BOOKMARK [1][]{section.11.2}{11.2 L\344hdetietokanta}{chapter.11}% 38
-\BOOKMARK [1][]{section.11.3}{11.3 L\344hdeluettelo}{chapter.11}% 39
-\BOOKMARK [1][]{section.11.4}{11.4 Tiedossa olevat ongelmat}{chapter.11}% 40
-\BOOKMARK [0][]{chapter.12}{12 Tutkielmapohjan erityispiirteet}{}% 41
-\BOOKMARK [0][]{chapter.13}{13 Yhteenveto}{}% 42
-\BOOKMARK [1][]{section.M.1}{A Siirtyminen gradu2:sta gradu3:een}{chapter.13}% 43
-\BOOKMARK [1][]{section.M.2}{B Harvemmin tarvittavat ominaisuudet}{chapter.13}% 44
+\BOOKMARK [0][]{chapter.1}{1 Johdanto}{}% 1
+\BOOKMARK [1][]{section.1.1}{1.1 Tausta}{chapter.1}% 2
+\BOOKMARK [1][]{section.1.2}{1.2 Tutkimuskysymys}{chapter.1}% 3
+\BOOKMARK [1][]{section.1.3}{1.3 Aiheen rajaus}{chapter.1}% 4
+\BOOKMARK [0][]{chapter.2}{2 Tutkimuksen Rakenne}{}% 5
+\BOOKMARK [0][]{chapter.3}{3 Kirjallisuuskatsaus}{}% 6
+\BOOKMARK [1][]{section.3.1}{3.1 Toteutus}{chapter.3}% 7
+\BOOKMARK [1][]{section.3.2}{3.2 MVC}{chapter.3}% 8
+\BOOKMARK [1][]{section.3.3}{3.3 Web-sovelluskehykset}{chapter.3}% 9
+\BOOKMARK [0][]{chapter.4}{4 MVC}{}% 10
+\BOOKMARK [1][]{section.4.1}{4.1 Historia}{chapter.4}% 11
+\BOOKMARK [1][]{section.4.2}{4.2 Malli \(Model\)}{chapter.4}% 12
+\BOOKMARK [1][]{section.4.3}{4.3 N\344kym\344 \(View\)}{chapter.4}% 13
+\BOOKMARK [1][]{section.4.4}{4.4 Ohjain \(Controller\)}{chapter.4}% 14
+\BOOKMARK [1][]{section.4.5}{4.5 Esimerkkiohjelma}{chapter.4}% 15
+\BOOKMARK [0][]{chapter.5}{5 Web-sovelluskehykset}{}% 16
+\BOOKMARK [1][]{section.5.1}{5.1 Tausta \046 Teoria}{chapter.5}% 17
+\BOOKMARK [1][]{section.5.2}{5.2 Pyramid}{chapter.5}% 18
+\BOOKMARK [1][]{section.5.3}{5.3 Django}{chapter.5}% 19
+\BOOKMARK [1][]{section.5.4}{5.4 Plone}{chapter.5}% 20
+\BOOKMARK [1][]{section.5.5}{5.5 Flask}{chapter.5}% 21
+\BOOKMARK [0][]{chapter.6}{6 MVC:n toteutus web-sovelluskehyksiss\344}{}% 22
+\BOOKMARK [1][]{section.6.1}{6.1 Yleist\344}{chapter.6}% 23
+\BOOKMARK [1][]{section.6.2}{6.2 Pyramid}{chapter.6}% 24
+\BOOKMARK [1][]{section.6.3}{6.3 Django}{chapter.6}% 25
+\BOOKMARK [1][]{section.6.4}{6.4 Plone}{chapter.6}% 26
+\BOOKMARK [0][]{chapter.7}{7 MVC and Flask}{}% 27
+\BOOKMARK [1][]{section.7.1}{7.1 Esimerkkiohjelma}{chapter.7}% 28
+\BOOKMARK [1][]{section.7.2}{7.2 Pohdinta}{chapter.7}% 29
+\BOOKMARK [1][]{section.7.3}{7.3 Yhteenveto}{chapter.7}% 30
+\BOOKMARK [0][]{chapter.8}{8 Johtop\344\344t\366kset}{}% 31
+\BOOKMARK [0][]{chapter.9}{9 Tutkielman rakenne}{}% 32
+\BOOKMARK [1][]{section.9.1}{9.1 Teoriaosa}{chapter.9}% 33
+\BOOKMARK [1][]{section.9.2}{9.2 Teorian j\344lkeen}{chapter.9}% 34
+\BOOKMARK [0][]{chapter.10}{10 L\344hteiden k\344ytt\366}{}% 35
+\BOOKMARK [1][]{section.10.1}{10.1 L\344hdeviittaukset}{chapter.10}% 36
+\BOOKMARK [1][]{section.10.2}{10.2 L\344hdetietokanta}{chapter.10}% 37
+\BOOKMARK [1][]{section.10.3}{10.3 L\344hdeluettelo}{chapter.10}% 38
+\BOOKMARK [1][]{section.10.4}{10.4 Tiedossa olevat ongelmat}{chapter.10}% 39
+\BOOKMARK [0][]{chapter.11}{11 Tutkielmapohjan erityispiirteet}{}% 40
+\BOOKMARK [0][]{chapter.12}{12 Yhteenveto}{}% 41
+\BOOKMARK [1][]{section.L.1}{A Siirtyminen gradu2:sta gradu3:een}{chapter.12}% 42
+\BOOKMARK [1][]{section.L.2}{B Harvemmin tarvittavat ominaisuudet}{chapter.12}% 43

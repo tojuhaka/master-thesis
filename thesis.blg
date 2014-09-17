@@ -1,21 +1,21 @@
 [0] Config.pm:318> INFO - This is Biber 1.8
 [0] Config.pm:321> INFO - Logfile is 'thesis.blg'
-[47] biber-darwin:275> INFO - === Thu Sep  4, 2014, 11:20:45
-[47] Biber.pm:333> INFO - Reading 'thesis.bcf'
-[110] Biber.pm:630> INFO - Found 24 citekeys in bib section 0
-[126] Biber.pm:3053> INFO - Processing section 0
-[141] Biber.pm:3190> INFO - Looking for bibtex format file 'thesis.bib' for section 0
-[142] bibtex.pm:937> INFO - Decoding LaTeX character macros into UTF-8
-[145] bibtex.pm:812> INFO - Found BibTeX data source 'thesis.bib'
-[164] Utils.pm:169> WARN - I didn't find a database entry for 'knuth86:_texbook' (section 0)
-[165] Utils.pm:169> WARN - I didn't find a database entry for 'lamport94:_latex' (section 0)
-[165] Utils.pm:169> WARN - I didn't find a database entry for 'kaijanaho03:_latex_ams_latex' (section 0)
-[165] Utils.pm:169> WARN - I didn't find a database entry for 'biblatex-manual' (section 0)
-[165] Utils.pm:169> WARN - I didn't find a database entry for 'biblatex-chicago-manual' (section 0)
-[216] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'level = 4' with 'level = 2'
-[217] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'variable = shifted' with 'variable = non-ignorable'
-[217] Biber.pm:2945> INFO - Sorting 'entry' list 'cms' keys
-[217] Biber.pm:2949> INFO - No sort tailoring available for locale 'en_US.UTF-8'
-[257] bbl.pm:482> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
-[259] bbl.pm:555> INFO - Output to thesis.bbl
-[259] Biber.pm:105> INFO - WARNINGS: 5
+[51] biber-darwin:275> INFO - === Wed Sep 17, 2014, 19:24:32
+[51] Biber.pm:333> INFO - Reading 'thesis.bcf'
+[115] Biber.pm:630> INFO - Found 24 citekeys in bib section 0
+[134] Biber.pm:3053> INFO - Processing section 0
+[149] Biber.pm:3190> INFO - Looking for bibtex format file 'thesis.bib' for section 0
+[151] bibtex.pm:937> INFO - Decoding LaTeX character macros into UTF-8
+[154] bibtex.pm:812> INFO - Found BibTeX data source 'thesis.bib'
+[174] Utils.pm:169> WARN - I didn't find a database entry for 'knuth86:_texbook' (section 0)
+[175] Utils.pm:169> WARN - I didn't find a database entry for 'lamport94:_latex' (section 0)
+[175] Utils.pm:169> WARN - I didn't find a database entry for 'kaijanaho03:_latex_ams_latex' (section 0)
+[175] Utils.pm:169> WARN - I didn't find a database entry for 'biblatex-manual' (section 0)
+[175] Utils.pm:169> WARN - I didn't find a database entry for 'biblatex-chicago-manual' (section 0)
+[234] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'level = 4' with 'level = 2'
+[234] Biber.pm:2939> INFO - Overriding locale 'en_US.UTF-8' default tailoring 'variable = shifted' with 'variable = non-ignorable'
+[234] Biber.pm:2945> INFO - Sorting 'entry' list 'cms' keys
+[234] Biber.pm:2949> INFO - No sort tailoring available for locale 'en_US.UTF-8'
+[277] bbl.pm:482> INFO - Writing 'thesis.bbl' with encoding 'UTF-8'
+[279] bbl.pm:555> INFO - Output to thesis.bbl
+[279] Biber.pm:105> INFO - WARNINGS: 5

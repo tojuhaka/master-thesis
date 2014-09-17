@@ -222,35 +222,68 @@ artikkeleiden olevan tieteellisesti päteviä ja tarjoavan kattavan
 lähdemateriaalin MVC:n pohjaksi. Burbeckin ja Krasnerin kirjoittamien
 artikkeleiden taustalta löytyy MVC-arkkitehtuurin alkuperäinen kehittäjä Trygve
 Reenskaug, jonka omia julkaisuja sekä kotisivujen MVC-osiota käytetään
-myös lähteenä tutkielmassa \parencite{xerox}.
+myös lähteenä tutkielmassa \parencite{xerox, xerox-thing, xerox-original}.
 
 \section{Web-sovelluskehykset}
 Web-sovelluskehyksistä löydetty kirjallisuus on hyvin
-suppea, eikä näiden varaan voida rakentaa kovinkaan perusteellista
+suppea, eikä niiden varaan voida rakentaa kovinkaan perusteellista
 tieteellistä pohjaa. Tämän vuoksi tutkimuksessa joudutaan osaksi turvautumaan
 sovelluskehyksien omaan dokumentatioon täydentämään
 lähdemateriaalia. IEEE Xploren ja ACM Digital Libraryn avulla löytyy kaksi
 artikkelia, joita käytetään tutkimuksen pohjana sovelluskehyksiä
 tarkastellessa. Ensimmäinen artikkeli on Okanovicin ja Mateljan
-kirjoittama artikkeli, jossa esiteltiin kuinka uusia web-sovelluskehyksiä
-rakennetaan \parencite{okanovic}. Se myös sivuuttaa lyhyesti
-MVC:tä. Toisena artikkelina käytetään ACM:stä tuloksena saatua Iwan
-Vosloon julkiasua, jossa käydään läpi yleisesti web-sovelluskehyksien
-rakennetta \parencite{vosloo}.   
-
-
-Google Scholarin hakutuloksista löytyi Liza Daly:n
+kirjoittama artikkeli, jossa esitellään web-sovelluskehyksien suunnittelua \parencite{okanovic}. 
+Se myös sivuuttaa lyhyesti MVC:tä. Toisena artikkelina käytetään ACM:stä tuloksena saatua Iwan
+Vosloon julkaisua, jossa käydään läpi yleisesti web-sovelluskehyksien
+rakennetta \parencite{vosloo}. Google Scholarin hakutuloksista löytyi Liza Daly:n
 kirjoittama ja O'Reillyn julkaisema "Next Generation Web Frameworks
 in Python", joka sisältönsä puolesta sopii hyvin pohjaksi
-tutkimuksessa käsiteltävien sovelluskehyksien lähdemateriaaliksi \parencite{liza}. Lisäksi IEEE Xplore
-
- Erityisesti tutkimuksessa käytettävistä Python-pohjaisista
-sovelluskehyksistä ei tieteellistä kirjallisuutta juurikaan
-löydy. Djangoon viittauksia Djangosta 
+tutkimuksessa käsiteltävien sovelluskehyksien lähdemateriaaliksi 
+\parencite{liza}.
 
 \chapter{MVC}
+MVC-arkkitehtuurin perusajatus on erottaa käyttöliittymä sovelluslogiikasta ja
+näin tehdä sovelluksesta helposti ylläpidettävä kolmen eri komponentin avulla:
+Malli (Model), Näkymä (View) ja Ohjain (Controller). Jokainen komponentti on
+erikoistunut sovelluksessa johonkin tiettyyn tehtävään. Mallin tehtävänä on
+hallita sovelluksen tilaa ja vastata sen käsittelemästä datasta ohjaimelle ja näkymälle.
+Näkymän tehtävänä on taas toteuttaa sovellukselle käyttöliittymä. Ohjaimen tarkoitus on ottaa
+vastaan syötteitä käyttäjältä käskien mallia ja näkymää muuttumaan tarvittaessa.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{krasner_mvc.jpg}
+\caption{Model-View-Controller State and Message Sending \cite[s. 5]{krasner_desc}}
+\end{figure} 
+Jokaisella komponentilla on oma rajattu tehtävänsä ja ohjelmakoodi tulee jakaa näiden komponentien kesken. Jotta MVC:tä pystyttäisiin käyttämään
+tehokkaasti, tulee ymmärtää komponenttien työnjako sekä se kuinka komponentit kommunikoivat keskenään \parencite{burbeck}. 
+
+Luodessamme MVC-arkkitehtuurin toteuttavia komponentteja, tulee ne periä jostakin abstraktista pohjaluokasta (Model, View tai Controller), joka määrittelee kyseisen komponentin käyttäytymisen MVC:ssä  \parencite[s. 5]{krasner_desc}.  Tässä kappaleessa käydään jokaisen komponentin toteutus erikseen läpi käyttäen ohjelmointikielenä Smalltalkia. Lähteenä käytetään Krasnerin julkaisua \parencite{krasner_desc}.
+
+Yleisesti MVC-komponenttien toimintaa kuvaavassa esimerkissä käyttäjältä tulee jokin syöte, jonka sillä hetkellä aktiivinen ohjain ottaa vastaan. Syötteen perusteella ohjain lähettää mallille viestin. Malli puolestaan tekee sille määrättyjä operaatioita muuttaen tilaansa ja lähettää edelleen viestin muutoksestaan kaikille siihen kiinnitettyille riippuvuuksille (näkymät ja ohjaimet). Näkymät
+voivat tämän jälkeen kysyä mallilta sen nykyistä tilaa ja päivittää itsensä, jos siihen on tarvetta. Ohjaimet voivat myös muuttaa tilaansa riippuen mallin tilasta \parencite[s. 4]{krasner_desc}. 
+
+MVC:n avulla luodaan illuusio siitä, että käyttäjä kommunikoi suoraan mallin kanssa. Todellisuudessa kuitenkin ohjain ja näkymä muodostavat yhdessä rajapinnan sille, miltä malli näyttää ulospäin ja miten sitä käsitellään. Ohjain huolehtii syötteiden vastaanottamisesta ja käsittelemisestä. Näkymä taas huolehtii mallin graafisesta puolesta \cite[s. 11-12]{Reenskaug:tools}. 
+
 \section{Historia}
+MVC:n esitteli Trygve Reenskaug ollessaan mukana Xerox PARC -tutkimushankkeessa. 
+Ensimmäinen julkaisu MVC:stä kirjoitettiin vuonna 1978 samassa tutkimuskeskuksessa. 
+Tuolloin julkaisussa esiteltiin kolmen komponentin sijasta neljä komponenttia: 
+Malli (Model), Näkymä(View), Ohjain(Controller) sekä Muokkaaja(Editor). Muokkaaja on 
+väliaikainen komponentti, jonka näkymä luo itsensä ja syötelaitteiden välille. 
+Muokkaaja-komponentista kuitenkin luovuttiin käsitteenä ja se sisällytettiin näkymään 
+ja ohjaimeen \parencite{xerox}. Alkuperäinen Xerox PARC:n tuottama raportti MVC:stä oli Reenskaugin 
+vuonna 1979 kirjoittama THING-MODEL-VIEW-EDITOR \parencite{xerox-thing}. Raportti esitteli MVC:n 
+komponentteja käyttäen hyväksi esimerkkejä Reenskaugin omasta suunnittelutyöstä. 
+Reenskaug päätyi kuitenkin termeihin Model-View-Controller ja julkaisi saman vuoden 
+lopulla raportin, jossa määritellään lyhyesti jokaisen komponentin tehtävä 
+(MODELS-VIEWS-CONTROLLERS) \parencite{xerox-original}. Koska MVC:n historia ja 
+suurin osa MVC:n alkuperäisistä julkaisuista pohjautuvat 
+Smalltalk-ohjelmointikieleen, joudutaan väistämättä sitomaan MVC:n tarkastelu 
+Smalltalk:iin. Tämä ei kuitenkaan rajoita tarkastelua, koska arkkitehtuurin 
+idea pysyy täysin samana riippumatta ohjelmointikielestä.
 \section{Malli (Model)}
+
 \section{Näkymä (View)}
 \section{Ohjain (Controller)}
 \section{Esimerkkiohjelma}

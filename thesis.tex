@@ -212,7 +212,7 @@ Library sekä IEEE XPlore -hakukoneita. Kolmas artikkeli Glenn
 E. Krasnerin kirjoittama julkaisu, jossa esitellään MVC:n toteutusta
 erilaisissa Smalltalk-sovelluksissa. Julkaisusta löytyy useita
 versioita, joista tässä tutkielmassa käytetään
-molempia \parencite{krasner} [krasner\_descr]. Tähän artikkeliin on
+molempia \parencite{krasner} \parencite[krasner_desc]. Tähän artikkeliin on
 myös viitattu runsaasti, joten se on Burbeckin julkaisun kanssa
 tärkeimpiä lähteitä MVC:n pohjakirjallisuudessa. Kirjoitushetkellä
 viittauksia Krasnerin artikkeliin on 2263. Monien MVC-arkkitehtuuria soveltavien artikkeleiden
@@ -222,7 +222,9 @@ artikkeleiden olevan tieteellisesti päteviä ja tarjoavan kattavan
 lähdemateriaalin MVC:n pohjaksi. Burbeckin ja Krasnerin kirjoittamien
 artikkeleiden taustalta löytyy MVC-arkkitehtuurin alkuperäinen kehittäjä Trygve
 Reenskaug, jonka omia julkaisuja sekä kotisivujen MVC-osiota käytetään
-myös lähteenä tutkielmassa \parencite{xerox}.
+myös lähteenä tutkielmassa \parencite{xerox}. Erityisesti Reenskaugin ja Adele Goldbergin
+julkaisu, jossa kerrotaan jokaisen MVC komponentin tehtävä....
+
 
 \section{Web-sovelluskehykset}
 Web-sovelluskehyksistä löydetty kirjallisuus on hyvin
@@ -266,10 +268,10 @@ Luodessamme MVC-arkkitehtuurin toteuttavia komponentteja, tulee ne periä jostak
 Yleisesti MVC-komponenttien toimintaa kuvaavassa esimerkissä käyttäjältä tulee jokin syöte, jonka sillä hetkellä aktiivinen ohjain ottaa vastaan. Syötteen perusteella ohjain lähettää mallille viestin. Malli puolestaan tekee sille määrättyjä operaatioita muuttaen tilaansa ja lähettää edelleen viestin muutoksestaan kaikille siihen kiinnitettyille riippuvuuksille (näkymät ja ohjaimet). Näkymät
 voivat tämän jälkeen kysyä mallilta sen nykyistä tilaa ja päivittää itsensä, jos siihen on tarvetta. Ohjaimet voivat myös muuttaa tilaansa riippuen mallin tilasta \parencite[s. 4]{krasner_desc}. 
 
-MVC:n avulla luodaan illuusio siitä, että käyttäjä kommunikoi suoraan mallin kanssa. Todellisuudessa kuitenkin ohjain ja näkymä muodostavat yhdessä rajapinnan sille, miltä malli näyttää ulospäin ja miten sitä käsitellään. Ohjain huolehtii syötteiden vastaanottamisesta ja käsittelemisestä. Näkymä taas huolehtii mallin graafisesta puolesta \cite[s. 11-12]{Reenskaug:tools}. 
+Suurin merkitys MVC:llä on luoda silta ihmismielen hahmottamalle mallille ja tietokoneessa esiintyvälle mallille. Oikein toteutettuna MVC:n avulla luodaan illuusio siitä, että käyttäjä kommunikoi suoraan mallin kanssa. Todellisuudessa kuitenkin ohjain ja näkymä muodostavat yhdessä rajapinnan sille, miltä malli näyttää ulospäin ja miten sitä käsitellään. Ohjain huolehtii syötteiden vastaanottamisesta ja käsittelemisestä. Näkymä taas huolehtii mallin graafisesta puolesta \parencite[s. 11-12]{reenskaug_tools}. 
 
 \section{Historia}
-MVC:n esitteli Trygve Reenskaug ollessaan mukana Xerox PARC -tutkimushankkeessa. 
+MVC:n esitteli Norjalainen Trygve Reenskaug ollessaan mukana Xerox PARC -tutkimushankkeessa. 
 Ensimmäinen julkaisu MVC:stä kirjoitettiin vuonna 1978 samassa tutkimuskeskuksessa. 
 Tuolloin julkaisussa esiteltiin kolmen komponentin sijasta neljä komponenttia: 
 Malli (Model), Näkymä(View), Ohjain(Controller) sekä Muokkaaja(Editor). Muokkaaja on 
@@ -277,14 +279,10 @@ väliaikainen komponentti, jonka näkymä luo itsensä ja syötelaitteiden väli
 Muokkaaja-komponentista kuitenkin luovuttiin käsitteenä ja se sisällytettiin näkymään 
 ja ohjaimeen \parencite{xerox}. Alkuperäinen Xerox PARC:n tuottama raportti MVC:stä oli Reenskaugin 
 vuonna 1979 kirjoittama THING-MODEL-VIEW-EDITOR \parencite{xerox-thing}. Raportti esitteli MVC:n 
-komponentteja käyttäen hyväksi esimerkkejä Reenskaugin omasta suunnittelutyöstä. 
-Reenskaug päätyi kuitenkin termeihin Model-View-Controller ja julkaisi saman vuoden 
-lopulla raportin, jossa määritellään lyhyesti jokaisen komponentin tehtävä 
-(MODELS-VIEWS-CONTROLLERS) \parencite{xerox-original}. Koska MVC:n historia ja 
-suurin osa MVC:n alkuperäisistä julkaisuista pohjautuvat 
-Smalltalk-ohjelmointikieleen, joudutaan väistämättä sitomaan MVC:n tarkastelu 
-Smalltalk:iin. Tämä ei kuitenkaan rajoita tarkastelua, koska arkkitehtuurin 
-idea pysyy täysin samana riippumatta ohjelmointikielestä.
+komponentteja käyttäen hyväksi esimerkkejä Reenskaugin omasta suunnittelutyöstä. Thing-komponentilla mallinnettiin
+jotakin isompaa kokonaisuutta, joka hallitsee pienempiä kokonaisuuksia. Sitä voidaan ajatella eräänlaisena suurena mallina,joka on jaettu useisiin pienempiin malleihin. Editor-komponentti luo rajapinnan käyttäjän ja yhden tai useamman näkymän välille. Se tarjoaa käyttäjälle sopivan komento-rajapinnan kuten esimerkisi valikon, joka vaihtuu sisällön muuttuessa \parencite{xerox-thing}. Reenskaug hylkäsi kuitenkin Editor- ja Thing-koponentin ja  päätyi Adele Goldbergin avustuksella termeihin Models-Views-Controllers julkaisten saman vuoden lopulla raportin, jossa määritellään lyhyesti jokaisen komponentin tehtävä (MODELS-VIEWS-CONTROLLERS) \parencite{xerox-original}. Koska MVC:n historia ja suurin osa MVC:n alkuperäisistä julkaisuista pohjautuvat Smalltalk-ohjelmointikieleen, esitellään myös tässä tutkielmassa MVC:n totetusta Smalltalkilla.
+Tämä ei kuitenkaan rajoita tarkastelua, koska arkkitehtuurin idea pysyy täysin samana riippumatta ohjelmointikielestä.
+
 \section{Malli (Model)}
 
 \section{Näkymä (View)}

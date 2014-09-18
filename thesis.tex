@@ -125,20 +125,6 @@ sen määritellyt \parencite{krasner}. Havaintojen pohjalta
 selvitetään voidaanko MVC tuoda sellaisenaan sovelluskehykseen ja
 mitä mahdollisia ongelmia se tuo.
 
-\section{Aiheen rajaus}
-Tutkimus on rajattu tarkastelemaan MVC-arkkitehtuurin
-toteutusta Pythonilla kirjoitetuissa
-web-sovelluskehyksissä. Tarkasteltavat web-sovelluskehykset ovat rajattu 
-Pyramid-, Django-, Plone- sekä Flask-sovelluskehyksiin, joista
-Pyramid, Django ja Plone toteuttavat MVC:n kaltaisen
-sovellusarkkitehtuurin. Flask on sovelluskehys, joka tarjoaa vain
-välttämättömät kirjastot web-sovelluksen toteuttamiseen. Sitä
-käytetään tutkimuksessa työkaluna selvittämään miten MVC tulisi
-toteuttaa sovelluskehykseen. Kun puhutaan MVC:stä tarkoitetaan tällä Krasnerin
-artikkelissa esiteltyjä määrittelyitä MVC:n
-toteutuksesta \parencite{krasner}. Tarkasteltavat sovelluskehykset käydään yleisellä tasolla läpi. 
-Tällä tarkoitetaan sovelluskehyksen historian ja käyttötarkoituksen esittelemistä. Sovelluskehyksien
-teknisiin ominaisuuksiin ja käyttämiseen ei tutkimuksessa perehdytä muutakuin MVC:n osalta.
 
 \chapter{Tutkimuksen Rakenne}
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
@@ -158,11 +144,28 @@ jokaiseen sovelluskehykseen ja selvitetään millä tavalla niiden sovellusarkki
 mahdollisesti eroaa MVC:stä,
 Havaintojen perusteella pohditaan MVC:n mahdollisia ongelmia sovelluskehyksien toteutuksessa 
 ja selvitetään löytyykö sovelluskehyksien arkkitehtuurista jotain yhtenäisiä piirteitä, mitkä ovat
-kytköksissä MVC:n toteutukseen. Lisäksi kirjoitetaan Flask-sovellus, joka toteuttaa MVC:n 
+kytköksissä MVC:n toteutukseen. Saatujen tulosten pohjalta  kirjoitetaan Flask-sovellus, joka toteuttaa MVC:n 
 niinkuin se on alunperin tarkoitettu.
 
 Tutkimuksen lopuksi koostetaan havainnoista yhteenveto, jossa pohditaan saatuja tuloksia ja selvitetään 
 pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
+
+
+\section{Aiheen rajaus}
+Tutkimus on rajattu tarkastelemaan MVC-arkkitehtuurin
+toteutusta Pythonilla kirjoitetuissa
+web-sovelluskehyksissä. Tarkasteltavat web-sovelluskehykset rajataan 
+Pyramid-, Django-, Plone- sekä Flask-sovelluskehyksiin. Pyramid, Django ja Plone toteuttavat MVC:n kaltaisen
+sovellusarkkitehtuurin. Flask on sovelluskehys, joka tarjoaa vain
+välttämättömät kirjastot web-sovelluksen toteuttamiseen. Sitä
+käytetään tutkimuksessa työkaluna selvittämään miten MVC tulisi
+toteuttaa sovelluskehykseen. MVC:stä on olemassa erilaisia versioita, joten sen määrittely tulee rajata tarkasti.
+Kun puhutaan MVC:stä tarkoitetaan tällä Krasnerin
+artikkelissa esiteltyjä määrittelyitä MVC:n
+toteutuksesta \parencite{krasner}, jotka pohjautuvat Trygve Reenskaugin esittelemään 
+MVC:n määritelmään \parencite{xerox-original}. 
+
+Tarkasteltavat sovelluskehykset käydään ensiksi yleisellä tasolla läpi, jonka jälkeen niitä tarkastellaan MVC:n näkökulmasta. Yleisellä tasolla tarkoitetaan sovelluskehyksen historian ja käyttötarkoituksen esittelemistä. Sovelluskehyksien muihin teknisiin ominaisuuksiin ei oteta kantaa. Flask-osiossa MVC-arkkitehtuuri toteutaan niinkuin se on Krasnerin julkaisussa määritelty. Näiden havaintojen pohjalta pyritään vastamaan tutkimuskysymykseen.
 
 
 \chapter{Kirjallisuuskatsaus}
@@ -252,8 +255,8 @@ näin tehdä sovelluksesta helposti ylläpidettävä kolmen eri komponentin avul
 Malli (Model), Näkymä (View) ja Ohjain (Controller). Jokainen komponentti on
 erikoistunut sovelluksessa johonkin tiettyyn tehtävään. Mallin tehtävänä on
 hallita sovelluksen tilaa ja vastata sen käsittelemästä datasta ohjaimelle ja näkymälle.
-Näkymän tehtävänä on taas toteuttaa sovellukselle käyttöliittymä. Ohjaimen tarkoitus on ottaa
-vastaan syötteitä käyttäjältä käskien mallia ja näkymää muuttumaan tarvittaessa.
+Näkymän tehtävänä on taas näyttää sovelluksen käyttöliittymä ja sitä kautta mallin dataa. 
+Ohjaimen tarkoitus on ottaa vastaan syötteitä käyttäjältä käskien mallia ja näkymää muuttumaan tarvittaessa.
 
 \begin{figure}[h]
 \centering
@@ -265,7 +268,7 @@ tehokkaasti, tulee ymmärtää komponenttien työnjako sekä se kuinka komponent
 
 Luodessamme MVC-arkkitehtuurin toteuttavia komponentteja, tulee ne periä jostakin abstraktista pohjaluokasta (Model, View tai Controller), joka määrittelee kyseisen komponentin käyttäytymisen MVC:ssä  \parencite[s. 5]{krasner_desc}.  Tässä kappaleessa käydään jokaisen komponentin toteutus erikseen läpi käyttäen ohjelmointikielenä Smalltalkia. Lähteenä käytetään Krasnerin julkaisua \parencite{krasner_desc}.
 
-Yleisesti MVC-komponenttien toimintaa kuvaavassa esimerkissä käyttäjältä tulee jokin syöte, jonka sillä hetkellä aktiivinen ohjain ottaa vastaan. Syötteen perusteella ohjain lähettää mallille viestin. Malli puolestaan tekee sille määrättyjä operaatioita muuttaen tilaansa ja lähettää edelleen viestin muutoksestaan kaikille siihen kiinnitettyille riippuvuuksille (näkymät ja ohjaimet). Näkymät
+Yleisesti MVC-komponenttien toimintaa kuvaavassa esimerkissä käyttäjältä tulee jokin syöte, jonka sillä hetkellä aktiivinen ohjain ottaa vastaan. Syötteen perusteella ohjain lähettää mallille viestin. Malli puolestaan tekee sille määrättyjä operaatioita muuttaen tilaansa ja lähettää edelleen viestin muutoksestaan kaikille siihen liitetyille riippuvuuksille (näkymät ja ohjaimet). Näkymät
 voivat tämän jälkeen kysyä mallilta sen nykyistä tilaa ja päivittää itsensä, jos siihen on tarvetta. Ohjaimet voivat myös muuttaa tilaansa riippuen mallin tilasta \parencite[s. 4]{krasner_desc}. 
 
 Suurin merkitys MVC:llä on luoda silta ihmismielen hahmottamalle mallille ja tietokoneessa esiintyvälle mallille. Oikein toteutettuna MVC:n avulla luodaan illuusio siitä, että käyttäjä kommunikoi suoraan mallin kanssa. Todellisuudessa kuitenkin ohjain ja näkymä muodostavat yhdessä rajapinnan sille, miltä malli näyttää ulospäin ja miten sitä käsitellään. Ohjain huolehtii syötteiden vastaanottamisesta ja käsittelemisestä. Näkymä taas huolehtii mallin graafisesta puolesta \parencite[s. 11-12]{reenskaug_tools}. 
@@ -280,7 +283,7 @@ Muokkaaja-komponentista kuitenkin luovuttiin käsitteenä ja se sisällytettiin 
 ja ohjaimeen \parencite{xerox}. Alkuperäinen Xerox PARC:n tuottama raportti MVC:stä oli Reenskaugin 
 vuonna 1979 kirjoittama THING-MODEL-VIEW-EDITOR \parencite{xerox-thing}. Raportti esitteli MVC:n 
 komponentteja käyttäen hyväksi esimerkkejä Reenskaugin omasta suunnittelutyöstä. Thing-komponentilla mallinnettiin
-jotakin isompaa kokonaisuutta, joka hallitsee pienempiä kokonaisuuksia. Sitä voidaan ajatella eräänlaisena suurena mallina,joka on jaettu useisiin pienempiin malleihin. Editor-komponentti luo rajapinnan käyttäjän ja yhden tai useamman näkymän välille. Se tarjoaa käyttäjälle sopivan komento-rajapinnan kuten esimerkisi valikon, joka vaihtuu sisällön muuttuessa \parencite{xerox-thing}. Reenskaug hylkäsi kuitenkin Editor- ja Thing-koponentin ja  päätyi Adele Goldbergin avustuksella termeihin Models-Views-Controllers julkaisten saman vuoden lopulla raportin, jossa määritellään lyhyesti jokaisen komponentin tehtävä (MODELS-VIEWS-CONTROLLERS) \parencite{xerox-original}. Koska MVC:n historia ja suurin osa MVC:n alkuperäisistä julkaisuista pohjautuvat Smalltalk-ohjelmointikieleen, esitellään myös tässä tutkielmassa MVC:n totetusta Smalltalkilla.
+jotakin isompaa kokonaisuutta, joka hallitsee pienempiä kokonaisuuksia. Sitä voidaan ajatella eräänlaisena suurena mallina,joka on jaettu useisiin pienempiin malleihin. Editor-komponentti luo rajapinnan käyttäjän ja yhden tai useamman näkymän välille. Se tarjoaa käyttäjälle sopivan komento-rajapinnan kuten esimerkisi valikon, joka vaihtuu sisällön muuttuessa \parencite{xerox-thing}. Reenskaug hylkäsi kuitenkin Editor- ja Thing-komponentin ja  päätyi Adele Goldbergin avustuksella termeihin Models-Views-Controllers julkaisten saman vuoden lopulla raportin, jossa määritellään lyhyesti jokaisen komponentin tehtävä (MODELS-VIEWS-CONTROLLERS) \parencite{xerox-original}. Koska MVC:n historia ja suurin osa MVC:n alkuperäisistä julkaisuista pohjautuvat Smalltalk-ohjelmointikieleen, esitellään myös tässä tutkielmassa MVC:n totetusta Smalltalkilla.
 Tämä ei kuitenkaan rajoita tarkastelua, koska arkkitehtuurin idea pysyy täysin samana riippumatta ohjelmointikielestä.
 
 \section{Malli (Model)}
@@ -308,155 +311,12 @@ Tämä ei kuitenkaan rajoita tarkastelua, koska arkkitehtuurin idea pysyy täysi
 \section{Yhteenveto}
 
 \chapter{Johtopäätökset}
-
-
-
-Apua sen käyttämiseen voit saada Tutkielma-TeX"-postituslistalta
-(\url{http://lists.jyu.fi/mailman/listinfo/tutkielma-tex}).
-Kommentteja, parannusehdotuksia ja bugiraportteja voit lähettää myös
-minulle suoraan.
-
-\begin{figure}[h]\centering
-  \includegraphics[height=5cm,keepaspectratio]{opus-kissa}
-  \caption[\LaTeX-oppaani \parencite{kaijanaho03:_latex_ams_latex}
-  kansikuva]{\LaTeX-oppaani \parencite{kaijanaho03:_latex_ams_latex}
-    kansikuva on tässä vain esimerkkinä kuvan ottamisesta mukaan
-    tutkielmaan.}
-  \label{fig:opus-kissa}
-\end{figure}
-
-Tämä malli olettaa, että tunnet \LaTeX-järjestelmän käytön perusasiat.
-Alkuperäinen \LaTeX-kirja \parencite{lamport94:_latex} on järjestelmän
-virallinen käyttöopas.  Olen myös itse kirjoittanut aiheesta
-opaskirjan \parencite{kaijanaho03:_latex_ams_latex}.\footnote{Monet
-  \TeX- ja \LaTeX-kirjat käyttävät kansikuviensa aiheena kissaeläintä.
-  Oman monisteeni kansikuva oli varsin abstrakti kisuli,
-  ks.~kuvio~\ref{fig:opus-kissa}.}  Hyvä suomenkielinen, vapaasti
-verkosta saatavilla oleva opas on \textit{Pitkänpuoleinen johdanto
-  \LaTeXe:n käyttöön} \parencite{oetiker:_pitka_latex}.  Muista lukea
-tämän mallin ladotun version (PDF tms) lisäksi sen \LaTeX-lähdekoodi!
-
-Huomaa, että tämän mallin esittämät ohjeet eivät ole millään tavalla
-virallisia.  Noudata aina ohjaajasi neuvoja vaikka ne poikkeaisivatkin
-tämän mallin ohjeista.
-
 \chapter{Tutkielman rakenne}
-
-Yhteensä tutkielmassa on hyvä olla 5--9 numeroitua
-lukua, siis Johdanto ja Yhteenveto mukaan lukien.  Tarvittaessa voit
-käyttää alilukuja tarkempaan jäsentelyyn.
-
-Johdannon ja Yhteenvedon väliin jääviä lukuja kutsutaan toisinaan
-tutkielman \textit{käsittelyosaksi}.  Usein sen katsotaan jakaantuvan
-vielä kahtia, jolloin käsittelyosa alkaa \textit{teoriaosalla} ja
-päättyy joko \textit{päälauseeseen}, \textit{konstruktiiviseen osaan}
-tai \textit{empiiriseen osaan}.
-
 \section{Teoriaosa}
-
-Tutkielman teoriaosan tarkoituksena on esitellä tutkielmassa
-tarvittava teoreettinen tausta.  Tämä on syytä tehdä vähintään sillä
-tarkkuudella, että tutkielman lukija pystyy pelkästään tutkielman
-itsensä perusteella ymmärtämään kaikki tutkielmassa käytettävät
-erityiskäsitteet ja "=menetelmät.  Hyvässä tutkielmassa on myös
-perusteltu (vaihtoehdot kirjallisuudesta esille tuoden), miksi juuri
-nämä käsitteet ja menetelmät on työssä käytössä.
-
-Teoriataustan järkevä esitys- ja käyttötapa riippuu siitä, minkä
-tyyppisestä tutkimuksesta tutkielmassasi on kyse.
-Matemaattis-teoreettisen työn teoriaosa on aivan eri näköinen kuin
-konstruktiivisen ohjelmistonkehitystyön teoriaosa; näistä myös eroaa
-olennaisesti ihmistieteellisiin traditioihin nojautuvan määrällisen
-tai laadullisen tutkimustuön teoriaosa.  Muita samantyyppisiä
-tutkielmia ja julkaistuja tutkimusraportteja lukemalla saat kyllä
-käsityksen siitä, mitä omalta työltäsi vaaditaan.
-
 \section{Teorian jälkeen}
-
-Teoriaosan jälkeen tulee työsi varsinainen kontribuutio:
-\begin{itemize}
-\item Matemaattis-teoreettisessa työssä se on yleensä jono itse
-  laatimiasi määritelmiä ja lemmoja, jotka kulminoituvat työn
-  päälauseen todistukseen.
-\item Konstruktiivisessa työssä se on itse laatimasi tietokoneohjelma
-  tai muu artefakti.
-\item Empiirisessä työssä se on jotain empiiristä tutkimusmenetelmää
-  soveltamalla saavutettu joukko empiirisiä tuloksia.
-\end{itemize}
-
-Tutkielmassa kontribuutio esitellään varsin tarkasti, tehdyt valinnat
-perustellen.  Erityisesti matemaattis-teoreettisissa ja empiirisissä
-töissä on syytä noudattaa kulloisenkin tutkimustradition käytänteitä
--- esimerkiksi ihmistieteellinen koeasetelma on kuvattava tarkasti.
-
 \chapter{Lähteiden käyttö}
-
-Teoriaosa perustuu lähes aina yksinomaan lähdekirjallisuuteen.  Myös
-kontribuutio"-osassa on lähteiden käyttö toisinaan tarpeen.
-
-Muista varoa plagiointia.  Jos kopioit joko sellaisenaan tai lievästi
-muutettuna (tai esimerkiksi englannista suomennettuna) tekstiä jostain
-lähteestä, tee selväksi, että olet tehnyt niin.  Merkitse lainaukset
-(lainausmerkeillä tai muulla selkeällä tavalla) ja anna täsmällinen
-lähdeviite.  Jos et lainaa sanatarkasti, merkitse tekemäsi muutokset.
-Useimmissa tilanteissa on kuitenkin parempi esittää asia omin sanoin,
-mieluiten useamman lähteen perusteella.  Merkitse tällöinkin
-käyttämäsi lähteet.
-
-Lähdeluettelon laadintaan {gradu3} käyttää automaattisesti
-\textsc{Bib\LaTeX}-järjestelmää \parencite{biblatex-manual} ja sen
-Chicago-tyyliä \parencite{biblatex-chicago-manual}.  Tämän
-automatiikan saa pois \string\documentclass-optiolla manualbib, mutta
-tällöin joudut itse huolehtimaan lähdeluettelon muotoilusta eivätkä
-tässä luvussa esitetyt tekniikat ole (välttämättä) käytettävissä.
-Huomaa, että Tietotekniikan laitoksen graduissa on suositeltavaa
-käyttää Chicago-tyylistä lähdeluetteloa.
-
 \section{Lähdeviittaukset}
 
-Lähteisiin voit viitata kahdella tavalla.  Ensinnäkin voit käyttää
-lähdettä lauseen subjektina: \textcite[luku~8.8.4]{aho-compilers}
-kuvaavat lyhyesti graafinvärityksen käyttämisen kääntäjän
-rekisterinvalinnassa.  Tällöin viittaukseen käytetään
-\string\textcite-komentoa.  Toisekseen lähdeviite voi olla
-sivuhuomautus, jota ei ääneen luettaessa mainita: Graafinväritys on
-yksi mahdollinen tapa valita
-rekisterit \parencite[luku~8.8.4]{aho-compilers}.  Tämä toteutetaan
-\string\parencite-komennolla.
-
-Sekä \string\textcite- että \string\parencite-komennot ottavat kolme
-parametria, joista kaksi on valinnaisia.  Ensimmäinen (valinnainen)
-parametri on esihuomautus, toinen (valinnainen) parametri on
-jälkihuomautus ja kolmas (pakollinen) parametri on lähdeviittauksen
-koodi \parencite[ks.][luku~3.7]{biblatex-manual}.  Edellisen virkkeen
-lähdeviite tehtiin seuraavalla komennolla:
-
-\begingroup\footnotesize
-\begin{verbatim}
-\parencite[ks.][luku~3.7]{biblatex-manual}
-\end{verbatim}
-\endgroup
-
-Jos komennolle annetaan vain yksi valinnainen (eli hakasulkeisiin
-kirjoitettu) argumentti, se tulkitaan jälkihuomautukseksi.  Jos
-halutaan antaa vain esihuomautus ilman jälkihuomautusta, on
-jälkihuomautus jätettävä tyhjäksi
-\parencite[ks.][]{biblatex-manual}:
-
-\begingroup\footnotesize
-\begin{verbatim}
-\parencite[ks.][]{biblatex-manual}
-\end{verbatim}
-\endgroup
-
-On myös mahdollista viitata useampaan lähteeseen samassa viittauksessa 
-%
-\parencites%
-  [ks.][luku~3.7]{biblatex-manual}%
-  [ks.~lähteiden käytöstä yleisesti myös][luku~5.3.2]%
-    {biblatex-chicago-manual}%
-\relax.
-%
 Tämä tehdään komennolla \string\parencites, jolle annetaan kutakin
 lähdettä kohti samat argumentit kuin yksittäiselle
 \string\parencite"-komennolle.  Komento on hyvä (mutta ei pakko)

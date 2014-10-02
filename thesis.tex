@@ -12,11 +12,37 @@
                      % ei pakollinen
 
 \usepackage{booktabs} % hyvä kauniiden taulukoiden tekemiseen
+\usepackage{listings}
+\usepackage{color}
+\usepackage{qtree}
 
 % HUOM! Tämän tulee olla viimeinen \usepackage koko dokumentissa!
 \usepackage[bookmarksopen,bookmarksnumbered,linktocpage]{hyperref}
 
 \addbibresource{thesis.bib} % Lähdetietokannan tiedostonimi
+
+\definecolor{light-gray}{gray}{0.96}
+
+\lstdefinelanguage{Smalltalk}{
+morekeywords={true,false,self,super,nil},
+sensitive=true,
+morecomment=[s][\color{blue}]{"}{"},
+morestring=[d]',
+alsoother={_},
+style=SmalltalkStyle,
+columns=fullflexible,
+basicstyle=\ttfamily,
+backgroundcolor=\color{light-gray},
+xleftmargin=.20in,
+showspaces=false,
+numbers=left,
+framexleftmargin=15pt,
+tabsize=4
+}
+\lstdefinestyle{SmalltalkStyle}{
+literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{\"o}}2
+}
+
 
 \begin{document}
 
@@ -306,7 +332,30 @@ Näkymän tehtävänä on huolehtia graafisesta puolesta MVC:ssä. Näkymä pyyt
 
 Näkymä vastaa myös MVC-komponenttien sisäisestä kommunikaatiosta MVC-kolmikon luontivaiheessa. Näkymä rekisteröi itsensä  riippuvuudeksi malliin, asettaa viitemuuttujansa viittamaan ohjaimeen ja välittää itsestään viestin ohjaimelle. Viestin avulla ohjain rekisteröi näkymän omaan viitemuuttujaansa. Näkymällä on myös vastuu poistaa viitteet sekä rekisteröinnit \parencite{burbeck}. 
 
-Näkymä ei sisällä ainoastaan komponentteja datan näyttämiseen ruudulla, vaan se voi sisältää myös useita alanäkymiä (\emph{subviews}) ja ylänäkymiä (\emph{superviews}). Tästä muodostuu hierarkia, jossa ylänäkymä hoitaa aina jonkun suuremman kokonaisuuden, kuten esimerkiksi näytön pääikkunan. Alanäkymä taas huolehtii jostain pienemmästä yksityiskohdasta pääikkunassa. Näkymillä on myös viite erilliseen transformaatioluokkaan, joka hoitaa kuvan sovittamisen ja yhdistämisen alanäkymien ja ylänäkymien välillä. Jokaisella näkymällä tulee siis olla yleisesti määrätty ominaisuus, jolla hoidetaan alanäkymien poistaminen sekä lisääminen. Samalla tulee määritellä ominaisuus, jolla sisäiset transformaatiot tuodaan transformaatioluokalle. Tämä helpottaa näkymän ja sen alanäkymien yhdistämistä \parencite[s. 8]{krasner_desc}.
+Näkymä ei sisällä ainoastaan komponentteja datan näyttämiseen ruudulla, vaan se voi sisältää myös useita alanäkymiä (\emph{subviews}) ja ylänäkymiä (\emph{superviews}). Tästä muodostuu hierarkia, jossa ylänäkymä hoitaa aina jonkun suuremman kokonaisuuden, kuten esimerkiksi näytön pääikkunan. Alanäkymä taas huolehtii jostain pienemmästä yksityiskohdasta pääikkunassa. Näkymillä on myös viite erilliseen transformaatioluokkaan, joka hoitaa kuvan sovittamisen ja yhdistämisen alanäkymien ja ylänäkymien välillä. Jokaisella näkymällä tulee siis olla toteutus, jolla hoidetaan alanäkymien poistaminen sekä lisääminen. Samalla tulee määritellä ominaisuus, jolla sisäiset transformaatiot tuodaan transformaatioluokalle. Tämä helpottaa näkymän ja sen alanäkymien yhdistämistä \parencite[s. 8]{krasner_desc}. Burbeck havainnollistaa Smalltalkilla kirjoitetulla esimerkillä kuinka MVC-kolmikko luodaan seuraavasti:
+
+\begin{lstlisting}[language=Smalltalk]
+openListBrowserOn: aCollection label: labelString initialSelection: sel
+  "Create and schedule a Method List browser for 
+  the methods in aCollection."
+  | topView aBrowser | 
+  aBrowser := MethodListBrowser new on: aCollection.
+  topView := BrowserView new.
+  topView model: aBrowser; controller: StandardSystemController new;
+                 label: labelString asString; minimumSize: 300@100.
+topView addSubView:
+  (SelectionInListView on: aBrowser printItems: false oneItem: false
+  aspect: #methodName change: #methodName: list: #methodList
+  menu: #methodMenu initialSelection: #methodName)
+  in: (0@0 extent: 1.0@0.25) borderWidth: 1.
+topView addSubView:
+  (CodeView on: aBrowser aspect: #text change: #acceptText:from:
+  menu: #textMenu initialSelection: sel)
+  in: (0@0.25 extent: 1@0.75) borderWidth: 1.
+  topView controller open
+\end{lstlisting}
+
+
 
 \subsection{Ohjain (Controller)}
 Ohjaimen tehtävänä on ottaa vastaan syötteitä sekä koordinoida malleja ja näkymiä saatujen syötteiden perusteella. Sen tulee myös kommunikoida muiden ohjaimien kanssa. Teknisesti ohjaimessa on kolme viitemuuttujaa: malli, näkymä ja sensori (sensor). Sensorin tehtävänä on toimia rajapintana syötelaitteiden sekä ohjaimen välillä. Sensori mallintaa syötelaitteiden käyttäytymistä ja muuttaa ne ohjaimen ymmärtämään muotoon.

@@ -150,6 +150,8 @@ sen määritellyt \parencite{krasner}. Havaintojen pohjalta
 selvitetään voidaanko MVC tuoda sellaisenaan sovelluskehykseen ja
 mitä mahdollisia ongelmia se tuo.
 
+\chapter{Oletus}
+Tässä oletetaan mitä tutkimuskysymykseen voisi tulla vastaukseksi
 
 \chapter{Tutkimuksen Rakenne}
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
@@ -354,7 +356,7 @@ topView addSubView:
   topView controller open
 \end{lstlisting}
 
-Seuraavaksi käydään rivi kerrallaan läpi mitä yllä esitetyssä ohjelmakoodissa tapahtuu. Mallin luonnin jälkeen [4] luodaan viite uudelle \textit{BrowserView} -luokan instanssille. \textit{BrowserView} on peritty \textit{StandardSystemView} -luokasta.
+Seuraavaksi käydään rivi kerrallaan läpi mitä yllä esitetyssä ohjelmakoodissa tapahtuu. Mallin luonnin jälkeen [5] luodaan viite uudelle \textit{BrowserView} -luokan instanssille [6]. \textit{BrowserView} on peritty \textit{StandardSystemView} -luokasta. Seuraavaksi määritellään malli ja ohjain sekä muuttujat näkymän otsikolle ja koolle [7]. Jos ohjainta ei määritellä erikseen, käytetään näkymän \textit{defaultController} metodia. Riveillä [7-11] luodaan alanäkymä \textit{SelectionInListView} ja riveillä [12-15] luodaan toinen alanäkymä \textit{CodeView}
 
 
 

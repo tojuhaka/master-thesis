@@ -2418,20 +2418,23 @@
     <bcf:citekey order="36">krasner</bcf:citekey>
     <bcf:citekey order="37">burbeck</bcf:citekey>
     <bcf:citekey order="38">burbeck</bcf:citekey>
-    <bcf:citekey order="39">krasner_desc</bcf:citekey>
+    <bcf:citekey order="39">burbeck</bcf:citekey>
     <bcf:citekey order="40">burbeck</bcf:citekey>
     <bcf:citekey order="41">krasner_desc</bcf:citekey>
-    <bcf:citekey order="42">krasner_desc</bcf:citekey>
-    <bcf:citekey order="43">Krasner:desc</bcf:citekey>
-    <bcf:citekey order="44">aho-compilers</bcf:citekey>
-    <bcf:citekey order="45">unicode620</bcf:citekey>
-    <bcf:citekey order="46">presidential-novel</bcf:citekey>
-    <bcf:citekey order="47">strachey-fundamentals</bcf:citekey>
-    <bcf:citekey order="48">debian-social-contract</bcf:citekey>
-    <bcf:citekey order="49">prechelt-credibility</bcf:citekey>
-    <bcf:citekey order="50">bibtexing</bcf:citekey>
-    <bcf:citekey order="51">biblatex-manual</bcf:citekey>
-    <bcf:citekey order="52">biblatex-chicago-manual</bcf:citekey>
+    <bcf:citekey order="42">burbeck</bcf:citekey>
+    <bcf:citekey order="43">krasner_desc</bcf:citekey>
+    <bcf:citekey order="44">burbeck</bcf:citekey>
+    <bcf:citekey order="45">krasner_desc</bcf:citekey>
+    <bcf:citekey order="46">Krasner:desc</bcf:citekey>
+    <bcf:citekey order="47">aho-compilers</bcf:citekey>
+    <bcf:citekey order="48">unicode620</bcf:citekey>
+    <bcf:citekey order="49">presidential-novel</bcf:citekey>
+    <bcf:citekey order="50">strachey-fundamentals</bcf:citekey>
+    <bcf:citekey order="51">debian-social-contract</bcf:citekey>
+    <bcf:citekey order="52">prechelt-credibility</bcf:citekey>
+    <bcf:citekey order="53">bibtexing</bcf:citekey>
+    <bcf:citekey order="54">biblatex-manual</bcf:citekey>
+    <bcf:citekey order="55">biblatex-chicago-manual</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" type="entry" label="cms">
   <bcf:sorting>

@@ -109,7 +109,7 @@ Tutkielman tekijä
 
 
 \begin{thetermlist}
-\item[Sovellusarkkitehtuuri] Donald Knuthin 1977--1989 laatima eräajotyyppinen
+\item[Sovellusarkkitehtuuri] Donald Knuthin 1977--1989 laatima eräajotyyppinenj
   ladontajärjestelmä \parencite[ks.][]{knuth86:_texbook}. 
 \item[MVC] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
   rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
@@ -379,13 +379,177 @@ Krasner määrittelee seuraavat metodit, joiden avulla ohjaimet viestivät \pare
 \item[controlLoop] -\ Lähettää \emph{controlActivity} -viesteja niin kauan, kuin ohjaimella on hallinta.
 \item[controlTerminate] -\ Lopettaa ohjaimen hallinnan.
 \end{description} 
+
 Kun ohjain saa hallinnan itselleen, kutsuu se \emph{startUp} -metodia, joka puolestaan kutsuu seuraavia metodeja: \emph{controlInitialize}, \emph{controlLoop} ja \emph{controlTerminate}. Metodit
 voidaan ylikirjoittaa, jolloin saavutetaan jokin haluttu ominaisuus kyseisessä vaiheessa. Esimerkiksi \emph{controlInitialize} ja \emph{controlTerminate} määräävät mitä tehdään, kun ohjain saa hallinnan tai luovuttaa sen eteenpäin. Ohjaimen hallinnan aikana kutsutaan
-\emph{controlLoop} -metodia, joka taas kutsuu \emph{controlActivity} -metodia niin kauan kuin ohjaimella on hallinta.  Metodi \emph{controlActivity} määrää ohjaimen toiminnan hallinnan aikana \cite[s. 9]{Krasner:desc}.
+\emph{controlLoop} -metodia, joka taas kutsuu \emph{controlActivity} -metodia niin kauan kuin ohjaimella on hallinta.  Metodi \emph{controlActivity} määrää ohjaimen toiminnan hallinnan aikana \cite[s. 9]{krasner_desc}.
 
-\section{Esimerkkiohjelma}
+\subsection{Esimerkkiohjelma}
+Seuraavaksi esitellään  Dortmundin yliopistossa kirjoitettu yksinkertainen esimerkkiohjelma Smalltalkilla siitä miten MVC:n toteutus tuodaan sovellukseen käytännössä. Ohjelmakoodi löytyy myös Krasnerin artikkelista \cite[s. 20]{krasner_desc}. Ohjelmassa toteutetaan yksinkertainen laskuri-ohjelma, joka käyttää MVC-arkkitehtuuria toteutuksessaan. Ohjelmassa esitellään mallina \emph{Counter} -luokka ja näkymänä \emph{CounterView} -luokka. \emph{Counter} perii mallin ominaisuudet ja
+toimii ohjelmassa yksinkertaisen kokonaisluku-muuttujan ylläpitäjänä. \emph{CounterView} perii näkymän ominaisuudet ja esittää mallin arvon ruudulla.
+Ohjaimena toimii \emph{CounterController} -luokka, joka perii ohjaimen käyttäytymisen. Ohjain tarjoaa sovellukselle painikkeet, joista voidaan vähentää
+tai lisätä laskurin arvoa.
 
-\chapter{Web-sovelluskehykset}
+Määritellään ensiksi \emph{Counter} -luokka, joka peritään \emph{Model} -luokasta.
+\begin{lstlisting}[language=Smalltalk]
+Model subclass: #Counter
+	instanceVariableNames: 'value'
+	classVariableNames: ''
+	poolDictionaries: ''
+  	category: 'Demo-Counter'
+\end{lstlisting}
+Seuraavaksi määritellään \emph{Counter}-luokalle metodeita, jotka määrävät
+laskuriarvon alustamisen sekä muokkaamisen.
+\begin{lstlisting}[language=Smalltalk]
+Counter methods For: 'Initialize-release'
+Initialize
+	"Aseta alkuarvoksi 0"
+	self value: 0
+Counter methodsFor: 'accessing'
+value
+	"Palauta mallin arvo"
+   	^value
+value: aNumber
+	"Aseta mallin arvo"
+	value <- aNumber.
+	self changed "to update displayed value"
+Counter methodsFor: 'operations'
+decrement
+	"Vähennä mallin arvoa yhdellä."
+	self value: value -1
+Increment
+	"Lisää mallin arvoa yhdellä."
+	self value: value + 1
+\end{lstlisting}
+Lisätään luokkaan metodi, jolla itse luokasta saadaan muodostettua instanssi.
+\begin{lstlisting}[language=Smalltalk]
+Counter class methodsFor: 'instance creation'
+new
+	"Palauta uusi instanssi luokasta"
+	^super new initialize
+\end{lstlisting}
+Seuraavaksi määritellään ohjain (\emph{CounterController}), joka peritään
+\emph{Controller} luokasta. Luodaan myös ohjaimelle metodit, joiden avulla
+ohjataan mallia sekä näkymää. Metodeissa toteutetaan valikko, joka tarjoaa
+mahdollisuuden joko vähentää tai lisätä laskurin arvoa. Kaikki \emph{CounterController} -luokassa käytetyt
+määrittelemättömät muuttujat peritään yliluokasta.
+\begin{lstlisting}[language=Smalltalk]
+Mouse MenuController subclass: #CounterControIler
+	instanceVariableNames: ' '
+  	classVariableNames: ' '
+  	poolDictionaries: ' '
+  	category: 'Demo-Counter'
+CounterController methodsFor: 'initialize-release'
+initialize
+	"Alusta valikko, jossa on mahdollisuus vähentää tai 
+        lisätä mallin arvoa"
+  	super initialize.
+  	Self yellowButtonMenu: (PopUpMenu labels: 
+                                  'Increment\Decrement' withCRs)
+  	yellowButtonMessages: #(increment decrement)
+CounterController methodsFor: 'menu messages'
+decrement
+	"Vähennä mallin arvoa yhdellä."
+ 	self model decrement
+increment
+	"Lisää mallin arvoa yhdellä"
+	self model increment
+CounterController methodsFor: 'control defaults'
+isControlActlve
+	"Ota hallinta kun sinistä nappia ei paineta"
+	^super isControlActive & sensor blueButtonPressed not
+\end{lstlisting}
+Määrätään näkymä (\emph{CounterView}), joka peritään \emph{View} -yliluokasta. Määrätään
+myös näkymälle metodit, joiden avulla näytetään mallin tila ruudulla.
+\begin{lstlisting}[language=Smalltalk]
+View subclass: #Counterview
+	instanceVariableNames: ''
+	classVariableNames: ''
+	poolDictionaries: ''
+	category: 'Demo-Counter'
+
+CounterView methodsFor: 'displaying'
+displayView
+	"Näytä mallin arvo näkymässä"
+	| box pos displayText |
+	box := self insetDisplayBox.
+	"Asettele teksti näkymään. Asettelu ei
+	 ole tutkielman kannalta oleellista."
+	pos := box origin + (4 @ (box extent y / 3)).
+	displayText := ('value:', self model value printString)
+					asDisplayText.
+	displayText displayAt: pos
+\end{lstlisting}
+Määritellään \emph{update} -metodi, jotta näkymä pystyy päivittämään itsensä. Metodia kutsutaan
+yleensä mallin tilan muuttuessa.
+\begin{lstlisting}[language=Smalltalk]
+CounterView methodsFor: 'updating'
+update: aParameter
+  "Yksinkertaisesti päivitä näyttö uudestaan"
+  self display
+\end{lstlisting}
+Luodaan myös metodi, joka palauttaa näkymään liitetyn ohjaimen.
+\begin{lstlisting}[language=Smalltalk]
+CounterView methodsFor: 'controller access'
+defaultControllerClass
+	"Palauta näkymään rekisteröity ohjain"
+	^CounterController
+\end{lstlisting}
+Lopuksi tarvitaan metodi, joka luo uuden näkymän sekä rekisteröi mallin ja ohjaimen itseensä. Näkymä näyttää ruudulta
+samalta kuin kuvassa 2.
+\begin{lstlisting}[language=Smalltalk]
+CounterView class methodsFor: 'instance creation'
+open
+	"Avaa näkymän uudelle laskurisovellukselle. Tässä 
+	metodissa nähdään kuinka näkymä huolehtii mallin 
+	rekisteröinnistä sekä nähdään kuinka näkymiä voi 
+	olla useita sisäkkäin."
+	| aCounterView topView |
+	"Luo laskurinäkymälle uusi näkymä, joka näyttää 
+	laskurin arvon"
+	aCounterView := CounterView new
+	"Asetetaan malliksi Counter -luokan instanssi"
+	model: Counter new.
+	aCounterView borderWidth: 2.
+	aCounterView insideColor: Form white.
+	"Asetetaan ylimmäksi näkymäksi StandardSystemView 
+	-luokan instanssi, joka vastaa perinteistä
+ikkunointimallia"
+	topView := StandardSystemView new
+		label: 'Counter'.
+	topView minimumSize: 80@40.
+	"Lisätään edellä luotu laskurinäkymä ylinäkymän 
+	alanäkymäksi"
+	topView addSubView: aCounterView.
+	"Käynnistetään ohjain"
+	topView controller open
+\end{lstlisting}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{counter.png}
+\caption{Kuva CounterView -näkymästä \cite{krasner_desc}}
+\end{figure}
+
+\section{Pyramid}
+Pyramid on Python-pohjainen web-sovelluskehys, jonka tehtävänä on helpottaa web-kehitystä tarjoamalla
+kehittäjälle valmiita työkaluja avuksi kehitykseen.
+
+\subsection{Tausta}
+Sovelluskehyksen tehtävänä on tuoda sovelluksen kehitykseen mukaan
+taso, joka tarjoaa erilaisia kirjastoja ratkaisemaan yleisimpiä ongelmia, joita tulee vastaan sovelluksen kehityksen aikana. Näin vältetään
+jo ratkaistujen perusoperaatioiden toistoa ja pystytään keskittymään suoraan sovelluksen toteuttamiseen. Web"-sovelluskehykset ovat erityisesti suunnattuja
+web-sovellusten ja -palvelujen toteuttamiseen.  Tärkein ero sovelluskehyksen ja kirjaston välillä on se, että kirjaston ohjelmakoodi kutsustaan aina
+kehittäjän toimestaa. Sovelluskehyksessä taas kehittäjän ohjelmakoodia kutsutaan aina sovelluskehyksen toimesta \cite{Pyramid:intr}.
+
+\chapter{Sovelluskehykset}
+Soveluskehykset ovat suosittuja, koska ne tarjoavat uudelleenkäytettäviä ratkaisuja erilaisiin ongelmiin sovelluskehityksessä. Toimialueesta riippumatta sovelluskehyksiä tulisi käyttää hyväksi kirjottaessa monimutkaisia sovelluksia. Sovelluskehys tuo sovellukseen tason, jossa sovelluksen osat on abstrahoitu erilaisilla luokilla sekä rajapinnoilla, joita voidaan käyttää uudelleen sovelluksen eri osissa. Sovelluskehys ei ole vain kokoelma rajapintoja ja kirjastoja\cite{towards_framework}. Tärkein ero sovelluskehyksen ja kirjaston välillä on se, että kirjaston ohjelmakoodi kutsustaan aina
+kehittäjän toimestaa. Sovelluskehyksessä taas kehittäjän ohjelmakoodia kutsutaan aina sovelluskehyksen toimesta \cite{pyramid_intr}.
+
+Sovelluskehys ei myöskään generoi koodia. Se käyttää erilaisia komponentteja ja kirjastoja luodakseen infrastruktuurin, jonka päälle voidaan rakentaa sovelluksia sovelluskehyksen ehdoilla. Sovelluskehyksen käyttäminen myös rajoittaa sovelluksen rakennetta ja pakottaa sovelluksen toteuttamaan asioita tietyin ehdoin. Rajoitusten ansiosta sovelluskehittäjä voi keskittyä toimialueeseen liittyviin ongelmiin välittämättä koko sovelluksen yksityiskohtaisesta toteutuksesta \cite{towards_framework}.
+
+Web-sovelluskehykset ovat sovelluskehyksiä, jotka tarjoavat ratkaisuja helpottamaan web-sovellusten toteuttamista. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla kirjoitettuja web-sovelluskehyksiä. 
+
 \section{Tausta \& Teoria}
 \section{Pyramid}
 \section{Django}
@@ -409,334 +573,6 @@ voidaan ylikirjoittaa, jolloin saavutetaan jokin haluttu ominaisuus kyseisessä 
 \section{Teorian jälkeen}
 \chapter{Lähteiden käyttö}
 \section{Lähdeviittaukset}
-
-Tämä tehdään komennolla \string\parencites, jolle annetaan kutakin
-lähdettä kohti samat argumentit kuin yksittäiselle
-\string\parencite"-komennolle.  Komento on hyvä (mutta ei pakko)
-päättää \string\relax-komentoon, jotta yllätyksiltä vältyttäisiin.
-
-\begingroup\footnotesize
-\begin{verbatim}
-\parencites%
-  [ks.][luku~3.7]{biblatex-manual}%
-  [ks.~lähteiden käytöstä yleisesti myös][luku~5.3.2]%
-    {biblatex-chicago-manual}%
-\relax.
-\end{verbatim}
-\endgroup
-
-Jos jaat \string\parencites"-komennon usealle riville, päätä rivit
-kommenttimerkillä (kuten yllä), jotta tulokseen ei ilmaantuisi
-ylimääräisiä välilyöntejä.
-
-\section{Lähdetietokanta}
-
-Lähteet lisätään erilliseen \textsc{Bib\TeX}"-tiedostomuodossa olevaan
-lähdetietokantaan.  Sen laatimisessa voit käyttää apuna monia
-lähteidenhallintajärjestelmiä, mutta sen voi laatia myös käsin.
-Tietokannan nimi kirjoitetaan \string\addbibresource-komennon
-argumentiksi.
-
-\textsc{Bib\TeX}-muotoinen lähdetietokanta on erityisellä tavalla
-muotoiltu tekstitiedosto.  Se koostuu tietueista, jotka alkavat
-@-merkillä ja sitä seuraavalla tietuetyypin nimellä.  Muu osa
-tietueesta kirjoitetaan aaltosulkeiden sisään.  Esimerkiksi edellä
-mainittu kääntäjäkirja \parencite{aho-compilers} voidaan
-esittää seuraavanlaisena tietueena:
-
-\begingroup\footnotesize
-\begin{verbatim}
-@Book{aho-compilers,
-  author =       {Alfred V. Aho and Monica S. Lam and Ravi Sethi and
-                  Jeffrey D. Ullman},
-  title =        {Compilers},
-  subtitle =     {Principles, Techniques, \& Tools},
-  publisher =    {Pearson Addison Wesley},
-  year =         2007,
-  address =      {Boston},
-  edition =      2
-}
-\end{verbatim}
-\endgroup%
-
-Tämän tietueen tyyppi on book, joka tarkoittaa luonnollisestikin
-kirjaa.  Aaltosulkeiden sisällä oleva ensimmäinen sana on tietueen
-koodi, jota käytetään \string\textcite- ja
-\string\parencite"-komennoissa.  Sen jälkeen tulee pilkku ja joukko
-nimettyjä kenttiä kuten kirjan kirjoittaja (author), nimi (title),
-alaotsikko (subtitle) ja julkaisija (publisher).  Kenttien sisällöt
-laitetaan aaltosulkeisiin, tosin pelkkiä numeroita sisältävät kentät
-voi kirjoittaa ilmankin.
-
-Kirjoittajien nimet kirjoitetaan tietuekenttään pääosin täysin
-tavanomaisella tavalla.  Vaihtoehtoisesti nimi voidaan esittää myös
-muodossa sukunimi-pilkku-etunimi (Aho, Alfred V.), ja joissakin
-erityistapauksissa (esimerkiksi moniosainen väliviivaton sukunimi) se
-on myös pakko tehdä niin.  Jos kirjoittajia on useita, heidän nimensä
-erotetaan sanalla and (jota ei pidä suomentaa!).  Jos kaikkia
-kirjoittajia ei luetella, laitetaan viimeisen nimen perään (ilman
-lainausmerkkejä) ''and others''.
-
-Jos lähteen tekijäksi on merkitty jokin organisaatio, sen nimi pitää
-kirjoittaa ylimääräisiin
-aaltosulkeisiin \parencite[esim.][]{unicode620}:
-
-\begingroup\footnotesize
-\begin{verbatim}
-@Book{unicode620,
-  author =       {{Unicode Consortium}},
-  title =        {The Unicode Standard, Version 6.2.0},
-  year =         {2012},
-  url =          {http://www.unicode.org/versions/Unicode6.2.0/},
-  urldate =      {2013-01-29}
-}
-\end{verbatim}
-\endgroup
-
-Jos lähteellä ei jostain syystä ole lainkaan mimettyä tekijää, tulee
-author-kenttä jättää kokonaan pois, jolloin lähdeviitteeseen tulee
-tekijän tilalle otsikko \parencite[esim.][]{presidential-novel}:
-
-\begingroup\footnotesize
-\begin{verbatim}
-@Book{presidential-novel,
-  title =        {O},
-  subtitle =     {A Presidential Novel},
-  publisher =    {Simon \& Schuster},
-  year =         {2011},
-}
-\end{verbatim}
-\endgroup
-
-Tieteellinen lehtiartikkeli \parencite[esim.][]{strachey-fundamentals}
-kirjoitetaan esimerkiksi seuraavanlaiseksi tietueeksi:
-
-\begingroup\footnotesize
-\begin{verbatim}
-@Article{strachey-fundamentals,
-  author =       {Christopher Strachey},
-  title =        {Fundamental Concepts in Programming Languages},
-  journal =      {Higher-Order and Symbolic Computation},
-  year =         2000,
-  volume =       13,
-  number =       {1--2},
-  pages =        {11--49},
-  doi =          {10.1023/A:1010000313106}
-}
-\end{verbatim}
-\endgroup
-
-Huomaa erityisesti kenttä doi, johon voi kirjoittaa artikkelin
-digitaalisen tunnisteen (Digital Object Identifier, DOI).  Se on
-yleensä parempi valinta kuin mikään URL, koska DOI on pysyvä
-artikkelin tunnistetieto.  Useimmat DOIt on lisäksi muutettavissa
-URLiksi lisäämällä sen alkuun \url{http://dx.doi.org/}.
-
-Jos netissä olevan lähteen DOI ei ole tiedossa (tai sitä ei ole
-lainkaan), voi käyttää url-kenttää ja sen kaverina urldate-kenttää,
-jolla ilmaistaan (muodossa VVVV--KK--PP) verkossa olevan lähteen
-viittauspäivä.  Linkki kannattaa valita huolella siten, että se on
-mahdollisimman tarkka ja mahdollisimman pitkään voimassa -- jos
-sivulla on erikseen osoitettu pysyvä linkki (engl.~\emph{permanent
-  link}), sitä on syytä käyttää.
-
-Viitattaessa WWW-sivuun, joka ei ole kirja tai artikkeli tai muukaan
-julkaisu, voidaan käyttää
-online-tietuetyyppiä \parencite[esim.][]{debian-social-contract}:
-
-\begingroup\footnotesize
-\begin{verbatim}
-@Online{debian-social-contract,
-  title =        {Debian Social Contract},
-  year =         {2004},
-  url =          {http://www.debian.org/social_contract.en.html},
-  urldate =      {2013-01-29}
-}
-\end{verbatim}
-\endgroup
-
-Jotkin lähteet ovat toimitettuja kokoomateoksia, jotka koostuvat
-itsenäisistä artikkeleista.  Yleensä tällöin viitataan johonkin sen
-osa"-artikkeliin \parencite[esim.][]{prechelt-credibility} eikä koko
-kokoomateokseen.  Tällöin sekä teos että viitatut artikkelit lisätään
-tietokantaan omina tietueinaan, ja kussakin artikkelitietueessa
-viitataan kokoomateokseen käyttäen
-crossref"-kenttää:\footnote{Sallittua on myös yhdistää artikkeli ja
-  kokoomateos yhdeksi InCollection-tietueeksi, esimerkiksi jos
-  kokoomateoksesta viitataan vain yhteen artikkeeliin.  Tällöin
-  kokoomateoksen nimi tulee booktitle"-kenttään eikä crossref"-kenttää
-  käytetä.}
-
-\begingroup\footnotesize
-\begin{verbatim}
-@Collection{making-software,
-  editor =       {Andy Oram and Greg Wilson},
-  title =        {Making Software},
-  subtitle =     {What Really Works, and Why We Believe It},
-  publisher =    {O'Reilly},
-  year =         2011
-}
-@InCollection{prechelt-credibility,
-  author =       {Lutz Prechelt and Marian Petre},
-  title =        {Credibility, or Why Should I Insist on Being
-                  Convinced},
-  crossref =     {making-software},
-  pages =        {17--34}
-}
-\end{verbatim}
-\endgroup
-
-Huomaa, kuinka kokoomateoksella on toimittajia (editor) eikä tekijöitä
-(author).
-
-Tarkempia tietoja lähdetietokannan rakenteesta löytyy
-\textsc{Bib\TeX}in manuaalista \parencite{bibtexing},
-\textsc{Bib\LaTeX}in manuaalista \parencite[luku~2]{biblatex-manual}
-sekä \textsc{Bib\LaTeX}-Chicagon manuaalista
-\parencite[luvut 5.1--5.2]{biblatex-chicago-manual}.  Lisää
-esimerkkejä löydät myös tämän oppaan lähdekoodista.
-
-\section{Lähdeluettelo}
-
-Lähdetietokanta muutetaan lähdeluetteloksi apuohjelmalla {biber}.  Se
-on varsin uusi, joten se puuttuu useimmista koneista, joiden
-\TeX-asennus ei ole aivan ajantasalla.  Yliopiston suorakäyttökoneista
-se löytyy tällä hetkellä vain charra.it.jyu.fi-koneesta.
-Ubuntu-asennuksiin se on saatavissa versiosta 12.10 alkaen ja
-Debian-asennuksiin Wheezystä alkaen.  Windowsiin se on asennettavissa
-Mik\TeX-pakettina miktex-biber-bin.\footnote{Valitettavasti tämä
-  paketti on tällä hetkellä saatavissa vain 32-bittiseen Mik\TeX iin.}
-
-Komentoriviltä biberin käyttö on yksinkertaista.  Kun \LaTeX\ (tai
-pdf\LaTeX) on kerran ajettu, ajetaan biber parametrinaan dokumentin
-nimi.  Tämän jälkeen ajetaan \LaTeX\ (tai pdf\LaTeX) vähintään kerran
-(kunnes edellisen ajon lopussa ei enää pyydetä uutta ajoa).
-Esimerkiksi näin:
-
-\begingroup\footnotesize
-\begin{verbatim}
-$ pdflatex malliopas
-[...]
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                malliopas
-(biblatex)                and rerun LaTeX afterwards.
-[..]
-Output written on malliopas.pdf (18 pages, 96855 bytes).
-Transcript written on malliopas.log.
-$ biber malliopas
-INFO - This is Biber 0.9.9
-[...]
-INFO - Output to malliopas.bbl
-$ pdflatex malliopas
-[...]
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-[...]
-Output written on malliopas.pdf (21 pages, 107373 bytes).
-Transcript written on malliopas.log.
-$ pdflatex malliopas
-[...]
-Output written on malliopas.pdf (21 pages, 107509 bytes).
-Transcript written on malliopas.log.
-\end{verbatim}
-\endgroup
-
-\section{Tiedossa olevat ongelmat}
-
-Lähdeluettelon ja lähdeviitteiden toiminta ei ole toistaiseksi aivan
-virheetöntä.
-
-Jos artikkelilla ei ole tekijää, lähdeluettelossa kyseisen artikkelin
-merkintä alkaa vuosiluvulla.  Tämä vika on korjattu
-\textsc{Bib\LaTeX}-Chicagon versiossa 0.9.9c (julkaistu 15.3.2013).
-
-Jos lähdetietokantaan kirjoittaa urldate-päiväyksen, tulee se
-lähdeluetteloon virheellisessä muodossa.  Tämä vika on korjattu
-\textsc{Bib\LaTeX}-Chicagon versiossa 0.9.9b (julkaistu 6.12.2012).
-
-\chapter{Tutkielmapohjan erityispiirteet}
-
-Pääsääntöisesti {gradu3} käyttäytyy kuten \LaTeX in mukana
-tuleva {report}-kirjoitelmaluokka.  Eroja kuitenkin on:
-\begin{itemize}
-\item Sinun ei tarvitse ladata {inputenc}-, {fontenc}-
-  eikä {babel}-pakettia.
-  \begin{itemize}
-  \item Käyttämäsi merkistö sinun pitää ilmoittaa
-    {\string\documentclass}-komennon optiona.  Nykyään {utf8} on
-    yleensä sopiva valinta, joskin joissakin tilanteissa latin1 tai
-    latin9 voi tulla myös kyseeseen.
-  \item Jos tutkielmasi on englanninkielinen, ilmoita se
-    {\string\documentclass}-komennon optiolla {english}.
-  \end{itemize}
-\item Jos tutkielmasi on kandidaatintutkielma, käytä
-  {\string\documentclass}-komennon optiota {bachelor}.
-\item Ilmoita tutkielmasi metatiedot taulukossa~\ref{tbl:metatiedot}
-  esitetyillä komennoilla.  Ne tulee antaa ennen
-  {\string\maketitle}-komentoa.
-\begin{table}[h]\centering
-  \begin{tabular}{lp{9cm}}
-    \toprule
-    Komento & Tarkoitus \\
-    \midrule
-    {\string\title}
-    & Työn otsikko (älä käytä {\string\thanks}-komentoa) \\
-    {\string\translatedtitle}
-    & Suomenkielisen työn englanninkielinen otsikko,
-    englanninkielisen työn suomenkielinen otsikko\\
-    {\string\studyline}
-    & Suuntautumisvaihtoehtosi \\
-    {\string\tiivistelma}
-    & Suomenkielinen tiivistelmä \\
-    {\string\abstract}
-    & Englanninkielinen abstrakti \\
-    {\string\avainsanat}
-    & Suomenkieliset avainsanat \\
-    {\string\keywords}
-    & Englanninkieliset avainsanat \\
-    {\string\author}
-    & Kirjoittajan nimi (jos useita, anna kukin omana komentonaan -- {\string\and}-komentoa ei tueta) \\
-    {\string\contactinformation}
-    & Kirjoittajan yhteystiedot \\
-    {\string\supervisor}
-    & Tutkielman ohjaaja (jos useita, anna kukin omana komentonaan)\\
-    \bottomrule
-  \end{tabular}
-  \caption{Metatietojen ilmoituskomennot}\label{tbl:metatiedot}
-\end{table}
-\item Voit \string\maketitle-komennon jälkeen halutessasi kirjoittaa
-  esipuheen.  Sen otsikon saat komennolla \string\preface.
-\item Mahdollisen esipuheen jälkeen voit kirjoittaa termiluettelon
-  käyttämällä thetermlist-ympäristöä.  Sen sisällä voit käyttää
-  \string\item[\textit{termi}]"-komentoa merkitsemään määriteltävän
-  termin.
-\item Käytä \string\maketitle-komennon ja mahdollisten esipuheen ja
-  termiluettelon jälkeen \string\mainmatter"-komentoa.  Se laatii
-  automaattisesti tarvittavat sisällys-, kuvio- ja taulukkoluettelot.
-\item Komentoja \string\subsubsection, \string\paragraph{} ja
-  \string\subparagraph{} ei tueta.
-\item Liitteet eivät ole lukuja (\string\chapter) vaan alilukuja
-  (\string\section).
-\item Lähdeluettelon ja lähdeviitteiden tekemisestä kerrottiin
-  edellisessä luvussa.
-\end{itemize}
-
-\chapter{Yhteenveto}
-
-Tutkielman viimeinen luku on Yhteenveto.  Sen on hyvä olla lyhyt;
-siinä todetaan, mitä tutkielmassa esitetyn nojalla voidaan sanoa
-johdannon väitteen totuudesta tai tutkimuskysymyksen vastauksesta.
-Yhteenvedossa tuodaan myös esille tutkielman heikkoudet (erityisesti
-tekijät, jotka heikentävät tutkielman tulosten luotettavuutta), ellei
-niitä ole jo aiemmin tuotu esiin esimerkiksi Pohdinta-luvussa.  Tässä
-luvussa voidaan myös tuoda esille, mitä tutkimusta olisi tämän
-tutkielman tulosten valossa syytä tehdä seuraavaksi.
-
-Jos Yhteenveto alkaa pitkittyä, se kannattaa jakaa kahtia niin, että
-tulosten tulkinta otetaan omaksi Pohdinta-luvukseen, jolloin
-Yhteenvedosta tulee varsin lyhyt ja lakoninen.
-
-Yhteenvedon jälkeen tulee \string\printbibliography-komennolla
-laadittu lähdeluettelo ja sen jälkeen mahdolliset liitteet.
 
 \printbibliography
 

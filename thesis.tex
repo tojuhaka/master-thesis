@@ -151,7 +151,8 @@ selvitetään voidaanko MVC tuoda sellaisenaan sovelluskehykseen ja
 mitä mahdollisia ongelmia se tuo.
 
 \chapter{Oletus}
-Tässä oletetaan mitä tutkimuskysymykseen voisi tulla vastaukseksi
+Tutkimustulokseksi oletetaan, että MVC:tä ei sellaisenaan voida tuoda web-sovelluskehykseen. Oletus perustuu ohjaimen
+konkreettiseen puuttumiseen sekä viestejen toteutukseen.
 
 \chapter{Tutkimuksen Rakenne}
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
@@ -548,10 +549,27 @@ kehittäjän toimestaa. Sovelluskehyksessä taas kehittäjän ohjelmakoodia kuts
 
 Sovelluskehys ei myöskään generoi koodia. Se käyttää erilaisia komponentteja ja kirjastoja luodakseen infrastruktuurin, jonka päälle voidaan rakentaa sovelluksia sovelluskehyksen ehdoilla. Sovelluskehyksen käyttäminen myös rajoittaa sovelluksen rakennetta ja pakottaa sovelluksen toteuttamaan asioita tietyin ehdoin. Rajoitusten ansiosta sovelluskehittäjä voi keskittyä toimialueeseen liittyviin ongelmiin välittämättä koko sovelluksen yksityiskohtaisesta toteutuksesta \cite{towards_framework}.
 
-Web-sovelluskehykset ovat sovelluskehyksiä, jotka tarjoavat ratkaisuja helpottamaan web-sovellusten toteuttamista. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla kirjoitettuja web-sovelluskehyksiä. 
+Web-sovelluskehykset ovat sovelluskehyksiä, jotka tarjoavat ratkaisuja helpottamaan web-sovellusten toteuttamista. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla toteutettuja web-sovelluskehyksiä. 
 
-\section{Tausta \& Teoria}
 \section{Pyramid}
+Pyramid on Python-pohjainen web-sovelluskehys, jonka tehtävänä on helpottaa web-kehitystä tarjoamalla
+kehittäjälle valmiita työkaluja avuksi kehitykseen. Pyramid on suunniteltu siten, että kehittäjän ei tarvitse tietää suuria määriä erilaisia malleja ja tekniikoita pystyäkseen tuottamaan web-sovelluksia. Se ei myöskään pakota käyttämään kehityksessä
+mitään erityistä tekniikkaa, vaan pyrkii olemaan mahdollisimman yksinkertainen ja helposti laajennettavissa erilaisiin käyttötarkoituksiin. Laajentamisella tarkoitetaan erilaisten lisäosien
+liittämistä Pyramidiin. Yksinkertaisuuden ja mimimaalisuuden ansiosta se on myös nopeampi kuin monet muut Python-pohjaiset web-sovelluskehykset. Tämä johtuu Pyramidin poikkeuksellisen
+pienestä kutsupinosta ajamisen aikana \cite{pyramid_intr}. 
+
+Koska Pyramid pyrkii tarjoamaan vain välttämättömimmät työkalut web"-sovelluksien kehitykseen, sen kehittäjät
+ovat päätyneet web-kehityksessä neljään yleisimpään ongelmaan ja tarjoavat niihin ratkaisun Pyramidissa:
+
+\begin{description}
+\item [URL Mapping] -\ URL:ien liittäminen ohjelmakoodiin.
+\item[Template] -\ Tuodaan sovelluksen näkymä selaimelle käyttäen HTML-kuvauskieltä, jolla määrätään näkymän rakenne. Tämän avulla pystytään erottamaan käyttöliittymä sovelluslogiikasta tehokkaasti.
+\item[Security] -\ Perinteiset tietoturvaongelmat tulee olla ratkaistuna valmiiksi jo sovelluskehyksessä. Tämä ei kuitenkaan tarkoita sitä, että kehittäjä voisi täysin unohtaa tietoturvan merkityksen.
+\item[Static Assets] -\ Staattisien resurssejen jakaminen niille tarkoitettuihin paikkoihin tiedostorakenteessa.
+\end{description}
+Yllä määriteltyjen neljän pääongelman lisäksi Pyramid tarjoaa lisäosien kautta monia erilaisia työkaluja, joiden avulla pystytään laajentamaan sen ominaisuuksia \cite{pyramid_intr}. Tutkielman aiheen rajauksen vuoksi ei kuitenkaan
+käydä läpi yksityiskohtaisemmin Pyramidin toteutusta ja siihen liitettävissä olevia lisäosia, vaan keskitytään tarkastelemaan MVC:n toteutusta Pyramidissa.
+
 \section{Django}
 \section{Plone}
 \section{Flask}

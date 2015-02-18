@@ -119,6 +119,20 @@ Tutkielman tekijä
   rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
   järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
   käytössä versio \LaTeXe.
+\item[WSGI] määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset
+yhdistetään prosessoimaan pyyntöjä.
+\item[Myghty Python Templating Framework] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
+  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
+  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
+  käytössä versio \LaTeXe.
+\item[mod\_python] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
+  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
+  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
+  käytössä versio \LaTeXe.
+\item[BFG] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
+  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
+  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
+  käytössä versio \LaTeXe.
 \end{thetermlist}
 
 \chapter{Johdanto}
@@ -552,11 +566,15 @@ Sovelluskehys ei myöskään generoi koodia. Se käyttää erilaisia komponentte
 Web-sovelluskehykset ovat sovelluskehyksiä, jotka tarjoavat ratkaisuja helpottamaan web-sovellusten toteuttamista. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla toteutettuja web-sovelluskehyksiä. 
 
 \section{Pyramid}
+
 Pyramid on Python-pohjainen web-sovelluskehys, jonka tehtävänä on helpottaa web-kehitystä tarjoamalla
-kehittäjälle valmiita työkaluja avuksi kehitykseen. Pyramid on suunniteltu siten, että kehittäjän ei tarvitse tietää suuria määriä erilaisia malleja ja tekniikoita pystyäkseen tuottamaan web-sovelluksia. Se ei myöskään pakota käyttämään kehityksessä
-mitään erityistä tekniikkaa, vaan pyrkii olemaan mahdollisimman yksinkertainen ja helposti laajennettavissa erilaisiin käyttötarkoituksiin. Laajentamisella tarkoitetaan erilaisten lisäosien
-liittämistä Pyramidiin. Yksinkertaisuuden ja mimimaalisuuden ansiosta se on myös nopeampi kuin monet muut Python-pohjaiset web-sovelluskehykset. Tämä johtuu Pyramidin poikkeuksellisen
-pienestä kutsupinosta ajamisen aikana \cite{pyramid_intr}. 
+kehittäjälle valmiita työkaluja avuksi kehitykseen. Pyramid on suunniteltu siten, että kehittäjän ei tarvitse tietää suuria määriä erilaisia malleja ja tekniikoita pystyäkseen tuottamaan web-sovelluksia. Se ei myöskään pakota käyttämään kehityksessä mitään erityistä tekniikkaa, vaan pyrkii olemaan mahdollisimman yksinkertainen ja helposti laajennettavissa erilaisiin käyttötarkoituksiin. Laajentamisella tarkoitetaan erilaisten lisäosien liittämistä Pyramidiin. Yksinkertaisuuden ja mimimaalisuuden ansiosta se on myös nopeampi kuin monet muut Python-pohjaiset web-sovelluskehykset. Tämä johtuu Pyramidin poikkeuksellisen pienestä kutsupinosta ajamisen aikana \cite{pyramid_intr}. 
+
+Pyramid sai alkunsa Pylons -projektista syyskuussa vuonna 2005, jolloin jo yli 30 Python-sovelluskehystä kilpaili käyttäjistä. Ben Bangert ja James Gardner alkoivat yhdessä kehittää sovelluskehystä, josta tuli lopulta Pylons. Alunperin Pylons oli
+muokattu "Myghty Python Templating Framework" pohjalta tarjotakseen MVC:n tarjoaman web-sovelluskehyksen. Myghty -sovelluskehystä ajettiin mod\_pythonin päällä, mutta Pylonsin pyrkimys oli käyttää WSGI:tä hyödyntämään joustavaa komponenttipohjaista lähestymistapaa web-sovelluksissa \cite{pyramid_history}. Pylons projektin tarkoituksena ei ole keskittyä yhden yksittäisen web-sovelluskehyksen kehittämiseen vaan tarjota kokoelma erilaisia teknologioita \cite{pyramid_about}.
+
+Vuonna 2008 Pyramid tunnettiin repoze.bfg -nimellä. Joulukuun 
+
 
 Koska Pyramid pyrkii tarjoamaan vain välttämättömimmät työkalut web"-sovelluksien kehitykseen, sen kehittäjät
 ovat päätyneet web-kehityksessä neljään yleisimpään ongelmaan ja tarjoavat niihin ratkaisun Pyramidissa:
@@ -567,10 +585,11 @@ ovat päätyneet web-kehityksessä neljään yleisimpään ongelmaan ja tarjoava
 \item[Security] -\ Perinteiset tietoturvaongelmat tulee olla ratkaistuna valmiiksi jo sovelluskehyksessä. Tämä ei kuitenkaan tarkoita sitä, että kehittäjä voisi täysin unohtaa tietoturvan merkityksen.
 \item[Static Assets] -\ Staattisien resurssejen jakaminen niille tarkoitettuihin paikkoihin tiedostorakenteessa.
 \end{description}
-Yllä määriteltyjen neljän pääongelman lisäksi Pyramid tarjoaa lisäosien kautta monia erilaisia työkaluja, joiden avulla pystytään laajentamaan sen ominaisuuksia \cite{pyramid_intr}. Tutkielman aiheen rajauksen vuoksi ei kuitenkaan
+Yllä määriteltyjen neljän ongelman lisäksi Pyramid tarjoaa lisäosien kautta monia erilaisia työkaluja, joiden avulla pystytään laajentamaan sen ominaisuuksia \cite{pyramid_intr}. Tutkielman aiheen rajauksen vuoksi ei kuitenkaan
 käydä läpi yksityiskohtaisemmin Pyramidin toteutusta ja siihen liitettävissä olevia lisäosia, vaan keskitytään tarkastelemaan MVC:n toteutusta Pyramidissa.
 
 \section{Django}
+
 \section{Plone}
 \section{Flask}
 

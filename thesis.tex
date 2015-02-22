@@ -133,6 +133,10 @@ yhdistetään prosessoimaan pyyntöjä.
   rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
   järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
   käytössä versio \LaTeXe.
+\item[MTV] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
+  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
+  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
+  käytössä versio \LaTeXe.
 \end{thetermlist}
 
 \chapter{Johdanto}
@@ -153,14 +157,12 @@ samalla esittelee alkuperäisen MVC:n toteuttamisen ongelmana. Tämä johtuu web
 kyseenalaistavat MVC-arkkitehtuurin toteutuksen Pyramidissa ja uskovat
 MVC:n olevan sellaisenaan sopimaton web-ohjelmointiin, vaikka
 Pyramidin toteutus onkin hyvin lähellä alkuperäistä MVC:tä
-\parencite{pyramid}. Django on myös toteutettu MVC:n pohjalta, mutta
-se ei kuitenkaan toteuta MVC:tä sellaisenaan \parencite{django}.
+\parencite{pyramid}. Django on vastaavasti toteutettu MVC:n pohjalta, mutta sen väitetään myös toteuttavan MVC hieman erilailla kuin MVC on alunperin tarkoitettu \parencite{django_mvc}.
 
 Tutkimuksen tarkoituksena on selvittää millä tavalla
 MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
-eroaa alkuperäisestä MVC:n toteutuksesta. Lisäksi laajennetaan
-Flask-sovelluskehys toteuttamaan alkuperäinen MVC niinkuin Krasner on
-sen määritellyt \parencite{krasner}. Havaintojen pohjalta
+eroaa alkuperäisestä MVC:n toteutuksesta. Lisäksi pyritään toteuttamaan MVC alkuperäisen
+toteutuksen mukaan käyttäen Flask-sovelluskehystä\parencite{krasner}. Havaintojen pohjalta
 selvitetään voidaanko MVC tuoda sellaisenaan sovelluskehykseen ja
 mitä mahdollisia ongelmia se tuo.
 
@@ -567,7 +569,7 @@ Sovelluskehys ei myöskään generoi koodia. Se käyttää erilaisia komponentte
 
 Web-sovelluskehykset ovat sovelluskehyksiä, jotka tarjoavat ratkaisuja helpottamaan web-sovellusten toteuttamista. Web-sovelluskehyksissä käyttöliittymä näytetään käyttäjille selaimen välityksellä. Sovellus ajetaan joko serverillä tai suoraan käyttäjän selaimessa. Sovellus määrittää käyttöliittymän sivujen järjestyksen, sisällön sekä mahdollisten toimintojen esittämisen käyttäjälle, jonka kautta käyttäjä voi vaikuttaa serverillä sijaitsevaan sovellukseen \parencite{vosloo}.
 
-Web-sovelluskehykset voidaan jakaa serveri-pohjaisiin ja selain-pohjaisiin sovelluskehyksiin. Serveri-pohjaisissa web-sovelluskehyksissä sovelluksen tilaa hallitaan serverin puolella. Tuolloin käyttöliittymää perustuu tilaan, mikä on sillä hetkellä serverin puolella. Selain-pohjaisissa sovelluskehyksissä sisältö muuttuu selaimen sisällä käyttäjän päässä \parencite{vosloo}. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla toteutettuja serveri-pohjaisia sovelluskehyksiä.
+Web-sovelluskehykset voidaan jakaa serveri-pohjaisiin ja selain-pohjaisiin sovelluskehyksiin. Serveri-pohjaisissa web-sovelluskehyksissä sovelluksen tilaa hallitaan serverin puolella. Tuolloin käyttöliittymää perustuu tilaan, mikä on sillä hetkellä serverin puolella. Selain-pohjaisissa sovelluskehyksissä sisältö muuttuu selaimen sisällä käyttäjän päässä \parencite{vosloo}. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla toteutettuja serveri-pohjaisia sovelluskehyksiä.gg
 
 \section{Pyramid}
 
@@ -591,7 +593,7 @@ Yllä määriteltyjen neljän ongelman lisäksi Pyramid tarjoaa lisäosien kautt
 käydä läpi yksityiskohtaisemmin Pyramidin toteutusta ja siihen liitettävissä olevia lisäosia, vaan keskitytään tarkastelemaan MVC:n toteutusta Pyramidissa.
 
 \section{Django}
-Django luotiin palvelemaan tarkoitusta  World Online -verkkolehdelle, jonka tehtävänä oli rakentaa web-sovelluksia mahdollisimman nopeasti julkaisuja varten. 2003 World Online:n kehittäjät Adrian Holovaty ja Simon Willison aloittivat käyttämään Pythonia web-sivujen kehittämisessä. 
+Django luotiin palvelemaan tarkoitusta  World Online -verkkolehdelle, jonka tehtävänä oli rakentaa web-sovelluksia mahdollisimman nopeasti julkaisuja varten. 2003 WO:n kehittäjät Adrian Holovaty ja Simon Willison aloittivat käyttämään Pythonia web-sivustojen kehittämisessä.  
 
 \section{Plone}
 \section{Flask}

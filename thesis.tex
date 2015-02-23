@@ -569,8 +569,7 @@ Sovelluskehys ei myöskään generoi koodia. Se käyttää erilaisia komponentte
 
 Web-sovelluskehykset ovat sovelluskehyksiä, jotka tarjoavat ratkaisuja helpottamaan web-sovellusten toteuttamista. Web-sovelluskehyksissä käyttöliittymä näytetään käyttäjille selaimen välityksellä. Sovellus ajetaan joko serverillä tai suoraan käyttäjän selaimessa. Sovellus määrittää käyttöliittymän sivujen järjestyksen, sisällön sekä mahdollisten toimintojen esittämisen käyttäjälle, jonka kautta käyttäjä voi vaikuttaa serverillä sijaitsevaan sovellukseen \parencite{vosloo}.
 
-Web-sovelluskehykset voidaan jakaa serveri-pohjaisiin ja selain-pohjaisiin sovelluskehyksiin. Serveri-pohjaisissa web-sovelluskehyksissä sovelluksen tilaa hallitaan serverin puolella. Tuolloin käyttöliittymää perustuu tilaan, mikä on sillä hetkellä serverin puolella. Selain-pohjaisissa sovelluskehyksissä sisältö muuttuu selaimen sisällä käyttäjän päässä \parencite{vosloo}. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla toteutettuja serveri-pohjaisia sovelluskehyksiä.gg
-
+Web-sovelluskehykset voidaan jakaa serveri-pohjaisiin ja selain-pohjaisiin sovelluskehyksiin. Serveri-pohjaisissa web-sovelluskehyksissä sovelluksen tilaa hallitaan serverin puolella. Tuolloin käyttöliittymää perustuu tilaan, mikä on sillä hetkellä serverin puolella. Selain-pohjaisissa sovelluskehyksissä sisältö muuttuu selaimen sisällä käyttäjän päässä \parencite{vosloo}. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla toteutettuja serveri-pohjaisia sovelluskehyksiä. Käsiteltävät kehykset ovat Django, Pyramid ja Flask. Django on käsiteltävistä sovelluskehyksistä kaikkein monoliittisin ja tarjoaa eniten ominaisuuksia valmiiksi asennettuna. Pyramidissa taas on vähemmän ominaisuuksia suoraan asennettuna, jonka kautta se pyrkii antamaan käyttäjälle enemmän valinnanvaraa erilaisten teknologioiden valitsemiseen. Flaski taas on mikro-sovelluskehys, joka tarjoaa kaikkein vähiten työkaluja web-kehitykseen näistä kolmesta. Kaikkia kolmea sovelluskehystä voidaa laajentaa erilaisilla laajennoksilla.
 \section{Pyramid}
 
 Pyramid on Python-pohjainen web-sovelluskehys, jonka tehtävänä on helpottaa web-kehitystä tarjoamalla
@@ -579,13 +578,12 @@ kehittäjälle valmiita työkaluja avuksi kehitykseen. Pyramid on suunniteltu si
 Pyramid sai alkunsa Pylons -projektista syyskuussa vuonna 2005, jolloin jo yli 30 Python-sovelluskehystä kilpaili käyttäjistä. Ben Bangert ja James Gardner alkoivat yhdessä kehittää sovelluskehystä, josta tuli lopulta Pylons. Alunperin Pylons oli
 muokattu Myghty Python Templating Framework:n pohjalta tarjotakseen MVC-pohjaisen web-sovelluskehyksen. Myghty -sovelluskehystä ajettiin mod\_pythonin päällä, mutta Pylonsin pyrkimys oli käyttää WSGI:tä hyödyntämään joustavaa komponenttipohjaista lähestymistapaa web-sovelluksissa \parencite{pyramid_history}. Pylons projektin tarkoituksena ei ole keskittyä yhden yksittäisen web-sovelluskehyksen kehittämiseen vaan tarjota kokoelma erilaisia teknologioita \parencite{pylons_about}. Vuonna 2008 Pyramid tunnettiin nimellä repoze.bfg. Joulukuun alussa tapahtui ohjelmakoodin uudelleen nimeäminen ja ominaisuuksien lisääminen sekä poistaminen \parencite{pyramid_about}.
 
-
 Koska Pyramid pyrkii tarjoamaan vain välttämättömimmät työkalut web"-sovelluksien kehitykseen, sen kehittäjät
 ovat päätyneet web-kehityksessä neljään yleisimpään ongelmaan ja tarjoavat niihin ratkaisun Pyramidissa:
 
 \begin{description}
 \item [URL Mapping] -\ URL:ien liittäminen ohjelmakoodiin.
-\item[Template] -\ Tuodaan sovelluksen näkymä selaimelle käyttäen HTML-kieltä, jolla määrätään näkymän rakenne. Tämän avulla pystytään erottamaan käyttöliittymä sovelluslogiikasta tehokkaasti.
+\item[Template] -\ Tuodaan sovelluksen näkymä selaimelle käyttäen template-kieltä, jolla määrätään näkymän rakenne. Kieli on usein HTML:än mukana tuotuja loogisia ilmaisuja, joiden perusteella template-engine rakentaa HTML-sivun selaimelle. Templatejen avulla pystytään erottamaan käyttöliittymä sovelluslogiikasta tehokkaasti.
 \item[Security] -\ Perinteiset tietoturvaongelmat tulee olla ratkaistuna valmiiksi jo sovelluskehyksessä. Tämä ei kuitenkaan tarkoita sitä, että kehittäjä voisi täysin unohtaa tietoturvan merkityksen.
 \item[Static Assets] -\ Staattisien resurssejen jakaminen niille tarkoitettuihin paikkoihin tiedostorakenteessa.
 \end{description}
@@ -595,10 +593,11 @@ käydä läpi yksityiskohtaisemmin Pyramidin toteutusta ja siihen liitettäviss�
 \section{Django}
 Django on web-sovelluskehys, joka  sai alkunsa kehitysryhmässä Kansaksen osavaltiossa Yhdysvalloissa 2003, kun web-kehittäjät Adrian Holovaty ja Simon Willison alkoivat käyttää Pythonia web-kehityksessä. The World Online -ryhmä (WO), joka oli vastuussa muutamaamasta paikallisesta uutissivustosta, menestyivät ympäristössä, jossa oli tiukat aikarajat. Journalistit vaativat ominaisuuksien ja kokonaisten sovelluksien valmistumista muutamassa päivässä ja joskus jopa tunneissa. Holovaty ja Willison kehittivät web-sovelluskehyksen, jonka avulla he pystyivät vastaamaan journalistisen ympäristön haasteisiin. Kesällä 2005 he saivat kehitettyä sovelluskehyksen siten, että se oli käytössä suurimmassa osassa World Onlinen sivustoja. Tuolloin mukaan kehitykseen tuli Jacob Kaplan-Moss. Kehittäjät päättivät julkaista heinäkuussa 2005 sovelluskehyksen nimellä Django jazz-kitaristi Django Reinhardtin mukaan \parencite{django_history}.
 
-Django tarjoaa samat välttämättömät työkalut niin kuin Pyramidissa. Se tarjoaa myös ylläpitäjille suunnatun työkalun, josta voidaan hallita sovellusta käyttöliittymätasolta. Lisäksi se tarjoaa lomake-työkalut, käyttäjätasoisen autentikaation sekä sisäänrakennetun virtuaalisen ympäristön tuomaan yhteys tietokantaan olio-ohjelmoinnin kautta (Object-relational napping)\parencite{djangobook}. Siinä missä Pyramid pyrkii tarjoamaan kehittäjille valinnanvaraa erilaisten komponenttejen suhteen, Django tarjoaa kokonaisvaltaisen ratkaisun sisältäen kaikki tarvittavat työkalut web-sovellusten rakentamiseen. 
+Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa myös ylläpitäjille suunnatun työkalun, josta voidaan hallita sovellusta käyttöliittymätasolta. Lisäksi se tarjoaa lomake-työkalut, käyttäjätasoisen autentikaation sekä tietokanta-abstrahoinnin. Tietokanta-abstraktiolla tarkoitetaan sisäänrakennettua virtuaalista ympäristöä tuomaan yhteys tietokantaan olio-ohjelmoinnin kautta (Object-relational mapping)\parencite{djangobook}. Siinä missä Pyramid pyrkii tarjoamaan kehittäjille valinnanvaraa erilaisten komponenttejen suhteen, Django tarjoaa kokonaisvaltaisen ratkaisun sisältäen kaikki tarvittavat työkalut web-sovellusten rakentamiseen. Djangoon on tarjolla myös paljon erilaisia paketteja täydentämään sitä. 
 
-\section{Plone}
 \section{Flask}
+Flask on mikro-sovelluskehys (micro-framework), jossa sovelluskehyksen lähdekoodi on pidetty mahdollisimman minimalistisena. Sen tarkoituksena ei ole tehdä valintoja kehittäjän puolesta millaisia teknologioita tämän tulisi käyttää. Ne teknologiat mitä Flask tuo mukana, kuten esimerkiksi mitä template-engineä käytetään, voidaan vaihtaa helposti. Flaski ei tuo mitään lomake-työkaluja, tietokanta-abstrahointeja tai mitään missä ulkoinen kirjasto ei pystyisi kyseistä teknologiaa toteuttamaan. Flask tukee laajennoksia, joilla sitä voidaan laajentaa erilaisilla teknologioilla. Tällaisia ovat esimerkiksi erilaiset lomake-kirjastot ja tietokanta-abstrahoinnit. 
+\section{Plone}
 
 \chapter{MVC:n toteutus web-sovelluskehyksissä}
 \section{Yleistä}

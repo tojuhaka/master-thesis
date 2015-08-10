@@ -570,7 +570,36 @@ Sovelluskehys ei myöskään generoi koodia. Se käyttää erilaisia komponentte
 
 Web-sovelluskehykset ovat sovelluskehyksiä, jotka tarjoavat ratkaisuja helpottamaan web-sovellusten toteuttamista. Web-sovelluskehyksissä käyttöliittymä näytetään käyttäjille selaimen välityksellä. Sovellus ajetaan joko serverillä tai suoraan käyttäjän selaimessa. Sovellus määrittää käyttöliittymän sivujen järjestyksen, sisällön sekä mahdollisten toimintojen esittämisen käyttäjälle, jonka kautta käyttäjä voi vaikuttaa serverillä sijaitsevaan sovellukseen \parencite{vosloo}. 
 
-Yleisimmät teknologiat mitä web-sovelluskehykset tarjoavat ovat rajapinta tietokannalle, template-moottori sekä mahdollisuus käsitellä http-pyyntöjä ohjelmakoodissa. Tietokanta-rajapinnalla tuodaan sovelluskehitykseen taso, jonka avulla helpotetaan kommunikointia tietokannan kanssa. Yleisimmin käytetty ohjelmointitekniikka tähän on ORM (Object-Relational-Mapping), jolla muunnetaan dataa tietokannan ja ohjelmakoodin välillä. Ohjelmoijalle tämä näkyy ns. virtuaalisena olio-tietokantana, jonka avulla voidaan lukea sekä muokata tietokantaa kutsuilla ohjelmakoodista. Tällöin suoria kyselyitä tietokantaan ei tarvita \parencite{Ghandeharizadeh}. Template-moottori on teknologia HTML-sivujen tuottamiseen, jolla generoidaan dynaamisia HTML-sivuja yhdistämällä ohjelmalogiikkaa sekä HTML-kieltä. Alla on esitelty Jinja2-kieli, jota käytetään template-kielenä Flask:ssa.
+Yleisimmät teknologiat mitä web-sovelluskehykset tarjoavat ovat rajapinta tietokannalle, template-moottori sekä mahdollisuus käsitellä http-pyyntöjä ohjelmakoodissa. Tietokanta-rajapinnalla tuodaan sovelluskehitykseen taso, jonka avulla helpotetaan kommunikointia tietokannan kanssa. Yleisimmin käytetty ohjelmointitekniikka tähän on ORM (Object-Relational-Mapping), jolla muunnetaan dataa tietokannan ja ohjelmakoodin välillä. Ohjelmoijalle tämä näkyy ns. virtuaalisena olio-tietokantana, jonka avulla voidaan lukea sekä muokata tietokantaa kutsuilla ohjelmakoodista. Tällöin suoria kyselyitä tietokantaan ei tarvita \parencite{Ghandeharizadeh}. Seuraavassa esimerkissä esitellään miten Djangon ORM:ia käytetään.
+
+\begin{lstlisting}[language=Python]
+from django.db import models
+
+class Blog(models.Model):
+    name = models.CharField(max_length=100)
+	tagline = models.TextField()
+\end{lstlisting}
+
+\begin{lstlisting}[language=Python]
+from blog.models import Blog
+
+b = Blog(name='Beatles Blog', tagline='All the latest Beatles news.')
+b.save()
+\end{lstlisting}
+
+Esimerkissä luodaan luokka, jolla määritellään taulu SQL-tietokantaan. Model-luokasta periminen mahdollistaa luokasta luotujen instanssien tallentumisen tauluun. Lisäksi
+luokalle voidaan määrittää attribuutteja, jotka käyttävät Djangon tarjoamia kenttiä. Kentät vastaavat tietokannassa olevia data-tyyppejä. Lopullinen tallentuminen
+tapahtuu kutsumalla instanssin save() -metodia.
+
+
+\begin{lstlisting}[language=Python]
+beatles_blog = Blog.objects.get(name="Beatles Blog")
+\end{lstlisting}
+
+Yllä oleva rivi hoitaa kyselyn nimen perusteella blog -nimisestä taulusta, luo sen kenttien perusteella instanssin Blog -luokasta ja tallentaa sen muuttujan arvoksi.
+
+
+Template-moottori on teknologia HTML-sivujen tuottamiseen, jolla generoidaan dynaamisia HTML-sivuja yhdistämällä ohjelmalogiikkaa sekä HTML-kieltä. Alla on esitelty Jinja2-kieli, jota käytetään template-kielenä Flask:ssa.
 \pagebreak
 
 \begin{lstlisting}[language=Smalltalk]

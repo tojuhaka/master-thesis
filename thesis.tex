@@ -1,10 +1,4 @@
 \documentclass[utf8]{gradu3}
-% Jos työ on kandidaatintutkielma eikä pro gradu, käytä ylläolevan asemesta
-%\documentclass[utf8,bachelor]{gradu3}
-% Jos kirjoitat englanniksi, käytä ylläolevan asemesta
-%\documentclass[utf8,english]{gradu3}
-% tai
-%\documentclass[utf8,bachelor,english]{gradu3}
 
 \usepackage{graphicx} % kuvien mukaan ottamista varten
 
@@ -45,7 +39,7 @@ literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{
 
 \begin{document}
 
-\title{\LaTeX-tutkielmapohjan {gradu3} käyttö}
+\title{MVC-arkkitehtuurin toteutus web-sovelluskehyksissä}
 \translatedtitle{Usage of the {gradu3} document class for \LaTeX\ theses}
 \studyline{Kaikki suuntautumisvaihtoehdot}
 \avainsanat{%
@@ -75,13 +69,11 @@ literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{
   things as the Finnish tiivistelmä.
 }
 
-\author{Antti-Juhani Kaijanaho}
-\contactinformation{Ag~C416.1, \texttt{antti-juhani.kaijanaho@jyu.fi}}
+\author{Toni Haka-Risku}
+\contactinformation{Ag~C416.1, \texttt{toni.haka-risku@student.jyu.fii}}
 % jos useita tekijöitä, anna useampi \author-komento
 \supervisor{Ohjaamaton työ}
 % jos useita ohjaajia, anna useampi \supervisor-komento
-
-\type{tutkielmapohjan esimerkki ja käsikirja} % et tarvitse tätä riviä tutkielmassa!
 
 \maketitle
 
@@ -122,23 +114,9 @@ Tutkielman tekijä
 \item[WSGI] määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset
 yhdistetään prosessoimaan pyyntöjä.
 \item[Template] Dynaaminen html-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
-\item[Myghty Python Templating Framework] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
-  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
-  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
-  käytössä versio \LaTeXe.
-\item[mod\_python] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
-  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
-  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
-  käytössä versio \LaTeXe.
-\item[BFG] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
-  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
-  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
-  käytössä versio \LaTeXe.
-\item[MTV] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
-  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
-  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
-  käytössä versio \LaTeXe.
 \end{thetermlist}
+
+\mainmatter
 
 \chapter{Johdanto}
 
@@ -652,25 +630,10 @@ Vaikka MVC:tä ei ole tarkoitettu alunperin web-sovelluksiin, voivat ne hyötyä
 
 \parencite{ibm_watson}
 
-\section{Yleistä}
-\section{Pyramid}
-Pyramid väittää olevansa mvc-kehys
-\section{Django}
-django väittää olevansa mvc-kehys
-\section{Plone}
-
-\chapter{MVC and Flask}
-\section{Esimerkkiohjelma}
-\section{Pohdinta}
-\section{Yhteenveto}
-
-\chapter{Johtopäätökset}
-\chapter{Tutkielman rakenne}
-\section{Teoriaosa}
-\section{Teorian jälkeen}
-\chapter{Lähteiden käyttö}
-\section{Lähdeviittaukset}
-
+\chapter{Yhteenveto}
 \printbibliography
+\appendix
+
+
 
 \end{document}

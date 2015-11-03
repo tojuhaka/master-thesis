@@ -50,15 +50,10 @@ literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{
   käyttöohje}
 \keywords{\LaTeX, {gradu3}, Master's Theses, Bachelor's Theses, user's guide}
 \tiivistelma{%
-  Tämä kirjoitelma on esimerkki siitä, kuinka
-  {gradu3}-tutkielmapohjaa käytetään.  Se sisältää myös
-  käyttöohjeet ja tutkielman rakennetta koskevia ohjeita.
+Tässä tutkielmassa esitellään MVC-arkkitehtuurin toteutusta Python-pohjaisissa web-sovelluskehyksissä. Työssä selvitetään
+millä tavalla MVC on toteutettu sovelluskehyksissä ja vastaako se alkuperäistä MVC:n toteutusta, joka määritellään Krasnerin artikkelissa \parencite{Krasner}. Työssä tutkitut 
+sovelluskehykset ovat Django, Pyramid, Plone(TODO: jätetäänkö plone pois?) ja Flask. Sovelluskehykset eivät toteuttaneet MVC:tä niinkuin se on määritelty. Flaskin avulla ei myöskään voida toteuttaa MVC:tä Krasnerin vaatimusten mukaisesti.
 
-  Tutkielman tiivistelmä on tyypillisesti lyhyt esitys, jossa
-  kerrotaan tutkielman taustoista, tavoitteesta, tutkimusmenetelmistä,
-  saavutetuista tuloksista, tulosten tulkinnasta ja johtopäätöksistä.
-  Tiivistelmän tulee olla niin lyhyt, että se, englanninkielinen
-  abstrakti ja muut metatiedot mahtuvat kaikki samalle sivulle.
 }
 \abstract{%
   This document is a sample {gradu3} thesis document class
@@ -138,21 +133,17 @@ MVC:n olevan sellaisenaan sopimaton web-ohjelmointiin, vaikka
 Pyramidin toteutus onkin hyvin lähellä alkuperäistä MVC:tä
 \parencite{pyramid}. Django on vastaavasti toteutettu MVC:n pohjalta, mutta sen väitetään myös toteuttavan MVC hieman erilailla kuin MVC on alunperin tarkoitettu \parencite{django_mvc}.
 
-Tutkimuksen tarkoituksena on selvittää millä tavalla
+Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta siirrytään tutkimaan millä tavalla 
 MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
 eroaa alkuperäisestä MVC:n toteutuksesta. Lisäksi pyritään toteuttamaan MVC alkuperäisen
 toteutuksen mukaan käyttäen Flask-sovelluskehystä\parencite{krasner}. Havaintojen pohjalta
 selvitetään voidaanko MVC tuoda sellaisenaan sovelluskehykseen ja
 mitä mahdollisia ongelmia se tuo.
 
-\chapter{Oletus}
-Tutkimustulokseksi oletetaan, että MVC:tä ei sellaisenaan voida tuoda web-sovelluskehykseen. Oletus perustuu ohjaimen
-konkreettiseen puuttumiseen sekä viestejen toteutukseen.
-
 \chapter{Tutkimuksen Rakenne}
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
-tutkimusta MVC:stä on tehty. Lisäksi käydään
-läpi mitä lähteitä löytyy Python-pohjaisista web-sovelluskehyksistä. Tämän jälkeen 
+tutkimusta ohjelmistokehityksestä ja MVC:stä on tehty. Lisäksi käydään
+läpi mitä lähteitä löytyy Python-pohjaisista web-sovelluskehyksistä sekä ohjelmistoarkkitehtuureista. Tämän jälkeen 
 tutkitaan MVC:n historiaa sekä millä tavalla MVC on tarkoitettu toteutettavaksi.
 Tässä vaiheessa käydään läpi jokaisen MVC-komponentin tarkoitus sekä niiden 
 keskinäisen kommunikaation rakentuminen. Lisäksi esitellään
@@ -174,10 +165,9 @@ Tutkimuksen lopuksi koostetaan havainnoista yhteenveto, jossa pohditaan saatuja 
 pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
 
 
-\section{Aiheen rajaus}
-Tutkimus on rajattu tarkastelemaan MVC-arkkitehtuurin
-toteutusta Pythonilla kirjoitetuissa
-web-sovelluskehyksissä. Tarkasteltavat web-sovelluskehykset rajataan 
+\chapter{Aiheen rajaus}
+Aluksi tarkastellaan ohjelmikstokehitystä ja ohjelmistoarkkitehtuureja yleisesti pohjustamaan MVC-arkkitehtuuria. MVC:n toteutus käydään
+hyvin yksityiskohtaisesti läpi ja sen vertaaminen rajataan Python-websovelluskehyksiin. Tarkasteltavat web-sovelluskehykset rajataan 
 Pyramid-, Django-, Plone- sekä Flask-sovelluskehyksiin. Pyramid, Django ja Plone toteuttavat MVC:n kaltaisen
 sovellusarkkitehtuurin. Flask on sovelluskehys, joka tarjoaa vain
 välttämättömät kirjastot web-sovelluksen toteuttamiseen. Sitä
@@ -214,16 +204,17 @@ tutkielmaa varten. Erityisesti kiinnitetään huomiota viittauksien
 määrän valittaessa tärkeimmät lähdemateriaalit. Tutkielmassa esiintyy myös satunnaisia viittauksia,
 joita ei ole kirjallisuuskatsauksessa mainittu. Tutkimuksen
 pääkirjallisuus kuitenkin käydään läpi kirjallisuuskatsauksessa.
-Haussa käytetään seuraavia hakutermejä: "MVC", "MVC Architecture",
-"frameworks", "web frameworks" ja  "MVC- Architecture". Erityisesti artikkeleita löytyy
-MVC-arkkitehtuurin soveltamisesta erilaisissa
-tekniikoissa. Tarkasteltavat artikkelit rajataan kuitenkin niihin,
-jotka esittelevät suoraan MVC:tä itseään tai tarjoavat
-lähdemateriaalin sovelluskehyksien esittelyyn.
-
-Tähän ohjelmistoarkkitehtuurin kirjallisuutta
+Haussa käytetään seuraavia hakutermejä: "Software engineering", "Software development", "MVC", "MVC Architecture",
+"frameworks", "web frameworks" ja  "MVC- Architecture".
+Tarkasteltavat artikkelit rajataan kuitenkin niihin,
+jotka esittelevät suoraan MVC:tä itseään, tarjoavat
+lähdemateriaalin sovelluskehyksien esittelyyn tai auttavat pohjustamaan yleisesti ohjelmistokehitysten tarkastelua.
 
 \section{Sovelluskehitys ja arkkitehtuurit}
+Sovelluskehityksen tarkasteluun löytyy runsaasti lähdemateriaalia. Merkittäväksi lähteeksi valitaan Ian Sommervillen kirjoittama \textit{Software Engineering 9th Edition} -kirja, jossa käydään läpi mitä kaikkea isojen ohjelmistojen kehitykseen kuuluu \parencite{Sommerville}. Kirja on jaettu neljään pääosioon: \textit{Introduction to Software Engineering}, \textit{Dependability and Security}, \textit{Advanced Software Engineering} ja \textit{Software Management}. Tutkimuksessa lähteenä käytetään \textit{Introduction to Software Engineering} ja \textit{Advanced Software Engineering} -osioita. \textit{Introduction to Software engineering} käy läpi ohjelmistojen suunnittelua ja toteutusta yleisesti. Tällaisia ovat esimerkiksi vaatimusmäärittelyt, prosessit, arkkitehtuuri ja testaus. \textit{Advanced Software Engineering} esittelee ohjelmistojen kirjoittamista siten, että ne olisivat mahdollisimman uudelleen käytettäviä ja ylläpidettäviä. Tähän tarjotaan ratkaisuksi erilaisia arkkitehtuureita (esim.  \textit{Component-based architecture} ja \textit{Service-oriented architecture} \parencite{Sommerville}.
+
+Toiseksi tärkeäksi lähteeksi valitaan
+
 \section{MVC}
 Google Scholarin tuloksista löytyy kolme artikkelia MVC:stä, jotka sopivat 
 lähdemateriaaliksi tutkimukseen. Ensimmäinen artikkeleista on John
@@ -235,8 +226,7 @@ MVC:tä sellaisena kuin sitä käytettiin Smalltalkissa \parencite{burbeck}. Bur
 artikkeliin viitataan monissa MVC:tä käsittelevissä
 julkaisuissa, joten sen arvo tämän tutkielman pohjakirjallisuudessa on
 vahva. Viittausten määrä on katsottu hakemalla artikkelia Google
-Scholarin hakukoneessa. Viittauksia kyseiseen artikkeliin on
-kirjoitushetkellä 308. Seuraavaksi kartoitetaan pohjakirjallisuutta käyttäen ACM Digital
+Scholarin hakukoneessa. Seuraavaksi kartoitetaan pohjakirjallisuutta käyttäen ACM Digital
 Library sekä IEEE XPlore -hakukoneita. Kolmas artikkeli Glenn
 E. Krasnerin kirjoittama julkaisu, jossa esitellään MVC:n toteutusta
 erilaisissa Smalltalk-sovelluksissa. Julkaisusta löytyy useita
@@ -257,7 +247,7 @@ julkaisu, jossa kerrotaan jokaisen MVC komponentin tehtävä....
 
 \section{Web-sovelluskehykset}
 Web-sovelluskehyksistä löydetty kirjallisuus on hyvin
-suppea, eikä niiden varaan voida rakentaa kovinkaan perusteellista
+suppea, eikä tämän varaan voida rakentaa kovinkaan perusteellista
 tieteellistä pohjaa. Tämän vuoksi tutkimuksessa joudutaan osaksi turvautumaan
 sovelluskehyksien omaan dokumentatioon täydentämään
 lähdemateriaalia. IEEE Xploren ja ACM Digital Libraryn avulla löytyy kolme julkaisua, 
@@ -533,14 +523,6 @@ ikkunointimallia"
 \includegraphics[scale=0.85]{counter.png}
 \caption{Kuva CounterView -näkymästä \cite{krasner_desc}}
 \end{figure}
-
-
-\subsection{Tausta}
-Sovelluskehyksen tehtävänä on tuoda sovelluksen kehitykseen mukaan
-taso, joka tarjoaa erilaisia kirjastoja ratkaisemaan yleisimpiä ongelmia, joita tulee vastaan sovelluksen kehityksen aikana. Näin vältetään
-jo ratkaistujen perusoperaatioiden toistoa ja pystytään keskittymään suoraan sovelluksen toteuttamiseen. Web"-sovelluskehykset ovat erityisesti suunnattuja
-web-sovellusten ja -palvelujen toteuttamiseen.  Tärkein ero sovelluskehyksen ja kirjaston välillä on se, että kirjaston ohjelmakoodi kutsustaan aina
-kehittäjän toimestaa. Sovelluskehyksessä taas kehittäjän ohjelmakoodia kutsutaan aina sovelluskehyksen toimesta \cite{Pyramid:intr}.
 
 \chapter{Sovelluskehykset}
 Soveluskehykset ovat suosittuja, koska ne tarjoavat uudelleenkäytettäviä ratkaisuja erilaisiin ongelmiin sovelluskehityksessä. Toimialueesta riippumatta sovelluskehyksiä tulisi käyttää hyväksi kirjottaessa monimutkaisia sovelluksia. Sovelluskehys tuo sovellukseen tason, jossa sovelluksen osat on abstrahoitu erilaisilla luokilla sekä rajapinnoilla, joita voidaan käyttää uudelleen sovelluksen eri osissa. Sovelluskehys ei ole vain kokoelma rajapintoja ja kirjastoja\parencite{towards_framework}. Tärkein ero sovelluskehyksen ja kirjaston välillä on se, että kirjaston ohjelmakoodi kutsustaan aina

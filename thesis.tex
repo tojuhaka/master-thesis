@@ -51,7 +51,7 @@ literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{
 \keywords{\LaTeX, {gradu3}, Master's Theses, Bachelor's Theses, user's guide}
 \tiivistelma{%
 Tässä tutkielmassa esitellään MVC-arkkitehtuurin toteutusta Python-pohjaisissa web-sovelluskehyksissä. Työssä selvitetään
-millä tavalla MVC on toteutettu sovelluskehyksissä ja vastaako se alkuperäistä MVC:n toteutusta, joka määritellään Krasnerin artikkelissa \parencite{Krasner}. Työssä tutkitut 
+millä tavalla MVC on toteutettu sovelluskehyksissä ja vastaako se alkuperäistä MVC:n toteutusta, joka määritellään Krasnerin artikkelissa \parencite{krasner}. Työssä tutkitut 
 sovelluskehykset ovat Django, Pyramid, Plone(TODO: jätetäänkö plone pois?) ja Flask. Sovelluskehykset eivät toteuttaneet MVC:tä niinkuin se on määritelty. Flaskin avulla ei myöskään voida toteuttaa MVC:tä Krasnerin vaatimusten mukaisesti.
 
 }
@@ -73,21 +73,7 @@ sovelluskehykset ovat Django, Pyramid, Plone(TODO: jätetäänkö plone pois?) j
 \maketitle
 
 \preface
-Tähän voit kirjoittaa tutkielmasi esipuheen.  Tutkielmissa on
-harvemmin esipuheita, mutta jos sen kirjoitat, pidä se lyhyenä
-(enintään sivu).
-
-Esipuheen tulisi kertoa ennemminkin tutkielmaprosessista kuin
-tutkielman sisällöstä.  Esimerkiksi jos tutkielman aiheen valintaan
-tai tekemiseen liittyy jokin erikoinen sattumus, voit siitä kertoa
-esipuheessa.  Tapana esipuheessa on myös kiittää nimeltä mainiten
-tärkeimpiä tutkielman tekemisessä auttaneita ihmisiä -- ainakin
-ohjaajia, puolisoa ja lapsia.  (Yleensä perhe on auttanut vähintään
-tukemalla ja kannustamalla.)
-
-Esipuhe kannattaa kirjoittaa minä-muodossa. Tavanomaista on myös
-allekirjoittaa se.
-
+Tutkielman aiheen valintaan vaikutti aiempi kokemus ohjelmoinnista niin vapaa-ajalla kuin työelämässäkin. Suurimmassa osassa ohjelmistoprojekteja, joissa olen työskennellyt, on ollut käytössä MVC-pohjainen sovelluskehys työkaluna. Django-sovelluskehyksen sivuilla kuitenkin kyseenalaistetaan MVC:n toteutus sellaisenaan. Tästä sain idean kirjoittaa Pro Gradu tutkielman löytääkseni vastauksen kyseiseen ongelmaan. 
 Jyväskylässä \today
 
 \bigskip
@@ -109,6 +95,9 @@ Tutkielman tekijä
 \item[WSGI] määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset
 yhdistetään prosessoimaan pyyntöjä.
 \item[Template] Dynaaminen html-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
+\item[Piirikytkentä] Dynaaminen html-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
+\item[Pakettikytkentä] on tiedonsiirtomenetelmä, jossa yhteys data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{ikytkenta}.
+\item[Piirikytkentä] on tiedonsiirtomenetelmä, jossa yhteys pysyy auki riippumatta siitä, onko osapuolien välillä liikennettä. Piirikytkentä on käytössä esim. puhelinverkoissa \parencite{kytkenta}.
 \end{thetermlist}
 
 \mainmatter
@@ -287,9 +276,17 @@ Sommenville (1,1) jakaa ammatilaisten kehittämät ohjelmistotuotteet kahteen ka
 \chapter{Web-sovellukset}
 World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksessä. Alunperin Web oli yliopistojen käytössä datan tallennusta varten ja sillä oli hyvin vähän vaikutusta sovelluksiin. Webin ympärille kirjoitetut sovellukset olivat käynnissä paikallisissa tietokoneissa ja niihin oli vain pääsy organisaation sisällä. 2000-luvun alussa Web alkoi kehittyä laajemmin. Selaimiin lisätyt ominaisuudet mahdollistivat Web-pohjaisten sovellusten käytön siten, että erillisen sovellukselle tarkoitetun käyttöliittymän sijasta voitiin käyttää selainta. Tämä johti monien erilaisten sovelluksien kehitykseen, jotka tarjosivat innovatiivisia palveluita käytettäväksi selaimen kautta. Webin kehityksen myötä selaimet kehittyivät siten, että ne pystyivät ajamaan myös pieniä sovelluksia paikallisesti. Tämä muutti organisaatioiden sekä liiketoiminnan tapoja käyttää sovelluksia. Sen sijaan, että sovellukset olisi asennettu käyttäjien tietokoneille, ne voitiin asentaa suoraan yhdelle web-palvelimelle. Tämä laski myös kustannuksia tehdä muutoksia sovelluksiin. Suurin osa on liiketoimien harjottajista on siirtynyt käyttämään web-pohjaisia sovelluksia siellä missä se on mahdollista \cite{Sommerville, Software eningeering and the Web}.
 
-Seuraava vaihe web-sovellusten kehityksessä olivat web-palvelut. Web-palvelut ovat sovelluskomponentteja, jotka tarjoavat hyödyllisiä palveluja käytettäväksi muille sovelluksille. Siinä missä web-sovellus tarjoaa käyttöliittymän sovellukselle, web-palvelu tarjoaa rajapinnan käyttöliittymäsovellukselle käytettäväksi. Web-palvelu on yksittäinen osa sovellusta ja sovelluksella voi olla monia web-palveluja käytettävänä.
+Seuraava vaihe web-sovellusten kehityksessä olivat web-palvelut. Web-palvelut ovat sovelluskomponentteja, jotka tarjoavat hyödyllisiä palveluja käytettäväksi muille sovelluksille. Siinä missä web-sovellus tarjoaa käyttöliittymän sovellukselle, web-palvelu tarjoaa rajapinnan käyttöliittymäsovellukselle käytettäväksi. Web-palvelu on yksittäinen osa sovellusta ja sovelluksella voi olla monia web-palveluja käytettävänä. 
+
+\section{Historia}
+Internetin historia on lähtöisiin tarpeesta luoda yhteyksiä tietokoneiden välille, joiden avulla voidaan luoda verkkoja. Verkkojen kautta erilaiset sovellukset voivat keskustella keskenään. Tämä on johtanut tarpeeseen luoda standardit, jotka määrittävät sen millä tavalla yhteyksiä tulisi luoda ja ylläpitää. TCP (Transmission Control Protocol) on standardi, joka määrittää yhteyden luonnin tietokoneiden välillä sekä niiden välisen kommunikoinnin. TCP:n avulla sovellukset pystyvät lähettämään dataa toisilleen verkon yli. TCP kehitettiin Yhdysvaltain asevoimien tutkimusorganisaatiossa DARPA:ssa (Defense Advanced Research Projects Agency )\cite{tcp}. 
+
+TCP on tarkoitettu toimivat eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa paketti- tai piirikytkentää.   \cite{tcp}.
+  Deputy Undersecretary of Defense for Research and Engineering
 
  TODO: TÄHÄN LISÄÄ WEBIN HISTORIASTA
+
+https://tools.ietf.org/html/rfc1307
 
 
 

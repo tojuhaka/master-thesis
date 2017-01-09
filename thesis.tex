@@ -281,7 +281,7 @@ Seuraava vaihe web-sovellusten kehityksessä olivat web-palvelut. Web-palvelut o
 \section{Historia}
 Internetin historia on lähtöisiin tarpeesta luoda yhteyksiä tietokoneiden välille, joiden avulla voidaan luoda verkkoja. Verkkojen kautta erilaiset sovellukset voivat keskustella keskenään. Tämä on johtanut tarpeeseen luoda standardit, jotka määrittävät sen millä tavalla yhteyksiä tulisi luoda ja ylläpitää. TCP (Transmission Control Protocol) on standardi, joka määrittää yhteyden luonnin tietokoneiden välillä sekä niiden välisen kommunikoinnin. TCP:n avulla sovellukset pystyvät lähettämään dataa toisilleen verkon yli. TCP kehitettiin Yhdysvaltain asevoimien tutkimusorganisaatiossa DARPA:ssa (Defense Advanced Research Projects Agency )\cite{tcp}. 
 
-TCP on tarkoitettu toimivat eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa esimerkiksi paketti- tai piirikytkentää. DARPA määrittää eri protkollien tasot seuraavasti:
+TCP on tarkoitettu toimivan eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa esimerkiksi paketti- tai piirikytkentää. TCP tarjoaa luotettavan DARPA määrittää eri protkollien tasot seuraavasti:
 
 
 \begin{figure}[h]
@@ -293,16 +293,19 @@ TCP on tarkoitettu toimivat eri tasoihin jaetussa protokollien hierarkiassa, jok
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.85]{internet_protocol.PNG}
-\caption{Kuva CounterView -näkymästä \cite{internet_protocol}}
+\caption{ \cite{internet_protocol}}
 \end{figure}
 
 
   \cite{tcp}. 
   Deputy Undersecretary of Defense for Research and Engineering
 
+TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut määrittää lähettäjän ja vastaanottajan osoitteet erilaisissa verkoissa. Internet Protokolla hoitaa myös mahdollisten TCP-segmenttejen pirstaloinnin ja uudelleenkokoamisen, jolloin TCP:n ei tarvitse näistä huolehtia. Se myös pitää mukanaan tiedon TCP-segmenttejen järjestyksestä, tietoturvamäärityksistä sekä lajittelusta. TCP tarjoaa rajapinnan luotettavalle yhteydelle useista verkoista koostuvassa ympäristössä.  JATKA 1.4  interfaces
+
+
  TODO: NÄISTÄ kuvista lisää kertomusta
 
-https://tools.ietf.org/html/rfc1307
+https://tools.ietf.org/html/rfc793
 
 
 

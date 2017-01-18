@@ -281,7 +281,8 @@ Seuraava vaihe web-sovellusten kehityksessä olivat web-palvelut. Web-palvelut o
 \section{Historia}
 Internetin historia on lähtöisiin tarpeesta luoda yhteyksiä tietokoneiden välille, joiden avulla voidaan luoda verkkoja. Verkkojen kautta erilaiset sovellukset voivat keskustella keskenään. Tämä on johtanut tarpeeseen luoda standardit, jotka määrittävät sen millä tavalla yhteyksiä tulisi luoda ja ylläpitää. TCP (Transmission Control Protocol) on standardi, joka määrittää yhteyden luonnin tietokoneiden välillä sekä niiden välisen kommunikoinnin. TCP:n avulla sovellukset pystyvät lähettämään dataa toisilleen verkon yli. TCP kehitettiin Yhdysvaltain asevoimien tutkimusorganisaatiossa DARPA:ssa (Defense Advanced Research Projects Agency )\cite{tcp}. 
 
-TCP on tarkoitettu toimivan eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa esimerkiksi paketti- tai piirikytkentää. TCP tarjoaa luotettavan DARPA määrittää eri protkollien tasot seuraavasti:
+\chapter{TCP}
+TCP on tarkoitettu toimivan eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa esimerkiksi paketti- tai piirikytkentää. TCP tarjoaa luotettavan DARPA määrittää eri protokollien tasot seuraavasti:
 
 
 \begin{figure}[h]
@@ -300,10 +301,15 @@ TCP on tarkoitettu toimivan eri tasoihin jaetussa protokollien hierarkiassa, jok
   \cite{tcp}. 
   Deputy Undersecretary of Defense for Research and Engineering
 
-TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut määrittää lähettäjän ja vastaanottajan osoitteet erilaisissa verkoissa. Internet Protokolla hoitaa myös mahdollisten TCP-segmenttejen pirstaloinnin ja uudelleenkokoamisen, jolloin TCP:n ei tarvitse näistä huolehtia. Se myös pitää mukanaan tiedon TCP-segmenttejen järjestyksestä, tietoturvamäärityksistä sekä lajittelusta. TCP tarjoaa rajapinnan luotettavalle yhteydelle useista verkoista koostuvassa ympäristössä.  JATKA 1.4  interfaces
+TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut määrittää lähettäjän ja vastaanottajan osoitteet erilaisissa verkoissa. Internet Protokolla hoitaa myös mahdollisten TCP-segmenttejen pirstaloinnin ja uudelleenkokoamisen, jolloin TCP:n ei tarvitse näistä huolehtia. Se myös pitää mukanaan tiedon TCP-segmenttejen järjestyksestä, tietoturvamäärityksistä sekä lajittelusta. TCP tarjoaa rajapinnan luotettavalle yhteydelle useista verkoista koostuvassa ympäristössä \cite{tcp} https://tools.ietf.org/html/rfc793
+
+TCP koostuu kahdesta rajapinnasta, joista toinen toimii käyttäjälle tai sovellukselle ja toinen alemman tason protokollille kuten Internet Protokolalle. Sovelluksille tarkoitettu rajapinta koostuu vastaavista kutsuista mitä käyttöjärjestelmä tarjoaa tiedostojen hallintaan. Esimerkiksi se sisältää kutsut yhteyden avaamiseen ja sulkemiseen sekä datan vastaanottoon ja lähetykseen yhteyden läpi. TCP pystyy myös asynkronisesti kommunikoimaan sovelluksien kanssa. Rajapinta alemmille protokollille on yleisesti määrittelemätöln, mutta se olettaa rajapinnassa olevan mekansimin, jossa kaksi tasoa pystyvät asynkronisesti siirtämään dataa toistensa välillä. Yleensä kyseinen määrittely oletetaan löytyvän alemman tason protokollalta. TCP on tarkoitettu toimimvan geneerisessä ympäristössä, mutta yleisesti voidaan olettaa alemman tason protokollan olevan Internet Protokolla \cite{tcp} 1.4
+
+/chapter{Internet Protokolla}
+
+JATKA https://tools.ietf.org/html/rfc791
 
 
- TODO: NÄISTÄ kuvista lisää kertomusta
 
 https://tools.ietf.org/html/rfc793
 

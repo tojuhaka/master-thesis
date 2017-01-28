@@ -82,21 +82,14 @@ Tutkielman tekijä
 
 
 \begin{thetermlist}
-\item[Sovellusarkkitehtuuri] Donald Knuthin 1977--1989 laatima eräajotyyppinenj
-  ladontajärjestelmä \parencite[ks.][]{knuth86:_texbook}. 
-\item[MVC] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
-  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
-  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
-  käytössä versio \LaTeXe.
-\item[Sovelluskehys] \TeX in \parencite[ks.][]{knuth86:_texbook} päälle
-  rakennettu rakenteisten kirjoitelmien ladontaan tarkoitettu
-  järjestelmä \parencite[ks.][]{lamport94:_latex}.  Siitä on nykyään
-  käytössä versio \LaTeXe.
+\item[Sovellusarkkitehtuuri] kertoo millä tavalla sovellus on rakennettu
+\item[MVC] Model-View-Controller sovellusarkkitehtuuri
+\item[Sovelluskehys] on sovelluskehitykselle tarkoitettu pohja, joka kutsuu käyttäjän kirjoittamaa ohjelmakoodia ja tarjoaa ratkaisuja yleisimpiin toistuviin ongelmiin
 \item[WSGI] määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset
 yhdistetään prosessoimaan pyyntöjä.
 \item[Template] Dynaaminen html-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
 \item[Piirikytkentä] Dynaaminen html-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
-\item[Pakettikytkentä] on tiedonsiirtomenetelmä, jossa yhteys data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{ikytkenta}.
+\item[Pakettikytkentä] on tiedonsiirtomenetelmä, jossa yhteys data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{kytkenta}.
 \item[Piirikytkentä] on tiedonsiirtomenetelmä, jossa yhteys pysyy auki riippumatta siitä, onko osapuolien välillä liikennettä. Piirikytkentä on käytössä esim. puhelinverkoissa \parencite{kytkenta}.
 \end{thetermlist}
 
@@ -202,7 +195,7 @@ lähdemateriaalin sovelluskehyksien esittelyyn tai auttavat pohjustamaan yleises
 \section{Sovelluskehitys ja arkkitehtuurit}
 Sovelluskehityksen tarkasteluun löytyy runsaasti lähdemateriaalia. Merkittäväksi lähteeksi valitaan Ian Sommervillen kirjoittama \textit{Software Engineering 9th Edition} -kirja, jossa käydään läpi mitä kaikkea isojen ohjelmistojen kehitykseen kuuluu \parencite{Sommerville}. Kirja on jaettu neljään pääosioon: \textit{Introduction to Software Engineering}, \textit{Dependability and Security}, \textit{Advanced Software Engineering} ja \textit{Software Management}. Tutkimuksessa lähteenä käytetään \textit{Introduction to Software Engineering} ja \textit{Advanced Software Engineering} -osioita. \textit{Introduction to Software engineering} käy läpi ohjelmistojen suunnittelua ja toteutusta yleisesti. Tällaisia ovat esimerkiksi vaatimusmäärittelyt, prosessit, arkkitehtuuri ja testaus. \textit{Advanced Software Engineering} esittelee ohjelmistojen kirjoittamista siten, että ne olisivat mahdollisimman uudelleen käytettäviä ja ylläpidettäviä. Tähän tarjotaan ratkaisuksi erilaisia sovellusarkkitehtuureja (esim.  \textit{Component-based architecture} ja \textit{Service-oriented architecture} \parencite{Sommerville}.
 
-Toiseksi tärkeäksi lähteeksi valitaan--- TODO: tähän jatkoa
+Toiseksi tärkeäksi lähteeksi valitaan ietf.org jota käytetään Internetin synnyn pohjalähteeksi?--- TODO: tähän jatkoa
 
 \section{MVC}
 Google Scholarin tuloksista löytyy kolme artikkelia MVC:stä, jotka sopivat 
@@ -236,6 +229,61 @@ julkaisu, jossa kerrotaan jokaisen MVC komponentin tehtävä....
 \section{Sovelluskehitys}
 Sommervillen kirja isona osana lähteitä
 
+
+\chapter{Internet}
+Internet ja sen arkkitehtuuri on syntynyt hyvin pienistä saavutuksista. Internetin taustalla ei ole alunperin ollut minkäänlaista suurempaa suunnitelmaa. Tutkiessamme Iternetin arkkitehtuuria tulee muistaa, että tekniset muutokset ovat jatkuvia tietotekniikan alalla. Monet arkkitehtuurilliset ratkaisut, jotka olivat suosiossa muutamia vuosia sitten ovat nyt jo vanhentuneet. Taas ratkaisut, jotka tänä päivänä nähdään hyvinä, voivat jo huomenna olla huonoja. Voidaan sanoa, että ainut asia joka Internetin suhteen pysyy on jatkuva muutos. Internet yhteisöjen monet jäsenet väittävät, että Internetillä ei ole arkkitehtuuria, mutta kuitenkin eräänlaisia perinteitä, johon koko Iternet pohjautuu. Iternetin tavoite on tarjota yhteydet, jossa työkaluna käytetään Iternet Protokollaa. Monien yhteisön jäsenien mielestä tärkeää ei ole se millä tavalla yhteydet luodaan verkon sisällä, vaan se millä tavalla yhteyksien alku- ja loppupää käyttäytyvät. Tähän tärkeimpänä argumenttina pidetään sitä, että useat tarvittavat toiminnallisuudet voidaan toteuttaa vain IP:tä käyttävien systeemien puolella. Jokainen hyvin suunniteltu verkko sisältää mahdollisuuden jollakin tasolla epäonnistua viestin kuljettamisessa. Tällaisen ongelman kanssa tulisi toimia siten, että vastuu kommunikaation eheydestä annetaan ulkopuolisille sovelluksille.  Nykyinen Internetin exponentaalinen kasvu näyttää kuitenkin sen, että yhteydet ovat paljon arvokkaampia kuin yksittäiset sovellukset. Tällaiset yhteydet vaativat yhteistyötä palveluntarjoajien ja televiestintäympäristöjen välille\cite{constant_change}. 
+
+Yleisesti on haluttua, että olisi vain yksi protokolla, jonka kautta yhteydet voidaan muodostaa. Tämän protokollan päälle voidaan kuitenkin rakentaa monia muita protokollia, jotka hoitavat muita erilaisia tarpeita. Käytännössä on ainakin kaksi syytä miksi verkko-protokollien tasoja tarvitaan useita. Esimerkiksi eri IP:stä voidaan haluta vaihtaa toiseen versioon. Myös uudet vaatimukset voivat synnyttää uusia protokolia. Internet tason protokolla tulee olla täysin riippumaton laitteistosta. Tällöin Internet voidaan toteuttaa minkä tahansa digitaalisen teknologian päälle.
+ \cite{constant_change}.
+
+\section{Historia}
+Internetin historia on lähtöisiin tarpeesta luoda yhteyksiä tietokoneiden välille, joiden avulla voidaan luoda verkkoja. Verkkojen kautta erilaiset sovellukset voivat keskustella keskenään. Tämä on johtanut tarpeeseen luoda standardit, jotka määrittävät sen millä tavalla yhteyksiä tulisi luoda ja ylläpitää. TCP (Transmission Control Protocol) on standardi, joka määrittää yhteyden luonnin tietokoneiden välillä sekä niiden välisen kommunikoinnin. TCP:n avulla sovellukset pystyvät lähettämään dataa toisilleen verkon yli. TCP kehitettiin Yhdysvaltain asevoimien tutkimusorganisaatiossa DARPA:ssa (Defense Advanced Research Projects Agency )\cite{tcp}. 
+
+\section{TCP}
+TCP on tarkoitettu toimivan eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa esimerkiksi paketti- tai piirikytkentää. TCP tarjoaa luotettavan DARPA määrittää eri protokollien tasot seuraavasti:
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{protocol_layering.PNG}
+\caption{\cite{tcp1_1}}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{internet_protocol.PNG}
+\caption{ \cite{internet_protocol}}
+\end{figure}
+
+  Deputy Undersecretary of Defense for Research and Engineering
+
+TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut määrittää lähettäjän ja vastaanottajan osoitteet erilaisissa verkoissa. Internet Protokolla hoitaa myös mahdollisten TCP-segmenttejen pirstaloinnin ja uudelleenkokoamisen, jolloin TCP:n ei tarvitse näistä huolehtia. Se myös pitää mukanaan tiedon TCP-segmenttejen järjestyksestä, tietoturvamäärityksistä sekä lajittelusta. TCP tarjoaa rajapinnan luotettavalle yhteydelle useista verkoista koostuvassa ympäristössä \cite{tcp1_1} 
+
+TCP koostuu kahdesta rajapinnasta, joista toinen toimii käyttäjälle tai sovellukselle ja toinen alemman tason protokollille kuten Internet Protokolalle. Sovelluksille tarkoitettu rajapinta koostuu vastaavista kutsuista mitä käyttöjärjestelmä tarjoaa tiedostojen hallintaan. Esimerkiksi se sisältää kutsut yhteyden avaamiseen ja sulkemiseen sekä datan vastaanottoon ja lähetykseen yhteyden läpi. TCP pystyy myös asynkronisesti kommunikoimaan sovelluksien kanssa. Rajapinta alemmille protokollille on yleisesti määrittelemätöln, mutta se olettaa rajapinnassa olevan mekansimin, jossa kaksi tasoa pystyvät asynkronisesti siirtämään dataa toistensa välillä. Yleensä kyseinen määrittely oletetaan löytyvän alemman tason protokollalta. TCP on tarkoitettu toimimvan geneerisessä ympäristössä, mutta yleisesti voidaan olettaa alemman tason protokollan olevan Internet Protokolla \cite{tcp} 1.4
+
+
+/section{TCP:n toiminta}
+TCP:n tärkein tehtävä on tarjota turvallinen ja luotettava yhteys kahden prosessin välille. Tarjotakseen tällaisen palvelun Internetin päälle, tulee seuraavat osat toteutua:
+
+- Datan siirtäminen
+- Luotettavuus
+- Datavirran hallinta
+- Kanavointi
+- Yhteydet
+- Järjestys ja luotettavuus
+
+Seuraavissa kappaleissa esitellään TCP:n toiminta, jokaista yllläesitelyä osaa kohden.
+
+/chapter{Datan siirtäminen}
+JATKA https://tools.ietf.org/html/rfc791
+
+
+
+https://tools.ietf.org/html/rfc793
+
+
+
+
 \section{Web-sovelluskehykset}
 Web-sovelluskehyksistä löydetty kirjallisuus on hyvin
 suppea, eikä tämän varaan voida rakentaa kovinkaan perusteellista
@@ -260,7 +308,6 @@ tutkimuksessa käsiteltävien sovelluskehyksien lähdemateriaaliksi
 
 \chapter{Sovelluskehitys}
 
-
 Katsomalla ympärille nykyajan yhteiskunnassa, huomataan monien asioiden toimivan ohjelmien varassa. Puhelimet, elektroniset kellot, autot ja erilaiset yhteiskunnalliset palvelut sisältävät kaikki ohjelman, jolla toimitoja sekä dataa hallitaan. Nykyajan modernia yhteiskuntaa ei pystytä ylläpitämään ilman sovelluksia. Monet tuotantolinjastot sekä rahoitusjärjestelmät teollisuudessa ovat täysin automatisoituja. Viihdeteollisuus kuten musiikki, pelit, elokuvat ja televisio ovat kaikki monimutkaisten sovellusten varassa. Ihmisten tiedot ovat monissa valtion hallintajärjestelmissä sekä niin julkisissa kuin yksityisissäkin potilastietojärjestelmissä. Nykypäivänä katsottaessa ympärille löydämme lähes poikkeuksetta jonkin asian, jonka taustalla on ohjelma. Suuri määrä ihmisiä kirjoittaa sovelluksia nykypäivänä. Liike-elämässä ihmiset kirjoittavat taulukkolaskentaohjelmia helpottaakseen työtään. Tutkijat ja insinöörit kirjoittavat ohjelmia prosessoimaan kerättyä dataa ja harrastelijat kirjoittavat ohjelmia viihdyttääkseen itseään. Suurin osa sovelluskehityksestä on kuitenkin toteutettu ammattilaisten toimesta tukemaan liiketoimintamalleja, kehittämään laitteita sekä rakentamaan erilaisia palveluita. Ammattilaisten toteuttamat ohjelmistot toteutetaan usein ryhmissä ja ne ovat suunnattu käytettäväksi muille kuin ohjelmoijille itselleen \parencite{Sommerville}.
 
 \section{Sovellusokehityksen määritelmä}
@@ -278,48 +325,13 @@ World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksess�
 
 Seuraava vaihe web-sovellusten kehityksessä olivat web-palvelut. Web-palvelut ovat sovelluskomponentteja, jotka tarjoavat hyödyllisiä palveluja käytettäväksi muille sovelluksille. Siinä missä web-sovellus tarjoaa käyttöliittymän sovellukselle, web-palvelu tarjoaa rajapinnan käyttöliittymäsovellukselle käytettäväksi. Web-palvelu on yksittäinen osa sovellusta ja sovelluksella voi olla monia web-palveluja käytettävänä. 
 
-\section{Historia}
-Internetin historia on lähtöisiin tarpeesta luoda yhteyksiä tietokoneiden välille, joiden avulla voidaan luoda verkkoja. Verkkojen kautta erilaiset sovellukset voivat keskustella keskenään. Tämä on johtanut tarpeeseen luoda standardit, jotka määrittävät sen millä tavalla yhteyksiä tulisi luoda ja ylläpitää. TCP (Transmission Control Protocol) on standardi, joka määrittää yhteyden luonnin tietokoneiden välillä sekä niiden välisen kommunikoinnin. TCP:n avulla sovellukset pystyvät lähettämään dataa toisilleen verkon yli. TCP kehitettiin Yhdysvaltain asevoimien tutkimusorganisaatiossa DARPA:ssa (Defense Advanced Research Projects Agency )\cite{tcp}. 
-
-\chapter{TCP}
-TCP on tarkoitettu toimivan eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa esimerkiksi paketti- tai piirikytkentää. TCP tarjoaa luotettavan DARPA määrittää eri protokollien tasot seuraavasti:
-
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.85]{protocol_layering.PNG}
-\caption{Kuva CounterView -näkymästä \cite{tcp}}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.85]{internet_protocol.PNG}
-\caption{ \cite{internet_protocol}}
-\end{figure}
-
-
-  \cite{tcp}. 
-  Deputy Undersecretary of Defense for Research and Engineering
-
-TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut määrittää lähettäjän ja vastaanottajan osoitteet erilaisissa verkoissa. Internet Protokolla hoitaa myös mahdollisten TCP-segmenttejen pirstaloinnin ja uudelleenkokoamisen, jolloin TCP:n ei tarvitse näistä huolehtia. Se myös pitää mukanaan tiedon TCP-segmenttejen järjestyksestä, tietoturvamäärityksistä sekä lajittelusta. TCP tarjoaa rajapinnan luotettavalle yhteydelle useista verkoista koostuvassa ympäristössä \cite{tcp} https://tools.ietf.org/html/rfc793
-
-TCP koostuu kahdesta rajapinnasta, joista toinen toimii käyttäjälle tai sovellukselle ja toinen alemman tason protokollille kuten Internet Protokolalle. Sovelluksille tarkoitettu rajapinta koostuu vastaavista kutsuista mitä käyttöjärjestelmä tarjoaa tiedostojen hallintaan. Esimerkiksi se sisältää kutsut yhteyden avaamiseen ja sulkemiseen sekä datan vastaanottoon ja lähetykseen yhteyden läpi. TCP pystyy myös asynkronisesti kommunikoimaan sovelluksien kanssa. Rajapinta alemmille protokollille on yleisesti määrittelemätöln, mutta se olettaa rajapinnassa olevan mekansimin, jossa kaksi tasoa pystyvät asynkronisesti siirtämään dataa toistensa välillä. Yleensä kyseinen määrittely oletetaan löytyvän alemman tason protokollalta. TCP on tarkoitettu toimimvan geneerisessä ympäristössä, mutta yleisesti voidaan olettaa alemman tason protokollan olevan Internet Protokolla \cite{tcp} 1.4
-
-/chapter{Internet Protokolla}
-
-JATKA https://tools.ietf.org/html/rfc791
-
-
-
-https://tools.ietf.org/html/rfc793
-
-
 
 \section{Laatu}
 
 \section{Ohjelmistojen tyypit}
 - lista tyypeist selityksineen
 - viite barry boehm "For another thing, unlike the engineering of electrons, materials, or chemicals, the basic software elements we engineer tend to change significantly from one decade to the next. "
+
 
 \chapter{Sovellusarkkitehtuurit}
 \chapter{MVC}

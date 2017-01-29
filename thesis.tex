@@ -195,7 +195,7 @@ lähdemateriaalin sovelluskehyksien esittelyyn tai auttavat pohjustamaan yleises
 \section{Sovelluskehitys ja arkkitehtuurit}
 Sovelluskehityksen tarkasteluun löytyy runsaasti lähdemateriaalia. Merkittäväksi lähteeksi valitaan Ian Sommervillen kirjoittama \textit{Software Engineering 9th Edition} -kirja, jossa käydään läpi mitä kaikkea isojen ohjelmistojen kehitykseen kuuluu \parencite{Sommerville}. Kirja on jaettu neljään pääosioon: \textit{Introduction to Software Engineering}, \textit{Dependability and Security}, \textit{Advanced Software Engineering} ja \textit{Software Management}. Tutkimuksessa lähteenä käytetään \textit{Introduction to Software Engineering} ja \textit{Advanced Software Engineering} -osioita. \textit{Introduction to Software engineering} käy läpi ohjelmistojen suunnittelua ja toteutusta yleisesti. Tällaisia ovat esimerkiksi vaatimusmäärittelyt, prosessit, arkkitehtuuri ja testaus. \textit{Advanced Software Engineering} esittelee ohjelmistojen kirjoittamista siten, että ne olisivat mahdollisimman uudelleen käytettäviä ja ylläpidettäviä. Tähän tarjotaan ratkaisuksi erilaisia sovellusarkkitehtuureja (esim.  \textit{Component-based architecture} ja \textit{Service-oriented architecture} \parencite{Sommerville}.
 
-Toiseksi tärkeäksi lähteeksi valitaan ietf.org jota käytetään Internetin synnyn pohjalähteeksi?--- TODO: tähän jatkoa
+Toiseksi tärkeäksi lähteeksi valitaan ietf.org jota käytetään Internetin synnyn pohjalähteeksi, tcp ja muut protokollat?--- TODO: tähän jatkoa
 
 
 \section{MVC}
@@ -284,11 +284,11 @@ TCP:n tärkein tehtävä on tarjota turvallinen ja luotettava yhteys kahden pros
 \begin{desclist}
 \item[Datan siirto] TCP pystyy lähettämään jatkuvasti paketteja kummankin käytätjän suuntaan. Joskus käyttäjien tulee varmistaa, että kaikki lähetetty data on lähetetty vastaanottajalle. Tähän tarkoitukseen on kehitelty push -toiminto, joka käskee TCP:tä
 lähettämään datan vastaanottajalle.
-\item[Luotettavuus]
-\item[Datavirran hallinta]
-\item[Kanavointi]
-\item[Yhteydet]
-\item[Järjestys ja luotettavuus]
+\item[Luotettavuus] TCP:n tulee pystyä selviytymään tilanteesta, jossa data on jollain tavalla korruptoitunut tai hävinnyt. Tämä on ratkaistu lisäämällä jokaiseen pakettiin sekvenssinumero ja jokaisessa viestissä vaaditaan kuittausta vastaanottajalta. Jos kuittausta ei jostain syystä saada, lähetetään paketti uudelleen. Vastaanottajan puolella sekvenssinumeron avulla pystytään päättelemään oikea järjestys.
+\item[Datavirran hallinta] TCP antaa vastaanottajalle mahdollisuuden rajata datamääriä. Tämä mahdollistetaan antamalla vastaanottajalle mahdollisuus lähettää kuittausviestin mukana ikkuna, joka määrittää rajat datalle.
+\item[Kanavointi] Koska yhden isäntäkoneen on mahdollista pavella useita TCP-yhteyksiä rinnakkain, tulee TCP:n tarjota lista osoitteita ja portteja yksittäistä severiä kohden. Jokaiselle yhteydelle luodaan soketti (socket). Soketti-pari muodostaa uniikin yhteyden, missä yksittäistä sokettia voidaan myös käyttää moniin eri yhteyksiin rinnakkain. Hyvänä esimerkkinä yhden soketin jakamisesta on erilaiset logitusprosessit, joita käytetään jatkuvasti.  Erillisiin portteihin liittäminen hoidetaan aina jokaisen isäntäkoneen toimesta.
+\item[Yhteydet] Luotettavuuden ja kanavoinnin toteutus vaatii TCP:tä erillisen tilan alustamista ja ylläpitoa jokaiselle datavirralle. Tietoa soketeista, sekvenssinumeroista ja ikkunoiden kokoa kutsutaan yhteydeksi. Jokainen yhteys määritellään sokettiparin perusteella. Kun kaksi prosessia haluaa kommunikoida kekskenään, kummankin TCP:n tulee ensin luoda yhteys, jolloin kummankin tila alustetaan. Kun yhteys on valmis, se terminoidaan tai suljetaan resurssien vapauttamiseksi. Koska yhteydet luodaan epävakaan internet-yhteyden sekä epäluotettavien prosessejen välille, TCP käyttää aikapohjausta kättely-mekanismia yhteyden muodostamisessa. Tämän avulla vältetään virheelliset yhteydenmuodostukset.
+\item[Järjestys ja luotettavuus] TCP:n käyttäjät voivat hallita järjestystä sekä luotettavuutta TCP:n yli erilaisilla arvoilla, jotka on alustettu jo valmiiksi.
 \end{desclist}
 
 \cite{tcp1_4}

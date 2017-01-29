@@ -52,7 +52,7 @@ literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{
 \tiivistelma{%
 Tässä tutkielmassa esitellään MVC-arkkitehtuurin toteutusta Python-pohjaisissa web-sovelluskehyksissä. Työssä selvitetään
 millä tavalla MVC on toteutettu sovelluskehyksissä ja vastaako se alkuperäistä MVC:n toteutusta, joka määritellään Krasnerin artikkelissa \parencite{krasner}. Työssä tutkitut 
-sovelluskehykset ovat Django, Pyramid, Plone(TODO: jätetäänkö plone pois?) ja Flask. Sovelluskehykset eivät toteuttaneet MVC:tä niinkuin se on määritelty. Flaskin avulla ei myöskään voida toteuttaa MVC:tä Krasnerin vaatimusten mukaisesti.
+sovelluskehykset ovat Django, Pyramid ja Flask. Sovelluskehykset eivät toteuttaneet MVC:tä niinkuin se on määritelty. Flaskin avulla ei myöskään voida toteuttaa MVC:tä Krasnerin vaatimusten mukaisesti.
 
 }
 \abstract{%
@@ -150,7 +150,7 @@ pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
 \chapter{Aiheen rajaus}
 Aluksi tarkastellaan ohjelmikstokehitystä ja ohjelmistoarkkitehtuureja yleisesti pohjustamaan MVC-arkkitehtuuria. MVC:n toteutus käydään
 hyvin yksityiskohtaisesti läpi ja sen vertaaminen rajataan Python-websovelluskehyksiin. Tarkasteltavat web-sovelluskehykset rajataan 
-Pyramid-, Django-, Plone- sekä Flask-sovelluskehyksiin. Pyramid, Django ja Plone toteuttavat MVC:n kaltaisen
+Pyramid-, Django- sekä Flask-sovelluskehyksiin. Pyramid ja Django toteuttavat MVC:n kaltaisen
 sovellusarkkitehtuurin. Flask on sovelluskehys, joka tarjoaa vain
 välttämättömät kirjastot web-sovelluksen toteuttamiseen. Sitä
 käytetään tutkimuksessa työkaluna selvittämään miten MVC tulisi
@@ -197,6 +197,7 @@ Sovelluskehityksen tarkasteluun löytyy runsaasti lähdemateriaalia. Merkittäv�
 
 Toiseksi tärkeäksi lähteeksi valitaan ietf.org jota käytetään Internetin synnyn pohjalähteeksi?--- TODO: tähän jatkoa
 
+
 \section{MVC}
 Google Scholarin tuloksista löytyy kolme artikkelia MVC:stä, jotka sopivat 
 lähdemateriaaliksi tutkimukseen. Ensimmäinen artikkeleista on John
@@ -229,61 +230,6 @@ julkaisu, jossa kerrotaan jokaisen MVC komponentin tehtävä....
 \section{Sovelluskehitys}
 Sommervillen kirja isona osana lähteitä
 
-
-\chapter{Internet}
-Internet ja sen arkkitehtuuri on syntynyt hyvin pienistä saavutuksista. Internetin taustalla ei ole alunperin ollut minkäänlaista suurempaa suunnitelmaa. Tutkiessamme Iternetin arkkitehtuuria tulee muistaa, että tekniset muutokset ovat jatkuvia tietotekniikan alalla. Monet arkkitehtuurilliset ratkaisut, jotka olivat suosiossa muutamia vuosia sitten ovat nyt jo vanhentuneet. Taas ratkaisut, jotka tänä päivänä nähdään hyvinä, voivat jo huomenna olla huonoja. Voidaan sanoa, että ainut asia joka Internetin suhteen pysyy on jatkuva muutos. Internet yhteisöjen monet jäsenet väittävät, että Internetillä ei ole arkkitehtuuria, mutta kuitenkin eräänlaisia perinteitä, johon koko Iternet pohjautuu. Iternetin tavoite on tarjota yhteydet, jossa työkaluna käytetään Iternet Protokollaa. Monien yhteisön jäsenien mielestä tärkeää ei ole se millä tavalla yhteydet luodaan verkon sisällä, vaan se millä tavalla yhteyksien alku- ja loppupää käyttäytyvät. Tähän tärkeimpänä argumenttina pidetään sitä, että useat tarvittavat toiminnallisuudet voidaan toteuttaa vain IP:tä käyttävien systeemien puolella. Jokainen hyvin suunniteltu verkko sisältää mahdollisuuden jollakin tasolla epäonnistua viestin kuljettamisessa. Tällaisen ongelman kanssa tulisi toimia siten, että vastuu kommunikaation eheydestä annetaan ulkopuolisille sovelluksille.  Nykyinen Internetin exponentaalinen kasvu näyttää kuitenkin sen, että yhteydet ovat paljon arvokkaampia kuin yksittäiset sovellukset. Tällaiset yhteydet vaativat yhteistyötä palveluntarjoajien ja televiestintäympäristöjen välille\cite{constant_change}. 
-
-Yleisesti on haluttua, että olisi vain yksi protokolla, jonka kautta yhteydet voidaan muodostaa. Tämän protokollan päälle voidaan kuitenkin rakentaa monia muita protokollia, jotka hoitavat muita erilaisia tarpeita. Käytännössä on ainakin kaksi syytä miksi verkko-protokollien tasoja tarvitaan useita. Esimerkiksi eri IP:stä voidaan haluta vaihtaa toiseen versioon. Myös uudet vaatimukset voivat synnyttää uusia protokolia. Internet tason protokolla tulee olla täysin riippumaton laitteistosta. Tällöin Internet voidaan toteuttaa minkä tahansa digitaalisen teknologian päälle.
- \cite{constant_change}.
-
-\section{Historia}
-Internetin historia on lähtöisiin tarpeesta luoda yhteyksiä tietokoneiden välille, joiden avulla voidaan luoda verkkoja. Verkkojen kautta erilaiset sovellukset voivat keskustella keskenään. Tämä on johtanut tarpeeseen luoda standardit, jotka määrittävät sen millä tavalla yhteyksiä tulisi luoda ja ylläpitää. TCP (Transmission Control Protocol) on standardi, joka määrittää yhteyden luonnin tietokoneiden välillä sekä niiden välisen kommunikoinnin. TCP:n avulla sovellukset pystyvät lähettämään dataa toisilleen verkon yli. TCP kehitettiin Yhdysvaltain asevoimien tutkimusorganisaatiossa DARPA:ssa (Defense Advanced Research Projects Agency )\cite{tcp}. 
-
-\section{TCP}
-TCP on tarkoitettu toimivan eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa esimerkiksi paketti- tai piirikytkentää. TCP tarjoaa luotettavan DARPA määrittää eri protokollien tasot seuraavasti:
-
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.85]{protocol_layering.PNG}
-\caption{\cite{tcp1_1}}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.85]{internet_protocol.PNG}
-\caption{ \cite{internet_protocol}}
-\end{figure}
-
-  Deputy Undersecretary of Defense for Research and Engineering
-
-TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut määrittää lähettäjän ja vastaanottajan osoitteet erilaisissa verkoissa. Internet Protokolla hoitaa myös mahdollisten TCP-segmenttejen pirstaloinnin ja uudelleenkokoamisen, jolloin TCP:n ei tarvitse näistä huolehtia. Se myös pitää mukanaan tiedon TCP-segmenttejen järjestyksestä, tietoturvamäärityksistä sekä lajittelusta. TCP tarjoaa rajapinnan luotettavalle yhteydelle useista verkoista koostuvassa ympäristössä \cite{tcp1_1} 
-
-TCP koostuu kahdesta rajapinnasta, joista toinen toimii käyttäjälle tai sovellukselle ja toinen alemman tason protokollille kuten Internet Protokolalle. Sovelluksille tarkoitettu rajapinta koostuu vastaavista kutsuista mitä käyttöjärjestelmä tarjoaa tiedostojen hallintaan. Esimerkiksi se sisältää kutsut yhteyden avaamiseen ja sulkemiseen sekä datan vastaanottoon ja lähetykseen yhteyden läpi. TCP pystyy myös asynkronisesti kommunikoimaan sovelluksien kanssa. Rajapinta alemmille protokollille on yleisesti määrittelemätöln, mutta se olettaa rajapinnassa olevan mekansimin, jossa kaksi tasoa pystyvät asynkronisesti siirtämään dataa toistensa välillä. Yleensä kyseinen määrittely oletetaan löytyvän alemman tason protokollalta. TCP on tarkoitettu toimimvan geneerisessä ympäristössä, mutta yleisesti voidaan olettaa alemman tason protokollan olevan Internet Protokolla \cite{tcp1_4}
-
-
-/section{TCP:n toiminta}
-TCP:n tärkein tehtävä on tarjota turvallinen ja luotettava yhteys kahden prosessin välille. Tarjotakseen tällaisen palvelun Internetin päälle, tulee seuraavat osat toteutua:
-
-- Datan siirtäminen
-- Luotettavuus
-- Datavirran hallinta
-- Kanavointi
-- Yhteydet
-- Järjestys ja luotettavuus
-
-Seuraavissa kappaleissa esitellään TCP:n toiminta, jokaista yllläesitelyä osaa kohden.
-
-/chapter{Datan siirtäminen}
-JATKA https://tools.ietf.org/html/rfc791
-
-
-
-https://tools.ietf.org/html/rfc793
-
-
-
-
 \section{Web-sovelluskehykset}
 Web-sovelluskehyksistä löydetty kirjallisuus on hyvin
 suppea, eikä tämän varaan voida rakentaa kovinkaan perusteellista
@@ -306,6 +252,55 @@ in Python", joka sisältönsä puolesta sopii hyvin pohjaksi
 tutkimuksessa käsiteltävien sovelluskehyksien lähdemateriaaliksi 
 \parencite{liza}.
 
+
+\chapter{Internet}
+Internet ja sen arkkitehtuuri on syntynyt hyvin pienistä saavutuksista. Internetin taustalla ei ole alunperin ollut minkäänlaista suurempaa suunnitelmaa. Tutkiessamme Iternetin arkkitehtuuria tulee muistaa, että tekniset muutokset ovat jatkuvia tietotekniikan alalla. Monet arkkitehtuurilliset ratkaisut, jotka olivat suosiossa muutamia vuosia sitten ovat nyt jo vanhentuneet. Taas ratkaisut, jotka tänä päivänä nähdään hyvinä, voivat jo huomenna olla huonoja. Voidaan sanoa, että ainut asia joka Internetin suhteen pysyy on jatkuva muutos. Internet yhteisöjen monet jäsenet väittävät, että Internetillä ei ole arkkitehtuuria, mutta kuitenkin eräänlaisia perinteitä, johon koko Iternet pohjautuu. Iternetin tavoite on tarjota yhteydet, jossa työkaluna käytetään Iternet Protokollaa. Monien yhteisön jäsenien mielestä tärkeää ei ole se millä tavalla yhteydet luodaan verkon sisällä, vaan se millä tavalla yhteyksien alku- ja loppupää käyttäytyvät. Tähän tärkeimpänä argumenttina pidetään sitä, että useat tarvittavat toiminnallisuudet voidaan toteuttaa vain IP:tä käyttävien systeemien puolella. Jokainen hyvin suunniteltu verkko sisältää mahdollisuuden jollakin tasolla epäonnistua viestin kuljettamisessa. Tällaisen ongelman kanssa tulisi toimia siten, että vastuu kommunikaation eheydestä annetaan ulkopuolisille sovelluksille.  Nykyinen Internetin exponentaalinen kasvu näyttää kuitenkin sen, että yhteydet ovat paljon arvokkaampia kuin yksittäiset sovellukset. Tällaiset yhteydet vaativat yhteistyötä palveluntarjoajien ja televiestintäympäristöjen välille\cite{constant_change}. 
+
+Yleisesti on haluttua, että olisi vain yksi protokolla, jonka kautta yhteydet voidaan muodostaa. Tämän protokollan päälle voidaan kuitenkin rakentaa monia muita protokollia, jotka hoitavat muita erilaisia tarpeita. Käytännössä on ainakin kaksi syytä miksi verkko-protokollien tasoja tarvitaan useita. Esimerkiksi eri IP:stä voidaan haluta vaihtaa toiseen versioon. Myös uudet vaatimukset voivat synnyttää uusia protokolia. Internet tason protokolla tulee olla täysin riippumaton laitteistosta. Tällöin Internet voidaan toteuttaa minkä tahansa digitaalisen teknologian päälle.
+ \cite{constant_change}.
+
+\section{Historia}
+Internetin historia on lähtöisiin tarpeesta luoda yhteyksiä tietokoneiden välille, joiden avulla voidaan luoda verkkoja. Verkkojen kautta erilaiset sovellukset voivat keskustella keskenään. Tämä on johtanut tarpeeseen luoda standardit, jotka määrittävät sen millä tavalla yhteyksiä tulisi luoda ja ylläpitää. TCP (Transmission Control Protocol) on standardi, joka määrittää yhteyden luonnin tietokoneiden välillä sekä niiden välisen kommunikoinnin. TCP:n avulla sovellukset pystyvät lähettämään dataa toisilleen verkon yli. TCP kehitettiin Yhdysvaltain asevoimien tutkimusorganisaatiossa DARPA:ssa (Defense Advanced Research Projects Agency )\cite{tcp1_1}. 
+
+\section{TCP}
+TCP on tarkoitettu toimivan eri tasoihin jaetussa protokollien hierarkiassa, joka tukee verkko-sovelluksia. Sen tarkoitus on pystyä toimimaan monien alemman tason protokollien päällä ja olla ottamatta kantaa käytetäänkö yhteyden muodostuksessa esimerkiksi paketti- tai piirikytkentää. TCP tarjoaa luotettavan DARPA määrittää eri protokollien tasot seuraavasti:
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{protocol_layering.PNG}
+\caption{\cite{tcp1_1}}
+\end{figure}
+
+
+TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut määrittää lähettäjän ja vastaanottajan osoitteet erilaisissa verkoissa. Internet Protokolla hoitaa myös mahdollisten TCP-segmenttejen pirstaloinnin ja uudelleenkokoamisen, jolloin TCP:n ei tarvitse näistä huolehtia. Se myös pitää mukanaan tiedon TCP-segmenttejen järjestyksestä, tietoturvamäärityksistä sekä lajittelusta. TCP tarjoaa rajapinnan luotettavalle yhteydelle useista verkoista koostuvassa ympäristössä \cite{tcp1_1} 
+
+TCP koostuu kahdesta rajapinnasta, joista toinen toimii käyttäjälle tai sovellukselle ja toinen alemman tason protokollille kuten Internet Protokolalle. Sovelluksille tarkoitettu rajapinta koostuu vastaavista kutsuista mitä käyttöjärjestelmä tarjoaa tiedostojen hallintaan. Esimerkiksi se sisältää kutsut yhteyden avaamiseen ja sulkemiseen sekä datan vastaanottoon ja lähetykseen yhteyden läpi. TCP pystyy myös asynkronisesti kommunikoimaan sovelluksien kanssa. Rajapinta alemmille protokollille on yleisesti määrittelemätöln, mutta se olettaa rajapinnassa olevan mekansimin, jossa kaksi tasoa pystyvät asynkronisesti siirtämään dataa toistensa välillä. Yleensä kyseinen määrittely oletetaan löytyvän alemman tason protokollalta. TCP on tarkoitettu toimivan geneerisessä ympäristössä, mutta yleisesti voidaan olettaa alemman tason protokollan olevan Internet Protokolla \cite{tcp1_4}.
+
+\section{TCP:n toiminta}
+
+TCP:n tärkein tehtävä on tarjota turvallinen ja luotettava yhteys kahden prosessin välille. Tarjotakseen tällaisen palvelun Internetin päälle,tulee tietyt osa-alueet toteutua. Alla TCP:n toteuttamat osa-alueet listattuna selityksineen:
+
+\begin{desclist}
+\item[Datan siirto] TCP pystyy lähettämään jatkuvasti paketteja kummankin käytätjän suuntaan. Joskus käyttäjien tulee varmistaa, että kaikki lähetetty data on lähetetty vastaanottajalle. Tähän tarkoitukseen on kehitelty push -toiminto, joka käskee TCP:tä
+lähettämään datan vastaanottajalle.
+\item[Luotettavuus]
+\item[Datavirran hallinta]
+\item[Kanavointi]
+\item[Yhteydet]
+\item[Järjestys ja luotettavuus]
+\end{desclist}
+
+\cite{tcp1_4}
+
+
+https://tools.ietf.org/html/rfc793
+
+\section{Internet Protokolla}
+\section{HTTP}
+
+
+
 \chapter{Sovelluskehitys}
 
 Katsomalla ympärille nykyajan yhteiskunnassa, huomataan monien asioiden toimivan ohjelmien varassa. Puhelimet, elektroniset kellot, autot ja erilaiset yhteiskunnalliset palvelut sisältävät kaikki ohjelman, jolla toimitoja sekä dataa hallitaan. Nykyajan modernia yhteiskuntaa ei pystytä ylläpitämään ilman sovelluksia. Monet tuotantolinjastot sekä rahoitusjärjestelmät teollisuudessa ovat täysin automatisoituja. Viihdeteollisuus kuten musiikki, pelit, elokuvat ja televisio ovat kaikki monimutkaisten sovellusten varassa. Ihmisten tiedot ovat monissa valtion hallintajärjestelmissä sekä niin julkisissa kuin yksityisissäkin potilastietojärjestelmissä. Nykypäivänä katsottaessa ympärille löydämme lähes poikkeuksetta jonkin asian, jonka taustalla on ohjelma. Suuri määrä ihmisiä kirjoittaa sovelluksia nykypäivänä. Liike-elämässä ihmiset kirjoittavat taulukkolaskentaohjelmia helpottaakseen työtään. Tutkijat ja insinöörit kirjoittavat ohjelmia prosessoimaan kerättyä dataa ja harrastelijat kirjoittavat ohjelmia viihdyttääkseen itseään. Suurin osa sovelluskehityksestä on kuitenkin toteutettu ammattilaisten toimesta tukemaan liiketoimintamalleja, kehittämään laitteita sekä rakentamaan erilaisia palveluita. Ammattilaisten toteuttamat ohjelmistot toteutetaan usein ryhmissä ja ne ovat suunnattu käytettäväksi muille kuin ohjelmoijille itselleen \parencite{Sommerville}.
@@ -326,14 +321,14 @@ World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksess�
 Seuraava vaihe web-sovellusten kehityksessä olivat web-palvelut. Web-palvelut ovat sovelluskomponentteja, jotka tarjoavat hyödyllisiä palveluja käytettäväksi muille sovelluksille. Siinä missä web-sovellus tarjoaa käyttöliittymän sovellukselle, web-palvelu tarjoaa rajapinnan käyttöliittymäsovellukselle käytettäväksi. Web-palvelu on yksittäinen osa sovellusta ja sovelluksella voi olla monia web-palveluja käytettävänä. 
 
 
+
+
 \section{Laatu}
 
 \section{Ohjelmistojen tyypit}
 - lista tyypeist selityksineen
 - viite barry boehm "For another thing, unlike the engineering of electrons, materials, or chemicals, the basic software elements we engineer tend to change significantly from one decade to the next. "
 
-
-\chapter{Sovellusarkkitehtuurit}
 \chapter{MVC}
 MVC-arkkitehtuurin perusajatus on erottaa käyttöliittymä sovelluslogiikasta ja
 näin tehdä sovelluksesta helposti ylläpidettävä kolmen eri komponentin avulla:
@@ -672,7 +667,6 @@ Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa 
 Flask on mikro-sovelluskehys (micro-framework), jossa sovelluskehyksen lähdekoodi on pidetty mahdollisimman minimalistisena. Sen tarkoituksena ei ole tehdä valintoja kehittäjän puolesta millaisia teknologioita tämän tulisi käyttää. Ne teknologiat mitä Flask tuo mukanaan, voidaan korvata toisella vastaavalla teknologialla. Esimerkiksi flask tuo mukanaan Jinja2 template-kielen, joka voidaan korvata millä tahansa muulla template-kielellä.
 
 Flaski ei tuo mitään lomake-työkaluja, tietokanta-abstrahointeja tai mitään missä ulkoinen kirjasto ei pystyisi kyseistä teknologiaa toteuttamaan. Flask tukee laajennoksia, joilla sitä voidaan laajentaa erilaisilla teknologioilla. Tällaisia ovat esimerkiksi erilaiset lomake-kirjastot ja tietokanta-abstrahoinnit. Flask on tämän tutkimuksen sovelluskehyksistä minimaalisin eikä se toteuta minkään laista MVC:hen liittyvää pohjaa. Tämän vuoksi sitä käytetään hyväksi tutkiessa miten MVC tulisi toteuttaa web-sovelluskehykseen, jotta sen alkuperäiset määritelmät täyttyisivät \parencite{flask}.
-\section{Plone}
 
 \chapter{MVC:n toteutus web-sovelluskehyksissä}
 Vaikka MVC:tä ei ole tarkoitettu alunperin web-sovelluksiin, voivat ne hyötyä MVC:n arkkitehtuurista. Suurin ongelma MVC:n käyttämisessä web-sovelluskehyksissä on palvelimen (server) ja asiakkaan (client) välinen ositus. Näkymä näytetään aina asiakkaan selaimessa sen omalla päätelaitteella HTML-kielellä. Malli ja Ohjain taas voivat olla ositettu teoriassa miten vain asiakkaan ja palvelimen välillä. Web-sovelluksissa kehittäjä pakotetaan osioimaan sovellus. MVC:n tulee olla riippumaton osioinnista. Osioinnin ei tule määrittää sovelluksen arkkitehtuuria.

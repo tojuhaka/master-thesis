@@ -583,6 +583,25 @@
   \end{list}
 }
 
+\newenvironment{desclist}{% begin
+  \begin{list}{% default label
+      \texttt{\string\item[\textrm{\textit{%
+            \iflanguage{finnish}{%
+              T\"am\"a jäi tyhjäksi!%
+            }{%
+              You left this blank!%
+            }%
+          }}]}%
+    }{%declarations
+      \renewcommand{\makelabel}[1]{##1\hfill}%
+      \setlength{\labelwidth}{4.8cm}%
+      \setlength{\labelsep}{0.2cm}%
+      \setlength{\leftmargin}{5cm}%
+    }
+}{% end
+  \end{list}
+}
+
 \renewcommand\appendix{\par\clearpage%
   \gdef\gradu@pagecount@curr{gradu@pagecount@app}%
   \chapter*{\appendicesname}%

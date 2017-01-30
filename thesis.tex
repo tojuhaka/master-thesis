@@ -96,8 +96,6 @@ yhdistetään prosessoimaan pyyntöjä.
 \mainmatter
 
 \chapter{Johdanto}
-
-\section{Tausta}
 \section{Tutkimuskysymys}
 MVC-arkkitehtuuri on saanut paljon huomiota web-sovelluskehyksien
 toteutuksissa ja useat web-sovelluskehykset ovat luokiteltu
@@ -670,20 +668,20 @@ Flaski ei tuo mitään lomake-työkaluja, tietokanta-abstrahointeja tai mitään
 \chapter{MVC:n vaatimukset}
 Vaikka MVC:tä ei ole tarkoitettu alunperin web-sovelluksiin, voivat ne hyötyä MVC:n arkkitehtuurista. Suurin ongelma MVC:n käyttämisessä web-sovelluskehyksissä on palvelimen (server) ja asiakkaan (client) välinen ositus. Näkymä näytetään aina asiakkaan selaimessa sen omalla päätelaitteella HTML-kielellä. Malli ja Ohjain taas voivat olla ositettu teoriassa miten vain asiakkaan ja palvelimen välillä. Web-sovelluksissa kehittäjä pakotetaan osioimaan sovellus. MVC:n tulee olla riippumaton osioinnista. Osioinnin ei tule määrittää sovelluksen arkkitehtuuria \cite{ibm_watson}.
 
-Pyramidin sovellusarkkitehtuuri on toteutettu käyttäen pohjana MVC"-arkkitehtuuria. Tämä ei kuitenkaan tarkoita sitä, että Pyramid toteuttaisi MVC:n teknisesti sellaisena kuin esimerkiksi Krasner määrittelee \cite{Krasner:desc}. 
+Pyramidin sovellusarkkitehtuuri on toteutettu käyttäen pohjana MVC"-arkkitehtuuria. Tämä ei kuitenkaan tarkoita sitä, että Pyramid toteuttaisi MVC:n teknisesti sellaisena kuin esimerkiksi Krasner määrittelee \cite{krasner_desc}. 
 Tärkeimpänä vaatimuksena MVC:n toteutukselle on se, että näkymä ja ohjain luovat rajapinnan, jonka kautta käyttäjä keskustelee mallin kanssa. Malli ei saa olla suorassa yhteydessä käyttäjään \cite[s. 10]{Reenskaug:tools}.
 Mallin tulee olla riippumaton näkymästä ja ohjaimesta. Sen tulee myös hallita sovelluksen tilaa sekä pystyä antamaan informaatiota sovelluksen tilasta \cite{Burbeck}. Näkymän on keskusteltava mallin kanssa sekä hoitaa mallilta saadun datan graafinen näyttäminen \cite[s.1]{Reenskaug:orig}. Ohjain puolestaan ottaa vastaan syötteitä ja lähettää viestejä tämän perusteella näkymälle ja mallille \cite{Burbeck}. Lisäksi Mallin tulee pystyä kommunikoimaan muutoksistaan ohjaimelle ja näkymälle. Näiden rajoituksien perusteella pystytään vastaamaan tutkielmassa siihen, toteuttaako Pyramid MVC-arkkitehtuurin vai ei.
 
 
 \chapter{MVC \& Pyramid}
 Pyramidin kehittäjien dokumenteissa esitellään Pyramid MVC-kehyksenä, mutta samalla myös kyseenalaistetaan tämä väite. Erityisesti mallin ja ohjaimen määritelmä puuttuu \cite{Pyramid:intr}. Tässä
-osiossa käsitellään Pyramidia MVC:n näkökulmasta. Tarkastelua varten toteutetaan Pyramidilla vastaava laskuri-sovellus kuin Krasnerin julkaisussa käyttäen Pyramidin tarjoamia ominaisuuksia \cite{Krasner:desc}. Sovellus rajataan käyttämään SQL-tietokantaa mallin datan tallennukseen sekä \emph{URL dispatch} -tekniikkaa \cite{urldispatch, sql}. Sovelluksen pohjalta tarkastellaan MVC:n kannalta kolmea oleellisinta tiedostoa: \emph{views.py}, \emph{models.py} ja \emph{template.pt}. Näin tutkielman tarkastelu pystytään rajaamaan mahdollisimman pienelle alueelle, jolloin tutkielma on helpompi keskittää tarkastelemaan yksittäistä tekniikkaa.
+osiossa käsitellään Pyramidia MVC:n näkökulmasta. Tarkastelua varten toteutetaan Pyramidilla vastaava laskuri-sovellus kuin Krasnerin julkaisussa käyttäen Pyramidin tarjoamia ominaisuuksia \cite{krasner_desc}. Sovellus rajataan käyttämään SQL-tietokantaa mallin datan tallennukseen sekä \emph{URL dispatch} -tekniikkaa \cite{urldispatch, sql}. Sovelluksen pohjalta tarkastellaan MVC:n kannalta kolmea oleellisinta tiedostoa: \emph{views.py}, \emph{models.py} ja \emph{template.pt}. Näin tutkielman tarkastelu pystytään rajaamaan mahdollisimman pienelle alueelle, jolloin tutkielma on helpompi keskittää tarkastelemaan yksittäistä tekniikkaa.
 
 Tässä osiossa tarkastellaan Pyramid-sovelluksen tiedostoja sekä niiden sisältöjä MVC-komponentteina. Erityisesti keskitytään ohjaimen ja näkymän toteukseen. Samalla tutkitaan voidaanko Pyramid havaintojen perusteella luokitella MVC:n toteuttavaksi sovelluskehykseksi.
 Koska Pyramidissa MVC:n määrittely on hyvin epävakaalla pohjalla, tulee tehdä selvästi mitä ominaisuuksia komponenteilta vaaditaan. Esimerkiksi \emph{views.py} ja \emph{template.pt} -tiedostot ovat tarkoitettu toimimaan yhdessä näkymänä, jolloin ohjaimen toteuttamat tehtävät sisällytettäisiin näkymään. MVC:tä tutkiessa täytyy sovelluksen komponentit kuitenkin jakaa kolmeen osaan.  Tiedosto \emph{views.py}
 sisältää paljon ohjaimelle yhteisiä piirteitä, joten se erottuu selvästi \emph{template.pt} -tiedostosta. Tutkielmassa oletetaan, että \emph{models.py} sisältää mallin, \emph{views.py} ohjaimen ja \emph{template.pt} näkymän.
 
-\subsection{Tiedostojen tarkastelu}
+\section{Tiedostojen tarkastelu}
 \lstset{
   literate={ö}{{\"o}}1
            {ä}{{\"a}}1,
@@ -779,7 +777,7 @@ Templatessa luodaan lomake kahdelle painikkeelle, joista kumpikin lähettää lo
 
 Templatessa hoidetaan sovelluksen graafinen puoli, joten se vastaa ominaisuuksiltaan näkymää. \\ Ongelmaksi muodostuu kuitenkin näkymän ja mallin välinen kommunikointi. Näkymä ei ole yhteydessä malliin suoraan, vaan tarvitsee ohjaimen kautta tiedon mallin tilasta.  Näkymä ei siis sellaisenaan toteuta sille asetettuja ominaisuuksia. \\
 
-\subsection{Sovelluksen toiminta}
+\section{Sovelluksen toiminta}
 Alla olevassa kuvassa esitellään visuaalisesti miten laskurisovellus muodostaa HTML-sivun, kun käyttäjä painaa sivulla \emph{Increment} -painiketta. Kuvan
 vaiheet toteutetaan numerojärjestyksessä alkaen ensimmäisestä.
 \begin{figure}[h]
@@ -802,20 +800,19 @@ escapeinside={/*@}{@*/},
 /*@Templatessa generoidaan HTML-sivu, joka tuodaan palvelimelle vastauksena.@*/
 \end{lstlisting}
 
-\subsection{Yhteenveto}
+\section{Yhteenveto}
 Malli sekä ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta näkymään tai ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan ohjaimelle ja näkymälle omista muutoksistaan, koska kaikki muutokset tulevat näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii request-oliossa tulevista syötteistä ja vaikuttaa malliin sekä näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä näkymän tarkoitus on kommunikoida suoraan mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa näkymä on yhteydessä vain ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu.
 
 \begin{figure}[h]
 \centering/
 \includegraphics[scale=0.85]{pyramid_mvc.jpg}
-\caption{Pyramidin kommunikointi MVC-komponenttien kesken. Kuva on muokattu Krasnerin esittelemästä kommunikointimallista \cite{Krasner:desc} }
+\caption{Pyramidin kommunikointi MVC-komponenttien kesken. Kuva on muokattu Krasnerin esittelemästä kommunikointimallista \cite{krasner_desc} }
 \end{figure}
 
 Yllä esitetyssä kommunikaatiomallissa ohjain saa vastaan request-olion, jossa tuodaan kaikki tarvittava tieto käyttäjästä. Tämän perusteella ohjain ohjaa mallia
 sekä muuttujaa. Samalla se pyytää mallilta tietoa sovelluksen tilasta ja välittää tiedon näkymälle. Näkymä taas välittää ohjaimen tuoman datan käyttäjälle graafisena.
 
-
-Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \cite{Krasner:desc}.
+Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \cite{krasner_desc}.
 Alla esitellyssä kuvassa havainnollisestetaan, kuinka mallin ja näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan ohjaimelle ja näkymälle vaan tarvitsee aina HTTP-pyynnön.
 
 Alunperin Pyramidin dokumentaatiossa kyseenalaistettiin mallin sekä ohjaimen toteutus \cite{Pyramid:intr}. Tutkimuksen pohjalta voidaan kuitenkin
@@ -824,10 +821,6 @@ kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelm�
 \emph{template.pt} -tiedosto katsotaan osaksi samaa komponenttia. Tutkimuksen tuloksien perusteella voidaan kuitenkin todeta, että \emph{views.py} -tiedoston näkymä-funktio toteuttaa kaikki
 ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä näkymää. Template ei kuitenkaan riitä toteuttamaan näkymän ominaisuuksia, koska se on täysin riippuvainen ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan näkymälle ja ohjaimelle ilman, että ohjain/näkymä pyytää Mallilta nykyistä tilaa.
 
-
-\parencite{ibm_watson}
-
-\chapter{Yhteenveto}
 \printbibliography
 \appendix
 

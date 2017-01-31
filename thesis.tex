@@ -270,7 +270,19 @@ TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut 
 
 TCP koostuu kahdesta rajapinnasta, joista toinen toimii käyttäjälle tai sovellukselle ja toinen alemman tason protokollille kuten Internet Protokolalle. Sovelluksille tarkoitettu rajapinta koostuu vastaavista kutsuista mitä käyttöjärjestelmä tarjoaa tiedostojen hallintaan. Esimerkiksi se sisältää kutsut yhteyden avaamiseen ja sulkemiseen sekä datan vastaanottoon ja lähetykseen yhteyden läpi. TCP pystyy myös asynkronisesti kommunikoimaan sovelluksien kanssa. Rajapinta alemmille protokollille on yleisesti määrittelemätöln, mutta se olettaa rajapinnassa olevan mekansimin, jossa kaksi tasoa pystyvät asynkronisesti siirtämään dataa toistensa välillä. Yleensä kyseinen määrittely oletetaan löytyvän alemman tason protokollalta. TCP on tarkoitettu toimivan geneerisessä ympäristössä, mutta yleisesti voidaan olettaa alemman tason protokollan olevan Internet Protokolla \cite{tcp1_4}.
 
+
+
 \section{TCP:n toiminta}
+TCP:n oletetaan olevan tavallinen moduuli käyttöjärjestelmässä. Käyttäjien tulee pystyä hallitsemaan TCP:tä niinkuin mitä tahansa tiedostojärjestelmää. Se pystyy myös kutsumaan muita käyttöjärjestelmän toimintoja. Rajapinta itse verkkoon tulee kuitenkin toteuttaa laitteen ajurissa. TCP ei kuitenkaan kutsu ajurin rajapintaa suoraan, vaan käyttää Internet Protokollaa. Internet protokolla sen sijaan kutsuu mahdollisen alemman tason ajurin rajapintaa. Käyttäjälle tarkoitettu rajapinta toteutetaan TCP:ssä siten, että sen kutsut ovat vastaavia kuin muissakin käyttöjärjestelmän ohjelmien tarjoamissa kutsuissa.  TCP:n tarjoamassa rajapinnassa kutsut ovat seuraavat: \cite{tcp2_3}
+
+\begin{desclist}
+\item[OPEN] Avaa yhteyden
+\item[CLOSE] Sulkee yhteyden
+\item[SEND] Lähettää
+\item[RECEIVE]
+\item[STATUS] 
+\end{desclist}
+
 
 TCP:n tärkein tehtävä on tarjota turvallinen ja luotettava yhteys kahden prosessin välille. Tarjotakseen tällaisen palvelun Internetin päälle,tulee tietyt osa-alueet toteutua. Alla TCP:n toteuttamat osa-alueet listattuna selityksineen:
 

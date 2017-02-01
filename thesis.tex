@@ -273,17 +273,6 @@ TCP koostuu kahdesta rajapinnasta, joista toinen toimii käyttäjälle tai sovel
 
 
 \section{TCP:n toiminta}
-TCP:n oletetaan olevan tavallinen moduuli käyttöjärjestelmässä. Käyttäjien tulee pystyä hallitsemaan TCP:tä niinkuin mitä tahansa tiedostojärjestelmää. Se pystyy myös kutsumaan muita käyttöjärjestelmän toimintoja. Rajapinta itse verkkoon tulee kuitenkin toteuttaa laitteen ajurissa. TCP ei kuitenkaan kutsu ajurin rajapintaa suoraan, vaan käyttää Internet Protokollaa. Internet protokolla sen sijaan kutsuu mahdollisen alemman tason ajurin rajapintaa. Käyttäjälle tarkoitettu rajapinta toteutetaan TCP:ssä siten, että sen kutsut ovat vastaavia kuin muissakin käyttöjärjestelmän ohjelmien tarjoamissa kutsuissa.  TCP:n tarjoamassa rajapinnassa kutsut ovat seuraavat: \cite{tcp2_3}
-
-\begin{desclist}
-\item[OPEN] Avaa yhteyden
-\item[CLOSE] Sulkee yhteyden
-\item[SEND] Lähettää
-\item[RECEIVE]
-\item[STATUS] 
-\end{desclist}
-
-
 TCP:n tärkein tehtävä on tarjota turvallinen ja luotettava yhteys kahden prosessin välille. Tarjotakseen tällaisen palvelun Internetin päälle,tulee tietyt osa-alueet toteutua. Alla TCP:n toteuttamat osa-alueet listattuna selityksineen:
 
 \begin{desclist}
@@ -297,9 +286,26 @@ lähettämään datan vastaanottajalle \cite{tcp1_4}.
 \end{desclist}
 
 
-https://tools.ietf.org/html/rfc793
+TCP:n oletetaan olevan tavallinen moduuli käyttöjärjestelmässä. Käyttäjien tulee pystyä hallitsemaan TCP:tä niinkuin mitä tahansa tiedostojärjestelmää. Se pystyy myös kutsumaan muita käyttöjärjestelmän toimintoja. Rajapinta itse verkkoon tulee kuitenkin toteuttaa laitteen ajurissa. TCP ei kuitenkaan kutsu ajurin rajapintaa suoraan, vaan käyttää Internet Protokollaa. Internet protokolla sen sijaan kutsuu mahdollisen alemman tason ajurin rajapintaa. Käyttäjälle tarkoitettu rajapinta toteutetaan TCP:ssä siten, että sen kutsut ovat vastaavia kuin muissakin käyttöjärjestelmän ohjelmien tarjoamissa kutsuissa.  TCP:n tarjoamassa rajapinnassa kutsut ovat seuraavat:
+
+\begin{desclist}
+\item[OPEN] Avaa yhteyden
+\item[CLOSE] Sulkee yhteyden
+\item[SEND] Lähettää dataa
+\item[RECEIVE] Ottaa vastaan dataa
+\item[STATUS] Palauttaa yhteyden tilan
+\end{desclist}
+
+\cite{tcp2_3}
 
 \section{Internet Protokolla}
+
+Internet Protokolla on tarkoitettu käytettäväksi tietokoneiden välisiin verkkoihin, joissa on käytössä pakettikytkentä. Se tarjoaa toteutuksen liikuttamaan datagrammeja käyttäjien välillä. Se toteuttaa myös pitkien datagrammejen pirstaloinnin pienempiin osiin tarvittaessa, jos dataa halutaan siirtää verkkojen läpi, jossa vain pienemmät paketit ovat sallittuja. Internet Protokolla ei ota kantaa datan luotettavuuteen, datavirran hallintaan tai järjestykseen. Tämä jätetään ylemmän tason protokollien hoidettavaksi. Esimerkiksi TCP-moduuli kutsuu Internet moduulia ottamaan haltuun TCP-segmentin, joka sisältää otsikon ja lähettäjän datan. Otsikko sisältää osoitteen ja muut tarvittavat parametrit. Tämän jälkeen Internet-moduuli luo internet datagrammin ja kutsuu paikallista verkkorajapintaa lähettämään datagrammin eteenpäin. \cite{internet_procotol}
+
+Internet Protokolla toteuttaa kaksi toiminnallisuutta: osituksen ja osoitteistuksen. Osoitteistuksessa Internet moduulit JATKUU 2.1.2017 https://tools.ietf.org/html/rfc791
+
+
+\cite{internet_procotol}
 \section{HTTP}
 \section{WEB-soketit}
 

@@ -310,10 +310,9 @@ Internet Protokolla on tarkoitettu käytettäväksi tietokoneiden välisiin verk
 Internet Protokolla toteuttaa kaksi toiminnallisuutta: osituksen ja osoitteistuksen. Datagrammin otsikoissa tulleiden tietojen perusteella internet moduuli osaa lähettää datan oikeaan paikkaan sekä pirstaloida datan sopivaksi verkolle. Internet Protokolla käsittelee jokaista datagrammia erillään ilman riippuvuuksia muista datagrammeista. Internet Protokolla käyttää neljää palvelua: Palvelutyyppi, Elinkaari, Vaihtoehdot ja Tarkistussuma. Palvelutyyppi on abstrakti tai geneerinen lista parametrejä, jotka määrittää verkolle minkä tyyppinen palvelu on kyseessä. Yhdyskäytävät käyttävät tätä informaatiota valitsemaan oikeat parametrit tietylle verkolle tai määrittämään seuraavan verkon mihin hypätä. Yhdyskäytävillä tarkoitetaan tässä verkon solmua, joka mahdollistaa siitymisen toiseen verkkoon. Solmut voivat olla esimerkiksi tietokoneita. Elinkaarella tarkoitetaan ylärajaa, jonka aikana datagrammin tulee saavuttaa määränpäänsä. Jos määränpäätä ei saavuteta, datagrammi tuhotaan. Yläraja määritetään lähettäjän toimesta ja sitä vähennetään siirron aikana. Datagrammi tuhoutuu saavuttaessan arvon nolla \cite{internet_protocol}. Vaihtoehdot ovat käytössä erityisissä tilanteissa. Tällaisia ovat esimerkiksi tietyt ohjaukset verkossa tai lisäykset tietoturvaan. Tarkistussummalla varmistetaan, että datagrammi on siirretty onnistuneesti. Datagrammin sisältö voi kuitenkin sisältää virheitä. Jos Tarkistussummassa on virheitä, datagrammi tuhotaan välittömästi. 
 
 Internet Protokolla ei tarjoa luotettavaa kommunikaatioyhteyttä. Se ei sisällä alku- ja loppupään kuittauksia eikä se ota kantaa datan eheyteen. Se ei myöskään sisällä uudelleenlähetyksiä tai muuta datavirran hallintaa \cite{internet_procotol}.
-\section{HTTP}
-HTTP (Hypertext Transfer Protocol) on ollut Internetin WWW:n (World-Wide-Web) käytössä vuodesta 1990 lähtien. HTTP on sovellus-tason protokolla, jonka yhtenä tarkoituksena on siirtää hyperteksiä järjestelmien välillä. Hypertekstillä tarkoitetaan tietokoneissa käytettyä tekstiä, jossa mahdollistetaan ristiviittauksia dokumenttejen välillä. Näitä viittauksia kutsutaan hyperlinkeiksi \cite{hypertext}.   HTTP on geneerinen sekä tilaton ja sitä voidaan käyttää muuhunkin kuin hypertekstin siirtämiseen ylätunnisteiden, pyyntöjen sekä virhekoodejen kautta. Tällaisia ovat esimerkiksi nimipalvelumet ja jaetut oliopohjaiset hallintajärjestelmät. HTTP-protokolla mahdollistaa järjestelmien rakentamisen riippumattomana siirrettävästä datasta \cite{http}.
+\section{HTTP-protokolla}
+HTTP (Hypertext Transfer Protocol) on ollut Internetin WWW:n (World-Wide-Web) käytössä vuodesta 1990 lähtien. HTTP on sovellus-tason protokolla, jonka yhtenä tarkoituksena on siirtää hyperteksiä järjestelmien välillä. Hypertekstillä tarkoitetaan tietokoneissa käytettyä tekstiä, jossa mahdollistetaan ristiviittauksia dokumenttejen välillä. Näitä viittauksia kutsutaan hyperlinkeiksi \cite{hypertext}.   HTTP on geneerinen sekä tilaton ja sitä voidaan käyttää muuhunkin kuin hypertekstin siirtämiseen ylätunnisteiden, pyyntöjen sekä virhekoodejen kautta. Tällaisia ovat esimerkiksi nimipalvelumet ja jaetut oliopohjaiset hallintajärjestelmät. HTTP-protokolla mahdollistaa järjestelmien rakentamisen riippumattomana siirrettävästä datasta \cite{http}. HTTP tuo sovelluksille mahdollisuuden kommunikoida avoimella joukolla menetelmiä ja ylätunnisteita, jotka määrittävät itse HTTP-viestin tarkoituksen. HTTP käyttä URI:n spesifikaatiota määrittämään resurssejen sijainnin \cite{uri}. TODO jatka, internet protokollan yhteys http protokollaan?
 
-\chapter{HTTP-pyyntö}
 
 \begin{figure}[h]
 \centering
@@ -321,22 +320,10 @@ HTTP (Hypertext Transfer Protocol) on ollut Internetin WWW:n (World-Wide-Web) k�
 \caption{HTTP-viesti kokonaisuudessaan \cite{httprequest}}
 \end{figure}
 
-HTTP-viestit koostuvat asiakaspuolen viesteistä sekä palvelimen vastauksista asiakkaalle. Molemmat viestit sisältävät aloitusrivin, tyhjän tai useamman ylätunnisteen, tyhjän rivin (CRLF) ja mahdollisen lähetettävän viestin. CRLF määrittää rivinvaihdon ja palvelimen on pystyttävä protokollan datavirtaa luettaessa huomioimaan se. Esimerkiksi datavirtaa luettaessa viesti alkaa CRLF:llä se tulee hylätä. HTTP-viestin otsikot sisältävät yleisen-, vastaus-, pyyntö- sekä kokonaisuus-ylätunnisteen. Ylätunnisteen kenttä koostuu nimestä sekä arvosta, jossa ne on eroteltu kaksoispisteellä. Yleisen-ylätunnisten kentät on tarkoitettu viittaamaan ite lähtetettyyn viestiin. Siinä voidaan esimeriksi siirtää tietoa millä tavalla HTTP-viesti on enkoodattu lähetystä varten ja  milloin viesti on luotu \cite{httprequest}. JATKUU: headerejen selitykset
+HTTP-viestit koostuvat asiakaspuolen viesteistä sekä palvelimen vastauksista asiakkaalle. Molemmat viestit sisältävät aloitusrivin, tyhjän tai useamman ylätunnisteen, tyhjän rivin (CRLF) ja mahdollisen lähetettävän viestin. CRLF määrittää rivinvaihdon ja palvelimen on pystyttävä protokollan datavirtaa luettaessa huomioimaan se. Esimerkiksi datavirtaa luettaessa viesti alkaa CRLF:llä se tulee hylätä. HTTP-viesti sisältää erilaisia ylätunnisteita (header), joiden avulla voidaan viedä ylimääräistä tietoa HTTP-pyynnöstä sekä asiakaspäästä. Ylätunnisteita voi olla useita yhdessä HTTP-viestissä. Viestikentässä (message-body) viedään tietyn viestin sisältö, jos sellainen on viestissä mukana \cite{httprequest}. Viestikentän olemassaolo määritetään pituuskentässä (Content-Length) tai kentässä, joka määrittää siirron enkoodauksen (Transfer-Encoding). HTTP-pyynnön ei tule sisältää viestikenttää, jos esimerkiksi enkoodauskenttä löytyy pyynnöstä ja se sisältää minkä tahansa muun arvon kuin "identity".
 
 
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.85]{request_line.png}
-\caption{HTTP:n pyyntö-osa \cite{httprequest}}
-\end{figure}
-
-
-CRLF selitys 
-HTTP-pyynnöt mudo
-\cite{httprequest}
-
-\section{WEB-soketit}
+\chapter{WEB-soketit}
 
 
 

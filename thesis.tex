@@ -301,6 +301,7 @@ TCP:n oletetaan olevan tavallinen moduuli käyttöjärjestelmässä. Käyttäjie
 
 todo jatka tätä hieman
 
+
 \cite{tcp2_3}
 
 \section{Internet Protokolla}
@@ -311,8 +312,7 @@ Internet Protokolla toteuttaa kaksi toiminnallisuutta: osituksen ja osoitteistuk
 
 Internet Protokolla ei tarjoa luotettavaa kommunikaatioyhteyttä. Se ei sisällä alku- ja loppupään kuittauksia eikä se ota kantaa datan eheyteen. Se ei myöskään sisällä uudelleenlähetyksiä tai muuta datavirran hallintaa \cite{internet_procotol}.
 \section{HTTP-protokolla}
-HTTP (Hypertext Transfer Protocol) on ollut Internetin WWW:n (World-Wide-Web) käytössä vuodesta 1990 lähtien. HTTP on sovellus-tason protokolla, jonka yhtenä tarkoituksena on siirtää hyperteksiä järjestelmien välillä. Hypertekstillä tarkoitetaan tietokoneissa käytettyä tekstiä, jossa mahdollistetaan ristiviittauksia dokumenttejen välillä. Näitä viittauksia kutsutaan hyperlinkeiksi \cite{hypertext}.   HTTP on geneerinen sekä tilaton ja sitä voidaan käyttää muuhunkin kuin hypertekstin siirtämiseen ylätunnisteiden, pyyntöjen sekä virhekoodejen kautta. Tällaisia ovat esimerkiksi nimipalvelumet ja jaetut oliopohjaiset hallintajärjestelmät. HTTP-protokolla mahdollistaa järjestelmien rakentamisen riippumattomana siirrettävästä datasta \cite{http}. HTTP tuo sovelluksille mahdollisuuden kommunikoida avoimella joukolla menetelmiä ja ylätunnisteita, jotka määrittävät itse HTTP-viestin tarkoituksen. HTTP käyttä URI:n spesifikaatiota määrittämään resurssejen sijainnin \cite{uri}. TODO jatka, internet protokollan yhteys http protokollaan?
-
+HTTP (Hypertext Transfer Protocol) on ollut Internetin WWW:n (World-Wide-Web) käytössä vuodesta 1990 lähtien. HTTP:n yhtenä tarkoituksena on siirtää hyperteksi-dokumentteja järjestelmien välillä. Hypertekstillä tarkoitetaan tietokoneissa käytettyä tekstiä, jossa mahdollistetaan ristiviittauksia dokumenttejen välillä. Näitä viittauksia kutsutaan hyperlinkeiksi \cite{hypertext}. HTTP on sovellustason protokolla ja se käyttää alemman kuljetuskerroksen protokollia yhteyden luomisessa. WWW:ssä HTTP käyttää kuljetuskerroksen TCP protokollaa \cite{w3http}. HTTP on geneerinen sekä tilaton ja sitä voidaan käyttää muuhunkin kuin hypertekstin siirtämiseen ylätunnisteiden, pyyntöjen sekä virhekoodejen kautta. Tällaisia ovat esimerkiksi nimipalvelumet ja jaetut oliopohjaiset hallintajärjestelmät. HTTP-protokolla mahdollistaa järjestelmien rakentamisen riippumattomana siirrettävästä datasta \cite{http}. HTTP tuo sovelluksille mahdollisuuden kommunikoida avoimella joukolla menetelmiä ja ylätunnisteita, jotka määrittävät itse HTTP-viestin tarkoituksen. HTTP käyttää URI:n spesifikaatiota määrittämään resurssejen sijainnin \cite{uri}.
 
 \begin{figure}[h]
 \centering
@@ -320,7 +320,15 @@ HTTP (Hypertext Transfer Protocol) on ollut Internetin WWW:n (World-Wide-Web) k�
 \caption{HTTP-viesti kokonaisuudessaan \cite{httprequest}}
 \end{figure}
 
-HTTP-viestit koostuvat asiakaspuolen viesteistä sekä palvelimen vastauksista asiakkaalle. Molemmat viestit sisältävät aloitusrivin, tyhjän tai useamman ylätunnisteen, tyhjän rivin (CRLF) ja mahdollisen lähetettävän viestin. CRLF määrittää rivinvaihdon ja palvelimen on pystyttävä protokollan datavirtaa luettaessa huomioimaan se. Esimerkiksi datavirtaa luettaessa viesti alkaa CRLF:llä se tulee hylätä. HTTP-viesti sisältää erilaisia ylätunnisteita (header), joiden avulla voidaan viedä ylimääräistä tietoa HTTP-pyynnöstä sekä asiakaspäästä. Ylätunnisteita voi olla useita yhdessä HTTP-viestissä. Viestikentässä (message-body) viedään tietyn viestin sisältö, jos sellainen on viestissä mukana \cite{httprequest}. Viestikentän olemassaolo määritetään pituuskentässä (Content-Length) tai kentässä, joka määrittää siirron enkoodauksen (Transfer-Encoding). HTTP-pyynnön ei tule sisältää viestikenttää, jos esimerkiksi enkoodauskenttä löytyy pyynnöstä ja se sisältää minkä tahansa muun arvon kuin "identity".
+HTTP-viestit koostuvat asiakaspuolen viesteistä sekä palvelimen vastauksista asiakkaalle. Molemmat viestit sisältävät aloitusrivin, tyhjän tai useamman ylätunnisteen, tyhjän rivin (CRLF) ja mahdollisen lähetettävän viestin. CRLF määrittää rivinvaihdon ja palvelimen on pystyttävä protokollan datavirtaa luettaessa huomioimaan se. Esimerkiksi datavirtaa luettaessa viesti alkaa CRLF:llä se tulee hylätä. HTTP-viesti sisältää erilaisia ylätunnisteita (header), joiden avulla voidaan viedä ylimääräistä tietoa HTTP-pyynnöstä sekä asiakaspäästä. Ylätunnisteita voi olla useita yhdessä HTTP-viestissä. Viestikentässä (message-body) viedään tietyn viestin sisältö, jos sellainen on viestissä mukana \cite{httprequest}. Viestikentän olemassaolo määritetään pituuskentässä (Content-Length) tai kentässä, joka määrittää siirron enkoodauksen (Transfer-Encoding). HTTP-pyynnön ei tule sisältää viestikenttää, jos esimerkiksi enkoodauskenttä löytyy pyynnöstä ja se sisältää minkä tahansa muun arvon kuin "identity".  Seuraavaksi esitellään yleisellä tasolla esimerkki millä tavalla asiakas saa HTTP-palvelimelta vastauksena hyperteksti-dokumentin.
+
+Yhteyden luonnissa asiakas luo TCP-IP yhteyden serverin ja asiakkaan välille käyttäen osoitteessa määritettyä porttinumeroa. Jos porttinumeroa ei ole annettu HTTP olettaa porttinumeron olevan 80. Asiakas lähettää pyynnön, joka koostuu yhdestä rivistä ASCII-merkkejä. Pyyntö sisältää sanan "GET", välilyönnin sekä ja dokumentin osoitteen. Dokumentin osoitteen tulee olla yksi yhtenäinen sana. Kaikki ylimääräiset sanat, jotka löydetään dokumentin osoitteesta jätetään huomioimatta tai ne tulkitaan HTTP-spesifikaation mukaisesti \cite{w3http2}. Vastaus yksinkertaiseen GET-viestiin sisältää HTML-pohjaisen (Hypertext Markup language) ASCII datavirran. HTML-kieltä käytetään julkaisemaan hyperteksti-dokumenttejä WWW:ssä. HTML:n pohjana on käytetty SGML:ää, joka on standardi määrittelemään merkkauskieliä \cite{sgml}. HTML-dokumentit ovat siis SGML-dokumentteja, jotka toteuttavat SGML:n määritelmät.  Hyvin toteutetut asiakassovellukset lukevat koko dokumentin mahdollisimman nopeasti, jolloin käyttäjän laukaisemat toiminnot, toteutetaan vasta dokumentin prosessoinnin jälkeen. TCP/IP yhteys suljetaan palvelimen toimesta kun koko dokumentti on siirretty.
+
+
+ jatkuu https://www.w3.org/MarkUp/
+   https://www.w3.org/Protocols/HTTP/AsImplemented.html
+
+ TODO jatka, internet protokollan yhteys http protokollaan? https://www.w3.org/Protocols/HTTP/AsImplemented.html ? https://www.w3.org/Protocols/HTTP/HTTP2.html?
 
 
 \chapter{WEB-soketit}

@@ -100,7 +100,12 @@ yhdistetään prosessoimaan pyyntöjä.
 
 \chapter{Johdanto}
 \section{Tutkimuskysymys}
-MVC-arkkitehtuuri on saanut paljon huomiota web-sovelluskehyksien
+Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hyåpteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
+käytössä suurta otantaa aihealueeseen liittyviä ohjelmistoteknisiä ratkaisuja, vaan se keskittyy perusteellisesti pieneen otantaan. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
+MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla.Tutkimuksen päämääränä on joko vahvistaa tai kumota hypoteesi MVC:n soveltuvuudesta web-sovelluskehyksiin. 
+
+Sovellusarkkitehtuurin tarkoituksena on vastata millä tavalla ohjelmiston eri komponentit on organistoitu, rakennettu ja millä tavalla ne kommunikoivat keskenään. Se on ensimmäinen vaihe, kun ohjelmistoa lähdetään toteuttamaan. MVC on yksi tapa
+toteuttaa sovelluksen arkkitehtuuri.    \parencite[s. 148]{Sommerville} MVC-arkkitehtuuri on saanut paljon huomiota web-sovelluskehyksien
 toteutuksissa ja useat web-sovelluskehykset ovat luokiteltu
 MVC-pohjaisiksi sovelluskehyksiksi \parencite{mvcframeworks}. Se on kuitenkin alunperin
 tarkoitettu matalan tason käyttöliittymäsovellusten toteuttamiseen,
@@ -116,7 +121,7 @@ MVC:n olevan sellaisenaan sopimaton web-ohjelmointiin, vaikka
 Pyramidin toteutus onkin hyvin lähellä alkuperäistä MVC:tä
 \parencite{pyramid}. Django on vastaavasti toteutettu MVC:n pohjalta, mutta sen väitetään myös toteuttavan MVC hieman erilailla kuin MVC on alunperin tarkoitettu \parencite{django_mvc}.
 
-Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta siirrytään tutkimaan millä tavalla 
+Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta tutkitaan millä tavalla 
 MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
 eroaa alkuperäisestä MVC:n toteutuksesta \parencite{krasner}. Lisäksi pyritään toteuttamaan MVC alkuperäisen
 toteutuksen mukaan käyttäen Flask-sovelluskehystä. Havaintojen pohjalta
@@ -322,13 +327,7 @@ HTTP (Hypertext Transfer Protocol) on ollut Internetin WWW:n (World-Wide-Web) k�
 
 HTTP-viestit koostuvat asiakaspuolen viesteistä sekä palvelimen vastauksista asiakkaalle. Molemmat viestit sisältävät aloitusrivin, tyhjän tai useamman ylätunnisteen, tyhjän rivin (CRLF) ja mahdollisen lähetettävän viestin. CRLF määrittää rivinvaihdon ja palvelimen on pystyttävä protokollan datavirtaa luettaessa huomioimaan se. Esimerkiksi datavirtaa luettaessa viesti alkaa CRLF:llä se tulee hylätä. HTTP-viesti sisältää erilaisia ylätunnisteita (header), joiden avulla voidaan viedä ylimääräistä tietoa HTTP-pyynnöstä sekä asiakaspäästä. Ylätunnisteita voi olla useita yhdessä HTTP-viestissä. Viestikentässä (message-body) viedään tietyn viestin sisältö, jos sellainen on viestissä mukana \cite{httprequest}. Viestikentän olemassaolo määritetään pituuskentässä (Content-Length) tai kentässä, joka määrittää siirron enkoodauksen (Transfer-Encoding). HTTP-pyynnön ei tule sisältää viestikenttää, jos esimerkiksi enkoodauskenttä löytyy pyynnöstä ja se sisältää minkä tahansa muun arvon kuin "identity".  Seuraavaksi esitellään yleisellä tasolla esimerkki millä tavalla asiakas saa HTTP-palvelimelta vastauksena hyperteksti-dokumentin.
 
-Yhteyden luonnissa asiakas luo TCP-IP yhteyden serverin ja asiakkaan välille käyttäen osoitteessa määritettyä porttinumeroa. Jos porttinumeroa ei ole annettu HTTP olettaa porttinumeron olevan 80. Asiakas lähettää pyynnön, joka koostuu yhdestä rivistä ASCII-merkkejä. Pyyntö sisältää sanan "GET", välilyönnin sekä ja dokumentin osoitteen. Dokumentin osoitteen tulee olla yksi yhtenäinen sana. Kaikki ylimääräiset sanat, jotka löydetään dokumentin osoitteesta jätetään huomioimatta tai ne tulkitaan HTTP-spesifikaation mukaisesti \cite{w3http2}. Vastaus yksinkertaiseen GET-viestiin sisältää HTML-pohjaisen (Hypertext Markup language) ASCII datavirran. HTML-kieltä käytetään julkaisemaan hyperteksti-dokumenttejä WWW:ssä. HTML:n pohjana on käytetty SGML:ää, joka on standardi määrittelemään merkkauskieliä \cite{sgml}. HTML-dokumentit ovat siis SGML-dokumentteja, jotka toteuttavat SGML:n määritelmät.  Hyvin toteutetut asiakassovellukset lukevat koko dokumentin mahdollisimman nopeasti, jolloin käyttäjän laukaisemat toiminnot, toteutetaan vasta dokumentin prosessoinnin jälkeen. TCP/IP yhteys suljetaan palvelimen toimesta kun koko dokumentti on siirretty.
-
-
- jatkuu https://www.w3.org/MarkUp/
-   https://www.w3.org/Protocols/HTTP/AsImplemented.html
-
- TODO jatka, internet protokollan yhteys http protokollaan? https://www.w3.org/Protocols/HTTP/AsImplemented.html ? https://www.w3.org/Protocols/HTTP/HTTP2.html?
+Yhteyden luonnissa asiakas luo TCP-IP yhteyden serverin ja asiakkaan välille käyttäen osoitteessa määritettyä porttinumeroa. Jos porttinumeroa ei ole annettu HTTP olettaa porttinumeron olevan 80. Asiakas lähettää pyynnön, joka koostuu yhdestä rivistä ASCII-merkkejä. Pyyntö sisältää sanan "GET", välilyönnin sekä ja dokumentin osoitteen. Dokumentin osoitteen tulee olla yksi yhtenäinen sana. Kaikki ylimääräiset sanat, jotka löydetään dokumentin osoitteesta jätetään huomioimatta tai ne tulkitaan HTTP-spesifikaation mukaisesti \cite{w3http2}. Vastaus yksinkertaiseen GET-viestiin sisältää HTML-pohjaisen (Hypertext Markup language) ASCII datavirran. HTML-kieltä käytetään julkaisemaan hyperteksti-dokumenttejä WWW:ssä. HTML:n pohjana on käytetty SGML:ää, joka on standardi määrittelemään merkkauskieliä \cite{sgml}. HTML-dokumentit ovat siis SGML-dokumentteja, jotka toteuttavat SGML:n määritelmät.  Hyvin toteutetut asiakassovellukset lukevat koko dokumentin mahdollisimman nopeasti, jolloin käyttäjän laukaisemat toiminnot, toteutetaan vasta dokumentin prosessoinnin jälkeen. TCP/IP yhteys suljetaan palvelimen toimesta kun koko dokumentti on siirretty \cite{w3http}
 
 
 \chapter{WEB-soketit}
@@ -346,8 +345,10 @@ Sovelluskehityksellä tarkoitetaan koko ohjelmiston elinkaaren mittaista tuotant
 \section{Sovellukset}
 Ohjelmistot ovat abstrakteja ja aineettomia. Ne eivät noudata mitään fysiikan lakeja eivätkä ne koostu mistään materiasta tai tuotantoprosessista. Tämä tekee ohjelmistokehityksestä helppoa ja vapaata, koska sille ei ole asetettu mitään luonnollisia esteitä. Rajojen puuttuminen johtaa myös siihen, että ne voivat olla usein erittäin monimutkaisia, vaikeita ymmärtää ja kallista muuttaa. Ohjelmistojen tyypit vaihtelevat sulautetuista järjestelmistä maailmanlaajuisiin tietojärjestelmiin. Tietojärjestelmän kehittäminen organisaatiolle eroaa täysin esimerkiksi ohjainlaitteen ohjelmoinnista. Näitä kahta taas ei voi verrata esimerkiksi grafiikkapohjaiseen pelikehitykseen. Kuitenkin kaikki nämä tarvitsevat ohjelmistokehitystä \parencite{Sommenville}. Ohjelmistot eivät ole pelkästään tietokoneohjelmia vaan ne koostuvat ohjelman lisäksi dokumentaatioista sekä erilaisista konfiguraatioista, joilla määritellään ohjelma toimimaan tietyllä tavalla. Dokumentaatio sisältää usein tiedon ohjelmiston rakanteesta sekä käyttäjille suunnatun ohjeen miten sovellusta hallitaan ja käytetään \parencite{Sommerville} section 1.1. Testaus ja sen automaatio on myös suuren osana ohjelmistoja nykypäivänä <lähde tähän pohjaamaan väitettä>. 
 
+Sommenville (1,1) jakaa ammatilaisten kehittämät ohjelmistotuotteet kahteen kategoriaan: geneeriset tuotteet ja räätälöidyt tuotteet. Geneeristen tuotteiden määritelmät ovat sitä kehittävän organisaation hallinnassa. Päätäntävalta ominaisuuksista on siis kehittävällä osapuolella. Räätälöidyissä tuotteissa tilaaja määrittelee ohjelmiston tarkoituksen ja sen ominaisuudet. Näitä kahta tyyppiä voidaan kuitenkin yhdistää, mikä on varsin yleistä ohjelmistoille. Pohjana voi olla geneerinen tuote, johon toteutetaan erilaisia tasoja, jotka ovat määritely tilaajan toimesta \parencite{Sommerville}
 
-Sommenville (1,1) jakaa ammatilaisten kehittämät ohjelmistotuotteet kahteen kategoriaan: geneeriset tuotteet ja räätälöidyt tuotteet. Geneeristen tuotteiden määritelmät ovat sitä kehittävän organisaation hallinnassa. Päätäntävalta ominaisuuksista on siis kehittävällä osapuolella. Räätälöidyissä tuotteissa tilaaja määrittelee ohjelmiston tarkoituksen ja sen ominaisuudet. Näitä kahta tyyppiä voidaan kuitenkin yhdistää, mikä on varsin yleistä ohjelmistoille. Pohjana voi olla geneerinen tuote, johon toteutetaan erilaisia tasoja, jotka ovat määritely tilaajan toimesta \parencite{Sommerville} 
+\section{Sovelluksien arkkitehtuurit}
+JATKUU 
 
 \chapter{Web-sovellukset}
 World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksessä. Alunperin Web oli yliopistojen käytössä datan tallennusta varten ja sillä oli hyvin vähän vaikutusta sovelluksiin. Webin ympärille kirjoitetut sovellukset olivat käynnissä paikallisissa tietokoneissa ja niihin oli vain pääsy organisaation sisällä. 2000-luvun alussa Web alkoi kehittyä laajemmin. Selaimiin lisätyt ominaisuudet mahdollistivat Web-pohjaisten sovellusten käytön siten, että erillisen sovellukselle tarkoitetun käyttöliittymän sijasta voitiin käyttää selainta. Tämä johti monien erilaisten sovelluksien kehitykseen, jotka tarjosivat innovatiivisia palveluita käytettäväksi selaimen kautta. Webin kehityksen myötä selaimet kehittyivät siten, että ne pystyivät ajamaan myös pieniä sovelluksia paikallisesti. Tämä muutti organisaatioiden sekä liiketoiminnan tapoja käyttää sovelluksia. Sen sijaan, että sovellukset olisi asennettu käyttäjien tietokoneille, ne voitiin asentaa suoraan yhdelle web-palvelimelle. Tämä laski myös kustannuksia tehdä muutoksia sovelluksiin. Suurin osa on liiketoimien harjottajista on siirtynyt käyttämään web-pohjaisia sovelluksia siellä missä se on mahdollista \cite{Sommerville}.

@@ -352,7 +352,7 @@ Arkkitehtuuri määrittää sovelluksen rakenteen, organisoinnin sekä komponent
 
 \newpage
 
-Sommervillen kirjassa esitellään esimerkkikaavio sovelluksen arkkitehtuurista. Kaaviossa esitellään arkkitehtuurimalli siitä miten pakkausrobottisovellus tulisi toteuttaa.
+Arkkitehtuurit kuvataan usein kaavioilla, joissa komponentit kuvataan lyhyesti nimetyillä lohkoilla. Jokainen lohko esittää yksittäistä komponenttia. Lohkojen sisällä olevat lohkot kuvaavat komponentin hajautusta useampaan alikomponenttiin. Nuolet komponenttejen välillä kuvaavat miten dataa ja signaaleja siirretään komponenttejen välillä. Kaavioiden avulla järjestelmän toteuttamiseen osallistuvat henkilöt ymmärtävät järjestelmän rakenteen korkealla tasolla \parencite[s. 150]{Sommerville}. Sommervillen kirjassa esitellään esimerkkikaavio sovelluksen arkkitehtuurista. Kaaviossa esitellään arkkitehtuurimalli siitä miten pakkausrobottisovellus tulisi toteuttaa.
 
 \begin{figure}[h]
 \centering
@@ -360,9 +360,10 @@ Sommervillen kirjassa esitellään esimerkkikaavio sovelluksen arkkitehtuurista.
 \caption{Pakkausrobotin arkktehtuurimalli \parencite[s.149]{Sommerville}}
 \end{figure}
 
-System architectures are often modeled using simple block diagram... JATKUU TÄSTÄ tähän väliin voisi selittää tuota kohtaa 15.2!
-
 Kaaviossa esitellään robottisovelluksen jako erilaisiin komponmentteihin. Robotti pystyy pakkaamaan kaikenlaisia tavaroita liukuhihnalta. Se käyttää Näkökomponenttia (Vision System) valitakseen erilaisia tavaroita ja tunnistamaan Identifiointi-komponentilla (Object Identification System) tavaroiden tyypin. Kun tavara on tunnistettu se annetaan Pakkaus-komponenteille prosessoitavaksi (Packing Selection System ja Packing System). Kun edellä mainituilla komponenteilla on hoidettu tavaran tunnistus sekä pakkaustyypin valinta, käsitellään tavara antamalla vastuu käsivarrelle (Arm Controller) ja kouralle (Gripper Controller), jotka kontrolloivat robotin fysiikka. Lisäksi robotilla tulee olla myös liukuhihnan hallintakomponentti (Conveyor Controller), jotta pystytään myös mahdollisesti pysäyttämään, hidastamaan ja nopeuttamaan linjaston kulkua \parencite[s.148]{Sommerville}
+
+The apparent contradictions between practice and architectural theory arise because there are two ways in which an architectural model of a program is used: JATKUU
+
 
 
 

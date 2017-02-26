@@ -382,6 +382,8 @@ Vaikka jokainen järjestelmä on uniikki, on niissä paljon yhteistä arkkitehtu
 
 ... Ja tähn jatkuu: The architecture of a software system may be based on a particular architectural pattern or style
 
+\pagebreak
+
 \section{Hajautetut järjestelmät}
 Sulautetut sekä henkilökohtaiselle tietokoneelle käyttöön tarkoitetut järjestelmät ovat tyyppillisesti rakennettu yhden prosessorin varaan. Niitä ei siis ole hajautettu useiden prosessorejen tai ytimien kesken toisin kuin monia suurempia järjestelmiä. Hajautuksen suunnittelu on yksi avaintekijöitä suunnittellessa arkkitehtuuria, jossa järjestelmä on niin suuri, että sen halutaan hajauttaa useampaan alijärjestelmään. Käytännössä lähes kaikki suuret tietokonepohjaiset järjestelmät ovat hajautettuja. Ne näyttäytyvät loppukäyttäjälle kuitenkin yhtenä yhtenäisenä järjestelmänä. Hajautetuissa järjestelmissä komponentit voivat olla useilla eri tietokoneilla. Tällöin tulee erityisesti ottaa huomioon niiden välinen kommunikointi, joka hoidetaan verkon yli \parencite[s. 480]{Sommerville}. Coulouris \parencite{Coulouris} esittelee seuraavat hyödyt hajautetuista järjestelmistä:
 
@@ -402,10 +404,29 @@ Hajautetut järjestelmät ovat yleensä monimutkaisempia kuin yhden prosessorin 
 
 Internetin päälle rakennetut hajautetut järjestelmät käyttävät asiakas-palvelin arkkitehtuuria. Asiakas-palvelin järjestelmissä käyttäjä kommunikoi paikallisesti omalle koneelleen asennetun sovelluksen avulla. Tällaisia ovat esimerkiksi selaimet ja erilaiset sovellukset älypuhelimessa. Kommunikoinnissa käyttäjän sovellus ottaa yhteyden verkon yli toiseen sovellukseen, joka on käynnissä toisella tietokoneella (palvelin). Palvelin tarjoaa erilaisia palveluita, kuten esimerkiksi web-sivuja. Asiakas-palvelin arkkitehtuuri on hyvin geneerinen ja yleisesti käytössä oleva arkkitehtuuri. Se ei rajoitu sovelluksiin, jotka on hajautettu useille tietokoneille, vaan sitä voidaan käyttää myös arkkitehtuurina jakamaan sovellukset loogisesti yhdellä tietokoneella \parencite[s.488]{Sommerville}.
 
-JATKA 161. MYÖS MVC:tä sivuuttava osio on hyvä käydä läpi s. 156
+Järjestelmät, jotka käyttävät asiakas-palvelin arkkitehtuuria, koostuvat useista palveluista. Palvelut on usein jaettu myös usealle tietokoneelle. Sommerville jakaa asiakas-palvelin arkkitehtuurin mallin kolmeen osaan \parencite[s. 161]{Sommerville}: 
 
-MVC ja CLient-server arkkitehtuurin yhdistäminen ongelmana? <-- tutkimus kysymykseen ja päätökseen hyvä?
+\begin{enumerate}  
+\item Useita servereita, jotka tarjoavat palveluita muille komponenteille. Tällaisia ovat esimeriksi tulostin-palvelut tai tiedostojenhallintaan erikoistuneet tiedosto-palvelut.
+\item Useita asiakasjärjestelmiä, jotka kutsuvat palvelimien tarjoamia palveluita. Normaalisti on useita asiakasjärjestelmän ilmentymiä, jotka käyttävät rinnakkain palvelimia.
+\item Verkko, jonka kautta datan siirto palvelimien ja asiakasjärjestelmien välillä hoidetaan. Suurin osa asiakas-palvein järjestelmistä on hajautettu ja ne luovat yhteydet käyttäen apunaan Internet prokotollia.
+\end{enumerate}
 
+Tärkeimpänä etuna asiakas-palvelin arkkitehtuurissa on komponenttejen itsenäisyys sekä hajautus. Palveluja ja palvelimia voidaan vaihtaa tai muokata ilman, että vaikutetaan muihin järjestelmän osiin. Palvelimen ei myöskään tarvitse tietää asiakassovelluksen identiteetistä mitään. Asiakassovellukselle riittää yleensä vain palvelimien ja niissä ajettavien palvelujen nimet. Asiakas kutsuu palvelimen tarjoamaa palvelua käskemällä tätä suorittamaan halutun ohjelmakoodin käyttäen apunaan esimerkiksi HTTP-protokollan trajoamaa viestiä, jota käytetään WWW:ssä. Pääasiallisesti asiakas lähettää pyynnön palvelimelle ja odottaa kunnes palvelin vastaa viestiin.
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{clientserver.png}
+\caption{Sommervillen esimerkki elokuvakirjaston asiakas-palvelin arkkitehtuurista \parencite[s.162]{Sommerville}}
+\end{figure}
+
+Ylläesitetyssä mallissa esitellään monen käyttäjän web-pohjainen järjestelmä elokuvien ja kuvien tarjontan. Järjestelmässä useat palvelimet hallitsevat ja tarjoavat erityyppisiä multimediatiedostoja. Videotiedostojen tarjonta tulee olla erittäin nopeaa ja synkornista. Jotta tähän pystytään tulee videotiedosto pakata pienemmäksi ja tarjota pienemmällä resoluutiolla. Lisäksi videoiden formaatit voivat vaihdella, jolloin videoille tarkoitetun palvelimen tulee pystyä tarjoamaan palvelua, jossa erilaisia videoformaatteja voidaan pakata ja purkaa. Kuvia on kuitenkin sopivaa tarjota suurilla resoluutioilla, joten niiden käsittely voidaan hoitaa erillisellä palvelimella. Näin ei tarvitse kuormittaa yhtä palvelinta kahdella toisistaan poikkeavalla prosessilla. Catalogin tulee pystyä käsittelemään useita erilaisia kyselyitä sekä tarjota yhteyksiä järjestelmiin, jotka hallitsevat esimerkiksi elokuvien tietoja sekä valokuvien myyntiä. Asiakassovellus on yksinkertainen käyttöiittymä, joka on rakennettu web-selaimeen ottamaan yhteyksiä palveluihin \parencite[s. 163]{Sommerville}. 
+
+\pagebreak
+
+
+\section{MVC}
+ JATKA 161. MYÖS MVC:tä sivuuttava osio on hyvä käydä läpi s. 156 MVC kuvattu hieman erilailla, kerro tähän ero. Tutkimuskysymykseen pohjaa? "Sommerville esittelee MVC:n myös poikkeavana alkuperäisestä mvc:stä jossa modeli ilmoittaa itsestään automaattiseti".
 
 
 \section{Sovellusarkkitehtuur (kerro erityisesti sovellusarkkitehtuureista jos löytyy tietoa sommervillen kirjasta}

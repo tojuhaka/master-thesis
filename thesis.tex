@@ -100,7 +100,7 @@ yhdistetään prosessoimaan pyyntöjä.
 
 \chapter{Johdanto}
 \section{Tutkimuskysymys}
-Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hyåpteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
+Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
 käytössä suurta otantaa aihealueeseen liittyviä ohjelmistoteknisiä ratkaisuja, vaan se keskittyy perusteellisesti pieneen otantaan. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
 MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla.Tutkimuksen päämääränä on joko vahvistaa tai kumota hypoteesi MVC:n soveltuvuudesta web-sovelluskehyksiin. 
 
@@ -119,13 +119,34 @@ samalla esittelee alkuperäisen MVC:n toteuttamisen ongelmana. Tämä johtuu web
 kyseenalaistavat MVC-arkkitehtuurin toteutuksen Pyramidissa ja uskovat
 MVC:n olevan sellaisenaan sopimaton web-ohjelmointiin, vaikka
 Pyramidin toteutus onkin hyvin lähellä alkuperäistä MVC:tä
-\parencite{pyramid}. Django on vastaavasti toteutettu MVC:n pohjalta, mutta sen väitetään myös toteuttavan MVC hieman erilailla kuin MVC on alunperin tarkoitettu \parencite{django_mvc}.
+\parencite{pyramid}. Django on vastaavasti toteutettu MVC:n pohjalta, mutta sen väitetään
+myös toteuttavan MVC hieman erilailla kuin MVC on alunperin tarkoitettu \parencite{django_mvc}.
+Sommerville \parencite[s. 157]{Sommerville} esittelee MVC:n yhtenä arkkitehtuurimallina, jonka hän luokittelee
+ kerrosarkkitehtuurien (Layered architecture) joukkoon. Sommervillen esittelemä  MVC-malli kuitenkin poikkeaa Krasnerin \parencite{krasner} alkuperäisestä MVC-mallista. Alla esitetään Krasnerin määrittelemä alkuperäinen MVC-malli sekä Sommervillen määrittelemä MVC-malli:
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.6]{krasner_mvc.jpg}
+\caption{\cite[s. 5]{krasner_desc}}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.50]{mvc.png}
+\caption{\parencite[s.162]{Sommerville}}
+\end{figure}
+
+Krasnerin esittelemässä MVC:ssä Malliin (Model) on rekisteröity Ohjaimia (Controller) ja Näkymiä (View). Näin Malli pystyy kommunikoimaan muutoksistaan suoraan Ohjaimelle sekä Näkymälle.
+Sommerville esittelee MVC-mallin web-sovelluksen näkökulmasta, jossa kommunikointi komponettejen suhteen toteutetaan erilailla. Sommervillen mallissa tieto käyttäjän toiminnoista voi tulla 
+Näkymältä itseltään. Käyttäjän pyynnöt voitat tulla niin Ohjaimelle kuin Näkymällekin toisinkuin Krasnerin mallissa, jossa käyttäjän toiminnot tulevat ainoastaan Ohjaimelle.
+Lisäksi Sommervillen mallissa Malli ei ole suoraan yhteydessä Ohjaimeen. 
+
 
 Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta tutkitaan millä tavalla 
 MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
 eroaa alkuperäisestä MVC:n toteutuksesta \parencite{krasner}. Lisäksi pyritään toteuttamaan MVC alkuperäisen
 toteutuksen mukaan käyttäen Flask-sovelluskehystä. Havaintojen pohjalta
-selvitetään voidaanko MVC tuoda sellaisenaan web-sovelluskehykseen.
+selvitetään voidaanko Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksessä.
 
 \chapter{Tutkimuksen Rakenne}
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
@@ -380,7 +401,7 @@ Arkkitehtuurin suunnittelu on luova prosessi, jossa toteutetaan halutun järjest
 
 Vaikka jokainen järjestelmä on uniikki, on niissä paljon yhteistä arkkitehtuurin suhteen. Esimerkiksi tuotteistetut sovellukset rakennetaan yhden pohja-arkkitehtuurin ympärille, josta toteutetaan erilaisia variaatioita vastaamaan erilaisiin vaatimuksiin. Arkkitehtuuria suunnitellessa tulee päättää mitä osia arkkitehtuurista voidaan käyttää uudelleen ja mitkä ovat tarkoitettuja vain tietylle asiakasvaatimukselle \parencite[s. 151]{Sommerville}.
 
-... Ja tähn jatkuu: The architecture of a software system may be based on a particular architectural pattern or style
+... Ja tähn jatkuu: The architecture of a software system may be based on a particular architectural pattern or style TODO jatka tätä
 
 \pagebreak
 
@@ -422,24 +443,6 @@ Tärkeimpänä etuna asiakas-palvelin arkkitehtuurissa on komponenttejen itsenä
 
 Ylläesitetyssä mallissa esitellään monen käyttäjän web-pohjainen järjestelmä elokuvien ja kuvien tarjontan. Järjestelmässä useat palvelimet hallitsevat ja tarjoavat erityyppisiä multimediatiedostoja. Videotiedostojen tarjonta tulee olla erittäin nopeaa ja synkornista. Jotta tähän pystytään tulee videotiedosto pakata pienemmäksi ja tarjota pienemmällä resoluutiolla. Lisäksi videoiden formaatit voivat vaihdella, jolloin videoille tarkoitetun palvelimen tulee pystyä tarjoamaan palvelua, jossa erilaisia videoformaatteja voidaan pakata ja purkaa. Kuvia on kuitenkin sopivaa tarjota suurilla resoluutioilla, joten niiden käsittely voidaan hoitaa erillisellä palvelimella. Näin ei tarvitse kuormittaa yhtä palvelinta kahdella toisistaan poikkeavalla prosessilla. Catalogin tulee pystyä käsittelemään useita erilaisia kyselyitä sekä tarjota yhteyksiä järjestelmiin, jotka hallitsevat esimerkiksi elokuvien tietoja sekä valokuvien myyntiä. Asiakassovellus on yksinkertainen käyttöiittymä, joka on rakennettu web-selaimeen ottamaan yhteyksiä palveluihin \parencite[s. 163]{Sommerville}. 
 
-\pagebreak
-
-
-\section{MVC}
- JATKA 161. MYÖS MVC:tä sivuuttava osio on hyvä käydä läpi s. 156 MVC kuvattu hieman erilailla, kerro tähän ero. Tutkimuskysymykseen pohjaa? "Sommerville esittelee MVC:n myös poikkeavana alkuperäisestä mvc:stä jossa modeli ilmoittaa itsestään automaattiseti".
-
-
-\section{Sovellusarkkitehtuur (kerro erityisesti sovellusarkkitehtuureista jos löytyy tietoa sommervillen kirjasta}
-
-
-
-
-
-
-
-
-
-
 
 \chapter{Web-sovellukset}
 World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksessä. Alunperin Web oli yliopistojen käytössä datan tallennusta varten ja sillä oli hyvin vähän vaikutusta sovelluksiin. Webin ympärille kirjoitetut sovellukset olivat käynnissä paikallisissa tietokoneissa ja niihin oli vain pääsy organisaation sisällä. 2000-luvun alussa Web alkoi kehittyä laajemmin. Selaimiin lisätyt ominaisuudet mahdollistivat Web-pohjaisten sovellusten käytön siten, että erillisen sovellukselle tarkoitetun käyttöliittymän sijasta voitiin käyttää selainta. Tämä johti monien erilaisten sovelluksien kehitykseen, jotka tarjosivat innovatiivisia palveluita käytettäväksi selaimen kautta. Webin kehityksen myötä selaimet kehittyivät siten, että ne pystyivät ajamaan myös pieniä sovelluksia paikallisesti. Tämä muutti organisaatioiden sekä liiketoiminnan tapoja käyttää sovelluksia. Sen sijaan, että sovellukset olisi asennettu käyttäjien tietokoneille, ne voitiin asentaa suoraan yhdelle web-palvelimelle. Tämä laski myös kustannuksia tehdä muutoksia sovelluksiin. Suurin osa on liiketoimien harjottajista on siirtynyt käyttämään web-pohjaisia sovelluksia siellä missä se on mahdollista \parencite[s.8]{Sommerville}.
@@ -463,7 +466,7 @@ Ohjaimen tarkoitus on ottaa vastaan syötteitä käyttäjältä käskien mallia 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.85]{krasner_mvc.jpg}
-\caption{Model-View-Controller State and Message Sending \cite[s. 5]{krasner_desc}}
+\caption{Model-View-Controller State and Message Sending \parencite[s. 5]{krasner_desc}}
 \end{figure} 
 Jokaisella komponentilla on oma rajattu tehtävänsä ja ohjelmakoodi tulee jakaa näiden komponentien kesken. Jotta MVC:tä pystyttäisiin käyttämään
 tehokkaasti, tulee ymmärtää komponenttien työnjako sekä se kuinka komponentit kommunikoivat keskenään \parencite{burbeck}. 

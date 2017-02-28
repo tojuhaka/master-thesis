@@ -372,7 +372,6 @@ Arkkitehtuuri määrittää sovelluksen rakenteen, organisoinnin sekä komponent
 
 Arkkitehtuurin mallinnusta voidaan käyttää kahdella hyvin erilaisella tavalla. Sitä voidaan käyttää auttamaan kommunikoinnissa osakkaiden sekä suunnittelijoiden kanssa, jolloin järjestelmän yksityiskohdat piilotetaan abstraktejen komponenttejen taakse arkkitehtuurikaaviossa. Yksinkertaisen kaavion avulla pystytään keskustelemaan useiden ihmisten kanssa siten, että yksityiskohdat eivät häiritse kokonaisuuden suunnittelua. Tällöin myös projektiin osallistuvien ihmisten ei tarvitse olla teknologioista tietoisia. Kaavion avulla myös projektin johto näkee avainkomponentit ja pystyy tämän avulla jakamaan tehtäviä kehittäjille. Toinen tapa on käyttää arkkitehtuurin mallinnusta dokumentaationa arkkitehtuurille, joka on jo etukäteen suunniteltu. Tällaisella on tarkoitus kuvata koko järjestelmä yksityiskohtaisemmin. Tällöin esitellään komponentit, niiden yhteydet toisiinsa sekä rajapinnat. Monissa projekteissa arkkitehtuurin kuvaus jää usein hyvin abstraktille tasolle, koska aina ei katsota yksityiskohtaisen mallinnuksen antavan tarpeeksi lisäarvoa \parencite[s. 150]{Sommerville}.
 
-
 Arkkitehtuurit kuvataan usein kaavioilla, joissa komponentit kuvataan lyhyesti nimetyillä lohkoilla. Jokainen lohko esittää yksittäistä komponenttia. Lohkojen sisällä olevat lohkot kuvaavat komponentin hajautusta useampaan alikomponenttiin. Nuolet komponenttejen välillä kuvaavat miten dataa ja signaaleja siirretään komponenttejen välillä. Kaavioiden avulla järjestelmän toteuttamiseen osallistuvat henkilöt ymmärtävät järjestelmän rakenteen korkealla tasolla \parencite[s. 150]{Sommerville}. Sommervillen kirjassa esitellään esimerkkikaavio sovelluksen arkkitehtuurista. Kaaviossa esitellään arkkitehtuurimalli siitä miten pakkausrobottisovellus tulisi toteuttaa.
 
 \begin{figure}[h]
@@ -399,7 +398,16 @@ Arkkitehtuurin suunnittelu on luova prosessi, jossa toteutetaan halutun järjest
 \item Miten järjestelmän arkkitehtuuri dokumentoidaan?
 \end{enumerate}
 
-Vaikka jokainen järjestelmä on uniikki, on niissä paljon yhteistä arkkitehtuurin suhteen. Esimerkiksi tuotteistetut sovellukset rakennetaan yhden pohja-arkkitehtuurin ympärille, josta toteutetaan erilaisia variaatioita vastaamaan erilaisiin vaatimuksiin. Arkkitehtuuria suunnitellessa tulee päättää mitä osia arkkitehtuurista voidaan käyttää uudelleen ja mitkä ovat tarkoitettuja vain tietylle asiakasvaatimukselle \parencite[s. 151]{Sommerville}.
+Vaikka jokainen järjestelmä on uniikki, on niissä paljon yhteistä arkkitehtuurin suhteen. Esimerkiksi tuotteistetut sovellukset rakennetaan yhden pohja-arkkitehtuurin ympärille, josta toteutetaan erilaisia variaatioita vastaamaan erilaisiin vaatimuksiin. Arkkitehtuuria suunnitellessa tulee päättää mitä osia arkkitehtuurista voidaan käyttää uudelleen ja mitkä ovat tarkoitettuja vain tietylle asiakasvaatimukselle \parencite[s. 151]{Sommerville}. Järjestelmän arkkitehtuuri voi pohjautua johonkin tiettyyn malliin tai tyyliin. Arkkitehtuurimalli on kuvaus järjestelmän teknisestä organisoinnista. Tällaisia voivat olla esimerkiksi asiakas-palvelin arkkitehtuuri tai kerrosarkkitehtuuri, johon MVC kuuluu. Arkkitehtuurin valinnassa tulee ottaa huomioon erityisesti järjestelmän vaatimukset. Sommerville esittelee viisi pääarvoa, joiden perusteella arkkitehtuurin valintaa voidaan ohjata:
+
+Jatka arvoista!
+\begin{desclist}
+\item[Suorituskyky] Avaa yhteyden
+\item[Tietoturva] Sulkee yhteyden
+\item[Turvallisuus] Lähettää dataa
+\item[Saatavuus] Ottaa vastaan dataa
+\item[Ylläpito] Palauttaa yhteyden tilan
+\end{desclist}
 
 ... Ja tähn jatkuu: The architecture of a software system may be based on a particular architectural pattern or style TODO jatka tätä
 

@@ -398,18 +398,17 @@ Arkkitehtuurin suunnittelu on luova prosessi, jossa toteutetaan halutun järjest
 \item Miten järjestelmän arkkitehtuuri dokumentoidaan?
 \end{enumerate}
 
-Vaikka jokainen järjestelmä on uniikki, on niissä paljon yhteistä arkkitehtuurin suhteen. Esimerkiksi tuotteistetut sovellukset rakennetaan yhden pohja-arkkitehtuurin ympärille, josta toteutetaan erilaisia variaatioita vastaamaan erilaisiin vaatimuksiin. Arkkitehtuuria suunnitellessa tulee päättää mitä osia arkkitehtuurista voidaan käyttää uudelleen ja mitkä ovat tarkoitettuja vain tietylle asiakasvaatimukselle \parencite[s. 151]{Sommerville}. Järjestelmän arkkitehtuuri voi pohjautua johonkin tiettyyn malliin tai tyyliin. Arkkitehtuurimalli on kuvaus järjestelmän teknisestä organisoinnista. Tällaisia voivat olla esimerkiksi asiakas-palvelin arkkitehtuuri tai kerrosarkkitehtuuri, johon MVC kuuluu. Arkkitehtuurin valinnassa tulee ottaa huomioon erityisesti järjestelmän vaatimukset. Sommerville esittelee viisi pääarvoa, joiden perusteella arkkitehtuurin valintaa voidaan ohjata:
+Vaikka jokainen järjestelmä on uniikki, on niissä paljon yhteistä arkkitehtuurin suhteen. Esimerkiksi tuotteistetut sovellukset rakennetaan yhden pohja-arkkitehtuurin ympärille, josta toteutetaan erilaisia variaatioita vastaamaan erilaisiin vaatimuksiin. Arkkitehtuuria suunnitellessa tulee päättää mitä osia arkkitehtuurista voidaan käyttää uudelleen ja mitkä ovat tarkoitettuja vain tietylle asiakasvaatimukselle \parencite[s. 151]{Sommerville}. Järjestelmän arkkitehtuuri voi pohjautua johonkin tiettyyn malliin tai tyyliin. Arkkitehtuurimalli on kuvaus järjestelmän teknisestä organisoinnista. Tällaisia voivat olla esimerkiksi asiakas-palvelin arkkitehtuuri tai kerrosarkkitehtuuri, johon MVC kuuluu. Arkkitehtuurin valinnassa tulee ottaa huomioon erityisesti järjestelmän vaatimukset. Sommerville \parencite[s.152]{Sommerville} esittelee viisi pääarvoa, joiden perusteella arkkitehtuurin valintaa voidaan ohjata:
 
-Jatka arvoista!
 \begin{desclist}
-\item[Suorituskyky] Avaa yhteyden
-\item[Tietoturva] Sulkee yhteyden
-\item[Turvallisuus] Lähettää dataa
-\item[Saatavuus] Ottaa vastaan dataa
-\item[Ylläpito] Palauttaa yhteyden tilan
+\item[Suorituskyky] Jos suorituskyky on suurimpana vaatimuksena, tulee kriittisimmät operaatiot olla samalla tietokoneella ja arkkitehtuuri jaettu mahdollisimman suuriin kompoentteihin, jotta kommunikaatio olisi mahdollisimman suoraviivaista. Useiden pienten komponenttejen hajauttaminen usealla tietokoneelle tuo usein ylimääräistä viestintää komponenttejen välillä, mikä hidastaa komponenttejen yhteisiä operaatioita. 
+\item[Tietoturva] Jos tietoturva on suurimpana vaatimuksena, tulee käyttää kerroarkkitehtuuria, jossa kaikkein kriittisimmät toiminnot on piilotettu alimpiin kerroksiin. Uloimmissa kerroksissa tulee olla tarkat datan validoinnit. 
+\item[Turvallisuus] Jos tuvallisuuus on suurimpana vaatimuksena, tulee turvallisuuteen liittyvien operaatioiden olla rakennettuna yhden tai mahdollisimman harvan komponentin varaan. Tämän avulla pystytään järjestelmä suojaamaan mahdollisilta järjestelmävirheiltä helposti ja turvallisesti.
+\item[Saatavuus] Jos saatavuus on suurimpana vaatimuksena, tulee arkkitehtuuri suunnitella siten, että komponentit tekevät mahdollisimman vähän kriittisiä komponentteja. Tuolloin komponentteja voidaan päivittää ja korvata ilman, että itse järjestelmää tarvitsee pysäyttää. 
+\item[Ylläpito] Jos ylläpito on suurimpana vaatimuksena, tulee komponenttejen olla mahdolllisimman itsenäisiä. Datan tuottajien tulee olla erossa datan käyttäjistä ja jaettuja datamalleja tulee välttää.
 \end{desclist}
 
-... Ja tähn jatkuu: The architecture of a software system may be based on a particular architectural pattern or style TODO jatka tätä
+katla Obviously there is potential conflict between some of these architectures. For example, using large components improves  s. 152
 
 \pagebreak
 

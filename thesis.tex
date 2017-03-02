@@ -408,7 +408,7 @@ Vaikka jokainen järjestelmä on uniikki, on niissä paljon yhteistä arkkitehtu
 \item[Ylläpito] Jos ylläpito on suurimpana vaatimuksena, tulee komponenttejen olla mahdolllisimman itsenäisiä. Datan tuottajien tulee olla erossa datan käyttäjistä ja jaettuja datamalleja tulee välttää.
 \end{desclist}
 
-katla Obviously there is potential conflict between some of these architectures. For example, using large components improves  s. 152
+Yllä esitellyissä arkkitehtuureissa voi kuitenkin olla ristiriitoja. Esimerkiksi suuret komponentit parantavat suorituskykyä  ja pienet parantavat järjestelmän saatavuutta. Järjestelmän vaatimukset voivat vaatia kumpaakin, jolloin on tehtävä kompromissieja. Usein kompromissit pystytään saavuttamaan käyttämällä useitai arkkitehtuureja järjestelmän eri osissa \parencite[s.152]{Sommerville}. 
 
 \pagebreak
 
@@ -450,6 +450,8 @@ Tärkeimpänä etuna asiakas-palvelin arkkitehtuurissa on komponenttejen itsenä
 
 Ylläesitetyssä mallissa esitellään monen käyttäjän web-pohjainen järjestelmä elokuvien ja kuvien tarjontan. Järjestelmässä useat palvelimet hallitsevat ja tarjoavat erityyppisiä multimediatiedostoja. Videotiedostojen tarjonta tulee olla erittäin nopeaa ja synkornista. Jotta tähän pystytään tulee videotiedosto pakata pienemmäksi ja tarjota pienemmällä resoluutiolla. Lisäksi videoiden formaatit voivat vaihdella, jolloin videoille tarkoitetun palvelimen tulee pystyä tarjoamaan palvelua, jossa erilaisia videoformaatteja voidaan pakata ja purkaa. Kuvia on kuitenkin sopivaa tarjota suurilla resoluutioilla, joten niiden käsittely voidaan hoitaa erillisellä palvelimella. Näin ei tarvitse kuormittaa yhtä palvelinta kahdella toisistaan poikkeavalla prosessilla. Catalogin tulee pystyä käsittelemään useita erilaisia kyselyitä sekä tarjota yhteyksiä järjestelmiin, jotka hallitsevat esimerkiksi elokuvien tietoja sekä valokuvien myyntiä. Asiakassovellus on yksinkertainen käyttöiittymä, joka on rakennettu web-selaimeen ottamaan yhteyksiä palveluihin \parencite[s. 163]{Sommerville}. 
 
+\chapter{Sovelluskehykset}
+16.2 Application frameworks s 431 Sommerville
 
 \chapter{Web-sovellukset}
 World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksessä. Alunperin Web oli yliopistojen käytössä datan tallennusta varten ja sillä oli hyvin vähän vaikutusta sovelluksiin. Webin ympärille kirjoitetut sovellukset olivat käynnissä paikallisissa tietokoneissa ja niihin oli vain pääsy organisaation sisällä. 2000-luvun alussa Web alkoi kehittyä laajemmin. Selaimiin lisätyt ominaisuudet mahdollistivat Web-pohjaisten sovellusten käytön siten, että erillisen sovellukselle tarkoitetun käyttöliittymän sijasta voitiin käyttää selainta. Tämä johti monien erilaisten sovelluksien kehitykseen, jotka tarjosivat innovatiivisia palveluita käytettäväksi selaimen kautta. Webin kehityksen myötä selaimet kehittyivät siten, että ne pystyivät ajamaan myös pieniä sovelluksia paikallisesti. Tämä muutti organisaatioiden sekä liiketoiminnan tapoja käyttää sovelluksia. Sen sijaan, että sovellukset olisi asennettu käyttäjien tietokoneille, ne voitiin asentaa suoraan yhdelle web-palvelimelle. Tämä laski myös kustannuksia tehdä muutoksia sovelluksiin. Suurin osa on liiketoimien harjottajista on siirtynyt käyttämään web-pohjaisia sovelluksia siellä missä se on mahdollista \parencite[s.8]{Sommerville}.
@@ -716,7 +718,7 @@ ikkunointimallia"
 \caption{Kuva CounterView -näkymästä \cite{krasner_desc}}
 \end{figure}
 
-\chapter{Sovelluskehykset}
+\chapter{Python web-ovelluskehykset}
 Soveluskehykset ovat suosittuja, koska ne tarjoavat uudelleenkäytettäviä ratkaisuja erilaisiin ongelmiin sovelluskehityksessä. Toimialueesta riippumatta sovelluskehyksiä tulisi käyttää hyväksi kirjottaessa monimutkaisia sovelluksia. Sovelluskehys tuo sovellukseen tason, jossa sovelluksen osat on abstrahoitu erilaisilla luokilla sekä rajapinnoilla, joita voidaan käyttää uudelleen sovelluksen eri osissa. Sovelluskehys ei ole vain kokoelma rajapintoja ja kirjastoja\parencite{towards_framework}. Tärkein ero sovelluskehyksen ja kirjaston välillä on se, että kirjaston ohjelmakoodi kutsustaan aina
 kehittäjän toimestaa. Sovelluskehyksessä taas kehittäjän ohjelmakoodia kutsutaan aina sovelluskehyksen toimesta \parencite{pyramid_intr}.
 

@@ -96,6 +96,8 @@ yhdistetään prosessoimaan pyyntöjä.
 \item[Palvelin] on tietokoneohjelma, joka ottaa vastaan yhteyksiä ja lähettää takaisin vastauksia asiakas-sovellukselle. Jokainen ohjelma pystyy olemaan yhtäaikaa asiakas-sovellus ja palvelin \cite{http}. 
 \item[Olio-ohjelmointi] TODO: explain. 
 \item[Perintä] TODO: explain. 
+\item[Sessio] TODO: explain. 
+\item[AJAX] TODO: explain. 
 \end{thetermlist}
 
 \mainmatter
@@ -464,15 +466,20 @@ Schmidt \parencite{frameworks} jakaa sovelluskehyksien arkkitehtuurit kolmeen lu
 
 \end{desclist}
 
-Web-sovelluskehykset ovat nykyaikana yksi tärkeimpiä sovelluskehyksien alalajeja. Web-sovelluskehyksiä, jotka tarjoavat työkaluja dynaamisten web-sovellusten toteuttamiseen, on tarjolla paljon. Yleisesti näiden sovelluskehysten arkkitehtuurina on käytetty MVC-arkkitehtuuria. Tämän takia monet web-sovelluskehykset mielletään MVC-sovelluskehyksiksi, vaikka MVC esiteltiinkin 80-luvulla eri tarkoitukseen. Sovelluskehykset voivat koostua useista arkkitehtuurimalleista. Esimerkiksi MVC-sovelluskehys koostuu Tarkkailu-mallista (Observer Pattern), Strategia-mallista (Strategy Pattern), Yhdistelmä-mallista sekä monista muista, jotka esitellään (Design Patterns: Elements of Reusable Object-Oriented Software) -kirjassa \parencite{design_patterns}. 
+Web-sovelluskehykset ovat nykyaikana yksi tärkeimpiä sovelluskehyksien alalajeja. Web-sovelluskehyksiä, jotka tarjoavat työkaluja dynaamisten web-sovellusten toteuttamiseen, on tarjolla paljon. Yleisesti näiden sovelluskehysten arkkitehtuurina on käytetty MVC-arkkitehtuuria. Tämän takia monet web-sovelluskehykset mielletään MVC-sovelluskehyksiksi, vaikka MVC esiteltiinkin 80-luvulla eri tarkoitukseen. Sovelluskehykset voivat koostua useista arkkitehtuurimalleista. Esimerkiksi MVC-sovelluskehys koostuu Tarkkailu-mallista (Observer Pattern), Strategia-mallista (Strategy Pattern), Yhdistelmä-mallista sekä monista muista, jotka esitellään (Design Patterns: Elements of Reusable Object-Oriented Software) -kirjassa \parencite{design_patterns}. Vaikka jokainen web-sovelluskehys on totetettu hieman erilaisella tavalla, Sommerville esittelee viisi perusominaisuutta, jotka yleensä löytyvät web-sovelluskehyksistä:
 
-JATKA lyhyesti Design patterns kirjan arkkitehtuurikuvauksista jotka liittyvät MVC:hen? Tai sitten jatka tästä:
+\begin{desclist}
+\item[Tietoturvan] tukemiseksi sovelluskehykset tarjoavat luokkia auttamaan käyttäjänhallinnan toteutuksessa, siten että sovellukseen voidaan luoda erilaisia joituksia käyttäjille. 
+\item[Dynaamisten web-sivujen] luontiin tarjotaan työkaluja luoda Templateja (template), joiden pohjalta voidaan data näyttää eritavoilla selaimelle.
+\item[Tietokantatuki] auttaa kommunikoinnissa tietokannan kanssa. Web-ovelluskehykset eivät yleensä sisällä tietokantaa, mutta ne on usein rakennettu tietyn tietokantatyypin pohjalta. Niillä on erilaisia luokkia, joilla voidaan abstrahoida tietokannan käyttö.
+\item[Session-hallintaan] on useita työkaluja, joilla sessioita voidaan hallita sekä luoda.
+\item[Interaktiivisuus] on monien web-sovelluskehyksien etuna, jollloin voidaan toteuttaa entistä interaktiivisempia sovelluksia käyttäjille (esimerkiksi AJAX-teknologia).
+\end{desclist}
 
-Web application frameworks usually incorporate one or more specialized frameworks that support specific application features. Although each framework includes slightly different functionality, most web application frameworks support the following features:
-1. Security WAFs s.433
+JATKA:
+To extend a framework you do not change the framework code. Rather, you add concrete classes that inherit operations from abstract classes in the framework. In addition, you may have to define callbacks.
 
 
- 
 \chapter{Web-sovellukset}
 World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksessä. Alunperin Web oli yliopistojen käytössä datan tallennusta varten ja sillä oli hyvin vähän vaikutusta sovelluksiin. Webin ympärille kirjoitetut sovellukset olivat käynnissä paikallisissa tietokoneissa ja niihin oli vain pääsy organisaation sisällä. 2000-luvun alussa Web alkoi kehittyä laajemmin. Selaimiin lisätyt ominaisuudet mahdollistivat Web-pohjaisten sovellusten käytön siten, että erillisen sovellukselle tarkoitetun käyttöliittymän sijasta voitiin käyttää selainta. Tämä johti monien erilaisten sovelluksien kehitykseen, jotka tarjosivat innovatiivisia palveluita käytettäväksi selaimen kautta. Webin kehityksen myötä selaimet kehittyivät siten, että ne pystyivät ajamaan myös pieniä sovelluksia paikallisesti. Tämä muutti organisaatioiden sekä liiketoiminnan tapoja käyttää sovelluksia. Sen sijaan, että sovellukset olisi asennettu käyttäjien tietokoneille, ne voitiin asentaa suoraan yhdelle web-palvelimelle. Tämä laski myös kustannuksia tehdä muutoksia sovelluksiin. Suurin osa on liiketoimien harjottajista on siirtynyt käyttämään web-pohjaisia sovelluksia siellä missä se on mahdollista \parencite[s.8]{Sommerville}.
 

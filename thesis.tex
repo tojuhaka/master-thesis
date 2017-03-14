@@ -476,8 +476,11 @@ Web-sovelluskehykset ovat nykyaikana yksi tärkeimpiä sovelluskehyksien alalaje
 \item[Interaktiivisuus] on monien web-sovelluskehyksien etuna, jollloin voidaan toteuttaa entistä interaktiivisempia sovelluksia käyttäjille (esimerkiksi AJAX-teknologia).
 \end{desclist}
 
+Sovelluskehystä laajennettaessa ei itse sovelluskehyksen koodia muuteta, vaan sovellukseen lisätään luokkia, jotka perivät sovelluskehyksen määrittelemiä ominaisuuksia luokkatasolla. Lisäksi voidaan määritellä kutsu-funktioita (callbacks). Kutsu-funktioita voidaan viedä eteenpäin toiselle ohjelmakoodille kutsuttavaksi. Kutsu-funktioita ajetaan vastauksena ennaltamäärätyille operaatiolle, jotka sovelluskehys tunnistaa. Sovelluskehykseen luodut toiminnot ovat vastuussa sovelluksen kokonaisuudesta, siten että ne kutsuvat sovelluskehyksen käyttäjän määrittelemiä toiminnallisuuksia. Sovelluskehykseen toteutetut oliot ovat vastuussa erilaisten tapahtumien hallinnoinnista ja välittävät näitä tapahtumia edelleen käyttäjän tekemälle sovelluskoodille.  Tällaisia toimintoja kutsutaan koukku-funktioiksi (hook method). Niiden tehtävä voi olla esimerkiksi toteuttaa jokin tietty toiminallisuus aina silloin, kun tietokantaan tehdään kirjoitusoperaatioita \section[s. 433]{Sommerville}.
+
 JATKA:
-To extend a framework you do not change the framework code. Rather, you add concrete classes that inherit operations from abstract classes in the framework. In addition, you may have to define callbacks.
+. The application-specific functionality responds to the event in an appropriate way (Figure 16.6). For example, a framework will have a method that handles a mouse click from the environment. This method calls the hook method, which you must configure to call the appropriate application methods to handle the mouse click. 
+
 
 
 \chapter{Web-sovellukset}

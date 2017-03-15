@@ -465,7 +465,6 @@ Schmidt \parencite{frameworks} jakaa sovelluskehyksien arkkitehtuurit kolmeen lu
 \item[Liiketoiminta-sovelluskehykset (Enterprise application frameworks)] keskittyvät tiettyjen sovelluksien osa-alueisiin, kuten esimeriksi telekommunikaation tai laskutusjärjestelmien toteutukseen. Ne ovat erityisesti suunnattuja loppukäyttäjälle.
 
 \end{desclist}
-
 Web-sovelluskehykset ovat nykyaikana yksi tärkeimpiä sovelluskehyksien alalajeja. Web-sovelluskehyksiä, jotka tarjoavat työkaluja dynaamisten web-sovellusten toteuttamiseen, on tarjolla paljon. Yleisesti näiden sovelluskehysten arkkitehtuurina on käytetty MVC-arkkitehtuuria. Tämän takia monet web-sovelluskehykset mielletään MVC-sovelluskehyksiksi, vaikka MVC esiteltiinkin 80-luvulla eri tarkoitukseen. Sovelluskehykset voivat koostua useista arkkitehtuurimalleista. Esimerkiksi MVC-sovelluskehys koostuu Tarkkailu-mallista (Observer Pattern), Strategia-mallista (Strategy Pattern), Yhdistelmä-mallista sekä monista muista, jotka esitellään (Design Patterns: Elements of Reusable Object-Oriented Software) -kirjassa \parencite{design_patterns}. Vaikka jokainen web-sovelluskehys on totetettu hieman erilaisella tavalla, Sommerville esittelee viisi perusominaisuutta, jotka yleensä löytyvät web-sovelluskehyksistä:
 
 \begin{desclist}
@@ -476,10 +475,16 @@ Web-sovelluskehykset ovat nykyaikana yksi tärkeimpiä sovelluskehyksien alalaje
 \item[Interaktiivisuus] on monien web-sovelluskehyksien etuna, jollloin voidaan toteuttaa entistä interaktiivisempia sovelluksia käyttäjille (esimerkiksi AJAX-teknologia).
 \end{desclist}
 
-Sovelluskehystä laajennettaessa ei itse sovelluskehyksen koodia muuteta, vaan sovellukseen lisätään luokkia, jotka perivät sovelluskehyksen määrittelemiä ominaisuuksia luokkatasolla. Lisäksi voidaan määritellä kutsu-funktioita (callbacks). Kutsu-funktioita voidaan viedä eteenpäin toiselle ohjelmakoodille kutsuttavaksi. Kutsu-funktioita ajetaan vastauksena ennaltamäärätyille operaatiolle, jotka sovelluskehys tunnistaa. Sovelluskehykseen luodut toiminnot ovat vastuussa sovelluksen kokonaisuudesta, siten että ne kutsuvat sovelluskehyksen käyttäjän määrittelemiä toiminnallisuuksia. Sovelluskehykseen toteutetut oliot ovat vastuussa erilaisten tapahtumien hallinnoinnista ja välittävät näitä tapahtumia edelleen käyttäjän tekemälle sovelluskoodille.  Tällaisia toimintoja kutsutaan koukku-funktioiksi (hook method). Niiden tehtävä voi olla esimerkiksi toteuttaa jokin tietty toiminallisuus aina silloin, kun tietokantaan tehdään kirjoitusoperaatioita \section[s. 433]{Sommerville}.
+Sovelluskehystä laajennettaessa ei itse sovelluskehyksen koodia muuteta, vaan sovellukseen lisätään luokkia, jotka perivät sovelluskehyksen määrittelemiä ominaisuuksia luokkatasolla. Lisäksi voidaan määritellä kutsu-funktioita (callbacks). Kutsu-funktioita voidaan viedä eteenpäin toiselle ohjelmakoodille kutsuttavaksi. Kutsu-funktioita ajetaan vastauksena ennaltamäärätyille operaatiolle, jotka sovelluskehys tunnistaa. Sovelluskehykseen luodut toiminnot ovat vastuussa sovelluksen kokonaisuudesta, siten että ne kutsuvat sovelluskehyksen käyttäjän määrittelemiä toiminnallisuuksia. Sovelluskehykseen toteutetut oliot ovat vastuussa erilaisten tapahtumien hallinnoinnista ja välittävät näitä tapahtumia edelleen käyttäjän tekemälle sovelluskoodille.  Tällaisia toimintoja kutsutaan koukku-funktioiksi (hook method). Niiden tehtävä voi olla esimerkiksi toteuttaa jokin tietty toiminallisuus aina silloin, kun tietokantaan tehdään kirjoitusoperaatioita \section[s. 433]{Sommerville}. 
 
-JATKA:
-. The application-specific functionality responds to the event in an appropriate way (Figure 16.6). For example, a framework will have a method that handles a mouse click from the environment. This method calls the hook method, which you must configure to call the appropriate application methods to handle the mouse click. 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{frameworks.PNG}
+\caption{Esimerkki sovelluksen toimintojen suhteesta sovelluskehyksen kutsu-funktioihin. Sovelluskehyksellä voi olla esimerkiksi metodi, joka hallitsee hiiren tapahtumia. Metodi kutsuu koukku-funktiota, joka tulee konfiguroida kutsumaan oikeita metodeja sovelluksesta, jossa hiiren tapahtumat käsitellään.   \parencite[s.434]{Sommerville}}
+\end{figure}
+
+JATKA seuraava kappale:
+Applications that are constructed using frameworks can be the basis for further reuse through the concept of software product lines or application families. Because 
 
 
 

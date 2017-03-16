@@ -483,8 +483,11 @@ Sovelluskehystä laajennettaessa ei itse sovelluskehyksen koodia muuteta, vaan s
 \caption{Esimerkki sovelluksen toimintojen suhteesta sovelluskehyksen kutsu-funktioihin. Sovelluskehyksellä voi olla esimerkiksi metodi, joka hallitsee hiiren tapahtumia. Metodi kutsuu koukku-funktiota, joka tulee konfiguroida kutsumaan oikeita metodeja sovelluksesta, jossa hiiren tapahtumat käsitellään.   \parencite[s.434]{Sommerville}}
 \end{figure}
 
-JATKA seuraava kappale:
-Applications that are constructed using frameworks can be the basis for further reuse through the concept of software product lines or application families. Because 
+Sovelluskehyksien avulla rakennetut sovellukset voivat toimia uudelleenkäytettävinä pohjina, jollekin tietylle liiketoiminta-alueella tai sovellus-perheelle. Koska näissä sovelluksissa on käytetty jotain tiettyä sovelluskehystä, voidaan sovelluksesta luoda monia instansseja, jotka palvelevat jotain tiettyjä alueita liiketoiminnassa. Koska kaikki sovellukset jakavat saman sovellluskehyksen tavan toteuttaa asioita, on uusien sovellusperheen jäsenten luonti usein hyvin suoraviivaista. Tämä mahdollistetaan ylikirjoittamalla pohjasovellukseen luokkia ja metodeja, joita voidaan muokata ylikirjoittamallla se taas uudessa sovelluksessa. Osa näistä luokista voidaan olla ylimmällä tasolla peritty suoraan sovelluskehyksestä. Sovelluskehykset ovat kuitenkin yleensä hyvin geneerisiä kuin eri
+liiketoiminta-alueiden sovellukset. 
+
+JATKA:
+For example, you can use a web-based framework to build different types of web-based applications. One of these might be a software product line that supports web-based 
 
 
 

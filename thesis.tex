@@ -484,11 +484,11 @@ Sovelluskehystä laajennettaessa ei itse sovelluskehyksen koodia muuteta, vaan s
 \end{figure}
 
 Sovelluskehyksien avulla rakennetut sovellukset voivat toimia uudelleenkäytettävinä pohjina, jollekin tietylle liiketoiminta-alueella tai sovellus-perheelle. Koska näissä sovelluksissa on käytetty jotain tiettyä sovelluskehystä, voidaan sovelluksesta luoda monia instansseja, jotka palvelevat jotain tiettyjä alueita liiketoiminnassa. Koska kaikki sovellukset jakavat saman sovellluskehyksen tavan toteuttaa asioita, on uusien sovellusperheen jäsenten luonti usein hyvin suoraviivaista. Tämä mahdollistetaan ylikirjoittamalla pohjasovellukseen luokkia ja metodeja, joita voidaan muokata ylikirjoittamallla se taas uudessa sovelluksessa. Osa näistä luokista voidaan olla ylimmällä tasolla peritty suoraan sovelluskehyksestä. Sovelluskehykset ovat kuitenkin yleensä hyvin geneerisiä kuin eri
-liiketoiminta-alueiden sovellukset. 
+liiketoiminta-alueiden sovellukset. Web-pohjaisia sovelluskehyksiä voidaan esimerkiksi käyttää toteuttamaan asiakaspalvelulle tarkoitettuja web-sovelluksia. 
 
-JATKA:
-For example, you can use a web-based framework to build different types of web-based applications. One of these might be a software product line that supports web-based 
+Sovelluskehykset ovat tehokkaita sovelluksien uudelleenkäytössä, mutta ne ovat myös kalliita tuoda sovelluskehitykseen mukaan. Sovelluskehykset ovat usein hyvin monimutkaisia ja niiden omaksuninen voi kestää kuukausia. Virheiden etsintä on sovelluskehyksien pohjalta tehdyissä sovelluksissa hastaavaa, koska ohjelmoijan tulee tietää ymmärtää millä tavalla sovelluskehys toimii. Lisäksi voi olla vaikeaa valita oikea sovelluskehys monien joukosta. 
 
+ This is a general problem with reusable software. Debugging tools may provide information about the reused system components, which a developer does not understand.
 
 
 \chapter{Web-sovellukset}

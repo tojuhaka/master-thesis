@@ -103,6 +103,36 @@ yhdistetään prosessoimaan pyyntöjä.
 \mainmatter
 
 \chapter{Johdanto}
+
+\section{Tutkimuksen rakenne ja aiheen rajaus}
+Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
+tutkimusta ohjelmistokehityksestä ja MVC:stä on tehty. Lisäksi käydään
+läpi mitä lähteitä löytyy Python-pohjaisista web-sovelluskehyksistä sekä ohjelmistoarkkitehtuureista. Tarkasteltavat web-sovelluskehykset rajataan 
+Pyramid-, Django- ja Tornado-sovelluskehyksiin. Tämän jälkeen 
+tutkitaan MVC:n historiaa sekä millä tavalla MVC on tarkoitettu toteutettavaksi.
+Tässä vaiheessa käydään läpi jokaisen MVC-komponentin tarkoitus sekä niiden 
+keskinäisen kommunikaation rakentuminen. Lisäksi esitellään
+Dortmundin yliopistossa kirjoitettu esimerkkiohjelma Smalltalkilla siitä miten MVC:n 
+toteutus tuodaan sovellukseen käytännössä.
+
+
+MVC:n tarkastelun jälkeen esitellään tutkimuksessa käytetyt web-sovelluskehykset, 
+joita käytetään apuna MVC:n tutkimisessa. MVC:n toteutus käydään
+hyvin yksityiskohtaisesti läpi ja sen vertaaminen rajataan Python-pohjaisiin web-sovelluskehyksiin. MVC:stä on olemassa erilaisia versioita, joten sen määrittely tulee rajata tarkasti.
+Kun puhutaan MVC:stä tarkoitetaan tällä Krasnerin artikkelissa esiteltyjä määrittelyitä MVC:n toteutuksesta \parencite{krasner}, jotka pohjautuvat Trygve Reenskaugin esittelemään 
+MVC:n määritelmään \parencite{xerox-original}. 
+
+Tarkasteltavat web-sovelluskehykset rajataan 
+Pyramid-, Django- sekä Tornado-sovelluskehyksiin. Sovelluskehyksistä Pyramid ja Django ovat MVC-arkkitehtuuriin pohjautuvia sovelluskehyksiä. Tornado on web-sokettien ympärille toteutettu asynkroninen sovelluskehys, jota käytetään tutkimuksessa toteuttamaan MVC alkuperäisen toteutuksen mukaisesti. Sovelluskehyksistä käydään läpi sen 
+historia sekä yleisellä tasolla mihin käyttötarkoitukseen
+sovelluskehys on tarkoitettu. Tämän jälkeen verrataan MVC:n toteutusta erikseen 
+Pyramid- ja Django-sovelluskehykseen ja selvitetään millä tavalla niiden sovellusarkkitehtuuri mahdollisesti eroaa MVC:n alkuperäisestä toteutuksesta. Sovelluskehyksien muihin teknisiin ominaisuuksiin ei oteta kantaa.
+Havaintojen perusteella pohditaan MVC:n mahdollisia ongelmia sovelluskehyksien toteutuksessa 
+ja selvitetään löytyykö sovelluskehyksien arkkitehtuurista jotain yhtenäisiä piirteitä, mitkä ovat
+kytköksissä MVC:n toteutukseen. Saatujen tulosten pohjalta  pyritään kirjoittamaan Tornado-sovellus, joka toteuttaa MVC:n 
+niinkuin se on alunperin tarkoitettu. Tutkimuksen lopuksi koostetaan havainnoista yhteenveto, jossa pohditaan saatuja tuloksia ja selvitetään 
+pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
+
 \section{Tutkimuskysymys}
 Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
 käytössä suurta otantaa aihealueeseen liittyviä ohjelmistoteknisiä ratkaisuja, vaan se keskittyy perusteellisesti pieneen otantaan. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
@@ -152,36 +182,8 @@ eroaa alkuperäisestä MVC:n toteutuksesta \parencite{krasner}. Lisäksi pyritä
 toteutuksen mukaan käyttäen Flask-sovelluskehystä. Havaintojen pohjalta
 selvitetään voidaanko Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksessä.
 
-\section{Tutkimuksen rakenne ja aiheen rajaus}
-Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
-tutkimusta ohjelmistokehityksestä ja MVC:stä on tehty. Lisäksi käydään
-läpi mitä lähteitä löytyy Python-pohjaisista web-sovelluskehyksistä sekä ohjelmistoarkkitehtuureista. Tarkasteltavat web-sovelluskehykset rajataan 
-Pyramid-, Django- ja Tornado-sovelluskehyksiin. Tämän jälkeen 
-tutkitaan MVC:n historiaa sekä millä tavalla MVC on tarkoitettu toteutettavaksi.
-Tässä vaiheessa käydään läpi jokaisen MVC-komponentin tarkoitus sekä niiden 
-keskinäisen kommunikaation rakentuminen. Lisäksi esitellään
-Dortmundin yliopistossa kirjoitettu esimerkkiohjelma Smalltalkilla siitä miten MVC:n 
-toteutus tuodaan sovellukseen käytännössä.
 
-
-MVC:n tarkastelun jälkeen esitellään tutkimuksessa käytetyt web-sovelluskehykset, 
-joita käytetään apuna MVC:n tutkimisessa. MVC:n toteutus käydään
-hyvin yksityiskohtaisesti läpi ja sen vertaaminen rajataan Python-pohjaisiin web-sovelluskehyksiin. MVC:stä on olemassa erilaisia versioita, joten sen määrittely tulee rajata tarkasti.
-Kun puhutaan MVC:stä tarkoitetaan tällä Krasnerin artikkelissa esiteltyjä määrittelyitä MVC:n toteutuksesta \parencite{krasner}, jotka pohjautuvat Trygve Reenskaugin esittelemään 
-MVC:n määritelmään \parencite{xerox-original}. 
-
-Tarkasteltavat web-sovelluskehykset rajataan 
-Pyramid-, Django- sekä Tornado-sovelluskehyksiin. Sovelluskehyksistä Pyramid ja Django ovat MVC-arkkitehtuuriin pohjautuvia sovelluskehyksiä. Tornado on web-sokettien ympärille toteutettu asynkroninen sovelluskehys, jota käytetään tutkimuksessa toteuttamaan MVC alkuperäisen toteutuksen mukaisesti. Sovelluskehyksistä käydään läpi sen 
-historia sekä yleisellä tasolla mihin käyttötarkoitukseen
-sovelluskehys on tarkoitettu. Tämän jälkeen verrataan MVC:n toteutusta erikseen 
-Pyramid- ja Django-sovelluskehykseen ja selvitetään millä tavalla niiden sovellusarkkitehtuuri mahdollisesti eroaa MVC:n alkuperäisestä toteutuksesta. Sovelluskehyksien muihin teknisiin ominaisuuksiin ei oteta kantaa.
-Havaintojen perusteella pohditaan MVC:n mahdollisia ongelmia sovelluskehyksien toteutuksessa 
-ja selvitetään löytyykö sovelluskehyksien arkkitehtuurista jotain yhtenäisiä piirteitä, mitkä ovat
-kytköksissä MVC:n toteutukseen. Saatujen tulosten pohjalta  pyritään kirjoittamaan Tornado-sovellus, joka toteuttaa MVC:n 
-niinkuin se on alunperin tarkoitettu. Tutkimuksen lopuksi koostetaan havainnoista yhteenveto, jossa pohditaan saatuja tuloksia ja selvitetään 
-pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
-
-\chapter{Kirjallisuuskatsaus}
+\chapter{Lähdemateriaalin hankinnasta}
 
 Kirjallisuuskatsauksessa käydään läpi vaihe vaiheelta, miten
 lähdemateriaalia kerätään tutkimusta varten. Lähdemateriaalin 

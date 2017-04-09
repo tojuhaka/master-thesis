@@ -206,25 +206,41 @@ tutkielmaa varten. Erityisesti kiinnitetään huomiota viittauksien
 määrän valittaessa tärkeimmät lähdemateriaalit. Tutkielmassa esiintyy myös satunnaisia viittauksia,
 joita ei ole kirjallisuuskatsauksessa mainittu. Tutkimuksen
 pääkirjallisuus kuitenkin käydään läpi kirjallisuuskatsauksessa.
-Haussa käytetään seuraavia hakutermejä: "Software engineering", "Software development", "MVC", "MVC Architecture",
-"frameworks", "web frameworks" ja  "MVC- Architecture".
+Haussa käytetään seuraavia hakutermejä: "software engineering", "software development", "MVC", "MVC Architecture",
+"frameworks" ja "web-frameworks". Alla esitellyssä taulukossa näytetään hakujen tuottamien tulosten määrä, jossa hakukriteerinä käytetty
+metatietoja sekä otsikkoa.
+
+
+\begin{center}
+\begin{tabular}[t]{|p{120pt}|p{90pt}|p{90pt}|p{90pt}|p{90pt}|}
+    \hline
+    Hakusana  & ACM digital library & IEEE Xplore & Google Scholar\\
+    \hline
+    "software engineering"   & 3 639    & 4 971 & 55 500  \\
+    "software development" & 21 729  & 3,045 & 60 900 \\
+    "MVC"  			 &  20	       & 1 068 & 5 320  \\
+    "MVC architecture"          &  49        & 308 & 122 \\
+   "frameworks" 		 &  44 824 & 174 731 & 79 700 \\
+   "web-frameworks" 	 &  7 848   & 50 & 136 \\
+    \hline
+\end{tabular}
+\end{center}
+
 Tarkasteltavat artikkelit rajataan kuitenkin niihin,
 jotka esittelevät suoraan MVC:tä itseään, tarjoavat
 lähdemateriaalin sovelluskehyksien esittelyyn tai auttavat pohjustamaan yleisesti ohjelmistokehitysten tarkastelua.
 
 \section{Sovelluskehitys ja arkkitehtuurit}
-Sovelluskehityksen tarkasteluun löytyy runsaasti lähdemateriaalia. Merkittäväksi lähteeksi valitaan Ian Sommervillen kirjoittama \textit{Software Engineering 9th Edition} -kirja, jossa käydään läpi mitä kaikkea isojen ohjelmistojen kehitykseen kuuluu \parencite{Sommerville}. Kirja on jaettu neljään pääosioon: \textit{Introduction to Software Engineering}, \textit{Dependability and Security}, \textit{Advanced Software Engineering} ja \textit{Software Management}. Tutkimuksessa lähteenä käytetään \textit{Introduction to Software Engineering} ja \textit{Advanced Software Engineering} -osioita. \textit{Introduction to Software engineering} käy läpi ohjelmistojen suunnittelua ja toteutusta yleisesti. Tällaisia ovat esimerkiksi vaatimusmäärittelyt, prosessit, arkkitehtuuri ja testaus. \textit{Advanced Software Engineering} esittelee ohjelmistojen kirjoittamista siten, että ne olisivat mahdollisimman uudelleen käytettäviä ja ylläpidettäviä. Tähän tarjotaan ratkaisuksi erilaisia sovellusarkkitehtuureja (esim.  \textit{Component-based architecture} ja \textit{Service-oriented architecture} \parencite{Sommerville}.
-
-
+Sovelluskehityksen tarkasteluun löytyy runsaasti lähdemateriaalia. Merkittäväksi lähteeksi valitaan Ian Sommervillen kirjoittama \textit{Software Engineering 9th Edition} -kirja, jossa käydään läpi mitä kaikkea isojen ohjelmistojen kehitykseen kuuluu \parencite{Sommerville}. Kirja on jaettu neljään pääosioon: \textit{Introduction to Software Engineering}, \textit{Dependability and Security}, \textit{Advanced Software Engineering} ja \textit{Software Management}. Tutkimuksessa lähteenä käytetään \textit{Introduction to Software Engineering} ja \textit{Advanced Software Engineering} -osioita. \textit{Introduction to Software engineering} käy läpi ohjelmistojen suunnittelua ja toteutusta yleisesti. Tällaisia ovat esimerkiksi vaatimusmäärittelyt, prosessit, arkkitehtuuri ja testaus. \textit{Advanced Software Engineering} esittelee ohjelmistojen kirjoittamista siten, että ne olisivat mahdollisimman uudelleen käytettäviä ja ylläpidettäviä. Tähän tarjotaan ratkaisuksi erilaisia sovellusarkkitehtuureja, kuten esimerkiksi \textit{Component-based architecture} ja \textit{Service-oriented architecture} \parencite{Sommerville}.
 
 \section{MVC}
 Google Scholarin tuloksista löytyy kolme artikkelia MVC:stä, jotka sopivat 
 lähdemateriaaliksi tutkimukseen. Ensimmäinen artikkeleista on John
 Deaconin  kirjoittama artikkeli, joka tarkastelee lyhyesti
 MVC:tä \parencite{deacon}. Artikkeli on kuitenkin hyvin suppea, mutta selittää
-tiivistetysti MVC:n idean. Toinen artikkeli on Steve burbeckin kirjoittama, 
+tiivistetysti MVC:n idean. Toinen artikkeli on Steve Burbeckin kirjoittama, 
 joka käsittelee
-MVC:tä sellaisena kuin sitä käytettiin Smalltalkissa \parencite{burbeck}. burbeckin
+MVC:tä sellaisena kuin sitä käytettiin Smalltalkissa \parencite{burbeck}. Burbeckin
 artikkeliin viitataan monissa MVC:tä käsittelevissä
 julkaisuissa, joten sen arvo tämän tutkielman pohjakirjallisuudessa on
 vahva. Viittausten määrä on katsottu hakemalla artikkelia Google
@@ -233,18 +249,17 @@ Library sekä IEEE XPlore -hakukoneita. Kolmas artikkeli Glenn
 E. Krasnerin kirjoittama julkaisu, jossa esitellään MVC:n toteutusta
 erilaisissa Smalltalk-sovelluksissa. Julkaisusta löytyy useita
 versioita, joista tässä tutkielmassa käytetään
-molempia \parencite{krasner} \parencite[krasner_desc]. Tähän artikkeliin on
-myös viitattu runsaasti, joten se on burbeckin julkaisun kanssa
+molempia \parencite{krasner} \parencite{krasner_desc}. Tähän artikkeliin on
+myös viitattu runsaasti, joten se on Burbeckin julkaisun kanssa
 tärkeimpiä lähteitä MVC:n pohjakirjallisuudessa. Kirjoitushetkellä
 viittauksia Krasnerin artikkeliin on 2263. Monien MVC-arkkitehtuuria soveltavien artikkeleiden
-lähdeviitteistä löytyy viittauksia burbeckin ja Krasnerin
+lähdeviitteistä löytyy viittauksia Burbeckin ja Krasnerin
 artikkeleihin. Tämän perusteella pystytään toteamaan kyseisten
 artikkeleiden olevan tieteellisesti päteviä ja tarjoavan kattavan
-lähdemateriaalin MVC:n pohjaksi. burbeckin ja Krasnerin kirjoittamien
+lähdemateriaalin MVC:n pohjaksi. Burbeckin ja Krasnerin kirjoittamien
 artikkeleiden taustalta löytyy MVC-arkkitehtuurin alkuperäinen kehittäjä Trygve
-Reenskaug, jonka omia julkaisuja sekä kotisivujen MVC-osiota käytetään
-myös lähteenä tutkielmassa \parencite{xerox}. Erityisesti Reenskaugin ja Adele Goldbergin
-julkaisu, jossa kerrotaan jokaisen MVC komponentin tehtävä....
+Reenskaug, jonka omia julkaisuja sekä kotisivujen MVC-osiota käytetään 
+lähteenä tutkielmassa \parencite{xerox}.
 
 \section{Web-sovelluskehykset \& Internet}
 Internetin taustojen selvitykseen käytetään IETF:n (The Internet Engineering Task Force) dokumentaatioita \parencite{ietf}. Näistä erityisesti TCP:n ja Iternet Protokollan dokumentaatiot Web-sovelluskehyksistä löydetty kirjallisuus on hyvin
@@ -826,6 +841,9 @@ Django on web-sovelluskehys, joka  sai alkunsa kehitysryhmässä Kansaksen osava
 Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa myös ylläpitäjille suunnatun työkalun, josta voidaan hallita sovellusta käyttöliittymätasolta. Lisäksi se tarjoaa lomake-työkalut, käyttäjätasoisen autentikaation sekä tietokanta-abstrahoinnin. Tietokanta-abstraktiolla tarkoitetaan sisäänrakennettua virtuaalista ympäristöä tuomaan yhteys tietokantaan olio-ohjelmoinnin kautta (Object-relational mapping)\parencite{djangobook}. Siinä missä Pyramid pyrkii tarjoamaan kehittäjille valinnanvaraa erilaisten komponenttejen suhteen, Django tarjoaa kokonaisvaltaisen ratkaisun sisältäen kaikki tarvittavat työkalut web-sovellusten rakentamiseen. Djangoon on tarjolla myös paljon erilaisia paketteja täydentämään sitä. 
 
 \section{Flask}
+
+TODO: tornado flaskin sijaan
+
 Flask on mikro-sovelluskehys (micro-framework), jossa sovelluskehyksen lähdekoodi on pidetty mahdollisimman minimalistisena. Sen tarkoituksena ei ole tehdä valintoja kehittäjän puolesta millaisia teknologioita tämän tulisi käyttää. Ne teknologiat mitä Flask tuo mukanaan, voidaan korvata toisella vastaavalla teknologialla. Esimerkiksi flask tuo mukanaan Jinja2 template-kielen, joka voidaan korvata millä tahansa muulla template-kielellä.
 
 Flaski ei tuo mitään lomake-työkaluja, tietokanta-abstrahointeja tai mitään missä ulkoinen kirjasto ei pystyisi kyseistä teknologiaa toteuttamaan. Flask tukee laajennoksia, joilla sitä voidaan laajentaa erilaisilla teknologioilla. Tällaisia ovat esimerkiksi erilaiset lomake-kirjastot ja tietokanta-abstrahoinnit. Flask on tämän tutkimuksen sovelluskehyksistä minimaalisin eikä se toteuta minkään laista MVC:hen liittyvää pohjaa. Tämän vuoksi sitä käytetään hyväksi tutkiessa miten MVC tulisi toteuttaa web-sovelluskehykseen, jotta sen alkuperäiset määritelmät täyttyisivät \parencite{flask}.

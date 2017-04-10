@@ -108,13 +108,10 @@ yhdistetään prosessoimaan pyyntöjä.
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
 tutkimusta ohjelmistokehityksestä ja MVC:stä on tehty. Lisäksi käydään
 läpi mitä lähteitä löytyy Python-pohjaisista web-sovelluskehyksistä sekä ohjelmistoarkkitehtuureista. Tarkasteltavat web-sovelluskehykset rajataan 
-Pyramid-, Django- ja Tornado-sovelluskehyksiin. Tämän jälkeen 
-tutkitaan MVC:n historiaa sekä millä tavalla MVC on tarkoitettu toteutettavaksi.
-Tässä vaiheessa käydään läpi jokaisen MVC-komponentin tarkoitus sekä niiden 
+Pyramid-, Django- ja Tornado-sovelluskehyksiin. Tämän jälkeen tutkitaan Internetin ja WWW:n taustoja sekä avataan ohjelmistoarkkitehtuurejen merkitystä tutkimukselle. Seuraavaksi käydään läpi MVC:n historiaa sekä millä tavalla MVC on tarkoitettu toteutettavaksi. Tässä vaiheessa esitellään jokaisen MVC-komponentin tarkoitus sekä niiden 
 keskinäisen kommunikaation rakentuminen. Lisäksi esitellään
 Dortmundin yliopistossa kirjoitettu esimerkkiohjelma Smalltalkilla siitä miten MVC:n 
 toteutus tuodaan sovellukseen käytännössä.
-
 
 MVC:n tarkastelun jälkeen esitellään tutkimuksessa käytetyt web-sovelluskehykset, 
 joita käytetään apuna MVC:n tutkimisessa. MVC:n toteutus käydään
@@ -136,7 +133,9 @@ pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
 \section{Tutkimuskysymys}
 Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
 käytössä suurta otantaa aihealueeseen liittyviä ohjelmistoteknisiä ratkaisuja, vaan se keskittyy perusteellisesti pieneen otantaan. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
-MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla.Tutkimuksen päämääränä on joko vahvistaa tai kumota hypoteesi MVC:n soveltuvuudesta web-sovelluskehyksiin. 
+MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla. Tutkimuksen päämääränä on joko vahvistaa tai kumota hypoteesi MVC:n soveltuvuudesta web-sovelluskehyksiin. 
+
+Internettiä ja WWW:tä (World Wide Web) varten toteutetuissa web-sovelluksissa toistuvat usein samat toiminnallisuudet, kuten esimerkiksi staattisten resurssejen jakaminen, URL:ien liittäminen ohjelmakoodiin sekä tietoturvan hallinta \parencite{pyramid_intr}. Tällöin on tärkeää, että Internetin ja WWW:n  taustat käydään tutkimuksessa läpi, sillä niiden merkitys on suuri web-sovelluskehyksien olemassaololle.
 
 Sovellusarkkitehtuurin tarkoituksena on vastata millä tavalla ohjelmiston eri komponentit on organistoitu, rakennettu ja millä tavalla ne kommunikoivat keskenään. Se on ensimmäinen vaihe, kun ohjelmistoa lähdetään toteuttamaan. MVC on yksi tapa
 toteuttaa sovelluksen arkkitehtuuri.    \parencite[s. 148]{Sommerville} MVC-arkkitehtuuri on saanut paljon huomiota web-sovelluskehyksien
@@ -480,7 +479,7 @@ Web-sovelluskehykset ovat nykyaikana yksi tärkeimpiä sovelluskehyksien alalaje
 \item[Interaktiivisuus] on monien web-sovelluskehyksien etuna, jollloin voidaan toteuttaa entistä interaktiivisempia sovelluksia käyttäjille (esimerkiksi AJAX-teknologia).
 \end{desclist}
 
-Sovelluskehystä laajennettaessa ei itse sovelluskehyksen koodia muuteta, vaan sovellukseen lisätään luokkia, jotka perivät sovelluskehyksen määrittelemiä ominaisuuksia luokkatasolla. Lisäksi voidaan määritellä kutsu-funktioita (callbacks). Kutsu-funktioita voidaan viedä eteenpäin toiselle ohjelmakoodille kutsuttavaksi. Kutsu-funktioita ajetaan vastauksena ennaltamäärätyille operaatiolle, jotka sovelluskehys tunnistaa. Sovelluskehykseen luodut toiminnot ovat vastuussa sovelluksen kokonaisuudesta, siten että ne kutsuvat sovelluskehyksen käyttäjän määrittelemiä toiminnallisuuksia. Sovelluskehykseen toteutetut oliot ovat vastuussa erilaisten tapahtumien hallinnoinnista ja välittävät näitä tapahtumia edelleen käyttäjän tekemälle sovelluskoodille.  Tällaisia toimintoja kutsutaan koukku-funktioiksi (hook method). Niiden tehtävä voi olla esimerkiksi toteuttaa jokin tietty toiminallisuus aina silloin, kun tietokantaan tehdään kirjoitusoperaatioita \section[s. 433]{Sommerville}. 
+Sovelluskehystä laajennettaessa ei itse sovelluskehyksen koodia muuteta, vaan sovellukseen lisätään luokkia, jotka perivät sovelluskehyksen määrittelemiä ominaisuuksia luokkatasolla. Lisäksi voidaan määritellä kutsu-funktioita (callbacks). Kutsu-funktioita voidaan viedä eteenpäin toiselle ohjelmakoodille kutsuttavaksi. Kutsu-funktioita ajetaan vastauksena ennaltamäärätyille operaatiolle, jotka sovelluskehys tunnistaa. Sovelluskehykseen luodut toiminnot ovat vastuussa sovelluksen kokonaisuudesta, siten että ne kutsuvat sovelluskehyksen käyttäjän määrittelemiä toiminnallisuuksia. Sovelluskehykseen toteutetut oliot ovat vastuussa erilaisten tapahtumien hallinnoinnista ja välittävät näitä tapahtumia edelleen käyttäjän tekemälle sovelluskoodille.  Tällaisia toimintoja kutsutaan koukku-funktioiksi (hook method). Niiden tehtävä voi olla esimerkiksi toteuttaa jokin tietty toiminallisuus aina silloin, kun tietokantaan tehdään kirjoitusoperaatioita \parencite[s. 433]{Sommerville}. 
 
 \begin{figure}[h]
 \centering

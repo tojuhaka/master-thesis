@@ -174,11 +174,10 @@ Sommerville esittelee MVC-mallin web-sovelluksen näkökulmasta, jossa kommuniko
 Näkymältä itseltään. Käyttäjän pyynnöt voitat tulla niin Ohjaimelle kuin Näkymällekin toisinkuin Krasnerin mallissa, jossa käyttäjän toiminnot tulevat ainoastaan Ohjaimelle.
 Lisäksi Sommervillen mallissa Malli ei ole suoraan yhteydessä Ohjaimeen. 
 
-
 Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta tutkitaan millä tavalla 
 MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
 eroaa alkuperäisestä MVC:n toteutuksesta \parencite{krasner}. Lisäksi pyritään toteuttamaan MVC alkuperäisen
-toteutuksen mukaan käyttäen Flask-sovelluskehystä. Havaintojen pohjalta
+toteutuksen mukaan käyttäen Tornado-sovelluskehystä. Havaintojen pohjalta
 selvitetään voidaanko Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksessä.
 
 
@@ -206,7 +205,7 @@ määrän valittaessa tärkeimmät lähdemateriaalit. Tutkielmassa esiintyy myö
 joita ei ole kirjallisuuskatsauksessa mainittu. Tutkimuksen
 pääkirjallisuus kuitenkin käydään läpi kirjallisuuskatsauksessa.
 Haussa käytetään seuraavia hakutermejä: "software engineering", "software development", "MVC", "MVC Architecture",
-"frameworks" ja "web-frameworks". Alla esitellyssä taulukossa näytetään hakujen tuottamien tulosten määrä, jossa hakukriteerinä käytetty
+"frameworks", "web-frameworks" ja "websocket". Alla esitellyssä taulukossa näytetään hakujen tuottamien tulosten määrä, jossa hakukriteerinä käytetty
 metatietoja sekä otsikkoa.
 
 
@@ -221,6 +220,7 @@ metatietoja sekä otsikkoa.
     "MVC architecture"          &  49        & 308 & 122 \\
    "frameworks" 		 &  44 824 & 174 731 & 79 700 \\
    "web-frameworks" 	 &  7 848   & 50 & 136 \\
+   "websocket"                     & 37        &   934 000 &  9 340 \\
     \hline
 \end{tabular}
 \end{center}
@@ -261,9 +261,9 @@ Reenskaug, jonka omia julkaisuja sekä kotisivujen MVC-osiota käytetään
 lähteenä tutkielmassa \parencite{xerox}.
 
 \section{Web-sovelluskehykset \& Internet}
-Internetin taustojen selvitykseen käytetään IETF:n (The Internet Engineering Task Force) dokumentaatioita \parencite{ietf}. Näistä erityisesti TCP:n ja Iternet Protokollan dokumentaatiot Web-sovelluskehyksistä löydetty kirjallisuus on hyvin
+Internetin taustojen selvitykseen käytetään IETF:n (The Internet Engineering Task Force) dokumentaatioita \parencite{ietf}. Näistä erityisesti TCP:n ja Internet Protokollan dokumentaatiota. Web-sovelluskehyksistä löydetty kirjallisuus on hyvin
 suppea, eikä tämän varaan voida rakentaa kovinkaan perusteellista
-tieteellistä pohjaa. Tämän vuoksi tutkimuksessa joudutaan osaksi turvautumaan
+tieteellistä pohjaa. Tämän vuoksi tutkimuksessa joudutaan truvautumaan
 sovelluskehyksien omaan dokumentatioon täydentämään
 lähdemateriaalia. IEEE Xploren ja ACM Digital Libraryn avulla löytyy kaksi julkaisua, 
 joita käytetään tutkimuksen pohjana sovelluskehyksiä
@@ -279,7 +279,9 @@ Google Scholarin hakutuloksista löytyi Liza Daly:n
 kirjoittama ja O'Reillyn julkaisema "Next Generation Web Frameworks
 in Python", joka sisältönsä puolesta sopii hyvin pohjaksi
 tutkimuksessa käsiteltävien sovelluskehyksien lähdemateriaaliksi 
-\parencite{liza}.
+\parencite{liza}. Web-sockettejen lähdemateriaalina käytetään IETF:n dokumentaatiota \parencite{websocket} sekä Google Scholarin hakutuloksista löytynyttä artikkelia, jossa toteutetaan reaaliaikainen monitorointi-sovellus käyttäen web-socketteja \parencite{websocket_ajax}.
+
+\section{Web-socketit ja }
 
 
 \chapter{Internet}
@@ -803,9 +805,7 @@ Yllä esitellyssä esimerkissä luodaan HTML-sivu, jossa tulostetaan otsikko sek
 
 Web-sovelluskehykset voidaan jakaa serveri-pohjaisiin ja selain-pohjaisiin sovelluskehyksiin. Serveri-pohjaisissa web-sovelluskehyksissä sovelluksen tilaa hallitaan serverin puolella. Tuolloin käyttöliittymää perustuu tilaan, mikä on sillä hetkellä serverin puolella. Selain-pohjaisissa sovelluskehyksissä sisältö muuttuu selaimen sisällä käyttäjän päässä \parencite{vosloo}. Tässä tutkimuksessa käsiteltävät sovelluskehykset ovat Pythonilla toteutettuja serveri-pohjaisia sovelluskehyksiä. Käsiteltävät kehykset ovat Django, Pyramid ja Flask. Django on käsiteltävistä sovelluskehyksistä kaikkein monoliittisin ja tarjoaa eniten ominaisuuksia valmiiksi asennettuna. Pyramidissa taas on vähemmän ominaisuuksia suoraan asennettuna, jonka kautta se pyrkii antamaan käyttäjälle enemmän valinnanvaraa erilaisten teknologioiden valitsemiseen. Flaski taas on mikro-sovelluskehys, joka tarjoaa kaikkein vähiten työkaluja web-kehitykseen näistä kolmesta. Sovelluskehysten koko kertoo myös niiden toteutuksesta: Django (1.7.4) 36 megabittiä, Pyramid (1.5.3) 5.6 megabittiä ja Flask (0.10.1) 1.2 megatavua. Sovelluskehysten koot tarkastettiin komentoriviltä käyttäen linuxin du -työkalua. Kaikkia kolmea sovelluskehystä voidaa laajentaa erilaisilla laajennoksilla.
 
-
 \section{Pyramid}
-
 Pyramid on Python-pohjainen web-sovelluskehys, jonka tehtävänä on helpottaa web-kehitystä tarjoamalla
 kehittäjälle valmiita työkaluja avuksi kehitykseen. Pyramid on suunniteltu siten, että kehittäjän ei tarvitse tietää suuria määriä erilaisia malleja ja tekniikoita pystyäkseen tuottamaan web-sovelluksia. Se ei myöskään pakota käyttämään kehityksessä mitään erityistä tekniikkaa, vaan pyrkii olemaan mahdollisimman yksinkertainen ja helposti laajennettavissa erilaisiin käyttötarkoituksiin. Laajentamisella tarkoitetaan erilaisten lisäosien liittämistä Pyramidiin. Yksinkertaisuuden ja mimimaalisuuden ansiosta se on myös nopeampi kuin monet muut Python-pohjaiset web-sovelluskehykset. Tämä johtuu Pyramidin poikkeuksellisen pienestä kutsupinosta ajamisen aikana \parencite{pyramid_intr}. 
 
@@ -829,13 +829,12 @@ Django on web-sovelluskehys, joka  sai alkunsa kehitysryhmässä Kansaksen osava
 
 Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa myös ylläpitäjille suunnatun työkalun, josta voidaan hallita sovellusta käyttöliittymätasolta. Lisäksi se tarjoaa lomake-työkalut, käyttäjätasoisen autentikaation sekä tietokanta-abstrahoinnin. Tietokanta-abstraktiolla tarkoitetaan sisäänrakennettua virtuaalista ympäristöä tuomaan yhteys tietokantaan olio-ohjelmoinnin kautta (Object-relational mapping)\parencite{djangobook}. Siinä missä Pyramid pyrkii tarjoamaan kehittäjille valinnanvaraa erilaisten komponenttejen suhteen, Django tarjoaa kokonaisvaltaisen ratkaisun sisältäen kaikki tarvittavat työkalut web-sovellusten rakentamiseen. Djangoon on tarjolla myös paljon erilaisia paketteja täydentämään sitä. 
 
-\section{Flask}
+\section{Tornado}
+\chapter{web-soketit}
+- web-soketit vs http
+- millä tavalla auttaa mvc:n toteutuksessa
+- pyramidissa tehty oletus jossa controllerin on aina kysyttävä mallilta päivitystä. Sokettien avulla kommunikaatio on toimii myös toiseen suuntan
 
-TODO: tornado flaskin sijaan
-
-Flask on mikro-sovelluskehys (micro-framework), jossa sovelluskehyksen lähdekoodi on pidetty mahdollisimman minimalistisena. Sen tarkoituksena ei ole tehdä valintoja kehittäjän puolesta millaisia teknologioita tämän tulisi käyttää. Ne teknologiat mitä Flask tuo mukanaan, voidaan korvata toisella vastaavalla teknologialla. Esimerkiksi flask tuo mukanaan Jinja2 template-kielen, joka voidaan korvata millä tahansa muulla template-kielellä.
-
-Flaski ei tuo mitään lomake-työkaluja, tietokanta-abstrahointeja tai mitään missä ulkoinen kirjasto ei pystyisi kyseistä teknologiaa toteuttamaan. Flask tukee laajennoksia, joilla sitä voidaan laajentaa erilaisilla teknologioilla. Tällaisia ovat esimerkiksi erilaiset lomake-kirjastot ja tietokanta-abstrahoinnit. Flask on tämän tutkimuksen sovelluskehyksistä minimaalisin eikä se toteuta minkään laista MVC:hen liittyvää pohjaa. Tämän vuoksi sitä käytetään hyväksi tutkiessa miten MVC tulisi toteuttaa web-sovelluskehykseen, jotta sen alkuperäiset määritelmät täyttyisivät \parencite{flask}.
 
 \chapter{MVC:n vaatimukset}
 Vaikka MVC:tä ei ole tarkoitettu alunperin web-sovelluksiin, voivat ne hyötyä MVC:n arkkitehtuurista. Suurin ongelma MVC:n käyttämisessä web-sovelluskehyksissä on palvelimen (server) ja asiakkaan (client) välinen ositus. Näkymä näytetään aina asiakkaan selaimessa sen omalla päätelaitteella HTML-kielellä. Malli ja Ohjain taas voivat olla ositettu teoriassa miten vain asiakkaan ja palvelimen välillä. Web-sovelluksissa kehittäjä pakotetaan osioimaan sovellus. MVC:n tulee olla riippumaton osioinnista. Osioinnin ei tule määrittää sovelluksen arkkitehtuuria \cite{ibm_watson}.

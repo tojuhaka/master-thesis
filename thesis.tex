@@ -271,11 +271,7 @@ rakennetta \parencite{vosloo}. Lisäksi käytetään
 IEEE:stä Ahamedin julkaisua, joka esittelee yleisesti asioita joita tulisi ottaa huomioon sovelluskehystä 
 valittaessa \parencite{towards_framework}.
 
-Google Scholarin hakutuloksista löytyi Liza Daly:n
-kirjoittama ja O'Reillyn julkaisema "Next Generation Web Frameworks
-in Python", joka sisältönsä puolesta sopii hyvin pohjaksi
-tutkimuksessa käsiteltävien sovelluskehyksien lähdemateriaaliksi 
-\parencite{liza}. Web-sockettejen lähdemateriaalina käytetään IETF:n dokumentaatiota \parencite{websocket} sekä Google Scholarin hakutuloksista löytynyttä artikkelia, jossa toteutetaan reaaliaikainen monitorointi-sovellus käyttäen web-soketteja \parencite{websocket_ajax}.
+ Web-sokettejen lähdemateriaalina käytetään IETF:n dokumentaatiota \parencite{websocket} sekä Google Scholarin hakutuloksista löytynyttä artikkelia, jossa toteutetaan reaaliaikainen monitorointi-sovellus käyttäen web-soketteja \parencite{websocket_ajax}. Tornado-sovelluskehyksestä itsestään löytynyt materiaali on hyvin suppeaa, jolloin sen esittelyssä käytettävät lähdemateriaalit liittyvät Tornadon käyttämiin teknologioihin. Näistä tärkeimpänä web-soketit sekä asynkroninen siirräntä \parencite{async}. Pääpainona on kuitenkin web-soketit, jolloin asynkronisen siirrännän läpikäyminen on hyvin pintapuolista.
 
 \chapter{Internet}
 Internet ja sen arkkitehtuuri on syntynyt hyvin pienistä saavutuksista. Internetin taustalla ei ole alunperin ollut minkäänlaista suurempaa suunnitelmaa. Tutkiessamme Iternetin arkkitehtuuria tulee muistaa, että tekniset muutokset ovat jatkuvia tietotekniikan alalla. Monet arkkitehtuurilliset ratkaisut, jotka olivat suosiossa muutamia vuosia sitten ovat nyt jo vanhentuneet. Toisaalta ratkaisut, jotka tänä päivänä nähdään hyvinä, voivat jo huomenna olla huonoja. Voidaan sanoa, että ainut asia joka Internetin suhteen pysyy on jatkuva muutos. Internet yhteisöjen monet jäsenet väittävät, että Internetillä ei ole arkkitehtuuria, mutta kuitenkin eräänlaisia perinteitä, johon koko Internet pohjautuu. Iternetin tavoite on tarjota yhteydet, jossa työkaluna käytetään Iternet Protokollaa. Monien yhteisön jäsenien mielestä tärkeää ei ole se millä tavalla yhteydet luodaan verkon sisällä, vaan se millä tavalla yhteyksien alku- ja loppupää käyttäytyvät. Tähän tärkeimpänä argumenttina pidetään sitä, että useat tarvittavat toiminnallisuudet voidaan toteuttaa vain IP:tä käyttävien systeemien puolella. Jokainen hyvin suunniteltu verkko sisältää mahdollisuuden jollakin tasolla epäonnistua viestin kuljettamisessa. Tällaisen ongelman kanssa tulisi toimia siten, että vastuu kommunikaation eheydestä annetaan ulkopuolisille sovelluksille.  Nykyinen Internetin exponentaalinen kasvu näyttää kuitenkin sen, että yhteydet ovat paljon arvokkaampia kuin yksittäiset sovellukset. Tällaiset yhteydet vaativat yhteistyötä palveluntarjoajien ja televiestintäympäristöjen välille \parencite{constant_change}. 
@@ -819,9 +815,9 @@ Django on web-sovelluskehys, joka  sai alkunsa kehitysryhmässä Kansaksen osava
 Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa myös ylläpitäjille suunnatun työkalun, josta voidaan hallita sovellusta käyttöliittymätasolta. Lisäksi se tarjoaa lomake-työkalut, käyttäjätasoisen autentikaation sekä tietokanta-abstrahoinnin. Tietokanta-abstraktiolla tarkoitetaan sisäänrakennettua virtuaalista ympäristöä tuomaan yhteys tietokantaan olio-ohjelmoinnin kautta (Object-relational mapping)\parencite{djangobook}. Siinä missä Pyramid pyrkii tarjoamaan kehittäjille valinnanvaraa erilaisten komponenttejen suhteen, Django tarjoaa kokonaisvaltaisen ratkaisun sisältäen kaikki tarvittavat työkalut web-sovellusten rakentamiseen. Djangoon on tarjolla myös paljon erilaisia paketteja täydentämään sitä. 
 
 \section{Tornado}
-Tornado on Python-pohjainen web-sovelluskehys , joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O). Asynkronisessa toteutuksessa ohjelmakoodi ei ajaudu systemaattisesti niinkuin TODO: ETSI LÄHTEITÄ POHJAAMAAN ASYNKRONISUUDEN SELITYSTÄ.
+Tornado on Python-pohjainen web-sovelluskehys , joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O) sekä mahdollistaa web-sokettejen käytön. Siirräntä tarkoittaa tässä yhteydessä luku- ja kirjoitusoperaatioita levyllä. Suurella kuormalla toimivat synkroniset TCP/IP-pohjaiset sovellukset voivat jättää useita syklejä prosessorin laskennasta väliin, joka johtuu siirrännän hitaudesta. Nämä syklit voitaisiin käyttää sovelluksen koodin ajamiseen. Mitä enemmän pyyntöjä tulee samanaikaisesti, sitä enemmän prosessorin syklejä jää väliin ja järjestelmään tulee ylimääräistä kuormaa. Siirrännät paljon hitaampia kuin prosessorin laskentateho. Asynkronisessa siirrännässä pyyntöjä voidaan ottaa vastaan käsiteltäväksi, vaikka edellistä pyyntöä ei ole vielä suoritettu loppuun \parencite[s. 1]{async}. 
 
-    Se on toteutettu FriendFeed-yhtiön toimesta vuonne 2009, jolloin se myös julkaistiin avoimena lähdekoodina. Tornado
+
 
 
 \chapter{MVC:n vaatimukset}
@@ -992,6 +988,7 @@ WEb-soketti protokolla on itsenäinen TCP-pohjainen protokolla. Sen avulla voida
 Web-soketti protokollassa on kaksi osaa: kättely ja datan siirto. Kättelyssä asiakas ja palvelin lähettävät kättelyviestit toisilleen ja kättelyn onnistuessa datan siirto alkaa. Kättelyn tehtävänä on siis sopia kummankin osapuolen yhteys, jonka kautta dataa siirretään. Datan siirto hoidetaan kaksisuuntaisen kanavan kautta, jossa kummatkin osapuolet voivat lähettää toisilleen riippumattomasti viestejä \parencite[s. 4]{websocket}. Kättely on yhteensopiva HTTP-protokollan kanssa, jolloin web-soketteja voidaan käyttää HTTP-pohjaisten web-sovellusten kanssa. HTTP:n avulla tehdyssä kättelyssä kummatkin, asiakas ja palvelin, pystyvät kommunikoimaan toisilleen kaksisuuntaisesti yhtä porttia käyttäen\parencite[s.5]{websocket}. 
 
 \chapter{MVC:n toteutus Tornadolla}
+Tornadolla toteutetaan vastaava laskurisovellus kuin aikaisemminkin Pyramid- ja Smalltalk-osioissa. Tällä kertaa kuitenkin HTTP:ta käytetään vain kättelyssä ja datan siirto hoidetaan web-sokettejen kautta.
 - tänne koodit Tornadon MVC toteutuksesta ja selvennykset millä tavalla 
 
 

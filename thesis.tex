@@ -36,6 +36,44 @@ tabsize=4
 literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{\"o}}2
 }
 
+% Taken from Lena Herrmann at 
+% http://lenaherrmann.net/2010/05/20/javascript-syntax-highlighting-in-the-latex-listings-package
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{
+   language=JavaScript,
+   backgroundcolor=\color{lightgray},
+   extendedchars=true,
+   basicstyle=\footnotesize\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+
+
 
 \begin{document}
 
@@ -815,10 +853,60 @@ Django on web-sovelluskehys, joka  sai alkunsa kehitysryhmässä Kansaksen osava
 Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa myös ylläpitäjille suunnatun työkalun, josta voidaan hallita sovellusta käyttöliittymätasolta. Lisäksi se tarjoaa lomake-työkalut, käyttäjätasoisen autentikaation sekä tietokanta-abstrahoinnin. Tietokanta-abstraktiolla tarkoitetaan sisäänrakennettua virtuaalista ympäristöä tuomaan yhteys tietokantaan olio-ohjelmoinnin kautta (Object-relational mapping)\parencite{djangobook}. Siinä missä Pyramid pyrkii tarjoamaan kehittäjille valinnanvaraa erilaisten komponenttejen suhteen, Django tarjoaa kokonaisvaltaisen ratkaisun sisältäen kaikki tarvittavat työkalut web-sovellusten rakentamiseen. Djangoon on tarjolla myös paljon erilaisia paketteja täydentämään sitä. 
 
 \section{Tornado}
-Tornado on Python-pohjainen web-sovelluskehys , joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O) sekä mahdollistaa web-sokettejen käytön. Siirräntä tarkoittaa tässä yhteydessä luku- ja kirjoitusoperaatioita levyllä. Suurella kuormalla toimivat synkroniset TCP/IP-pohjaiset sovellukset voivat jättää useita syklejä prosessorin laskennasta väliin, joka johtuu siirrännän hitaudesta. Nämä syklit voitaisiin käyttää sovelluksen koodin ajamiseen. Mitä enemmän pyyntöjä tulee samanaikaisesti, sitä enemmän prosessorin syklejä jää väliin ja järjestelmään tulee ylimääräistä kuormaa. Siirrännät paljon hitaampia kuin prosessorin laskentateho. Asynkronisessa siirrännässä pyyntöjä voidaan ottaa vastaan käsiteltäväksi, vaikka edellistä pyyntöä ei ole vielä suoritettu loppuun \parencite[s. 1]{async}. 
+Tornado on Python-pohjainen web-sovelluskehys , joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O) sekä mahdollistaa web-sokettejen käytön. Siirräntä tarkoittaa tässä yhteydessä luku- ja kirjoitusoperaatioita levyllä. Suurella kuormalla toimivat synkroniset TCP/IP-pohjaiset sovellukset voivat jättää useita syklejä prosessorin laskennasta väliin, joka johtuu siirrännän hitaudesta. Nämä syklit voitaisiin käyttää sovelluksen koodin ajamiseen. Mitä enemmän pyyntöjä tulee samanaikaisesti, sitä enemmän prosessorin syklejä jää väliin ja järjestelmään tulee ylimääräistä kuormaa. Siirrännät paljon hitaampia kuin prosessorin laskentateho. Asynkronisessa siirrännässä pyyntöjä voidaan ottaa vastaan käsiteltäväksi, vaikka edellistä pyyntöä ei ole vielä suoritettu loppuun \parencite[s. 1]{async}. Tornado ei myöskään toteuta MVC-mallia, vaan tarjoaa vapaammat kädet kehittäjälle toteuttaa haluamansa arkkitehtuuri. 
 
+Alla olevissa koodeissa luodaan yksinkertainen web-sovellus käyttäen web-soketteja Tornadolla. Sovelluksessa lähetetään selaimesta viesti palvelimelle, joka kaiuttaa viestin takaisin selaimelle. 
 
+\lstset{
+  literate={ö}{{\"o}}1
+           {ä}{{\"a}}1,
+xleftmargin=30pt,
+escapeinside={/*@}{@*/},
+backgroundcolor=\color{light-gray}
+}
+\lstset{numbers=left}
+\begin{lstlisting}[language=Python]
+import tornado.ioloop
+from tornado import websocket
 
+class EchoWebSocket(websocket.WebSocketHandler):
+    def check_origin(self, origin):
+        return True
+
+    def open(self):
+        print("WebSocket opened")
+
+    def on_message(self, message):
+        self.write_message(u"You said: " + message)
+
+    def on_close(self):
+        print("WebSocket closed")
+
+def make_app():
+    return tornado.web.Application([
+        (r"/websocket", EchoWebSocket),
+    ], debug=True)
+
+if __name__ == "__main__":
+    app = make_app()
+    app.listen(8888)
+    tornado.ioloop.IOLoop.current().start()
+\end{lstlisting}
+Jokaista web-sockettia varten luodaan erillinen käsittelijä, joka peritään WebSocketHandler-luokasta. Luokasta tulee ylikirjoittaa \emph{on\_message}-, \emph{on\_close}- ja \emph{open}-metodit. Tietoturvan kannalta \emph{check\_origin} tulisi toteuttaa tarkastamaan asiakaspuolen yhteyden
+identiteetti, mutta tässä toteutuksessa ei oteta kyseiseen metodiin kantaa. TODO LÄHDE TORNADOON JA JATKA SELVENNYSTÄ
+
+\begin{lstlisting}[language=JavaScript]
+<script>
+  var ws = new WebSocket("ws://localhost:8888/websocket");
+
+  ws.onopen = function() {
+     ws.send("message");
+  };
+  ws.onmessage = function (evt) {
+     alert(evt.data);
+  };
+  </script>
+\end{lstlisting}
 
 \chapter{MVC:n vaatimukset}
 Vaikka MVC:tä ei ole tarkoitettu alunperin web-sovelluksiin, voivat ne hyötyä MVC:n arkkitehtuurista. Suurin ongelma MVC:n käyttämisessä web-sovelluskehyksissä on palvelimen (server) ja asiakkaan (client) välinen ositus. Näkymä näytetään aina asiakkaan selaimessa sen omalla päätelaitteella HTML-kielellä. Malli ja Ohjain taas voivat olla ositettu teoriassa miten vain asiakkaan ja palvelimen välillä. Web-sovelluksissa kehittäjä pakotetaan osioimaan sovellus. MVC:n tulee olla riippumaton osioinnista. Osioinnin ei tule määrittää sovelluksen arkkitehtuuria \parencite{ibm_watson}.
@@ -982,10 +1070,12 @@ Pyramid-sovelluskehystä ja MVC:tä tutkiessa todettiin MVC:n alkuperäisen tote
 \section{Toiminta}
 WEb-soketti protokolla on itsenäinen TCP-pohjainen protokolla. Sen avulla voidaan yhden yksittäisen TCP-yhteyden aikana siirtää dataa kumpaankin suuntaan. Protokollaa voidaan käyttää niin tavallisissa web-sivustoissa kuin peleissäkin. Se on suunniteltu erityisesti syrjäyttämään olemassa olevia kommunikointiteknologioita, jotka käyttävät HTTP:ta datan siirrossa. Koska HTTP:ta ei oltu alunperin tarkoitettu kaksisuuntaiseen kommunikaation, tehtiin useat aiemmat teknologiset ratkaisut tehokkuuden ja toimintavarmuuden väliltä. Tavallinen HTTP-malli ei siis tue suoraan kommunikaatiota palvelimelta asiakassovellukselle \parencite[s.2]{polling}.  Web-soketti protokolla ei kuitenkaan vaadi HTTP:ta toimiakseen, mutta tässä tutkimuksessa keskitytääin web-sokettejen toteutukseen HTTP:n kanssa \parencite[s. 1.1]{websocket}.
 
+
+
 \section{Toteutus}
-- web-sokettien tarkempi toteutus
 
 Web-soketti protokollassa on kaksi osaa: kättely ja datan siirto. Kättelyssä asiakas ja palvelin lähettävät kättelyviestit toisilleen ja kättelyn onnistuessa datan siirto alkaa. Kättelyn tehtävänä on siis sopia kummankin osapuolen yhteys, jonka kautta dataa siirretään. Datan siirto hoidetaan kaksisuuntaisen kanavan kautta, jossa kummatkin osapuolet voivat lähettää toisilleen riippumattomasti viestejä \parencite[s. 4]{websocket}. Kättely on yhteensopiva HTTP-protokollan kanssa, jolloin web-soketteja voidaan käyttää HTTP-pohjaisten web-sovellusten kanssa. HTTP:n avulla tehdyssä kättelyssä kummatkin, asiakas ja palvelin, pystyvät kommunikoimaan toisilleen kaksisuuntaisesti yhtä porttia käyttäen\parencite[s.5]{websocket}. 
+
 
 \chapter{MVC:n toteutus Tornadolla}
 Tornadolla toteutetaan vastaava laskurisovellus kuin aikaisemminkin Pyramid- ja Smalltalk-osioissa. Tällä kertaa kuitenkin HTTP:ta käytetään vain kättelyssä ja datan siirto hoidetaan web-sokettejen kautta.

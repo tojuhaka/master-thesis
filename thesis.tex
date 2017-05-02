@@ -902,13 +902,15 @@ Alla esitellään selaimeen toteutettu JavaScript-koodi, jonka avulla web-sokett
   var ws = new WebSocket("ws://localhost:8888/websocket");
 
   ws.onopen = function() {
-     ws.send("message");
+     ws.send("Hello World!");
   };
   ws.onmessage = function (evt) {
      alert(evt.data);
   };
   </script>
 \end{lstlisting}
+
+Koodin ajaminen selaimessa luo HTTP:n kautta kättelyn ja tämän jälkeen siirtää viestinnän web-soketti protokollalle. Koodissa lähetetään yksinkertainen "Hello World!" viesti yhteyden avautuessa Tornadossa luotuun käsittelijään. Käsittelijässä \emph{on\_message} -metodi saa kyseisen viestin ja lähettää tämän takaisin selaimelle web-soketin yhteyttä pitkin. JavaScriptillä toteutetussa koodissa käsitellään viesti \emph{onmessage} -metodissa, jossa viestin sisällön perusteella näytetään selaimessa ponnahdusikkuna. 
 
 \chapter{MVC:n vaatimukset}
 Vaikka MVC:tä ei ole tarkoitettu alunperin web-sovelluksiin, voivat ne hyötyä MVC:n arkkitehtuurista. Suurin ongelma MVC:n käyttämisessä web-sovelluskehyksissä on palvelimen (server) ja asiakkaan (client) välinen ositus. Näkymä näytetään aina asiakkaan selaimessa sen omalla päätelaitteella HTML-kielellä. Malli ja Ohjain taas voivat olla ositettu teoriassa miten vain asiakkaan ja palvelimen välillä. Web-sovelluksissa kehittäjä pakotetaan osioimaan sovellus. MVC:n tulee olla riippumaton osioinnista. Osioinnin ei tule määrittää sovelluksen arkkitehtuuria \parencite{ibm_watson}.

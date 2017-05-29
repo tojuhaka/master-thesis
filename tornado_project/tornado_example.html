@@ -1,0 +1,34 @@
+<body>
+<script>
+var controllerToModel = new WebSocket("ws://localhost:8888/model");
+var viewToModel = new WebSocket("ws://localhost:8888/model");
+
+var CounterController = class {
+    constructor(model, view) {
+       this.modelSocket = model;
+       this.view = view;
+
+       this.modelSocket.onmessage = function(event) {
+            alert(event.data);
+       };
+   }
+
+   increaseModel() {
+       this.model.send('increase');
+   };
+
+   decreaseModel() {
+       this.model.send('increase');
+   };
+
+   sendView() {
+      this.view.send('increase');
+   };
+};
+</script>
+
+<<div id="counterView">
+   <h1> </h1>
+</div>
+
+</body>

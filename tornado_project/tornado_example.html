@@ -1,34 +1,52 @@
+<html>
 <body>
 <script>
-var controllerToModel = new WebSocket("ws://localhost:8888/model");
-var viewToModel = new WebSocket("ws://localhost:8888/model");
+    var modelSocket = new WebSocket("ws://localhost:8888/model");
 
-var CounterController = class {
-    constructor(model, view) {
-       this.modelSocket = model;
-       this.view = view;
+    modelSocket.onmessage = function (evt) {
+        var element = document.getElementById("counterView").firstElementChild;
+        element.textContent = parseInt(evt.data);
+    };
 
-       this.modelSocket.onmessage = function(event) {
-            alert(event.data);
-       };
-   }
+    var controller = (function () {
+        return {
+            increase: function () {
+                modelSocket.send('increase');
+            },
+            decrease: function () {
+                modelSocket.send('decrease');
+            }
+        };
 
-   increaseModel() {
-       this.model.send('increase');
-   };
-
-   decreaseModel() {
-       this.model.send('increase');
-   };
-
-   sendView() {
-      this.view.send('increase');
-   };
-};
+    })
 </script>
 
-<<div id="counterView">
-   <h1> </h1>
+<div id="counterView">
+    <div id="number"> </div>
+    <button id="increase" onclick="ctrl.increase()"> increase </button>
+    <button id="decrease" onclick="ctrl.decrease()"> decrease </button>
+    <script>
+        var ctrl = controller();
+
+        function waitForSocketConnection(socket, callback){
+            setTimeout(
+                function(){
+                    if (socket.readyState === 1) {
+                        if(callback !== undefined){
+                            callback();
+                        }
+                    } else {
+                        waitForSocketConnection(socket,callback);
+                    }
+                }, 5);
+        }
+
+        waitForSocketConnection(modelSocket, function() {
+            modelSocket.send('get');
+        });
+    </script>
 </div>
 
+<div> TODO: mieti onko controlleri parempi toteuttaa serverin vai selaimen puolelle. Kun näkymä alustaa arvon tulee sen kysyä sitä suroaan mallillta luontivaiheessa -> tulee viite näkymän ja mallin välille </div>
 </body>
+</html>

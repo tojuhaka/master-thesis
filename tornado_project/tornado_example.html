@@ -3,12 +3,7 @@
 <script>
     var modelSocket = new WebSocket("ws://localhost:8888/model");
 
-    modelSocket.onmessage = function (evt) {
-        var element = document.getElementById("counterView").firstElementChild;
-        element.textContent = parseInt(evt.data);
-    };
-
-    var controller = (function () {
+    var controller = (function (modelSocket) {
         return {
             increase: function () {
                 modelSocket.send('increase');
@@ -18,15 +13,14 @@
             }
         };
 
-    })
-</script>
+    });
 
-<div id="counterView">
-    <div id="number"> </div>
-    <button id="increase" onclick="ctrl.increase()"> increase </button>
-    <button id="decrease" onclick="ctrl.decrease()"> decrease </button>
-    <script>
-        var ctrl = controller();
+    var view = (function (modelSocket) {
+
+        modelSocket.onmessage = function (evt) {
+            var element = document.getElementById("counterView").firstElementChild;
+            element.textContent = parseInt(evt.data);
+        };
 
         function waitForSocketConnection(socket, callback){
             setTimeout(
@@ -41,12 +35,27 @@
                 }, 5);
         }
 
-        waitForSocketConnection(modelSocket, function() {
-            modelSocket.send('get');
-        });
+        return {
+            refresh: function () {
+                waitForSocketConnection(modelSocket, function() {
+                    modelSocket.send('get');
+                });
+            }
+        };
+    })
+</script>
+
+<div id="counterView">
+    <div id="number"> </div>
+    <button id="increase" onclick="ctrl.increase()"> increase </button>
+    <button id="decrease" onclick="ctrl.decrease()"> decrease </button>
+    <script>
+        var ctrl = controller(modelSocket);
+        var view = view(modelSocket);
+        view.refresh();
     </script>
 </div>
-
-<div> TODO: mieti onko controlleri parempi toteuttaa serverin vai selaimen puolelle. Kun näkymä alustaa arvon tulee sen kysyä sitä suroaan mallillta luontivaiheessa -> tulee viite näkymän ja mallin välille </div>
+Näkymä huolehtii kontrollerin ja näkymän luonnista. Lisäksi näkymällä on yhteys malliin alustuksen ohella, jolloin mallia
+pyydetään lähettämään sen nykyinen tila.
 </body>
 </html>

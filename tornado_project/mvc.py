@@ -5,17 +5,8 @@ from tornado import websocket
 class Model(websocket.WebSocketHandler):
     counter = 0
 
-    def __init__(self, application, request, **kwargs):
-        super().__init__(application, request, **kwargs)
-
     def check_origin(self, origin):
         return True
-
-    def open(self):
-        print("WebSocket opened")
-
-    def on_close(self):
-        print("WebSocket closed")
 
     def increase(self):
         self.counter += 1
@@ -24,12 +15,15 @@ class Model(websocket.WebSocketHandler):
     def decrease(self):
         self.counter -= 1
 
+    def get_value(self):
+        return self.counter
+
     def on_message(self, message):
-        {"get": lambda: True,
+        {"get": self.get_value,
          "increase": self.increase,
          "decrease": self.decrease}[message]()
 
-        self.write_message(str(self.counter))
+        self.write_message(str(self.get_value()))
 
 
 def make_app():

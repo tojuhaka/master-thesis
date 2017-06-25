@@ -10,13 +10,10 @@
             },
             decrease: function () {
                 modelSocket.send('decrease');
-            }
-        };
-
+            }};
     });
 
     var view = (function (modelSocket) {
-
         modelSocket.onmessage = function (evt) {
             var element = document.getElementById("counterView").firstElementChild;
             element.textContent = parseInt(evt.data);

@@ -15,15 +15,12 @@ class Model(websocket.WebSocketHandler):
     def decrease(self):
         self.counter -= 1
 
-    def get_value(self):
-        return self.counter
-
     def on_message(self, message):
-        {"get": self.get_value,
+        {"get": lambda: True,
          "increase": self.increase,
          "decrease": self.decrease}[message]()
 
-        self.write_message(str(self.get_value()))
+        self.write_message(str(self.counter))
 
 
 def make_app():

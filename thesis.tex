@@ -1072,18 +1072,109 @@ ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen gr
 Pyramid-sovelluskehystä ja MVC:tä tutkiessa todettiin MVC:n alkuperäisen toteutuksen vaativan reaaliaikaista kommunikoita mallin sekä näkymän välillä siten, että malli kommunikoi suoraan näkymälle muutoksistaan. Tämä ei pelkällä Pyramidilla toteutetun web-sovelluksen avulla onnistu, koska kommunikointi toteutetaan aina HTTP-pyynnön kautta ja muutoksien näkeminen vaatii aina uuden HTTP-pyynnön. Web 2.0 teknologiat kuten AJAX (Asynchronous JavaScript and XML) ovat tuonneet uuden tavan loppukäyttäjille kommunikoida web-sovelluksien kanssa. Sen sijaan, että muodostetaan useita sivuja sekä kutsu-funktioita (callbacks) tuomaan sisältö loppukäyttäjälle, voidaan sisältöä tuoda reaaliaikaisesti. Loppukäyttäjän ei tällöin tarvitse päivittää sivua nähdäkseen sisällössä muutoksia. AJAX vaatii kuitenkin useiden päivityspyyntöjen lähettämistä palvelimelle yhteyden aikana, jotta käyttäjälle voidaan päivittää sisältöä. Tätä kutsutaan pollaukseksi (polling). Tästä syystä jokainen tapahtuma luo ylimääräistä kuormaa palvelimelle\parencite{websocket_ajax}. AJAX ei siis riitä toteuttamaan MVC:ssä mallin suoraa kommunikointia näkymälle ja ohjaimelle, koska erillinen pyyntö päivitysten tarkastamiseen tarvitaan edelleen. AJAX:n kanssa ei kuitenkaan tarvita sivun lataamista uudelleen muutoksien näkemiseksi, koska pollaus toteutetaan taustalla yhteyden aikana.  Web-socketit ratkaisevat pollauksen ongelman ja mahdollistavat yhteyden molempiin suuntiin \parencite[s. 1.1]{websocket}.
 
 \section{Toiminta}
-WEb-soketti protokolla on itsenäinen TCP-pohjainen protokolla. Sen avulla voidaan yhden yksittäisen TCP-yhteyden aikana siirtää dataa kumpaankin suuntaan. Protokollaa voidaan käyttää niin tavallisissa web-sivustoissa kuin peleissäkin. Se on suunniteltu erityisesti syrjäyttämään olemassa olevia kommunikointiteknologioita, jotka käyttävät HTTP:ta datan siirrossa. Koska HTTP:ta ei oltu alunperin tarkoitettu kaksisuuntaiseen kommunikaation, tehtiin useat aiemmat teknologiset ratkaisut tehokkuuden ja toimintavarmuuden väliltä. Tavallinen HTTP-malli ei siis tue suoraan kommunikaatiota palvelimelta asiakassovellukselle \parencite[s.2]{polling}.  Web-soketti protokolla ei kuitenkaan vaadi HTTP:ta toimiakseen, mutta tässä tutkimuksessa keskitytääin web-sokettejen toteutukseen HTTP:n kanssa \parencite[s. 1.1]{websocket}.
-
-
+Web-soketti protokolla on itsenäinen TCP-pohjainen protokolla. Sen avulla voidaan yhden yksittäisen TCP-yhteyden aikana siirtää dataa kumpaankin suuntaan. Protokollaa voidaan käyttää niin tavallisissa web-sivustoissa kuin peleissäkin. Se on suunniteltu erityisesti syrjäyttämään olemassa olevia kommunikointiteknologioita, jotka käyttävät HTTP:ta datan siirrossa. Koska HTTP:ta ei oltu alunperin tarkoitettu kaksisuuntaiseen kommunikaation, tehtiin useat aiemmat teknologiset ratkaisut tehokkuuden ja toimintavarmuuden väliltä. Tavallinen HTTP-malli ei siis tue suoraan kommunikaatiota palvelimelta asiakassovellukselle \parencite[s.2]{polling}.  Web-soketti protokolla ei kuitenkaan vaadi HTTP:ta toimiakseen, mutta tässä tutkimuksessa keskitytääin web-sokettejen toteutukseen HTTP-kättelyn kanssa \parencite[s. 1.1]{websocket}.
 
 \section{Toteutus}
-
 Web-soketti protokollassa on kaksi osaa: kättely ja datan siirto. Kättelyssä asiakas ja palvelin lähettävät kättelyviestit toisilleen ja kättelyn onnistuessa datan siirto alkaa. Kättelyn tehtävänä on siis sopia kummankin osapuolen yhteys, jonka kautta dataa siirretään. Datan siirto hoidetaan kaksisuuntaisen kanavan kautta, jossa kummatkin osapuolet voivat lähettää toisilleen riippumattomasti viestejä \parencite[s. 4]{websocket}. Kättely on yhteensopiva HTTP-protokollan kanssa, jolloin web-soketteja voidaan käyttää HTTP-pohjaisten web-sovellusten kanssa. HTTP:n avulla tehdyssä kättelyssä kummatkin, asiakas ja palvelin, pystyvät kommunikoimaan toisilleen kaksisuuntaisesti yhtä porttia käyttäen\parencite[s.5]{websocket}. 
+
+\section{Javascript}
+Javascript on  
 
 
 \chapter{MVC:n toteutus Tornadolla}
-Tornadolla toteutetaan vastaava laskurisovellus kuin aikaisemminkin Pyramid- ja Smalltalk-osioissa. Tällä kertaa kuitenkin HTTP:ta käytetään vain kättelyssä ja datan siirto hoidetaan web-sokettejen kautta.
-- tänne koodit Tornadon MVC toteutuksesta ja selvennykset millä tavalla 
+Tornadon avulla toteutetaan vastaava laskurisovellus kuin aikaisemminkin Pyramid- ja Smalltalk-osioissa. Tällä kertaa kuitenkin HTTP:ta käytetään vain kättelyssä ja kommunikaatio komponenttejen välillä sovelluksen ajonaikana hoidetaan web-sokettejen avulla. Sovelluksessa ohjain ja näkymä toteutetaan selaimen puolella käyttäen HTML:ää sekä Javascript ohjelmointikieltä. Malli kirjoitetaan palvelimen puolelle, jossa käytetään Tornadoa. Ohjain voidaan myös toteuttaa Palvelimen puolelle, jolloin ohjaimen logiikka voidaan piilottaa käyttäjältä. Tässä tutkimuksesa keskitytään toteutukseen, jossa ohjaimen logiikka on nähtävillä web-selaimen puolella. Tutkimuksen kananlta oleellisinta on kuitenkin selvittää voidaanko web-sokettejen avulla toteuttaa MVC web-sovelluksessa. Jotta esimerkkisovellus saadaan esiteltyä selkeästi, on joitain paloja ohjelmasta jätetty näyttämättä. Täysin toimiva sovellus löytyy liitteet -osiosta. 
+
+\section{Mallin toteutus}
+
+\begin{lstlisting}[language=Python]
+class Model(websocket.WebSocketHandler):
+    counter = 0
+
+    def increase(self):
+        self.counter += 1
+        self.write_message(str(self.counter))
+
+    def decrease(self):
+        self.counter -= 1
+
+    def get_value(self):
+        return self.counter
+
+    def on_message(self, message):
+        {"get": self.get_value,
+         "increase": self.increase,
+         "decrease": self.decrease}[message]()
+
+        self.write_message(str(self.get_value()))
+\end{lstlisting}
+
+Malli määritellään yhdessä luokassa, joka peritään \emph{WebSocketHandler} -luokasta, joka löytyy Tornadon tarjoamasta \emph{websocket} -kirjastosta (1). 
+
+\section{Näkymä}
+\begin{lstlisting}[language=Javascript]
+var view = (function (modelSocket) {
+   modelSocket.onmessage = function (evt) {
+     var element = document.getElementById("counterView").firstElementChild;
+     element.textContent = parseInt(evt.data);
+   };
+
+  function waitForSocketConnection(socket, callback){
+     setTimeout(
+         function(){
+             if (socket.readyState === 1) {
+                 if(callback !== undefined){
+                    callback();
+                 }
+              } else {
+                waitForSocketConnection(socket,callback);
+              }}, 5);
+     }
+     return {
+        refresh: function () {
+            waitForSocketConnection(modelSocket, function() {
+                modelSocket.send('get');
+             });
+        }};
+})
+\end{lstlisting}
+\begin{lstlisting}[language=Javascript]
+<div id="counterView">
+    <div id="number"> </div>
+    <button id="increase" onclick="ctrl.increase()"> increase </button>
+    <button id="decrease" onclick="ctrl.decrease()"> decrease </button>
+    <script>
+        var ctrl = controller(modelSocket);
+        var view = view(modelSocket);
+        view.refresh();
+    </script>
+</div>
+\end{lstlisting}
+
+\section{Ohjain}
+\begin{lstlisting}[language=Javascript]
+var modelSocket = new WebSocket("ws://localhost:8888/model");
+var controller = (function (modelSocket) {
+    return {
+        increase: function () {
+            modelSocket.send('increase');
+        },
+        decrease: function () {
+            modelSocket.send('decrease');
+        }};
+});
+\end{lstlisting}
+
+
+
+
+ 
+
+
+ Javascriptillä ohjelmoidaan selaimen puoleinen toteutus, johon tulee ohjain sekä näkymä. Malli pidetään palvelimen puolella. Tämä on yksi tapa. Toinen tapa on se, että ohjain on siirretty palvelimen puolelle. Tutkielmassa käymme kuitenkin läpi toteutuksen, jossa ohjain on selaimen puolella.
+- tänne koodit Tornadon MVC toteutuksesta ja selvennykset millä tavalla
+
+\section{Javascript}
+Javascript on 
 
 
 

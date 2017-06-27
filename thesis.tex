@@ -1119,7 +1119,7 @@ if __name__ == "__main__":
     tornado.ioloop.IOLoop.current().start()
 \end{lstlisting}
 
-Web-soketit rekisteröidään Tornadolle antamalla \emph{Application} -luokan instanssille parametrina lista luokkia, jotka on peritty \emph{WebSocketHandkler} -luokasta. Lisäksi jokaista luokkaa kohden annetaan polku, josta sokettiin voidaan ottaa yhteyttä. 
+Web-soketit rekisteröidään Tornadolle antamalla \emph{Application} -luokan instanssille parametrina lista luokkia, jotka on peritty \emph{WebSocketHandkler} -luokasta. Lisäksi jokaista luokkaa kohden annetaan polku, josta sokettiin voidaan ottaa yhteyttä. Varsinainen sovellus rakennetaan \emph{make\_app} -funktion paluuarvon perusteella, joka palauttaa instanssin Tornado-sovelluksesta. Sovellus alustetaan kuuntelemaan porttia 8888, jonka jälkeen käynnistetään silmukka kuuntelemaan tapahtumia. Tämän jällkeen Malliin voidaan ottaa yhteyttä osoitteesta \emph{ws://localhost:8888/model} web-soketin avulla, jossa \emph{localhost} viittaa lokaalin osoitteeseen. Lisäksi malli voi lähettää viestejä sokettiin kytketyille ohjaimille ja näkymille. 
 
 
 \section{Ohjain}
@@ -1135,6 +1135,8 @@ var controller = (function (modelSocket) {
         }};
 });
 \end{lstlisting}
+
+Ohjain toteutetaan web-selaimen puolella, jolla on viite Mallin sokettiin. Ohjaimella on vastaavat metodit kuin Mallilla (\emph{increase} ja \emph{decrease}). Kummankin toteutuksessa lähetetään joko viesti "increase" tai "decrease", joka käsitellään Mallin puolella kasvattaen tai vähentäen laskurin arvoa. Ohjaimelle voidaan myös antaa viite näkymään, jos ohjaimen tulisi kommunikoida näkymän kanssa. Kuitenkin toteutetussa laskurisovelluksessa tälle ei ole tarvetta, koska muutokset tilasta tulevat Mallin kautta. Lisäksi Mallilta tulevat viestit voidaan käsitellä ohjaimessa \emph{modelSocket} -instanssin kautta, mutta tähänkään ei ole tarvetta, koska viestejä ei tarvitse Ohjaimessa käsitellä. Riittää, että ohjain vain lähettää viestejä napin painalluksista mallille.
 
 
 \section{Näkymä}
@@ -1177,23 +1179,6 @@ var view = (function (modelSocket) {
 </div>
 \end{lstlisting}
 
-
-
-
-
-
- 
-
-
- Javascriptillä ohjelmoidaan selaimen puoleinen toteutus, johon tulee ohjain sekä näkymä. Malli pidetään palvelimen puolella. Tämä on yksi tapa. Toinen tapa on se, että ohjain on siirretty palvelimen puolelle. Tutkielmassa käymme kuitenkin läpi toteutuksen, jossa ohjain on selaimen puolella.
-- tänne koodit Tornadon MVC toteutuksesta ja selvennykset millä tavalla
-
-\section{Javascript}
-Javascript on 
-
-
-
-\chapter{Tulokset}
 \printbibliography
 \appendix
 

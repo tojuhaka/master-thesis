@@ -1140,9 +1140,25 @@ Ohjain toteutetaan web-selaimen puolella, jolla on viite Mallin sokettiin. Ohjai
 
 
 \section{Näkymä}
+
+\begin{lstlisting}[language=Javascript]
+<div id="counterView">
+    <div id="number"> </div>
+    <button id="increase" onclick="ctrl.increase()"> increase </button>
+    <button id="decrease" onclick="ctrl.decrease()"> decrease </button>
+    <script>
+        var ctrl = controller(modelSocket);
+        var view = view(modelSocket);
+        view.refresh();
+    </script>
+</div>
+\end{lstlisting}
+
+Yllä esitellään HTML:llä kirjoitettu näkymä, jossa määritellään divisioona (\emph{div}) tunnisteella \emph{counterView}. Tunnisteen avulla voidaan yksilöidä divisioona, jolloin sitä on helpompi käsitellä Javascriptillä. Päädivisioonan sisälle lisätään kaikki mitä halutaan  näytettävän laskurissa. Laskurin kaksi painiketta \emph{increase} ja \emph{decrease} liitetään ohjaimen funktioihin. Jokainen painallus kutsuu ohjaimessa määriteltyjä \emph{increase} ja \emph{decrease} funktioita riippuen valitusta painikkeesta. Muuttujat  \emph{ctrl} ja \emph{view} alustetaan funktioilla, joiden kautta websocket -yhteys suoritetaan. Lisäksi tulee varmistaa, että yhteys on muodostettu varmasti ennenkuin mitään toimintoja voidaan tehdä. Tästä syystä \emph{refresh} -funktiossa on toteutettu tarkistus yhteyden tilalle ja sitä kutsutaan alustamisen mukana.
+
 \begin{lstlisting}[language=Javascript]
 var view = (function (modelSocket) {
-   modelSocket.onmessage = function (evt) {
+     modelSocket.onmessage = function (evt) {
      var element = document.getElementById("counterView").firstElementChild;
      element.textContent = parseInt(evt.data);
    };
@@ -1166,21 +1182,17 @@ var view = (function (modelSocket) {
         }};
 })
 \end{lstlisting}
-\begin{lstlisting}[language=Javascript]
-<div id="counterView">
-    <div id="number"> </div>
-    <button id="increase" onclick="ctrl.increase()"> increase </button>
-    <button id="decrease" onclick="ctrl.decrease()"> decrease </button>
-    <script>
-        var ctrl = controller(modelSocket);
-        var view = view(modelSocket);
-        view.refresh();
-    </script>
-</div>
-\end{lstlisting}
+
+Yllä esitellään useita funktioita joiden avulla yhdistetään näkymä vastaanottamaan websocket-yhteydestä tulevia viestejä. Lisäksi määritellään \emph{refresh} -funktio, jota kutsumalla varmistetaan yhteyden alustus. Alustuksen yhteydessä myös lähetetään mallille viesti, jossa pyydetään lähettämään alkutila. Serveriltä tulevat viestit käsitellään \emph{onmessage} -funktiossa, jota kutsutaan aina yksittäisen viestin saapuessa. Viestin sisältö löytyy \emph{evt}:n \emph{data} -muuttujasta. Muuttujan oletetaan olevan kokonaislukuarvo, joten se puretaan sellaiseksi ja asetetaan \emph{counterView} divisioonan ensimmäiseen lapsielementtiin, joka on tässä tapauksessa \emph{number} -tunnisteella esiintyvä divisioona. Serveriltä tullut viesti laitetaan tällöin suoraan divisioonan sisältöön, jolloin muutos näkyy suoraan selaimessa. 
+
+
+\chapter{Tulokset}
+
 
 \printbibliography
 \appendix
+
+
 
 
 

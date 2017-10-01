@@ -121,6 +121,7 @@ Toni Haka-Risku
 
 \begin{thetermlist}
 \item[Sovellusarkkitehtuuri] kertoo millä tavalla sovellus on rakennettu
+\item[URL] määrittää tavan nimetä objekteja ja komponentteja sovelluksessa, jolloin ne voidaan identifioida ja paikantaa \parencite{trends}
 \item[MVC] Model-View-Controller sovellusarkkitehtuuri
 \item[Sovelluskehys] on sovelluskehitykselle tarkoitettu pohja, joka kutsuu käyttäjän kirjoittamaa ohjelmakoodia ja tarjoaa ratkaisuja yleisimpiin toistuviin ongelmiin
 \item[WSGI] määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset
@@ -130,6 +131,7 @@ yhdistetään prosessoimaan pyyntöjä.
 \item[Pakettikytkentä] on tiedonsiirtomenetelmä, jossa yhteys data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{kytkenta}.
 \item[Piirikytkentä] on tiedonsiirtomenetelmä, jossa yhteys pysyy auki riippumatta siitä, onko osapuolien välillä liikennettä. Piirikytkentä on käytössä esim. puhelinverkoissa \parencite{kytkenta}.
 \item[Asiakas-sovellus] alustaa yhteyden lähettääkseen pyyntöjä palvelimelle \parencite{http}.
+\item[HTTP] Kommunikaatio-protokolla Web:lle. Määrittelee kahdeksan perusoperaatiota: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE ja CONNECT. Käytetyimmät operaatiot ovat GET ja POST. GET-metodi hakee datan, joka on liitetty pyynnössä annettuun URL:iin. POST lähettää dataa ohjelmalle, joka kuuntelee jotain määriteltyä URL:ia.
 \item[Käyttäjä-agentti] on tietokoneohjelma, joka lähettäää pyynnön jollekin tietylle ohjelmalle. Tällaisia ovat esimerkiksi selaimet \parencite{http}. 
 \item[Palvelin] on tietokoneohjelma, joka ottaa vastaan yhteyksiä ja lähettää takaisin vastauksia asiakas-sovellukselle. Jokainen ohjelma pystyy olemaan yhtäaikaa asiakas-sovellus ja palvelin \parencite{http}. 
 \end{thetermlist}
@@ -137,6 +139,24 @@ yhdistetään prosessoimaan pyyntöjä.
 \mainmatter
 
 \chapter{Johdanto}
+
+1994-luvulla Internet tuli julkisesti kaikkien saataville ja tämän jälkeen Internetistä on tullut alusta lukuisille Web-sovelluksille. Web:n ensimmäiset toteutukset koostuivat suurista määristä dokumentteja, joita pystyttiin
+yhdistämään toisiinsa hyperlinkeillä. Nämä olivat usein yksinkertaisia tekstitiedostoja, joissa sisältö oli staattista. Yhdessä vuosikymmenessä Web on kuitenkin muuttunut staattisesta arkistosta kattavaksi alustaksi sovellusten toteuttamiseen ja julkaisuun.  Uudet web-teknologiat, metodit ja kielet mahdollistavat dynaamisten sovellusten luonnin sekä malintamisen käyttäjien välille. Tulevaisuuden kehitys web-sovelluksissa kehittymään sitä mukaan kun uusia teknologioita otetaan käyttöön web-selaimissa \parencite{trends abstract}. 
+
+Web:n arkkitehtuurissa palvelin-sovellus tarjoaa asiakas-sovellukselle Web-sivuja, jotka voidaan dynaamisesti luoda palvelin puolella ohjelmakoodin avulla. Esimerkiksi selaimen pyytäessä web-sivua tulee pyyntö palvelimelle, jonka perusteella palvelin hakee tietokannasta tarvittavat tiedot ja muodostaa niistä sivun, joka palautetaan vastauksena takaisin selaimelle. Palvelimen puolella toteutettu sivujen prosessointi johti CGI-sovelluksiin (Common Gateway Interface) missä sovelluksen yksittäinen URL yhdistetään ohjelmakoodiin. Sovelluksen kasvaessa palvelimen puolella ohjelmakoodissa generoidut web-sivut osoittautuvat kuitenkin vaikeaksi hallita. Tämän ongelman ratkaisemiseksi kehittyi hybrid-malli, jossa ohjelmakoodin palasia kirjoitetaan tekstejen sekaan, jolloin halutut osat voidaan muuttaa dynaamiseksi. Pyynnön aikana dynaamiset ohjelmakoodin palaset suoritetaan ja yhdistetään dokumenttiin. PHP-ohjelmointikielellä oli tähän merkittävä vaikutus. Ratkaisu teki sivujen uudelleenkäyttämisen helpommaksi, mutta ajan kuluessa huomattiin koodimuutoksien olevan vaikeasti toteutettavissa, kun ohjelmakoodin palaset olivat käytössä kaikkialla sivuilla. Tämä puolestaan johti lopulta malliin, jossa sovelluksen tietty osa hallitsee pääsyä dataan ja toinen osa hajotetaan palasiin, joilla hallitaan sivujen luontia ja käyttäjien näkymiä \parencite{trends 3.1}
+
+Tyypillinen rakenne Web-sovelluksissa koostuu seuraavista osista: 
+\begin{itemize}
+\item HTML-sivujen näyttäminen käyttäjälle
+\item selaimen ohjelmakoodit, jotka ajetaan selaimen puolella
+\item palvelimen ohjelmakoodit, jotka ajetaan palvelimen puolella ja tyypillisesti keskustelevat tietokantojen kanssa
+\end{itemize}
+
+Selaimessa käytetty ohjelmointikieli perustuu ECMAScript standardiin, joka on olio-pohjainen ohjelmointikieli ja erityisesti tarkoitettu selaimen puolella ohjelmointiin. Tunnetuin ECMAScriptin toteutus on JavaScript. Palvelin-puolen ohjelmointikieliä on monia. Tällaisia ovat esimerkiksi PERL, PHP, Python ja Ruby.  
+
+
+ joka on nykypäivän web-sovelluksissa yleisesti käytössä. 
+ Tässä tutkimuksessa käydään web-sovelluskehyksien toteutusta läpi MVC-arkkitehtuurin näkökulmasta ja selvitetään voidaanko web-soketti teknologialla ratkaista siihen liittyviä ongelmia. 
 
 \section{Tutkimuksen rakenne ja aiheen rajaus}
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
@@ -161,7 +181,7 @@ Pyramid- ja Django-sovelluskehykseen ja selvitetään millä tavalla niiden sove
 Havaintojen perusteella pohditaan MVC:n mahdollisia ongelmia sovelluskehyksien toteutuksessa 
 ja selvitetään löytyykö sovelluskehyksien arkkitehtuurista jotain yhtenäisiä piirteitä, mitkä ovat
 kytköksissä MVC:n toteutukseen. Saatujen tulosten pohjalta  pyritään kirjoittamaan Tornado-sovellus, joka toteuttaa MVC:n 
-niinkuin se on alunperin tarkoitettu. Tutkimuksen lopuksi koostetaan havainnoista yhteenveto, jossa pohditaan saatuja tuloksia ja selvitetään 
+niinkuin se on alunperin tarkoitettu käyttäen web-soketteja. Tutkimuksen lopuksi koostetaan havainnoista yhteenveto, jossa pohditaan saatuja tuloksia ja selvitetään 
 pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
 
 \section{Tutkimuskysymys}
@@ -171,7 +191,7 @@ MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla. Tutkimuks
 
 Internettiä ja WWW:tä (World Wide Web) varten toteutetuissa web-sovelluksissa toistuvat usein samat toiminnallisuudet, kuten esimerkiksi staattisten resurssejen jakaminen, URL:ien liittäminen ohjelmakoodiin sekä tietoturvan hallinta \parencite{pyramid_intr}. Tällöin on tärkeää, että Internetin ja WWW:n  taustat käydään tutkimuksessa läpi, sillä niiden merkitys on suuri web-sovelluskehyksien olemassaololle.
 
-Sovellusarkkitehtuurin tarkoituksena on vastata millä tavalla ohjelmiston eri komponentit on organisoitu, rakennettu ja millä tavalla ne kommunikoivat keskenään. Se on ensimmäinen vaihe, kun ohjelmistoa lähdetään toteuttamaan. MVC on yksi tapa
+Sovellusarkkitehtuurin tarkoituksena on vastata millä tavalla ohjelmiston eri komponentit on organisoitu, rakennettu ja millä tavalla ne kommunikoivat keskenään. Tämä on ensimmäinen vaihe, kun ohjelmistoa lähdetään toteuttamaan. MVC on yksi tapa
 toteuttaa sovelluksen arkkitehtuuri.    \parencite[s. 148]{Sommerville} MVC-arkkitehtuuri on saanut paljon huomiota web-sovelluskehyksien
 toteutuksissa ja useat web-sovelluskehykset ovat luokiteltu
 MVC-pohjaisiksi sovelluskehyksiksi \parencite{mvcframeworks}. Tätä tukee myös Sommervillen teos, jossa väitetään web-sovelluskehysten olevan suurimmaksi osaksi MVC-arkkitehtuurin toteuttavia \parencite[s. 432]{Sommerville}.
@@ -211,7 +231,7 @@ Lisäksi Sommervillen mallissa Malli ei ole suoraan yhteydessä Ohjaimeen.
 Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta tutkitaan millä tavalla 
 MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
 eroaa alkuperäisestä MVC:n toteutuksesta \parencite{krasner}. Lisäksi pyritään toteuttamaan MVC alkuperäisen
-toteutuksen mukaan käyttäen Tornado-sovelluskehystä sekä Web-soketteja. Havaintojen pohjalta
+toteutuksen mukaan käyttäen Tornado-sovelluskehystä sekä web-soketteja. Havaintojen pohjalta
 selvitetään voidaanko Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksessä Tornadon ja Web-sokettejen avulla.
 
 
@@ -1187,7 +1207,7 @@ Yllä esitellään useita funktioita joiden avulla yhdistetään näkymä vastaa
 
 
 \chapter{Tulokset}
-
+Web-sokettejen avulla ratkaistaan kaksisuuntainen kommunikaatio ongelma MVC:ssä. TODO: Jatka tästä perusteluja 
 
 \printbibliography
 \appendix

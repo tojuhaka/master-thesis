@@ -156,10 +156,10 @@ Selaimessa käytetty ohjelmointikieli perustuu ECMAScript standardiin, joka on o
 
 \section{Tutkimuskysymys}
 Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta tutkitaan millä tavalla 
-MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
-eroaa alkuperäisestä MVC:n toteutuksesta \parencite{krasner}. Lisäksi pyritään toteuttamaan MVC alkuperäisen
-toteutuksen mukaan käyttäen Tornado-sovelluskehystä sekä web-soketteja. Havaintojen pohjalta
-selvitetään voidaanko Reenskaugin ja Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksessä Tornadon ja Web-sokettejen avulla.
+MOdel-View-Controller -arkkitehtuuri (MVC) on toteutettu web-sovelluskehyksissä ja miten se
+eroaa alkuperäisestä arkkitehtuurin määritelmästä, jonka määrittelee Krasner \parencite{krasner} käyttäen pohjana Reenskaugin kehittelemää MVC-arkkitehtuuria \parencite{reenskaug_tools} . Lisäksi pyritään toteuttamaan MVC alkuperäisen
+määritelmään mukaan käyttäen Tornado-sovelluskehystä sekä käyttäen TCP:n päälle rakennettua web-socket protokollaa. Havaintojen pohjalta
+selvitetään voidaanko Reenskaugin ja Krasnerin alkuperäinen MVC-malli toteuttaa perinteisillä web-sovelluskehyksillä. 
 
 \section{Tutkimuksen rakenne ja aiheen rajaus}
 Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
@@ -352,7 +352,6 @@ TCP on rakennettu Internet Protokollan päälle, joka tarjoaa TCP:lle työkalut 
 
 TCP koostuu kahdesta rajapinnasta, joista toinen toimii käyttäjälle tai sovellukselle ja toinen alemman tason protokollille kuten Internet Protokolalle. Sovelluksille tarkoitettu rajapinta koostuu vastaavista kutsuista mitä käyttöjärjestelmä tarjoaa tiedostojen hallintaan. Esimerkiksi se sisältää kutsut yhteyden avaamiseen ja sulkemiseen sekä datan vastaanottoon ja lähetykseen yhteyden läpi. TCP pystyy myös asynkronisesti kommunikoimaan sovelluksien kanssa. Rajapinta alemmille protokollille on yleisesti määrittelemätön, mutta se olettaa rajapinnassa olevan mekansimin, jossa kaksi tasoa pystyvät asynkronisesti siirtämään dataa toistensa välillä. Yleensä kyseinen määrittely oletetaan löytyvän alemman tason protokollalta. TCP on tarkoitettu toimivan geneerisessä ympäristössä, mutta yleisesti voidaan olettaa alemman tason protokollan olevan Internet Protokolla \parencite{tcp1_4}.
 
-\section{TCP:n toiminta}
 TCP:n tärkein tehtävä on tarjota turvallinen ja luotettava yhteys kahden prosessin välille. Tarjotakseen tällaisen palvelun Internetin päälle, tulee tietyt osa-alueet toteutua. IETF \parencite{tcp1_4}  määrittää TCP:n toteuttamat osa-alueet seuraavasti:
 
 \begin{desclist}
@@ -398,6 +397,9 @@ HTTP (Hypertext Transfer Protocol) on ollut Internetin WWW:n (World-Wide-Web) k�
 HTTP-viestit koostuvat asiakaspuolen viesteistä sekä palvelimen vastauksista asiakkaalle. Molemmat viestit sisältävät aloitusrivin, tyhjän tai useamman ylätunnisteen, tyhjän rivin (CRLF) ja mahdollisen lähetettävän viestin. CRLF määrittää rivinvaihdon ja palvelimen on pystyttävä protokollan datavirtaa luettaessa huomioimaan se. Esimerkiksi datavirtaa luettaessa viesti alkaa CRLF:llä se tulee hylätä. HTTP-viesti sisältää erilaisia ylätunnisteita (header), joiden avulla voidaan viedä ylimääräistä tietoa HTTP-pyynnöstä sekä asiakaspäästä. Ylätunnisteita voi olla useita yhdessä HTTP-viestissä. Viestikentässä (message-body) viedään tietyn viestin sisältö, jos sellainen on viestissä mukana \parencite{httprequest}. Viestikentän olemassaolo määritetään pituuskentässä (Content-Length) tai kentässä, joka määrittää siirron enkoodauksen (Transfer-Encoding). HTTP-pyynnön ei tule sisältää viestikenttää, jos esimerkiksi enkoodauskenttä löytyy pyynnöstä ja se sisältää minkä tahansa muun arvon kuin "identity".  Seuraavaksi esitellään yleisellä tasolla esimerkki millä tavalla asiakas saa HTTP-palvelimelta vastauksena hyperteksti-dokumentin.
 
 Yhteyden luonnissa asiakas luo TCP-IP yhteyden serverin ja asiakkaan välille käyttäen osoitteessa määritettyä porttinumeroa. Jos porttinumeroa ei ole annettu HTTP olettaa porttinumeron olevan 80. Asiakas lähettää pyynnön, joka koostuu yhdestä rivistä ASCII-merkkejä. Pyyntö sisältää sanan "GET", välilyönnin sekä ja dokumentin osoitteen. Dokumentin osoitteen tulee olla yksi yhtenäinen sana. Kaikki ylimääräiset sanat, jotka löydetään dokumentin osoitteesta jätetään huomioimatta tai ne tulkitaan HTTP-spesifikaation mukaisesti \parencite{w3http2}. Vastaus yksinkertaiseen GET-viestiin voi sisältää esimerkiksi HTML-pohjaisen (Hypertext Markup language) ASCII datavirran. HTML-kieltä käytetään julkaisemaan hyperteksti-dokumenttejä WWW:ssä. HTML:n pohjana on käytetty SGML:ää, joka on standardi määrittelemään merkkauskieliä \parencite{sgml}. HTML-dokumentit ovat siis SGML-dokumentteja, jotka toteuttavat SGML:n määritelmät.  Hyvin toteutetut asiakassovellukset lukevat koko dokumentin mahdollisimman nopeasti, jolloin käyttäjän laukaisemat toiminnot, toteutetaan vasta dokumentin prosessoinnin jälkeen. TCP/IP yhteys suljetaan palvelimen toimesta kun koko dokumentti on siirretty \parencite{w3http}
+
+\section{Web-soketti protokolla}
+Web-soketti protokolla on itsenäinen TCP-pohjainen protokolla. Sen avulla voidaan yhden yksittäisen TCP-yhteyden aikana siirtää dataa kumpaankin suuntaan. Protokollaa voidaan käyttää niin tavallisissa web-sivustoissa kuin peleissäkin. Se on suunniteltu erityisesti syrjäyttämään olemassa olevia kommunikointiteknologioita, jotka käyttävät HTTP:ta datan siirrossa. Koska HTTP:ta ei oltu alunperin tarkoitettu kaksisuuntaiseen kommunikaation, tehtiin useat aiemmat teknologiset ratkaisut tehokkuuden ja toimintavarmuuden väliltä. Tavallinen HTTP-malli ei siis tue suoraan kommunikaatiota palvelimelta asiakassovellukselle \parencite[s.2]{polling}.  Web-soketti protokolla ei kuitenkaan vaadi HTTP:ta toimiakseen, mutta tässä tutkimuksessa keskitytääin web-sokettejen toteutukseen HTTP-kättelyn kanssa \parencite[s. 1.1]{websocket}.
 
 
 \chapter{Sovelluskehitys}
@@ -871,62 +873,7 @@ Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa 
 \section{Tornado}
 Tornado on Python-pohjainen web-sovelluskehys , joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O) sekä mahdollistaa web-sokettejen käytön \parencite{tornado}. Siirräntä tarkoittaa tässä yhteydessä luku- ja kirjoitusoperaatioita levyllä. Suurella kuormalla toimivat synkroniset TCP/IP-pohjaiset sovellukset voivat jättää useita syklejä prosessorin laskennasta väliin, joka johtuu siirrännän hitaudesta. Nämä syklit voitaisiin käyttää sovelluksen koodin ajamiseen. Mitä enemmän pyyntöjä tulee samanaikaisesti, sitä enemmän prosessorin syklejä jää väliin ja järjestelmään tulee ylimääräistä kuormaa. Siirrännät paljon hitaampia kuin prosessorin laskentateho. Asynkronisessa siirrännässä pyyntöjä voidaan ottaa vastaan käsiteltäväksi, vaikka edellistä pyyntöä ei ole vielä suoritettu loppuun \parencite[s. 1]{async}. Tornado ei myöskään toteuta MVC-mallia, vaan tarjoaa vapaammat kädet kehittäjälle toteuttaa haluamansa arkkitehtuuri. 
 
-\chapter{Tornado \& web-soketit}
-Tornadon dokumentaatioissa luodaan yksinkertainen web-sovellus käyttäen web-soketteja \parencite{tornado_socket}. Sovelluksessa lähetetään selaimesta viesti palvelimelle, joka kaiuttaa viestin takaisin selaimelle. 
 
-\lstset{
-  literate={ö}{{\"o}}1
-           {ä}{{\"a}}1,
-xleftmargin=30pt,
-escapeinside={/*@}{@*/},
-backgroundcolor=\color{light-gray}
-}
-\lstset{numbers=left}
-\begin{lstlisting}[language=Python]
-import tornado.ioloop
-from tornado import websocket
-
-class EchoWebSocket(websocket.WebSocketHandler):
-    def check_origin(self, origin):
-        return True
-
-    def open(self):
-        print("WebSocket opened")
-
-    def on_message(self, message):
-        self.write_message(u"You said: " + message)
-
-    def on_close(self):
-        print("WebSocket closed")
-
-def make_app():
-    return tornado.web.Application([
-        (r"/websocket", EchoWebSocket),
-    ], debug=True)
-
-if __name__ == "__main__":
-    app = make_app()
-    app.listen(8888)
-    tornado.ioloop.IOLoop.current().start()
-\end{lstlisting}
-Jokaista web-sockettia varten luodaan erillinen käsittelijä, joka peritään WebSocketHandler-luokasta. Luokasta tulee ylikirjoittaa \emph{on\_message}-, \emph{on\_close}- ja \emph{open}-metodit. Tietoturvan kannalta \emph{check\_origin} tulisi toteuttaa tarkastamaan asiakaspuolen yhteyden identiteetti, mutta tässä toteutuksessa ei oteta kyseiseen metodiin kantaa. \emph{Open} -metodia kutsutaan yhteyden avaamisessa, \emph{on\_message} käsittelee viestin ja \emph{on\_close} kutsutaan yhteyden sulkemisen yhteydessä. Metodissa \emph{make\_app} liitetään käsittelijä polkuun \emph{/websocket}. Sovelluksen käynnistyttyä löytyy web-soketti osoitteesta \emph{ws://localhost:8888/websocket}.
-
-Alla esitellään selaimeen toteutettu JavaScript-koodi, jonka avulla web-sokettiin yhdistetään:
-
-\begin{lstlisting}[language=JavaScript]
-<script>
-  var ws = new WebSocket("ws://localhost:8888/websocket");
-
-  ws.onopen = function() {
-     ws.send("Hello World!");
-  };
-  ws.onmessage = function (evt) {
-     alert(evt.data);
-  };
-  </script>
-\end{lstlisting}
-
-Koodin ajaminen selaimessa luo HTTP:n kautta kättelyn ja tämän jälkeen siirtää viestinnän web-soketti protokollalle. Koodissa lähetetään yksinkertainen "Hello World!" viesti yhteyden avautuessa Tornadossa luotuun käsittelijään. Käsittelijässä \emph{on\_message} -metodi saa kyseisen viestin ja lähettää tämän takaisin selaimelle web-soketin yhteyttä pitkin. JavaScriptillä toteutetussa koodissa käsitellään viesti \emph{onmessage} -metodissa, jossa viestin sisällön perusteella näytetään selaimessa ponnahdusikkuna. 
 
 \chapter{Alkuperäisen MVC:n vaatimukset}
 Pyramidin sovellusarkkitehtuuri on toteutettu käyttäen pohjana MVC"-arkkitehtuuria. Tämä ei kuitenkaan tarkoita sitä, että Pyramid toteuttaisi MVC:n teknisesti sellaisena kuin esimerkiksi Krasner \parencite{krasner_desc} ja Reenskaug \parencite{reenskaug_tools} määrittelee. Tärkeimpänä vaatimuksena MVC:n toteutukselle on se, että näkymä ja ohjain luovat rajapinnan, jonka kautta käyttäjä keskustelee mallin kanssa. Malli ei saa olla suorassa yhteydessä käyttäjään \parencite[s. 10]{reenskaug_tools}. Mallin tulee olla riippumaton näkymästä ja ohjaimesta. Sen tulee myös hallita sovelluksen tilaa sekä pystyä antamaan informaatiota sovelluksen tilasta \parencite{burbeck}. Näkymän on keskusteltava mallin kanssa sekä hoitaa mallilta saadun datan graafinen näyttäminen \parencite[s.1]{reenskaug_orig}. Ohjain puolestaan ottaa vastaan syötteitä ja lähettää viestejä tämän perusteella näkymälle ja mallille \parencite{burbeck}.
@@ -1073,7 +1020,6 @@ Alla esitellyssä kuvassa havainnollisestetaan, kuinka mallin ja näkymän kommu
 Yllä esitetyssä kommunikaatiomallissa ohjain saa vastaan request-olion, jossa tuodaan kaikki tarvittava tieto käyttäjästä. Tämän perusteella ohjain ohjaa mallia
 sekä muuttujaa. Samalla se pyytää mallilta tietoa sovelluksen tilasta ja välittää tiedon näkymälle. Näkymä taas välittää ohjaimen tuoman datan käyttäjälle graafisena.
 
-
 Alunperin Pyramidin dokumentaatiossa kyseenalaistettiin mallin sekä ohjaimen toteutus \parencite{pyramid_intr}. Tutkimuksen pohjalta voidaan kuitenkin
 todeta, että ongelmaksi ei muodostu yksittäisien komponenttien toteutus, vaan komponenttien välinen kommunikointi. Erityisesti näkymän ja mallin yhteistyö jää
 kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelmän kanssa \parencite[s. 1]{reenskaug_orig}. Tämä johtuu siitä, että Pyramidissa \emph{views.py} -tiedoston sisältämä ohjelmakoodi on nimensä mukaisesti tarkoitettu näkymäksi ja
@@ -1081,17 +1027,68 @@ kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelm�
 ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä näkymää. Template ei kuitenkaan riitä toteuttamaan näkymän ominaisuuksia, koska se on täysin riippuvainen ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan näkymälle ja ohjaimelle ilman, että ohjain/näkymä pyytää Mallilta nykyistä tilaa.
 
 
-\chapter{Web-soketit}
+\chapter{Web-soketit \% Tornado}
 Pyramid-sovelluskehystä ja MVC:tä tutkiessa todettiin MVC:n alkuperäisen toteutuksen vaativan reaaliaikaista kommunikoita mallin sekä näkymän välillä siten, että malli kommunikoi suoraan näkymälle muutoksistaan. Tämä ei pelkällä Pyramidilla toteutetun web-sovelluksen avulla onnistu, koska kommunikointi toteutetaan aina HTTP-pyynnön kautta ja muutoksien näkeminen vaatii aina uuden HTTP-pyynnön. Web 2.0 teknologiat kuten AJAX (Asynchronous JavaScript and XML) ovat tuonneet uuden tavan loppukäyttäjille kommunikoida web-sovelluksien kanssa. Sen sijaan, että muodostetaan useita sivuja sekä takaisinkutsuja tuomaan sisältö loppukäyttäjälle, voidaan sisältöä tuoda reaaliaikaisesti. Loppukäyttäjän ei tällöin tarvitse päivittää sivua nähdäkseen sisällössä muutoksia. AJAX vaatii kuitenkin useiden päivityspyyntöjen lähettämistä palvelimelle yhteyden aikana, jotta käyttäjälle voidaan päivittää sisältöä. Tätä kutsutaan pollaukseksi (polling). Tästä syystä jokainen tapahtuma luo ylimääräistä kuormaa palvelimelle\parencite{websocket_ajax}. AJAX ei siis riitä toteuttamaan MVC:ssä mallin suoraa kommunikointia näkymälle ja ohjaimelle, koska erillinen pyyntö päivitysten tarkastamiseen tarvitaan edelleen. AJAX:n kanssa ei kuitenkaan tarvita sivun lataamista uudelleen muutoksien näkemiseksi, koska pollaus toteutetaan taustalla yhteyden aikana.  Web-socketit ratkaisevat pollauksen ongelman ja mahdollistavat yhteyden molempiin suuntiin \parencite[s. 1.1]{websocket}.
 
-\section{Toiminta}
-Web-soketti protokolla on itsenäinen TCP-pohjainen protokolla. Sen avulla voidaan yhden yksittäisen TCP-yhteyden aikana siirtää dataa kumpaankin suuntaan. Protokollaa voidaan käyttää niin tavallisissa web-sivustoissa kuin peleissäkin. Se on suunniteltu erityisesti syrjäyttämään olemassa olevia kommunikointiteknologioita, jotka käyttävät HTTP:ta datan siirrossa. Koska HTTP:ta ei oltu alunperin tarkoitettu kaksisuuntaiseen kommunikaation, tehtiin useat aiemmat teknologiset ratkaisut tehokkuuden ja toimintavarmuuden väliltä. Tavallinen HTTP-malli ei siis tue suoraan kommunikaatiota palvelimelta asiakassovellukselle \parencite[s.2]{polling}.  Web-soketti protokolla ei kuitenkaan vaadi HTTP:ta toimiakseen, mutta tässä tutkimuksessa keskitytääin web-sokettejen toteutukseen HTTP-kättelyn kanssa \parencite[s. 1.1]{websocket}.
-
 \section{Toteutus}
-Web-soketti protokollassa on kaksi osaa: kättely ja datan siirto. Kättelyssä asiakas ja palvelin lähettävät kättelyviestit toisilleen ja kättelyn onnistuessa datan siirto alkaa. Kättelyn tehtävänä on siis sopia kummankin osapuolen yhteys, jonka kautta dataa siirretään. Datan siirto hoidetaan kaksisuuntaisen kanavan kautta, jossa kummatkin osapuolet voivat lähettää toisilleen riippumattomasti viestejä \parencite[s. 4]{websocket}. Kättely on yhteensopiva HTTP-protokollan kanssa, jolloin web-soketteja voidaan käyttää HTTP-pohjaisten web-sovellusten kanssa. HTTP:n avulla tehdyssä kättelyssä kummatkin, asiakas ja palvelin, pystyvät kommunikoimaan toisilleen kaksisuuntaisesti yhtä porttia käyttäen\parencite[s.5]{websocket}. 
+Web-soketti protokollassa on kaksi osaa: kättely ja datan siirto. Kättelyssä asiakas ja palvelin lähettävät kättelyviestit toisilleen ja kättelyn onnistuessa datan siirto alkaa. Kättelyn tehtävänä on siis sopia kummankin osapuolen välille yhteys, jonka kautta dataa siirretään. Datan siirto hoidetaan kaksisuuntaisen kanavan kautta, jossa kummatkin osapuolet voivat lähettää toisilleen riippumattomasti viestejä \parencite[s. 4]{websocket}. Kättely on yhteensopiva HTTP-protokollan kanssa, jolloin web-soketteja voidaan käyttää HTTP-pohjaisten web-sovellusten kanssa. HTTP:n avulla tehdyssä kättelyssä kummatkin, asiakas ja palvelin, pystyvät kommunikoimaan toisilleen kaksisuuntaisesti yhtä porttia käyttäen web-sokettien kautta \parencite[s.5]{websocket}. 
 
-\section{Javascript}
-Javascript on  
+\section{Tornado \& web-soketit}
+Tornadon dokumentaatioissa luodaan yksinkertainen web-sovellus käyttäen web-soketteja \parencite{tornado_socket}. Sovelluksessa lähetetään selaimesta viesti palvelimelle, joka kaiuttaa viestin takaisin selaimelle. 
+
+\lstset{
+  literate={ö}{{\"o}}1
+           {ä}{{\"a}}1,
+xleftmargin=30pt,
+escapeinside={/*@}{@*/},
+backgroundcolor=\color{light-gray}
+}
+\lstset{numbers=left}
+\begin{lstlisting}[language=Python]
+import tornado.ioloop
+from tornado import websocket
+
+class EchoWebSocket(websocket.WebSocketHandler):
+    def check_origin(self, origin):
+        return True
+
+    def open(self):
+        print("WebSocket opened")
+
+    def on_message(self, message):
+        self.write_message(u"You said: " + message)
+
+    def on_close(self):
+        print("WebSocket closed")
+
+def make_app():
+    return tornado.web.Application([
+        (r"/websocket", EchoWebSocket),
+    ], debug=True)
+
+if __name__ == "__main__":
+    app = make_app()
+    app.listen(8888)
+    tornado.ioloop.IOLoop.current().start()
+\end{lstlisting}
+Jokaista web-sockettia varten luodaan erillinen käsittelijä, joka peritään WebSocketHandler-luokasta. Luokasta tulee ylikirjoittaa \emph{on\_message}-, \emph{on\_close}- ja \emph{open}-metodit. Tietoturvan kannalta \emph{check\_origin} tulisi toteuttaa tarkastamaan asiakaspuolen yhteyden identiteetti, mutta tässä toteutuksessa ei oteta kyseiseen metodiin kantaa. \emph{Open} -metodia kutsutaan yhteyden avaamisessa, \emph{on\_message} käsittelee viestin ja \emph{on\_close} kutsutaan yhteyden sulkemisen yhteydessä. Metodissa \emph{make\_app} liitetään käsittelijä polkuun \emph{/websocket}. Sovelluksen käynnistyttyä löytyy web-soketti osoitteesta \emph{ws://localhost:8888/websocket}.
+
+Alla esitellään selaimeen toteutettu JavaScript-koodi, jonka avulla web-sokettiin yhdistetään:
+
+\begin{lstlisting}[language=JavaScript]
+<script>
+  var ws = new WebSocket("ws://localhost:8888/websocket");
+
+  ws.onopen = function() {
+     ws.send("Hello World!");
+  };
+  ws.onmessage = function (evt) {
+     alert(evt.data);
+  };
+  </script>
+\end{lstlisting}
+
+Koodin ajaminen selaimessa luo HTTP:n kautta kättelyn ja tämän jälkeen siirtää viestinnän web-soketti protokollalle. Koodissa lähetetään yksinkertainen "Hello World!" viesti yhteyden avautuessa Tornadossa luotuun käsittelijään. Käsittelijässä \emph{on\_message} -metodi saa kyseisen viestin ja lähettää tämän takaisin selaimelle web-soketin yhteyttä pitkin. JavaScriptillä toteutetussa koodissa käsitellään viesti \emph{onmessage} -metodissa, jossa viestin sisällön perusteella näytetään selaimessa ponnahdusikkuna. 
 
 
 \chapter{MVC:n toteutus Tornadolla}

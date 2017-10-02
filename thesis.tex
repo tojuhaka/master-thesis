@@ -154,8 +154,21 @@ Tyypillinen rakenne Web-sovelluksissa koostuu seuraavista osista:
 
 Selaimessa käytetty ohjelmointikieli perustuu ECMAScript standardiin, joka on olio-pohjainen ohjelmointikieli ja erityisesti tarkoitettu selaimen puolella ohjelmointiin. Tunnetuin ECMAScriptin toteutus on JavaScript. Palvelin-puolen ohjelmointikieliä on monia. Tällaisia ovat esimerkiksi PERL, PHP, Python ja Ruby. Palvelin-puolen ohjelmointikielien pohjalta on luotu lukuisia sovelluskehyksiä, joissa pohjana on MVC-arkkitehtuuri. Näistä tunnetuin on Ruby-kielellä toteutettu Ruby On Rails sekä Pythonilla toteutettu Django \parencite{trends}. Tutkimuksessa käydään Pythonilla toteutettu Pyramid-sovelluskehyksen MVC-rakenne läpi ja heijastetaan toteutusta alkuperäisen MVC:n määritelmään. 
 
+\section{Tutkimuskysymys}
+Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta tutkitaan millä tavalla 
+MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
+eroaa alkuperäisestä MVC:n toteutuksesta \parencite{krasner}. Lisäksi pyritään toteuttamaan MVC alkuperäisen
+toteutuksen mukaan käyttäen Tornado-sovelluskehystä sekä web-soketteja. Havaintojen pohjalta
+selvitetään voidaanko Reenskaugin ja Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksessä Tornadon ja Web-sokettejen avulla.
 
 \section{Tutkimuksen rakenne ja aiheen rajaus}
+Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
+käytössä suurta otantaa aihealueeseen liittyviä ohjelmistoteknisiä ratkaisuja, vaan se keskittyy perusteellisesti pieneen otantaan. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
+MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla. Tutkimuksen päämääränä on joko vahvistaa tai kumota hypoteesi MVC:n soveltuvuudesta web-sovelluskehyksiin. 
+
+Internettiä ja WWW:tä (World Wide Web) varten toteutetuissa web-sovelluksissa toistuvat usein samat toiminnallisuudet, kuten esimerkiksi staattisten resurssejen jakaminen, URL:ien liittäminen ohjelmakoodiin sekä tietoturvan hallinta \parencite{pyramid_intr}. Tällöin on tärkeää, että Internetin ja WWW:n  taustat käydään tutkimuksessa läpi, sillä niiden merkitys on suuri web-sovelluskehyksien olemassaololle. Lisäksi HTTP-protokollalla on suuri rooli MVC:n suhteen, koska se pakottaa yksisuuntaiseen viestintään, vaikka 
+MVC:n alkuperäisenä ajatuksena on kaksisuuntainen kommunikaatio esimerkiksi Mallin ja Näkymän välillä \parencite{reenskaug_tools}.
+
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
 tutkimusta ohjelmistokehityksestä ja MVC:stä on tehty. Lisäksi käydään
 läpi mitä lähteitä löytyy Python-pohjaisista web-sovelluskehyksistä sekä ohjelmistoarkkitehtuureista. Tarkasteltavat web-sovelluskehykset rajataan 
@@ -181,16 +194,9 @@ kytköksissä MVC:n toteutukseen. Saatujen tulosten pohjalta  pyritään kirjoit
 niinkuin se on alunperin tarkoitettu käyttäen web-soketteja. Tutkimuksen lopuksi koostetaan havainnoista yhteenveto, jossa pohditaan saatuja tuloksia ja selvitetään 
 pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
 
-\section{Tutkimuskysymys}
-Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
-käytössä suurta otantaa aihealueeseen liittyviä ohjelmistoteknisiä ratkaisuja, vaan se keskittyy perusteellisesti pieneen otantaan. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
-MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla. Tutkimuksen päämääränä on joko vahvistaa tai kumota hypoteesi MVC:n soveltuvuudesta web-sovelluskehyksiin. 
-
-Internettiä ja WWW:tä (World Wide Web) varten toteutetuissa web-sovelluksissa toistuvat usein samat toiminnallisuudet, kuten esimerkiksi staattisten resurssejen jakaminen, URL:ien liittäminen ohjelmakoodiin sekä tietoturvan hallinta \parencite{pyramid_intr}. Tällöin on tärkeää, että Internetin ja WWW:n  taustat käydään tutkimuksessa läpi, sillä niiden merkitys on suuri web-sovelluskehyksien olemassaololle. Lisäksi HTTP-protokollalla on suuri rooli MVC:n suhteen, koska se pakottaa yksisuuntaiseen viestintään, vaikka 
-MVC:n alkuperäisenä ajatuksena on kaksisuuntainen kommunikaatio esimerkiksi Mallin ja Näkymän välillä \parencite{reenskaug_tools}
-
+\section{MVC:n ongelmat web-kehityksessä}
 Sovellusarkkitehtuurin tarkoituksena on vastata millä tavalla ohjelmiston eri komponentit on organisoitu, rakennettu ja millä tavalla ne kommunikoivat keskenään. Tämä on ensimmäinen vaihe, kun ohjelmistoa lähdetään toteuttamaan. MVC on yksi tapa
-toteuttaa sovelluksen arkkitehtuuri.    \parencite[s. 148]{Sommerville} MVC-arkkitehtuuri on saanut paljon huomiota web-sovelluskehyksien
+toteuttaa sovelluksen arkkitehtuuri    \parencite[s. 148]{Sommerville}. MVC-arkkitehtuuri on saanut paljon huomiota web-sovelluskehyksien
 toteutuksissa ja useat web-sovelluskehykset ovat luokiteltu
 MVC-pohjaisiksi sovelluskehyksiksi \parencite{mvcframeworks}. Tätä tukee myös Sommervillen teos, jossa väitetään web-sovelluskehysten olevan suurimmaksi osaksi MVC-arkkitehtuurin toteuttavia \parencite[s. 432]{Sommerville}.
 Se on kuitenkin alunperin tarkoitettu matalan tason käyttöliittymäsovellusten toteuttamiseen,
@@ -225,12 +231,6 @@ Krasnerin esittelemässä MVC:ssä Malliin (Model) on rekisteröity Ohjaimia (Co
 Sommerville esittelee MVC-mallin web-sovelluksen näkökulmasta, jossa kommunikointi komponettejen suhteen toteutetaan erilailla. Sommervillen mallissa tieto käyttäjän toiminnoista voi tulla 
 Näkymältä itseltään. Käyttäjän pyynnöt voitat tulla niin Ohjaimelle kuin Näkymällekin toisinkuin Krasnerin mallissa, jossa käyttäjän toiminnot tulevat ainoastaan Ohjaimelle.
 Lisäksi Sommervillen mallissa Malli ei ole suoraan yhteydessä Ohjaimeen. 
-
-Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta tutkitaan millä tavalla 
-MVC-arkkitehtuuri on toteutettu web-sovelluskehyksissä ja miten se
-eroaa alkuperäisestä MVC:n toteutuksesta \parencite{krasner}. Lisäksi pyritään toteuttamaan MVC alkuperäisen
-toteutuksen mukaan käyttäen Tornado-sovelluskehystä sekä web-soketteja. Havaintojen pohjalta
-selvitetään voidaanko Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksessä Tornadon ja Web-sokettejen avulla.
 
 
 \chapter{Lähdemateriaalin hankinnasta}

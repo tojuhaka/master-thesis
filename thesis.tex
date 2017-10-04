@@ -89,8 +89,8 @@ literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{
 \keywords{MVC, Web-sovelluskehys}
 \tiivistelma{%
 Tässä tutkielmassa esitellään MVC-arkkitehtuurin toteutusta Python-pohjaisissa web-sovelluskehyksissä. Työssä selvitetään
-millä tavalla MVC on toteutettu sovelluskehyksissä ja vastaako se alkuperäistä MVC:n toteutusta, joka määritellään Krasnerin artikkelissa \parencite{krasner}. Työssä tutkitut 
-sovelluskehykset ovat Django, Pyramid ja Tornado. Sovelluskehykset eivät toteuttaneet MVC:tä niinkuin se on määritelty. Tornadon avulla ei myöskään voida toteuttaa MVC:tä Krasnerin vaatimusten mukaisesti.
+millä tavalla MVC on toteutettu sovelluskehyksissä ja vastaako se alkuperäistä MVC:n toteutusta. MVC:n toteutus määritellään Krasnerin artikkelissa \parencite{krasner}, joka pohjautuu Reenskaugin alkuperäiseen MVC:n määritelmään. Työssä tutkitut 
+sovelluskehykset ovat Django, Pyramid ja Tornado. Django ja Pyramid eivät toteuttaneet MVC:tä. Tornadon ja web-sokettien avulla MVC on mahdollista toteuttaa.
 
 }
 \abstract{%
@@ -140,8 +140,8 @@ yhdistetään prosessoimaan pyyntöjä.
 
 \chapter{Johdanto}
 
-1994-luvulla Internet tuli julkisesti kaikkien saataville ja tämän jälkeen Internetistä on tullut alusta lukuisille Web-sovelluksille. Web:n ensimmäiset toteutukset koostuivat suurista määristä dokumentteja, joita pystyttiin
-yhdistämään toisiinsa hyperlinkeillä. Nämä olivat usein yksinkertaisia tekstitiedostoja, joissa sisältö oli staattista. Yhdessä vuosikymmenessä Web on kuitenkin muuttunut staattisesta arkistosta kattavaksi alustaksi sovellusten toteuttamiseen ja julkaisuun.  Uudet web-teknologiat, metodit ja kielet mahdollistavat dynaamisten sovellusten luonnin sekä malintamisen käyttäjien välille. Tulevaisuuden kehitys web-sovelluksissa kehittymään sitä mukaan kun uusia teknologioita otetaan käyttöön web-selaimissa \parencite{trends}. 
+1994-luvulla Internet tuli julkisesti kaikkien saataville ja tämän jälkeen siitä on tullut alusta lukuisille Web-sovelluksille. Web:n ensimmäiset toteutukset koostuivat suurista määristä dokumentteja, joita pystyttiin
+yhdistämään toisiinsa hyperlinkeillä. Nämä olivat usein yksinkertaisia tekstitiedostoja, joissa sisältö oli staattista. Yhdessä vuosikymmenessä Web on kuitenkin muuttunut staattisesta arkistosta kattavaksi alustaksi sovellusten toteuttamiseen ja julkaisuun.  Uudet web-teknologiat, metodit ja kielet mahdollistavat dynaamisten sovellusten luonnin sekä malintamisen käyttäjien välille. Web-sovelluksissa tullaan kehittymään sitä mukaan, kun uusia teknologioita otetaan käyttöön web-selaimissa \parencite{trends}. 
 
 Web:n arkkitehtuurissa palvelin-sovellus tarjoaa asiakas-sovellukselle Web-sivuja, jotka voidaan dynaamisesti luoda palvelin puolella ohjelmakoodin avulla. Esimerkiksi selaimen pyytäessä web-sivua tulee pyyntö palvelimelle, jonka perusteella palvelin hakee tietokannasta tarvittavat tiedot ja muodostaa niistä sivun, joka palautetaan vastauksena takaisin selaimelle. Palvelimen puolella toteutettu sivujen prosessointi johti CGI-sovelluksiin (Common Gateway Interface) missä sovelluksen yksittäinen URL yhdistetään ohjelmakoodiin. Sovelluksen kasvaessa palvelimen puolella ohjelmakoodissa generoidut web-sivut osoittautuvat kuitenkin vaikeaksi hallita. Tämän ongelman ratkaisemiseksi kehittyi hybrid-malli, jossa ohjelmakoodin palasia kirjoitetaan tekstejen sekaan, jolloin halutut osat voidaan muuttaa dynaamiseksi. Pyynnön aikana dynaamiset ohjelmakoodin palaset suoritetaan ja yhdistetään dokumenttiin. PHP-ohjelmointikielellä oli tähän merkittävä vaikutus. Ratkaisu teki sivujen uudelleenkäyttämisen helpommaksi, mutta ajan kuluessa huomattiin koodimuutoksien olevan vaikeasti toteutettavissa, kun ohjelmakoodin palaset olivat käytössä kaikkialla sivuilla. Tämä puolestaan johti lopulta malliin, jossa sovelluksen tietty osa hallitsee pääsyä dataan ja toinen osa hajotetaan palasiin, joilla hallitaan sivujen luontia ja käyttäjien näkymiä \parencite[3.1]{trends}
 
@@ -152,26 +152,24 @@ Tyypillinen rakenne Web-sovelluksissa koostuu seuraavista osista:
 \item palvelimen ohjelmakoodit, jotka ajetaan palvelimen puolella ja tyypillisesti keskustelevat tietokantojen kanssa
 \end{itemize}
 
-Selaimessa käytetty ohjelmointikieli perustuu ECMAScript standardiin, joka on olio-pohjainen ohjelmointikieli ja erityisesti tarkoitettu selaimen puolella ohjelmointiin. Tunnetuin ECMAScriptin toteutus on JavaScript. Palvelin-puolen ohjelmointikieliä on monia. Tällaisia ovat esimerkiksi PERL, PHP, Python ja Ruby. Palvelin-puolen ohjelmointikielien pohjalta on luotu lukuisia sovelluskehyksiä, joissa pohjana on MVC-arkkitehtuuri. Näistä tunnetuin on Ruby-kielellä toteutettu Ruby On Rails sekä Pythonilla toteutettu Django \parencite{trends}. Tutkimuksessa käydään Pythonilla toteutettu Pyramid-sovelluskehyksen MVC-rakenne läpi ja heijastetaan toteutusta alkuperäisen MVC:n määritelmään. 
+Selaimessa käytetty ohjelmointikieli perustuu ECMAScript standardiin, joka on olio-pohjainen ohjelmointikieli ja erityisesti tarkoitettu käyttöön selaimen puolelle. Tunnetuin ECMAScriptin toteutus on JavaScript. Palvelin-puolen ohjelmointikieliä on monia. Tällaisia ovat esimerkiksi PERL, PHP, Python ja Ruby. Palvelin-puolen ohjelmointikielien pohjalta on luotu lukuisia sovelluskehyksiä, joissa pohjana on MVC-arkkitehtuuri. Näistä tunnetuimpia ovat Ruby-kielellä toteutettu Ruby On Rails sekä Pythonilla toteutettu Django \parencite{trends}. Tutkimuksessa käydään Pythonilla toteutettu Pyramid- ja Django-sovelluskehyksen MVC-rakenne läpi ja heijastetaan toteutusta alkuperäisen MVC:n määritelmään. Lisäksi toteutetaan MVC-arkkitehtuuri käyttäen Tornado-sovelluskehystä, joka ei ota itsessään kantaa MVC-arkkitehtuuriin.
 
 \section{Tutkimuskysymys}
 Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Näiden pohjalta tutkitaan millä tavalla 
-MOdel-View-Controller -arkkitehtuuri (MVC) on toteutettu web-sovelluskehyksissä ja miten se
+Model-View-Controller -arkkitehtuuri (MVC) on toteutettu web-sovelluskehyksissä ja miten se
 eroaa alkuperäisestä arkkitehtuurin määritelmästä, jonka määrittelee Krasner \parencite{krasner} käyttäen pohjana Reenskaugin kehittelemää MVC-arkkitehtuuria \parencite{reenskaug_tools} . Lisäksi pyritään toteuttamaan MVC alkuperäisen
-määritelmään mukaan käyttäen Tornado-sovelluskehystä sekä käyttäen TCP:n päälle rakennettua web-socket protokollaa. Havaintojen pohjalta
-selvitetään voidaanko Reenskaugin ja Krasnerin alkuperäinen MVC-malli toteuttaa perinteisillä web-sovelluskehyksillä. 
-
+määritelmään mukaan Tornado-sovelluskehyksellä käyttäen TCP:n päällä toimivaa web-soketti protokollaa kommunikaatiossa HTTP:n sijaan. Havaintojen pohjalta
+selvitetään voidaanko Reenskaugin ja Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksellä. 
 \section{Tutkimuksen rakenne ja aiheen rajaus}
-Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimuksessa ei ole
-käytössä suurta otantaa aihealueeseen liittyviä ohjelmistoteknisiä ratkaisuja, vaan se keskittyy perusteellisesti pieneen otantaan. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
-MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla. Tutkimuksen päämääränä on joko vahvistaa tai kumota hypoteesi MVC:n soveltuvuudesta web-sovelluskehyksiin. 
+Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkimuksen aikana, koska tutkimus perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
+MVC:n suhteesta web-sovellusten toteutuksiin sovelluskehykisen avulla. Tutkimuksen päämääränä on joko vahvistaa tai kumota hypoteesi MVC:n soveltuvuudesta web-sovelluskehyksillä toteutettuihin web-sovelluksiin. 
 
 Internettiä ja WWW:tä (World Wide Web) varten toteutetuissa web-sovelluksissa toistuvat usein samat toiminnallisuudet, kuten esimerkiksi staattisten resurssejen jakaminen, URL:ien liittäminen ohjelmakoodiin sekä tietoturvan hallinta \parencite{pyramid_intr}. Tällöin on tärkeää, että Internetin ja WWW:n  taustat käydään tutkimuksessa läpi, sillä niiden merkitys on suuri web-sovelluskehyksien olemassaololle. Lisäksi HTTP-protokollalla on suuri rooli MVC:n suhteen, koska se pakottaa yksisuuntaiseen viestintään, vaikka 
 MVC:n alkuperäisenä ajatuksena on kaksisuuntainen kommunikaatio esimerkiksi Mallin ja Näkymän välillä \parencite{reenskaug_tools}.
 
 Tutkimus aloitetaan kirjallisuuskatsauksella, jossa tarkastellaan mitä aiempaa 
 tutkimusta ohjelmistokehityksestä ja MVC:stä on tehty. Lisäksi käydään
-läpi mitä lähteitä löytyy Python-pohjaisista web-sovelluskehyksistä sekä ohjelmistoarkkitehtuureista. Tarkasteltavat web-sovelluskehykset rajataan 
+läpi mitä lähteitä löytyy Python-pohjaisista web-sovelluskehyksistä sekä ohjelmistoarkkitehtuureista. Web-sovelluskehykset rajataan 
 Pyramid-, Django- ja Tornado-sovelluskehyksiin. Tämän jälkeen tutkitaan Internetin ja WWW:n taustoja sekä avataan ohjelmistoarkkitehtuurejen merkitystä tutkimukselle. Seuraavaksi käydään läpi MVC:n historiaa sekä millä tavalla MVC on tarkoitettu toteutettavaksi. Tässä vaiheessa esitellään jokaisen MVC-komponentin tarkoitus sekä niiden 
 keskinäisen kommunikaation rakentuminen. Lisäksi esitellään
 Dortmundin yliopistossa kirjoitettu esimerkkiohjelma Smalltalkilla siitä miten MVC:n 
@@ -183,8 +181,7 @@ hyvin yksityiskohtaisesti läpi ja sen vertaaminen rajataan Python-pohjaisiin we
 Kun puhutaan MVC:stä tarkoitetaan tällä Krasnerin artikkelissa esiteltyjä määrittelyitä MVC:n toteutuksesta \parencite{krasner}, jotka pohjautuvat Trygve Reenskaugin esittelemään 
 MVC:n määritelmään \parencite{xerox-original}. 
 
-Tarkasteltavat web-sovelluskehykset rajataan 
-Pyramid-, Django- sekä Tornado-sovelluskehyksiin. Sovelluskehyksistä Pyramid ja Django ovat MVC-arkkitehtuuriin pohjautuvia sovelluskehyksiä. Tornado on web-sokettien ympärille toteutettu asynkroninen sovelluskehys, jota käytetään tutkimuksessa toteuttamaan MVC alkuperäisen toteutuksen mukaisesti. Sovelluskehyksistä käydään läpi sen 
+Tarkasteltavista sovelluskehyksistä Pyramid ja Django ovat MVC-arkkitehtuuriin pohjautuvia sovelluskehyksiä. Tornado on web-sokettien ympärille toteutettu asynkroninen sovelluskehys, jota käytetään tutkimuksessa toteuttamaan MVC alkuperäisen toteutuksen mukaisesti. Sovelluskehyksistä käydään läpi sen 
 historia sekä yleisellä tasolla mihin käyttötarkoitukseen
 sovelluskehys on tarkoitettu. Tämän jälkeen verrataan MVC:n toteutusta erikseen 
 Pyramid- ja Django-sovelluskehykseen ja selvitetään millä tavalla niiden sovellusarkkitehtuuri mahdollisesti eroaa MVC:n alkuperäisestä toteutuksesta. Sovelluskehyksien muihin teknisiin ominaisuuksiin ei oteta kantaa.
@@ -213,7 +210,8 @@ Pyramidin toteutus onkin hyvin lähellä alkuperäistä MVC:tä
 \parencite{pyramid}. Django on vastaavasti toteutettu MVC:n pohjalta, mutta sen väitetään
 myös toteuttavan MVC hieman erilailla kuin MVC on alunperin tarkoitettu \parencite{django_mvc}.
 Sommerville \parencite[s. 157]{Sommerville} esittelee MVC:n yhtenä arkkitehtuurimallina, jonka hän luokittelee
- kerrosarkkitehtuurien (Layered architecture) joukkoon. Sommervillen esittelemä  MVC-malli kuitenkin poikkeaa Krasnerin \parencite{krasner} alkuperäisestä MVC-mallista. Alla esitetään Krasnerin määrittelemä alkuperäinen MVC-malli sekä Sommervillen määrittelemä MVC-malli:
+ kerrosarkkitehtuurien (Layered architecture) joukkoon. Sommervillen esittelemä  MVC-malli kuitenkin poikkeaa Krasnerin \parencite{krasner} määrittelemästä MVC-mallista. Alla esitetään Krasnerin määrittelemä alkuperäinen MVC-malli sekä Sommervillen määrittelemä MVC-malli:
+
 
 \begin{figure}[h]
 \centering
@@ -223,15 +221,14 @@ Sommerville \parencite[s. 157]{Sommerville} esittelee MVC:n yhtenä arkkitehtuur
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.50]{mvc.png}
+\includegraphics[scale=0.4]{mvc.png}
 \caption{\parencite[s.162]{Sommerville}}
 \end{figure}
 
 Krasnerin esittelemässä MVC:ssä Malliin (Model) on rekisteröity Ohjaimia (Controller) ja Näkymiä (View). Näin Malli pystyy kommunikoimaan muutoksistaan suoraan Ohjaimelle sekä Näkymälle.
 Sommerville esittelee MVC-mallin web-sovelluksen näkökulmasta, jossa kommunikointi komponettejen suhteen toteutetaan erilailla. Sommervillen mallissa tieto käyttäjän toiminnoista voi tulla 
 Näkymältä itseltään. Käyttäjän pyynnöt voitat tulla niin Ohjaimelle kuin Näkymällekin toisinkuin Krasnerin mallissa, jossa käyttäjän toiminnot tulevat ainoastaan Ohjaimelle.
-Lisäksi Sommervillen mallissa Malli ei ole suoraan yhteydessä Ohjaimeen. 
-
+Lisäksi Sommervillen määritelmässä Mallilla ei ole kaksisuuntaista yhteyttä ohjaimeen.
 
 \chapter{Lähdemateriaalin hankinnasta}
 
@@ -1192,7 +1189,7 @@ Yllä esitellään useita funktioita joiden avulla yhdistetään näkymä vastaa
 
 
 \chapter{Tulokset}
-Web-sokettejen avulla ratkaistaan kaksisuuntainen kommunikaatio ongelma MVC:ssä. TODO: Jatka tästä perusteluja 
+Web-sokettejen avulla ratkaistaan kaksisuuntainen kommunikaatio ongelma MVC:ssä. Lisäksi syötteet voidaan tulkita suoraan Pyynnöksi (request) jolloin controllerin tehtävänä on hallita sisään tulevaa dataa.  TODO: Jatka tästä perusteluja 
 
 \printbibliography
 \appendix

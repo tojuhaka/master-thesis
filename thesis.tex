@@ -880,7 +880,7 @@ beatles_blog = Blog.objects.get(name="Beatles Blog")
 Yllä oleva rivi hoitaa kyselyn nimen perusteella blog -nimisestä taulusta, luo sen kenttien perusteella instanssin Blog -luokasta ja tallentaa sen muuttujan arvoksi.
 
 
-Template-moottori on teknologia HTML-sivujen tuottamiseen, jolla generoidaan dynaamisia HTML-sivuja yhdistämällä ohjelmalogiikkaa sekä HTML-kieltä. Alla on esitelty Jinja2-kieli, jota käytetään template-kielenä Flask:ssa.
+Template-moottori on teknologia HTML-sivujen tuottamiseen, jolla generoidaan dynaamisia HTML-sivuja yhdistämällä ohjelmalogiikkaa sekä HTML-kieltä. Alla on esitelty Jinja2-kieli, jota käytetään template-kielenä Flask-sovelluskehyksessä.
 \pagebreak
 
 \begin{lstlisting}[language=Smalltalk]
@@ -922,8 +922,6 @@ Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa 
 
 \section{Tornado}
 Tornado on Python-pohjainen web-sovelluskehys , joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O) sekä mahdollistaa web-sokettejen käytön \parencite{tornado}. Siirräntä tarkoittaa tässä yhteydessä luku- ja kirjoitusoperaatioita levyllä. Suurella kuormalla toimivat synkroniset TCP/IP-pohjaiset sovellukset voivat jättää useita syklejä prosessorin laskennasta väliin, joka johtuu siirrännän hitaudesta. Nämä syklit voitaisiin käyttää sovelluksen koodin ajamiseen. Mitä enemmän pyyntöjä tulee samanaikaisesti, sitä enemmän prosessorin syklejä jää väliin ja järjestelmään tulee ylimääräistä kuormaa. Siirrännät paljon hitaampia kuin prosessorin laskentateho. Asynkronisessa siirrännässä pyyntöjä voidaan ottaa vastaan käsiteltäväksi, vaikka edellistä pyyntöä ei ole vielä suoritettu loppuun \parencite[s. 1]{async}. Tornado ei myöskään toteuta MVC-mallia, vaan tarjoaa vapaammat kädet kehittäjälle toteuttaa haluamansa arkkitehtuuri. 
-
-
 
 \chapter{MVC \& Pyramid}
 Pyramidin kehittäjien dokumenteissa esitellään Pyramid MVC-kehyksenä, mutta samalla myös kyseenalaistetaan tämä väite. Erityisesti mallin ja ohjaimen määritelmä puuttuu \parencite{pyramid_intr}. Tässä
@@ -1053,8 +1051,8 @@ escapeinside={/*@}{@*/},
 \end{lstlisting}
 
 \section{Yhteenveto}
-Malli sekä ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta näkymään tai ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan ohjaimelle ja näkymälle omista muutoksistaan, koska kaikki muutokset tulevat näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii request-oliossa tulevista syötteistä ja vaikuttaa malliin sekä näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä näkymän tarkoitus on kommunikoida suoraan mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa näkymä on yhteydessä vain ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu .Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \parencite{krasner_desc}.
-Alla esitellyssä kuvassa havainnollisestetaan, kuinka mallin ja näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan ohjaimelle ja näkymälle vaan tarvitsee aina HTTP-pyynnön.
+Malli sekä ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta näkymään tai ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan ohjaimelle ja näkymälle omista muutoksistaan, koska kaikki muutokset tulevat näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii request-oliossa tulevista syötteistä ja vaikuttaa malliin sekä näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä näkymän tarkoitus on kommunikoida suoraan mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa näkymä on yhteydessä vain ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu. Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \parencite{krasner_desc}.
+Alla esitellyssä kuvassa havainnollisestetaan, kuinka mallin ja näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan ohjaimelle ja näkymälle vaan tarvitsee aina erillisen HTTP-pyynnön.
 
 \begin{figure}[h]
 \centering/
@@ -1070,6 +1068,54 @@ todeta, että ongelmaksi ei muodostu yksittäisien komponenttien toteutus, vaan 
 kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelmän kanssa \parencite[s. 1]{reenskaug_orig}. Tämä johtuu siitä, että Pyramidissa \emph{views.py} -tiedoston sisältämä ohjelmakoodi on nimensä mukaisesti tarkoitettu näkymäksi ja
 \emph{template.pt} -tiedosto katsotaan osaksi samaa komponenttia. Tutkimuksen tuloksien perusteella voidaan kuitenkin todeta, että \emph{views.py} -tiedoston näkymä-funktio toteuttaa kaikki
 ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä näkymää. Template ei kuitenkaan riitä toteuttamaan näkymän ominaisuuksia, koska se on täysin riippuvainen ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan näkymälle ja ohjaimelle ilman, että ohjain/näkymä pyytää Mallilta nykyistä tilaa.
+
+\chapter{MVC \& Django}
+Django luokitellaan MVC-arkkitehtuurin toteuttavaksi web-sovelluskehykseksi, mutta sen toteutus kuitenkin poikkeaa alkuperäisestä MVC-toteutuksesta samalla tavalla kuin Pyramidissa. Djangosta löytyvät samat tiedostot  ja luokat MVC:n toteuttamiselle, kuin Pyramidista. Siinä on vastaavasti \emph{models.py}, \emph{views.py} sekä \emph{template.html}. Näistä \emph{models.py} sisältää mallit, \emph{views.py} ohjaimet ja \emph{template.html} näkymät selaimelle. Tässä tutkielmassa  käytetään Djangon versiota 1.11. Seuraavaksi esitellään lyhesti Mallin, Näkymän sekä Ohjaimen toteutus Djangossa, jotka on myös esitelty Djangon dokumentaatiossa https://docs.djangoproject.com/en/1.11/topics/class-based-views/intro/.
+
+Mallin toteutetaan luomalla luokka, joka peritään \emph{models.Model} luokasta. Alla esitetyssä esimerkissä luodaan malli, jolla voidaan tallentaa henkilön etu- ja sukunimi.
+
+\begin{lstlisting}[language=Python]
+from django.db import models
+
+class Person(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+\end{lstlisting}
+
+Ohjaimen toiminta toteutuu Djangossa näkymien kautta vastaavasti kuin Pyramidissakin, koska näkymät käsittelevät pyyntöjä ja syötteitä, jotka tulevat selaimelta. Tästä syystä myös ohjaimen määritelmä toteutuu  sovelluksehyksessä määriteltyjen näkymien kautta https://docs.djangoproject.com/en/1.11/topics/class-based-views/intro/.
+
+\begin{lstlisting}[language=Python]
+from django.http import HttpResponse
+
+def my_view(request):
+    if request.method == 'GET':
+        # <view logic>
+        return HttpResponse('result')
+\end{lstlisting}
+
+Näkymät toteutetaan vastaavasti selaimelle käyttäen templateja. Djangossa on sisäänrakennettuna oma template-kieli, mutta se on hyvin samankaltainen esimerkiksi Jinja2 template-kielen kanssa.
+
+\begin{lstlisting}[language=Python]
+{% extends "base_generic.html" %}
+
+{% block title %}{{ section.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ section.title }}</h1>
+
+{% for story in story_list %}
+<h2>
+  <a href="{{ story.get_absolute_url }}">
+    {{ story.headline|upper }}
+  </a>
+</h2>
+<p>{{ story.tease|truncatewords:"100" }}</p>
+{% endfor %}
+{% endblock %}
+\end{lstlisting}
+
+\section{Yhteenveto}
+Djangossa määritellään MVC samalla tavalla kuin Pyramidissakin. Tästä syystä voidaan todeta, että vaikka MVC-komponenttejen vaatimukset toteutuvat yksittäin, tulee samat ongelmat vastaan kuin Pyramidissakin. Kommunikaatiomalli on ristiriidassa MVC:n alkuperäisen toteutuksen kanssa, mikä johtuu HTTP:n päälle rakennetusta toteutuksesta. Lisäksi näkymä ei kommunikoi suoraan mallin kanssa, vaan kommunikaatio mallille toteutetaan ohjaimen kautta. 
 
 
 \chapter{Web-soketit \& Tornado}
@@ -1132,6 +1178,7 @@ Alla esitellään selaimeen toteutettu JavaScript-koodi, jonka avulla web-sokett
 \end{lstlisting}
 
 Koodin ajaminen selaimessa luo HTTP:n kautta kättelyn ja tämän jälkeen siirtää viestinnän web-soketti protokollalle. Koodissa lähetetään yksinkertainen "Hello World!" viesti yhteyden avautuessa Tornadossa luotuun käsittelijään. Käsittelijässä \emph{on\_message} -metodi saa kyseisen viestin ja lähettää tämän takaisin selaimelle web-soketin yhteyttä pitkin. JavaScriptillä toteutetussa koodissa käsitellään viesti \emph{onmessage} -metodissa, jossa viestin sisällön perusteella näytetään selaimessa ponnahdusikkuna. 
+
 
 
 \chapter{MVC:n toteutus Tornadolla}
@@ -1238,9 +1285,11 @@ var view = (function (modelSocket) {
 
 Yllä esitellään useita funktioita joiden avulla yhdistetään näkymä vastaanottamaan websocket-yhteydestä tulevia viestejä. Lisäksi määritellään \emph{refresh} -funktio, jota kutsumalla varmistetaan yhteyden alustus. Alustuksen yhteydessä myös lähetetään mallille viesti, jossa pyydetään lähettämään alkutila. Serveriltä tulevat viestit käsitellään \emph{onmessage} -funktiossa, jota kutsutaan aina yksittäisen viestin saapuessa. Viestin sisältö löytyy \emph{evt}:n \emph{data} -muuttujasta. Muuttujan oletetaan olevan kokonaislukuarvo, joten se puretaan sellaiseksi ja asetetaan \emph{counterView} divisioonan ensimmäiseen lapsielementtiin, joka on tässä tapauksessa \emph{number} -tunnisteella esiintyvä divisioona. Serveriltä tullut viesti laitetaan tällöin suoraan divisioonan sisältöön, jolloin muutos näkyy suoraan selaimessa. 
 
+\section{Yhteenveto}
+Tornado ei ota kantaa MVC:n toteutukseen, joten se antaa vapauden sovelluksen kehittäjälle määrittää sovelluksen arkkitehtuurin rakenne. Jakamalla sovellus Malliin, Näkymään ja Ohjaimeen siten, että Ohjain ja Näkymä toteutetaan selaimen puolella ja Malli palvelimen puolella on mahdollista toteuttaa MVC-arkkitehtuuri niinkuin se on tarkoitettu. Komponenttejen kommunikaatio hoidetaan web-sokettejen kautta, jolloin mahdollistetaan kaksisuuntainen kommunikaatio komponenttejen välillä. 
 
 \chapter{Tulokset}
-Web-sokettejen avulla ratkaistaan kaksisuuntainen kommunikaatio ongelma MVC:ssä. Lisäksi syötteet voidaan tulkita suoraan Pyynnöksi (request) jolloin controllerin tehtävänä on hallita sisään tulevaa dataa.  TODO: Jatka tästä perusteluja 
+Djangossa ja Pyramidissa ei toteudu MVC:n alkuperäinen määritelmä. Kummankin MVC-toteutuksessa kommunikaatio Mallin ja Näkymän välillä toteutuu ohjaimen kautta, vaikka alkuperäisessä määrittelyssä myös Mallin tulisi olla suoraan yhteydessä Näkymään. Lisäksi vaaditaan kaksisuuntainen kommunikaatio komponenttejen välillä ja tämä ei toteudu HTTP:n kautta kommunikaation toteuttavissa web-sovelluksissa. Voidaan siis väittää, että mikä tahansa HTTP:n päälle rakennettu web-sovellus ei voi toteuttaa alkuperäistä MVC:n määritelmää. Web-sokettejen avulla ratkaistaan kaksisuuntaisen kommunikaation ongelma MVC:ssä ja Mallin yhteys Näkymään voidaan toteuttaa sovelluskehyksellä, jossa arkkitehtuurin toteutus on jätetty toteutettavaksi erikseen. Tornadon ja web-sokettejen avulla voidaan toteuttaa MVC alkuperäisen määritelmän mukaan.
 
 \printbibliography
 \appendix

@@ -94,18 +94,15 @@ sovelluskehykset ovat Django, Pyramid ja Tornado. Django ja Pyramid eivät toteu
 
 }
 \abstract{%
-  This document is a sample {gradu3} thesis document class
-  document.  It also functions as a user manual and supplies
-  guidelines for structuring a thesis document.
-
-  The English abstract of a thesis should usually say exactly the same
-  things as the Finnish tiivistelmä.
+  This thesis goes through MVC-architecture implementation in Python-based MVC web-frameworks and answers the question if the original MVC is properly implemented. The original MVC is defined in Kranser's article \parencite{krasner} which is based on model founded by Trygve Reenskaug. The web-frameworks used thesis are Pyramid, Django and Tornado. Django and Pyramid did not implement the MVC properly. With Tornado and web-sockets the MVC-architecture is possible to implement.
+uld usually say exactly the same
 }
 
 \author{Toni Haka-Risku}
 \contactinformation{Ag~C416.1, \texttt{toni.haka-risku@student.jyu.fi}}
 % jos useita tekijöitä, anna useampi \author-komento
-\supervisor{Ohjaamaton työ}
+\supervisor{Tommi Kärkkäinen}
+\supervisor{Jonne Itkonen}
 % jos useita ohjaajia, anna useampi \supervisor-komento
 
 \maketitle
@@ -120,20 +117,21 @@ Toni Haka-Risku
 
 
 \begin{thetermlist}
-\item[Sovellusarkkitehtuuri] kertoo millä tavalla sovellus on rakennettu
-\item[URL] määrittää tavan nimetä objekteja ja komponentteja sovelluksessa, jolloin ne voidaan identifioida ja paikantaa \parencite{trends}
-\item[MVC] Model-View-Controller sovellusarkkitehtuuri
+\item[Sovellusarkkitehtuuri] Määrittää millä tavalla sovellus on rakennettu.
+\item[URL] Tapa nimetä objekteja ja komponentteja sovelluksessa, jolloin ne voidaan yksilöidä ja paikantaa \parencite{trends}.
+\item[MVC] Model-View-Controller sovellusarkkitehtuuri..
 \item[Sovelluskehys] on sovelluskehitykselle tarkoitettu pohja, joka kutsuu käyttäjän kirjoittamaa ohjelmakoodia ja tarjoaa ratkaisuja yleisimpiin toistuviin ongelmiin
-\item[WSGI] määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset
+\item[WSGI] Määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset.
 yhdistetään prosessoimaan pyyntöjä.
 \item[Template] Dynaaminen html-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
-\item[Piirikytkentä] Dynaaminen html-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
-\item[Pakettikytkentä] on tiedonsiirtomenetelmä, jossa yhteys data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{kytkenta}.
-\item[Piirikytkentä] on tiedonsiirtomenetelmä, jossa yhteys pysyy auki riippumatta siitä, onko osapuolien välillä liikennettä. Piirikytkentä on käytössä esim. puhelinverkoissa \parencite{kytkenta}.
-\item[Asiakas-sovellus] alustaa yhteyden lähettääkseen pyyntöjä palvelimelle \parencite{http}.
-\item[HTTP] Kommunikaatio-protokolla Web:lle. Määrittelee kahdeksan perusoperaatiota: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE ja CONNECT. Käytetyimmät operaatiot ovat GET ja POST. GET-metodi hakee datan, joka on liitetty pyynnössä annettuun URL:iin. POST lähettää dataa ohjelmalle, joka kuuntelee jotain määriteltyä URL:ia.
+\item[Pakettikytkentä] Tiedonsiirtomenetelmä, jossa yhteys data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{kytkenta}.
+\item[Piirikytkentä] Tedonsiirtomenetelmä, jossa yhteys pysyy auki riippumatta siitä, onko osapuolien välillä liikennettä. Piirikytkentä on käytössä esim. puhelinverkoissa \parencite{kytkenta}.
+\item[Asiakas] Alustaa yhteyden lähettääkseen pyyntöjä palvelimelle \parencite{http}.
+\item[HTTP] Yksisuuntainen kommunikaatio-protokolla Web:lle. Määrittelee kahdeksan perusoperaatiota: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE ja CONNECT. Käytetyimmät operaatiot ovat GET ja POST. GET-metodi hakee datan, joka on liitetty pyynnössä annettuun URL:iin. POST lähettää dataa ohjelmalle, joka kuuntelee jotain määriteltyä URL:ia.
 \item[Käyttäjä-agentti] on tietokoneohjelma, joka lähettäää pyynnön jollekin tietylle ohjelmalle. Tällaisia ovat esimerkiksi selaimet \parencite{http}. 
-\item[Palvelin] on tietokoneohjelma, joka ottaa vastaan yhteyksiä ja lähettää takaisin vastauksia asiakas-sovellukselle. Jokainen ohjelma pystyy olemaan yhtäaikaa asiakas-sovellus ja palvelin \parencite{http}. 
+\item[Palvelin] Tietokoneohjelma, joka ottaa vastaan yhteyksiä ja lähettää takaisin vastauksia asiakas-sovellukselle. Jokainen ohjelma pystyy olemaan yhtäaikaa asiakas-sovellus ja palvelin \parencite{http}. 
+\item[Web-soketti] TCP:n päällä toimiva protokolla, joka mahdolllistaa kaksisuuntaisen kommunikaation asiakkaan ja palvelimen välillä \parencite{websocket}.
+\item[TCP] Protokolla kahden isännän väliseen luotettavaan tiedonsiirtoon verkossa  \parencite{tcp1_1}.
 \end{thetermlist}
 
 \mainmatter
@@ -901,7 +899,7 @@ Pyramid on Python-pohjainen web-sovelluskehys, jonka tehtävänä on helpottaa w
 kehittäjälle valmiita työkaluja avuksi kehitykseen. Pyramid on suunniteltu siten, että kehittäjän ei tarvitse tietää suuria määriä erilaisia malleja ja tekniikoita pystyäkseen tuottamaan web-sovelluksia. Se ei myöskään pakota käyttämään kehityksessä mitään erityistä tekniikkaa, vaan pyrkii olemaan mahdollisimman yksinkertainen ja helposti laajennettavissa erilaisiin käyttötarkoituksiin. Laajentamisella tarkoitetaan erilaisten lisäosien liittämistä Pyramidiin. Yksinkertaisuuden ja mimimaalisuuden ansiosta se on myös nopeampi kuin monet muut Python-pohjaiset web-sovelluskehykset. Tämä johtuu Pyramidin poikkeuksellisen pienestä kutsupinosta ajamisen aikana \parencite{pyramid_intr}. 
 
 Pyramid sai alkunsa Pylons-projektista syyskuussa vuonna 2005, jolloin jo yli 30 Python-sovelluskehystä kilpaili käyttäjistä. Ben Bangert ja James Gardner alkoivat yhdessä kehittää sovelluskehystä, josta tuli lopulta Pylons. Alunperin Pylons oli
-muokattu Myghty Python Templating Framework:n pohjalta tarjotakseen MVC-pohjaisen web-sovelluskehyksen. Myghty -sovelluskehystä ajettiin mod\_pythonin päällä, mutta Pylonsin pyrkimys oli käyttää WSGI:tä hyödyntämään joustavaa komponenttipohjaista lähestymistapaa web-sovelluksissa \parencite{pyramid_history}. Pylons projektin tarkoituksena ei ole keskittyä yhden yksittäisen web-sovelluskehyksen kehittämiseen vaan tarjota kokoelma erilaisia teknologioita \parencite{pylons_about}. Vuonna 2008 Pyramid tunnettiin nimellä repoze.bfg. Joulukuun alussa tapahtui ohjelmakoodin uudelleen nimeäminen ja ominaisuuksien lisääminen sekä poistaminen \parencite{pyramid_about}.
+muokattu Myghty Python Templating Framework:n pohjalta tarjotakseen MVC-pohjaisen web-sovelluskehyksen. Myghty -sovelluskehystä ajettiin mod\_pythonin päällä, mutta Pylonsin pyrkimys oli käyttää WSGI:tä hyödyntämään joustavaa komponenttipohjaista lähestymistapaa web-sovelluksissa \parencite{pylons_history}. Pylons projektin tarkoituksena ei ole keskittyä yhden yksittäisen web-sovelluskehyksen kehittämiseen vaan tarjota kokoelma erilaisia teknologioita \parencite{pylons_about}. Vuonna 2008 Pyramid tunnettiin nimellä repoze.bfg. Joulukuun alussa tapahtui ohjelmakoodin uudelleen nimeäminen ja ominaisuuksien lisääminen sekä poistaminen \parencite{pyramid_about}.
 
 Koska Pyramid pyrkii tarjoamaan vain välttämättömimmät työkalut web"-sovelluksien kehitykseen, sen kehittäjät
 ovat päätyneet web-kehityksessä neljään yleisimpään ongelmaan ja tarjoavat niihin ratkaisun Pyramidissa:

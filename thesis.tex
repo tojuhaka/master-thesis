@@ -548,7 +548,7 @@ MVC-arkkitehtuurin perusajatus on erottaa käyttöliittymä sovelluslogiikasta j
 näin tehdä sovelluksesta helposti ylläpidettävä kolmen eri komponentin avulla:
 Malli (Model), Näkymä (View) ja Ohjain (Controller). Jokainen komponentti on
 erikoistunut sovelluksessa johonkin tiettyyn tehtävään. Mallin tehtävänä on
-hallita sovelluksen tilaa ja vastata sen käsittelemästä datasta ohjaimelle ja näkymälle.
+hallita sovelluksen tilaa ja vastata sen käsittelemästä datasta Ohjaimelle ja Näkymälle.
 Näkymän tehtävänä on taas näyttää sovelluksen käyttöliittymä ja sitä kautta Mallin dataa. 
 Ohjaimen tarkoitus on ottaa vastaan syötteitä käyttäjältä käskien Mallia ja Näkymää muuttumaan tarvittaessa.
 
@@ -565,32 +565,32 @@ Luodessamme MVC-arkkitehtuurin toteuttavia komponentteja, tulee ne periä jostak
 Yleisesti MVC-komponenttien toimintaa kuvaavassa esimerkissä käyttäjältä tulee jokin syöte, jonka sillä hetkellä aktiivinen ohjain ottaa vastaan. Syötteen perusteella ohjain lähettää Mallille viestin. Malli puolestaan tekee sille määrättyjä operaatioita muuttaen tilaansa ja lähettää edelleen viestin muutoksestaan kaikille siihen liitetyille riippuvuuksille (näkymät ja ohjaimet). Näkymät
 voivat tämän jälkeen kysyä Mallilta sen nykyistä tilaa ja päivittää itsensä, jos siihen on tarvetta. Ohjaimet voivat myös muuttaa tilaansa riippuen Mallin tilasta \parencite[s. 4]{krasner_desc}. 
 
-Suurin merkitys MVC:llä on luoda silta ihmismielen hahmottamalle mallille ja tietokoneessa esiintyvälle Mallille. Oikein toteutettuna MVC:n avulla luodaan illuusio siitä, että käyttäjä kommunikoi suoraan Mallin kanssa. Todellisuudessa kuitenkin ohjain ja näkymä muodostavat yhdessä rajapinnan sille, miltä Malli näyttää ulospäin ja miten sitä käsitellään. Ohjain huolehtii syötteiden vastaanottamisesta ja käsittelemisestä. Näkymä taas huolehtii Mallin graafisesta puolesta \parencite[s. 11-12]{reenskaug_tools}. 
+Suurin merkitys MVC:llä on luoda silta ihmismielen hahmottamalle mallille ja tietokoneessa esiintyvälle Mallille. Oikein toteutettuna MVC:n avulla luodaan illuusio siitä, että käyttäjä kommunikoi suoraan Mallin kanssa. Todellisuudessa kuitenkin Ohjain ja Näkymä muodostavat yhdessä rajapinnan sille, miltä Malli näyttää ulospäin ja miten sitä käsitellään. Ohjain huolehtii syötteiden vastaanottamisesta ja käsittelemisestä. Näkymä taas huolehtii Mallin graafisesta puolesta \parencite[s. 11-12]{reenskaug_tools}. 
 
 \section{Historia}
 MVC:n esitteli Norjalainen Trygve Reenskaug ollessaan mukana Xerox PARC -tutkimushankkeessa. 
 Ensimmäinen julkaisu MVC:stä kirjoitettiin vuonna 1978 samassa tutkimuskeskuksessa. 
 Tuolloin julkaisussa esiteltiin kolmen komponentin sijasta neljä komponenttia: 
 Malli (Model), Näkymä(View), Ohjain(Controller) sekä Muokkaaja(Editor). Muokkaaja on 
-väliaikainen komponentti, jonka näkymä luo itsensä ja syötelaitteiden välille. 
-Muokkaaja-komponentista kuitenkin luovuttiin käsitteenä ja se sisällytettiin näkymään 
+väliaikainen komponentti, jonka Näkymä luo itsensä ja syötelaitteiden välille. 
+Muokkaaja-komponentista kuitenkin luovuttiin käsitteenä ja se sisällytettiin Näkymään 
 ja ohjaimeen \parencite{xerox}. Alkuperäinen Xerox PARC:n tuottama raportti MVC:stä oli Reenskaugin 
 vuonna 1979 kirjoittama THING-MODEL-VIEW-EDITOR \parencite{xerox-thing}. Raportti esitteli MVC:n 
 komponentteja käyttäen hyväksi esimerkkejä Reenskaugin omasta suunnittelutyöstä. Thing-komponentilla mallinnettiin
-jotakin isompaa kokonaisuutta, joka hallitsee pienempiä kokonaisuuksia. Sitä voidaan ajatella eräänlaisena suurena Mallina,joka on jaettu useisiin pienempiin Malleihin. Editor-komponentti luo rajapinnan käyttäjän ja yhden tai useamman näkymän välille. Se tarjoaa käyttäjälle sopivan komento-rajapinnan kuten esimerkisi valikon, joka vaihtuu sisällön muuttuessa \parencite{xerox-thing}. Reenskaug hylkäsi kuitenkin Editor- ja Thing-komponentin ja  päätyi Adele Goldbergin avustuksella termeihin Models-Views-Controllers julkaisten saman vuoden lopulla raportin, jossa määritellään lyhyesti jokaisen komponentin tehtävä (MODELS-VIEWS-CONTROLLERS) \parencite{xerox-original}. Koska MVC:n historia ja suurin osa MVC:n alkuperäisistä julkaisuista pohjautuvat Smalltalk-ohjelmointikieleen, esitellään myös tässä tutkielmassa MVC:n toteutusta Smalltalkilla.
+jotakin isompaa kokonaisuutta, joka hallitsee pienempiä kokonaisuuksia. Sitä voidaan ajatella eräänlaisena suurena Mallina,joka on jaettu useisiin pienempiin Malleihin. Editor-komponentti luo rajapinnan käyttäjän ja yhden tai useamman Näkymän välille. Se tarjoaa käyttäjälle sopivan komento-rajapinnan kuten esimerkisi valikon, joka vaihtuu sisällön muuttuessa \parencite{xerox-thing}. Reenskaug hylkäsi kuitenkin Editor- ja Thing-komponentin ja  päätyi Adele Goldbergin avustuksella termeihin Models-Views-Controllers julkaisten saman vuoden lopulla raportin, jossa määritellään lyhyesti jokaisen komponentin tehtävä (MODELS-VIEWS-CONTROLLERS) \parencite{xerox-original}. Koska MVC:n historia ja suurin osa MVC:n alkuperäisistä julkaisuista pohjautuvat Smalltalk-ohjelmointikieleen, esitellään myös tässä tutkielmassa MVC:n toteutusta Smalltalkilla.
 Tämä ei kuitenkaan rajoita tarkastelua, koska arkkitehtuurin idea pysyy täysin samana riippumatta ohjelmointikielestä.
 
 \section{Malli (Model)}
 Malli pitää yllä sovelluksen tilaa sekä vastaa sovelluksen tallentamasta datasta. Se voi olla esimerkiksi kokonaislukumuuttuja laskuri-sovelluksessa, merkkijono-olio tekstinkäsittelyohjelmassa tai
 mikä tahansa monimutkainen olio \parencite[s. 3]{krasner_desc}. Kaikkein yksinkertaisimmassa tapauksessa Mallin ei tarvitse kommunikoida ollenkaan Ohjaimen ja Näkymän kanssa, vaan toimia passiivisena säiliönä datalle.
 Tällaisesta tilanteesta on hyvä esimerkki yksinkertainen tekstieditori, jossa teksti nähdään juuri sellaisena kuin se olisi paperilla. Tässä tapauksessa Mallin ei tarvitse ottaa vastuuta
-kommunikoinnista näkymälle, koska muutokset tekstiin tapahtuvat käyttäjän pyynnöstä. Tällöin ohjain ottaa vastaan käyttäjän syötteet ja voi esimerkiksi ilmoittaa Näkymälle muutoksesta, jolloin Näkymä
+kommunikoinnista Näkymälle, koska muutokset tekstiin tapahtuvat käyttäjän pyynnöstä. Tällöin ohjain ottaa vastaan käyttäjän syötteet ja voi esimerkiksi ilmoittaa Näkymälle muutoksesta, jolloin Näkymä
 päivittää Mallin. Ohjain voi myös päivittää Mallin ja ilmoittaa tästä Näkymälle, jolloin Näkymä voi pyytää Mallin sen hetkistä tilaa. Kummassakaan tapauksesssa Mallin ei tarvitse tietää Ohjaimen ja Näkymän
 olemassaolosta \parencite{burbeck}.
 
-Malli ei kuitenkaan aina voi olla täysin passiivinen. Se voi myös muuttua ilman, että se tarvitsee ohjaimen tai näkymän käskyä. Otetaan esimerkiksi Malli, joka muuttaa tilaansa satunnaisin väliajoina. Koska Malli muuttaa itseään, täytyy sillä olla jokin yhteys näkymään, jotta se voi antaa tiedon muutoksestaan \parencite{burbeck}. Datan kapseloinnin ja ohjelmakoodin uudelleen käytön kannalta ei ole kuitenkaan järkevää, että Malli on suoraan yhteydessä Näkymään ja Ohjaimeen. Ohjaimen ja Näkymän tulee siis olla riippuvaisia Mallista, mutta ei toisinpäin. Näin mahdollistetaan myös se, että mMllilla voi olla useampi Näkymä ja Ohjain \parencite[s. 4]{krasner_desc}.
+Malli ei kuitenkaan aina voi olla täysin passiivinen. Se voi myös muuttua ilman, että se tarvitsee ohjaimen tai Näkymän käskyä. Otetaan esimerkiksi Malli, joka muuttaa tilaansa satunnaisin väliajoina. Koska Malli muuttaa itseään, täytyy sillä olla jokin yhteys Näkymään, jotta se voi antaa tiedon muutoksestaan \parencite{burbeck}. Datan kapseloinnin ja ohjelmakoodin uudelleen käytön kannalta ei ole kuitenkaan järkevää, että Malli on suoraan yhteydessä Näkymään ja Ohjaimeen. Ohjaimen ja Näkymän tulee siis olla riippuvaisia Mallista, mutta ei toisinpäin. Näin mahdollistetaan myös se, että mMllilla voi olla useampi Näkymä ja Ohjain \parencite[s. 4]{krasner_desc}.
 
-Yleensä Mallin tila muuttuu ohjaimista tulleiden käskyjen kautta. Tämän muutoksen tulisi heijastua jokaiseen näkymään, jotka ovat sidottuja Malliin. Tällaisia tilanteita varten kehitettiin riippuvuudet (\emph{dependents}).
+Yleensä Mallin tila muuttuu Ohjaimesta tulevan käskyn perusteella. Tämän muutoksen tulisi heijastua jokaiseen Näkymään, jotka ovat sidottuja Malliin. Tällaisia tilanteita varten kehitettiin riippuvuudet (\emph{dependents}).
 Riippuvuuksilla tarkoitetaan listaa niistä ohjaimista ja näkymistä, jotka ovat sidottuja Malliin. Mallilla tulee siis olla lista riippuvuuksista ohjaimiin ja näkymiin sekä myös kyky lisätä ja poistaa niitä. Malli ei siis tiedä mitään yksittäisistä riippuvuuksista, mutta pystyy kuitenkin lähettämään itsestään muutosviestejä (\emph{change messages}) listassa oleville ohjaimille ja näkymille. Mallin tuottamat muutosviestit voivat olla minkä tyyppisiä tahansa, joten ohjaimet ja näkymät reagoivat niihin omalla määritellyllä tavallaan  \parencite[s.2-3]{krasner}.
 
 Mallille määritellään pääluokka \emph{Model} ja tälle viitemuuttuja \emph{dependents}, joka viittaa yhteen riippuvaan komponenttiin tai listaan riippuvista komponenteista. Kaikki uudet Mallit tulee periä niiden pääluokasta, jotta saavutetaan sama toiminnallisuus kaikkiin malleihin. Komponenttien tieto Mallin muutoksista tukeutuu täysin Mallin riippuvuusmekanismiin. Kun jokin komponentti luodaan, se rekisteröi itsensä Malliin riippuvuudeksi ja samalla tavalla se myös poistaa itsensä \parencite{burbeck}. Näkymät käyttävät riippuuvuusmekanismia päivittääkseen itsensä Mallin muutoksien perusteella. Esimerkiksi Mallin muuttuessa lähetätetään \textit{changed}, jonka pohjalta jokainen riippuvuus saa \textit{update} -viestin.Viestillä voi olla myös erilaisia parametrejä, joiden perusteella viestiä pystytään tarkentamaan. Esimerkiksi Malli, johon on liitetty useita näkymiä, ei välttämättä tarvitse lähettää kaikille näkymille viestiä muutoksestaan. Se voi välittää viestin mukana parametrina tiedon muutoksesta, jonka perusteella jokainen vastaanottaja voi päättää miten toimia \parencite{burbeck}.
@@ -598,11 +598,11 @@ Mallille määritellään pääluokka \emph{Model} ja tälle viitemuuttuja \emph
 Alkuperäinen \textit{update} -metodi on peritty \textit{Object} -luokasta, eikä se tuolloin tee vielä yhtään mitään. Useimmilla näkymillä se on kuitenkin toteutettu näyttämään Näkymä uudestaan kutsuttaessa. Tämä \textit{changed/update} -mekanismi valittiin toimimaan kommunikaatiokanavana mallien ja näkymien välille, koska se aiheuttaa vähiten rajoituksia ja esteitä \parencite{burbeck}. 
 
 \subsection{Näkymä (View)}
-Näkymän tehtävänä on huolehtia graafisesta puolesta MVC:ssä. Näkymä pyytää yleensä Mallilta datan ja tämän pohjalta näyttää käyttäjälle käyttöliittymän sovellukseen. Toisinkuin Malli, jota pystytään rajoittamattomasti yhdistelemään moniin näkymiin ja ohjaimiin, jokainen näkymä on liitetty yhteen ohjaimeen.  Näkymä siis sisältää viitteen ohjaimeen ja ohjain sisältää viitteen näkymään. Kuten ohjain, näkymä on myös rekisteröity Mallin riippuvuuksiin. Kummatkin sisältävät siis myös viitteen Malliin, johon ne on rekisteröity \parencite{burbeck}. Jokaisella näkymällä on tasan yksi Malli ja yksi Ohjain \parencite[s. 7]{krasner_desc}.
+Näkymän tehtävänä on huolehtia graafisesta puolesta MVC:ssä. Näkymä pyytää yleensä Mallilta datan ja tämän pohjalta näyttää käyttäjälle käyttöliittymän sovellukseen. Toisinkuin Malli, jota pystytään rajoittamattomasti yhdistelemään moniin näkymiin ja ohjaimiin, jokainen Näkymä on liitetty yhteen Ohjaimeen.  Näkymä siis sisältää viitteen ohjaimeen ja ohjain sisältää viitteen Näkymään. Kuten Ohjain, Näkymä on myös rekisteröity Mallin riippuvuuksiin. Kummatkin sisältävät siis myös viitteen Malliin, johon ne on rekisteröity \parencite{burbeck}. Jokaisella Näkymällä on tasan yksi Malli ja yksi Ohjain \parencite[s. 7]{krasner_desc}.
 
-Näkymä vastaa myös MVC-komponenttien sisäisestä kommunikaatiosta MVC-kolmikon luontivaiheessa. Näkymä rekisteröi itsensä riippuvuudeksi Malliin, asettaa viitemuuttujansa viittamaan Ohjaimeen ja välittää itsestään viestin Ohjaimelle. Viestin avulla ohjain rekisteröi näkymän omaan viitemuuttujaansa. Näkymällä on myös vastuu poistaa viitteet sekä rekisteröinnit \parencite{burbeck}. 
+Näkymä vastaa myös MVC-komponenttien sisäisestä kommunikaatiosta MVC-kolmikon luontivaiheessa. Näkymä rekisteröi itsensä riippuvuudeksi Malliin, asettaa viitemuuttujansa viittamaan Ohjaimeen ja välittää itsestään viestin Ohjaimelle. Viestin avulla ohjain rekisteröi Näkymän omaan viitemuuttujaansa. Näkymällä on myös vastuu poistaa viitteet sekä rekisteröinnit \parencite{burbeck}. 
 
-Näkymä ei sisällä ainoastaan komponentteja datan näyttämiseen ruudulla, vaan se voi sisältää myös useita alanäkymiä (\emph{subviews}) ja ylänäkymiä (\emph{superviews}). Tästä muodostuu hierarkia, jossa ylänäkymä hoitaa aina jonkun suuremman kokonaisuuden, kuten esimerkiksi näytön pääikkunan. Alanäkymä taas huolehtii jostain pienemmästä yksityiskohdasta pääikkunassa. Näkymillä on myös viite erilliseen transformaatioluokkaan, joka hoitaa kuvan sovittamisen ja yhdistämisen alanäkymien ja ylänäkymien välillä. Jokaisella näkymällä tulee siis olla toteutus, jolla hoidetaan alanäkymien poistaminen sekä lisääminen. Samalla tulee määritellä ominaisuus, jolla sisäiset transformaatiot tuodaan transformaatioluokalle. Tämä helpottaa näkymän ja sen alanäkymien yhdistämistä \parencite[s. 8]{krasner_desc}. burbeck havainnollistaa Smalltalkilla kirjoitetulla esimerkillä kuinka MVC-kolmikko luodaan. Esitetyssä esimerkissä on yksinkertaistettu versio MVC-kolmikon luonnista siten, että mukana on myös ylä- ja alanäkymien toteutus.
+Näkymä ei sisällä ainoastaan komponentteja datan näyttämiseen ruudulla, vaan se voi sisältää myös useita alanäkymiä (\emph{subviews}) ja ylänäkymiä (\emph{superviews}). Tästä muodostuu hierarkia, jossa ylänäkymä hoitaa aina jonkun suuremman kokonaisuuden, kuten esimerkiksi näytön pääikkunan. Alanäkymä taas huolehtii jostain pienemmästä yksityiskohdasta pääikkunassa. Näkymillä on myös viite erilliseen transformaatioluokkaan, joka hoitaa kuvan sovittamisen ja yhdistämisen alanäkymien ja ylänäkymien välillä. Jokaisella Näkymällä tulee siis olla toteutus, jolla hoidetaan alanäkymien poistaminen sekä lisääminen. Samalla tulee määritellä ominaisuus, jolla sisäiset transformaatiot tuodaan transformaatioluokalle. Tämä helpottaa Näkymän ja sen alanäkymien yhdistämistä \parencite[s. 8]{krasner_desc}. burbeck havainnollistaa Smalltalkilla kirjoitetulla esimerkillä kuinka MVC-kolmikko luodaan. Esitetyssä esimerkissä on yksinkertaistettu versio MVC-kolmikon luonnista siten, että mukana on myös ylä- ja alanäkymien toteutus.
 
 \begin{lstlisting}[language=Smalltalk]
 openListBrowserOn: aCollection label: labelString initialSelection: sel
@@ -625,15 +625,15 @@ topView addSubView:
   topView controller open
 \end{lstlisting}
 
-Seuraavaksi käydään rivi kerrallaan läpi mitä yllä esitetyssä ohjelmakoodissa tapahtuu. Mallin luonnin jälkeen [5] luodaan viite uudelle \textit{BrowserView} -luokan instanssille [6]. \textit{BrowserView} on peritty \textit{StandardSystemView} -luokasta. Seuraavaksi määritellään Malli ja Ohjain sekä muuttujat näkymän otsikolle ja koolle [7]. Jos ohjainta ei määritellä erikseen, käytetään näkymän \textit{defaultController} metodia. Riveillä [7-11] luodaan alanäkymä \textit{SelectionInListView} ja riveillä [12-15] luodaan toinen alanäkymä \textit{CodeView}. Lopuksi [16] avataan ohjain, joka käynnistää ikkunoiden piirtämisprosessin.
+Seuraavaksi käydään rivi kerrallaan läpi mitä yllä esitetyssä ohjelmakoodissa tapahtuu. Mallin luonnin jälkeen [5] luodaan viite uudelle \textit{BrowserView} -luokan instanssille [6]. \textit{BrowserView} on peritty \textit{StandardSystemView} -luokasta. Seuraavaksi määritellään Malli ja Ohjain sekä muuttujat Näkymän otsikolle ja koolle [7]. Jos Ohjainta ei määritellä erikseen, käytetään Näkymän \textit{defaultController} metodia. Riveillä [7-11] luodaan alanäkymä \textit{SelectionInListView} ja riveillä [12-15] luodaan toinen alanäkymä \textit{CodeView}. Lopuksi [16] avataan ohjain, joka käynnistää ikkunoiden piirtämisprosessin.
 
-Näkymät saattavat tarvita myös oman protokollan itsensä näyttämiseen. Kun Malli ilmoittaa muutoksestaan, \textit{update} -metodi näkymässä kutsuu \textit{display}, joka puolestaan kutsuu \textit{displayBorder}, \textit{displayView} ja \textit{displaySubviews}. Jos näkymä tarvitsee erityistä käyttäytymistä itsensä näyttämiseen, se toteutetaan edellämainituissa metodeissa. Muuten käytetään pääluokasta perittyjä ominaisuuksia \parencite{burbeck}. Monet näkymät käyttävät myös erilaisia transformaatio-instansseja, joilla hallitaan esimerkiksi näkymän skaalausta ruudulla. Tähän ei kuitenkaan perehdytä sen enempää, koska ne menevät tutkimuksen rajojen ulkopuolelle.
+Näkymät saattavat tarvita myös oman protokollan itsensä näyttämiseen. Kun Malli ilmoittaa muutoksestaan, \textit{update} -metodi Näkymässä kutsuu \textit{display}, joka puolestaan kutsuu \textit{displayBorder}, \textit{displayView} ja \textit{displaySubviews}. Jos Näkymä tarvitsee erityistä käyttäytymistä itsensä näyttämiseen, se toteutetaan edellämainituissa metodeissa. Muuten käytetään pääluokasta perittyjä ominaisuuksia \parencite{burbeck}. Monet näkymät käyttävät myös erilaisia transformaatio-instansseja, joilla hallitaan esimerkiksi Näkymän skaalausta ruudulla. Tähän ei kuitenkaan perehdytä sen enempää, koska ne menevät tutkimuksen rajojen ulkopuolelle.
 
 
 \subsection{Ohjain (Controller)}
 Ohjaimen tehtävänä on ottaa vastaan syötteitä sekä koordinoida malleja ja näkymiä saatujen syötteiden perusteella. Sen tulee myös kommunikoida muiden ohjaimien kanssa. Teknisesti ohjaimessa on kolme viitemuuttujaa: Malli, Näkymä ja Sensori (sensor). Sensorin tehtävänä on toimia rajapintana syötelaitteiden sekä ohjaimen välillä. Sensori mallintaa syötelaitteiden käyttäytymistä ja muuttaa ne ohjaimen ymmärtämään muotoon.
 
-Ohjaimien tulee käyttäytyä siten, että vain yksi ohjain ottaa vastaan syötteitä kerrallaan. Esimerkiksi näkymät pystyvät esittämään informaatiota rinnakkain monen näkymän kautta, mutta käyttäjän toimintoja tulkitsee aina vain yksi ohjain. Ohjain on siis määritelty käyttäytymään siten, että se osaa tietyn signaalin perusteella päättää tuleeko sen aktivoida itsensä vai ei. Ohjain sisältää toiminnallisuuden jonka perusteella se pystyy päättämään tuleeko hallinta pitää itsellä vai luovuttaa eteenpäin \parencite[s. 9]{krasner_desc}. Ohjainten ylimmällä tasolla on \textit{ControlManager}, joka kysyy jokaiselta päänäkymään liitetyltä ohjaimelta erikseen, haluaako tämä ottaa hallinnan. Jos ohjaimen näkymä sisältää kursorin, vastaa ohjain kutsuun myönteisesti, jolloin kyseinen ohjain saa hallinnan. Hallitsevan ohjaimen näkymä kysyy seuraavaksi mahdollisten alanäkymien ohjaimilta samalla tavalla haluaako jokin ohjaimista hallinnan itselleen. Jos myönteisesti vastaava ohjain löytyy, ottaa se uuden hallinnan. Tätä prosessia jatkamalla löydetään matalimman tason näkymä ja sen ohjain ottaa lopullisen hallinnan. Ohjain pitää hallinnan itsellään niin kauan kunnes kursoria liikutetaan näkymän rajoista ulos. Ainoastaan se jonka kohdalla kursori on, vastaa kutsuun ja tuolloin ottaa hallinan. Näkymillä on oikeus kysyä alanäkymiensä ohjaimia. Ohjaimien tehtävänä on kysyä omalta näkymältään onko kursori niiden päällä.
+Ohjaimien tulee käyttäytyä siten, että vain yksi ohjain ottaa vastaan syötteitä kerrallaan. Esimerkiksi Näkymät pystyvät esittämään informaatiota rinnakkain monen Näkymän kautta, mutta käyttäjän toimintoja tulkitsee aina vain yksi ohjain. Ohjain on siis määritelty käyttäytymään siten, että se osaa tietyn signaalin perusteella päättää tuleeko sen aktivoida itsensä vai ei. Ohjain sisältää toiminnallisuuden jonka perusteella se pystyy päättämään tuleeko hallinta pitää itsellä vai luovuttaa eteenpäin \parencite[s. 9]{krasner_desc}. Ohjainten ylimmällä tasolla on \textit{ControlManager}, joka kysyy jokaiselta päänäkymään liitetyltä Ohjaimelta erikseen, haluaako tämä ottaa hallinnan. Jos Ohjaimen Näkymä sisältää kursorin, vastaa ohjain kutsuun myönteisesti, jolloin kyseinen ohjain saa hallinnan. Hallitsevan ohjaimen Näkymä kysyy seuraavaksi mahdollisten alanäkymien ohjaimilta samalla tavalla haluaako jokin ohjaimista hallinnan itselleen. Jos myönteisesti vastaava ohjain löytyy, ottaa se uuden hallinnan. Tätä prosessia jatkamalla löydetään matalimman tason Näkymä ja sen Ohjain ottaa lopullisen hallinnan. Ohjain pitää hallinnan itsellään niin kauan kunnes kursoria liikutetaan Näkymän rajoista ulos. Ainoastaan se jonka kohdalla kursori on, vastaa kutsuun ja tuolloin ottaa hallinan. Näkymillä on oikeus kysyä alanäkymiensä ohjaimia. Ohjaimien tehtävänä on kysyä omalta Näkymältään onko kursori niiden päällä.
 
 Krasner määrittelee seuraavat metodit, joiden avulla ohjaimet viestivät \parencite[s. 9]{krasner_desc}:
 
@@ -641,7 +641,7 @@ Krasner määrittelee seuraavat metodit, joiden avulla ohjaimet viestivät \pare
 \item[isControlWanted] -\ Tuleeko ohjaimen ottaa hallinta.
 \item[isControlActive] -\ Onko ohjain aktiivinen.
 \item[controlToNextLevel] -\ Luovutetaan hallinta seuraavalle ohjaimelle.
-\item[viewHasCursor] -\ Onko ohjaimen näkymässä hiiren kursori.
+\item[viewHasCursor] -\ Onko ohjaimen Näkymässä hiiren kursori.
 \item[controlInitialize] -\ Kun ohjain on saanut hallinnan, alustetaan se.
 \item[controlLoop] -\ Lähettää \emph{controlActivity} -viesteja niin kauan, kuin ohjaimella on hallinta.
 \item[controlTerminate] -\ Lopettaa ohjaimen hallinnan.
@@ -655,11 +655,11 @@ voidaan ylikirjoittaa, jolloin saavutetaan jokin haluttu ominaisuus kyseisessä 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.85]{counter.png}
-\caption{Kuva CounterView -näkymästä \parencite{krasner_desc}}
+\caption{Kuva CounterView -Näkymästä \parencite{krasner_desc}}
 \end{figure}
 
 Seuraavaksi esitellään  Dortmundin yliopistossa kirjoitettu yksinkertainen esimerkkiohjelma Smalltalkilla siitä miten MVC:n toteutus tuodaan sovellukseen käytännössä. Ohjelmakoodi löytyy myös Krasnerin artikkelista \parencite[s. 20]{krasner_desc}. Ohjelmassa toteutetaan yksinkertainen laskuri-ohjelma, joka käyttää MVC-arkkitehtuuria toteutuksessaan. Ohjelmassa esitellään Mallina \emph{Counter} -luokka ja Näkymänä \emph{CounterView} -luokka. \emph{Counter} perii Mallin ominaisuudet ja
-toimii ohjelmassa yksinkertaisen kokonaisluku-muuttujan ylläpitäjänä. \emph{CounterView} perii näkymän ominaisuudet ja esittää Mallin arvon ruudulla.
+toimii ohjelmassa yksinkertaisen kokonaisluku-muuttujan ylläpitäjänä. \emph{CounterView} perii Näkymän ominaisuudet ja esittää Mallin arvon ruudulla.
 Ohjaimena toimii \emph{CounterController} -luokka, joka perii ohjaimen käyttäytymisen. Ohjain tarjoaa sovellukselle painikkeet, joista voidaan vähentää
 tai lisätä laskurin arvoa.
 
@@ -732,8 +732,8 @@ isControlActlve
 	"Ota hallinta kun sinistä nappia ei paineta"
 	^super isControlActive & sensor blueButtonPressed not
 \end{lstlisting}
-Määrätään näkymä (\emph{CounterView}), joka peritään \emph{View} -yliluokasta. Määrätään
-myös näkymälle metodit, joiden avulla näytetään Mallin tila ruudulla.
+Määrätään Näkymä (\emph{CounterView}), joka peritään \emph{View} -yliluokasta. Määrätään
+myös Näkymälle metodit, joiden avulla näytetään Mallin tila ruudulla.
 \begin{lstlisting}[language=Smalltalk]
 View subclass: #Counterview
 	instanceVariableNames: ''
@@ -743,17 +743,17 @@ View subclass: #Counterview
 
 CounterView methodsFor: 'displaying'
 displayView
-	"Näytä Mallin arvo näkymässä"
+	"Näytä Mallin arvo Näkymässä"
 	| box pos displayText |
 	box := self insetDisplayBox.
-	"Asettele teksti näkymään. Asettelu ei
+	"Asettele teksti Näkymään. Asettelu ei
 	 ole tutkielman kannalta oleellista."
 	pos := box origin + (4 @ (box extent y / 3)).
 	displayText := ('value:', self model value printString)
 					asDisplayText.
 	displayText displayAt: pos
 \end{lstlisting}
-Määritellään \emph{update} -metodi, jotta näkymä pystyy päivittämään itsensä. Metodia kutsutaan
+Määritellään \emph{update} -metodi, jotta Näkymä pystyy päivittämään itsensä. Metodia kutsutaan
 yleensä Mallin tilan muuttuessa.
 \begin{lstlisting}[language=Smalltalk]
 CounterView methodsFor: 'updating'
@@ -761,37 +761,37 @@ update: aParameter
   "Yksinkertaisesti päivitä näyttö uudestaan"
   self display
 \end{lstlisting}
-Luodaan myös metodi, joka palauttaa näkymään liitetyn ohjaimen.
+Luodaan myös metodi, joka palauttaa Näkymään liitetyn ohjaimen.
 \begin{lstlisting}[language=Smalltalk]
 CounterView methodsFor: 'controller access'
 defaultControllerClass
-	"Palauta näkymään rekisteröity ohjain"
+	"Palauta Näkymään rekisteröity ohjain"
 	^CounterController
 \end{lstlisting}
-Lopuksi tarvitaan metodi, joka luo uuden näkymän sekä rekisteröi Mallin ja Ohjaimen itseensä. Näkymä näyttää ruudulta
+Lopuksi tarvitaan metodi, joka luo uuden Näkymän sekä rekisteröi Mallin ja Ohjaimen itseensä. Näkymä näyttää ruudulta
 samalta kuin kuvassa 2.
 \begin{lstlisting}[language=Smalltalk]
 CounterView class methodsFor: 'instance creation'
 open
-	"Avaa näkymän uudelle laskurisovellukselle. Tässä 
-	metodissa nähdään kuinka näkymä huolehtii Mallin 
+	"Avaa Näkymän uudelle laskurisovellukselle. Tässä 
+	metodissa nähdään kuinka Näkymä huolehtii Mallin 
 	rekisteröinnistä sekä nähdään kuinka näkymiä voi 
 	olla useita sisäkkäin."
 	| aCounterView topView |
-	"Luo laskurinäkymälle uusi näkymä, joka näyttää 
+	"Luo laskurinäkymälle uusi Näkymä, joka näyttää 
 	laskurin arvon"
 	aCounterView := CounterView new
 	"Asetetaan Malliksi Counter -luokan instanssi"
 	model: Counter new.
 	aCounterView borderWidth: 2.
 	aCounterView insideColor: Form white.
-	"Asetetaan ylimmäksi näkymäksi StandardSystemView 
+	"Asetetaan ylimmäksi Näkymäksi StandardSystemView 
 	-luokan instanssi, joka vastaa perinteistä
 ikkunointimallia"
 	topView := StandardSystemView new
 		label: 'Counter'.
 	topView minimumSize: 80@40.
-	"Lisätään edellä luotu laskurinäkymä ylinäkymän 
+	"Lisätään edellä luotu laskurinäkymä ylänäkymän 
 	alanäkymäksi"
 	topView addSubView: aCounterView.
 	"Käynnistetään ohjain"
@@ -799,7 +799,7 @@ ikkunointimallia"
 \end{lstlisting}
 
 \section{Alkuperäisen MVC:n vaatimukset}
-Pyramidin sekä Djangon sovellusarkkitehtuuri on toteutettu käyttäen pohjana MVC"-arkkitehtuuria. Tämä ei kuitenkaan tarkoita sitä, että ne toteuttaisivat MVC:n teknisesti sellaisena kuin esimerkiksi Krasner \parencite{krasner_desc} ja Reenskaug \parencite{reenskaug_tools} määrittelee. Tärkeimpänä vaatimuksena MVC:n toteutukselle on se, että näkymä ja ohjain luovat rajapinnan, jonka kautta käyttäjä keskustelee Mallin kanssa. Malli ei saa olla suorassa yhteydessä käyttäjään \parencite[s. 10]{reenskaug_tools}. Mallin tulee olla riippumaton näkymästä ja ohjaimesta. Sen tulee myös hallita sovelluksen tilaa sekä pystyä antamaan informaatiota sovelluksen tilasta \parencite{burbeck}. Näkymän on keskusteltava Mallin kanssa sekä hoitaa Mallilta saadun datan graafinen näyttäminen \parencite[s.1]{reenskaug_orig}. Ohjain puolestaan ottaa vastaan syötteitä ja lähettää viestejä tämän perusteella Näkymälle ja Mallille \parencite{burbeck}.
+Pyramidin sekä Djangon sovellusarkkitehtuuri on toteutettu käyttäen pohjana MVC"-arkkitehtuuria. Tämä ei kuitenkaan tarkoita sitä, että ne toteuttaisivat MVC:n teknisesti sellaisena kuin esimerkiksi Krasner \parencite{krasner_desc} ja Reenskaug \parencite{reenskaug_tools} määrittelee. Tärkeimpänä vaatimuksena MVC:n toteutukselle on se, että Näkymä ja Ohjain luovat rajapinnan, jonka kautta käyttäjä keskustelee Mallin kanssa. Malli ei saa olla suorassa yhteydessä käyttäjään \parencite[s. 10]{reenskaug_tools}. Mallin tulee olla riippumaton Näkymästä ja Ohjaimesta. Sen tulee myös hallita sovelluksen tilaa sekä pystyä antamaan informaatiota sovelluksen tilasta \parencite{burbeck}. Näkymän on keskusteltava Mallin kanssa sekä hoitaa Mallilta saadun datan graafinen näyttäminen \parencite[s.1]{reenskaug_orig}. Ohjain puolestaan ottaa vastaan syötteitä ja lähettää viestejä tämän perusteella Näkymälle ja Mallille \parencite{burbeck}.
 
 Vaikka MVC:tä ei ole tarkoitettu alunperin web-sovelluksiin, voivat ne hyötyä MVC:n arkkitehtuurista. Suurin ongelma MVC:n käyttämisessä web-sovelluskehyksissä on palvelimen (palvelin) ja asiakkaan (client) välinen ositus. Näkymä näytetään aina asiakkaan selaimessa sen omalla päätelaitteella. Malli ja Ohjain taas voivat olla ositettu teoriassa miten vain asiakkaan ja palvelimen välillä. Web-sovelluksissa kehittäjä pakotetaan osioimaan sovellus. MVC:n tulee olla riippumaton osioinnista. Osioinnin ei tule määrittää sovelluksen arkkitehtuuria \parencite{ibm_watson}. Osioinnin yhteydessä tulee myös mahdollistaa kaksisuuntainen kommunikaatio palvelimen ja selaimen välille. Reenskaugin mukaan Mallin tulee pystyä lähettämään itsestään muutosviestejä siihen kytketyille komponenteille. Tässä tapauksessa siis web-sovelluskehyksissä toteutettun Mallin tulee lähettää viestejä suoraan Näkymille ja ohjaimille \parencite{reenskaug_tools}. 
 
@@ -923,9 +923,9 @@ Tornado on Python-pohjainen web-sovelluskehys, joka pystyy skaalautumaan kymmeni
 Pyramidin kehittäjien dokumenteissa esitellään Pyramid MVC-kehyksenä, mutta samalla myös kyseenalaistetaan tämä väite. Erityisesti Mallin ja Ohjaimen määritelmä puuttuu \parencite{pyramid_intr}. Tässä
 osiossa käsitellään Pyramidia MVC:n näkökulmasta. Tarkastelua varten toteutetaan Pyramidilla vastaava laskuri-sovellus kuin Krasnerin julkaisussa käyttäen Pyramidin tarjoamia ominaisuuksia \parencite{krasner_desc}. Sovellus rajataan käyttämään SQL-tietokantaa Mallin datan tallennukseen sekä \emph{URL dispatch} -tekniikkaa \parencite{urldispatch}. Sovelluksen pohjalta tarkastellaan MVC:n kannalta kolmea oleellisinta tiedostoa: \emph{views.py}, \emph{models.py} ja \emph{template.pt}. Näin tutkielman tarkastelu pystytään rajaamaan mahdollisimman pienelle alueelle, jolloin tutkielma on helpompi keskittää tarkastelemaan yksittäistä tekniikkaa.
 
-Tässä osiossa tarkastellaan Pyramid-sovelluksen tiedostoja sekä niiden sisältöjä MVC-komponentteina. Erityisesti keskitytään ohjaimen ja näkymän toteukseen. Samalla tutkitaan voidaanko Pyramid havaintojen perusteella luokitella MVC:n toteuttavaksi sovelluskehykseksi.
-Koska Pyramidissa MVC:n määrittely on hyvin epävakaalla pohjalla, tulee tehdä selvästi mitä ominaisuuksia komponenteilta vaaditaan. Esimerkiksi \emph{views.py} ja \emph{template.pt} -tiedostot ovat tarkoitettu toimimaan yhdessä näkymänä, jolloin ohjaimen toteuttamat tehtävät sisällytettäisiin näkymään. MVC:tä tutkiessa täytyy sovelluksen komponentit kuitenkin jakaa kolmeen osaan.  Tiedosto \emph{views.py}
-sisältää paljon ohjaimelle yhteisiä piirteitä, joten se erottuu selvästi \emph{template.pt} -tiedostosta. Tutkielmassa oletetaan, että \emph{models.py} sisältää Mallin, \emph{views.py} ohjaimen ja \emph{template.pt} näkymän.
+Tässä osiossa tarkastellaan Pyramid-sovelluksen tiedostoja sekä niiden sisältöjä MVC-komponentteina. Erityisesti keskitytään Ohjaimen ja Näkymän toteukseen. Samalla tutkitaan voidaanko Pyramid havaintojen perusteella luokitella MVC:n toteuttavaksi sovelluskehykseksi.
+Koska Pyramidissa MVC:n määrittely on hyvin epävakaalla pohjalla, tulee tehdä selvästi mitä ominaisuuksia komponenteilta vaaditaan. Esimerkiksi \emph{views.py} ja \emph{template.pt} -tiedostot ovat tarkoitettu toimimaan yhdessä näkymänä, jolloin Ohjaimen toteuttamat tehtävät sisällytettäisiin Näkymään. MVC:tä tutkiessa täytyy sovelluksen komponentit kuitenkin jakaa kolmeen osaan.  Tiedosto \emph{views.py}
+sisältää paljon ohjaimelle yhteisiä piirteitä, joten se erottuu selvästi \emph{template.pt} -tiedostosta. Tutkielmassa oletetaan, että \emph{models.py} sisältää Mallin, \emph{views.py} Ohjaimen ja \emph{template.pt} Näkymän.
 
 \section{Tiedostojen tarkastelu}
 \lstset{
@@ -968,9 +968,9 @@ def populate():
 \end{lstlisting}
 \emph{Models.py} -tiedosto sisältää Malliin liittyvän ohjelmakoodin. Jokaiselle Mallille luodaan aina oma luokkansa, jossa määritellään Mallin ominaisuudet. Malli rekisteröidään \emph{populate} -funktion kautta, jota kutsutaan Pyramidin toimesta.
 Ohjelmakoodista nähdään, että Malli ei luo minkäänlaista riippuvuutta Näkymään tai Ohjaimeen. Se myös pitää huolen datan käsittelystä.  Malli on siis Pyramidissa itsenäinen komponentti, joka huolehtii sovelluksen tilasta. Tämän perusteella Malli toteutuu Pyramidissa MVC-arkkitehtuurin mukaisesti.
-\emph{Views.py} -tiedostossa määritellään näkymän ohjelmakoodi. Pyramidissa on konkreettisesti määritelty ohjelmakooditasolla vain Malli ja Näkymä.
-Jokaista näkymää kohden on oma funktio, joka ottaa vastaan \emph{request}-olion. Request-oliossa tuodaan sovellukselle kaikki tieto käyttäjästä ja sovelluksen viesteistä. Tämän perusteella tulkitaan request-oliossa tuotu data käyttäjän syötteiksi.
-Vaikka \emph{views.py} nimetään Pyramidissa näkymäksi, on se toteutukseltaan hyvin lähellä ohjainta. Tästä syystä tarkastellaan funktion toteutusta mahdollisena ohjaimena. Tästä eteenpäin puhutaessa ohjaimesta Pyramidissa, tarkoitetaan sillä \emph{views.py} -tiedoston sisältämää funktiota.
+\emph{Views.py} -tiedostossa määritellään Näkymän ohjelmakoodi. Pyramidissa on konkreettisesti määritelty ohjelmakooditasolla vain Malli ja Näkymä.
+Jokaista Näkymää kohden on oma funktio, joka ottaa vastaan \emph{request}-olion. Request-oliossa tuodaan sovellukselle kaikki tieto käyttäjästä ja sovelluksen viesteistä. Tämän perusteella tulkitaan request-oliossa tuotu data käyttäjän syötteiksi.
+Vaikka \emph{views.py} nimetään Pyramidissa Näkymäksi, on se toteutukseltaan hyvin lähellä ohjainta. Tästä syystä tarkastellaan funktion toteutusta mahdollisena ohjaimena. Tästä eteenpäin puhutaessa ohjaimesta Pyramidissa, tarkoitetaan sillä \emph{views.py} -tiedoston sisältämää funktiota.
 
 \lstset{
   literate={ö}{{\"o}}1
@@ -1004,7 +1004,7 @@ def counter_view(request):
     # ja näytetään template.pt -tiedostssa
     return {'value': counter.value}
 \end{lstlisting}
-Määritellään funktiolle URL-osoite sekä liitetään siihen template-tiedosto (2). Tämän jälkeen rekisteröidään Malli mukaan funktioon (8). Koska tarkastelemme funktiota ohjaimena, voimme tulkita templaten näkymäksi. Tällöin funktioon rekisteröidään Malli sekä näkymä, jolloin rekisteröinnin puolesta se toteuttaa ohjaimelle tarkoitetut ominaisuudet MVC:ssä. Funktioon lisätään myös toiminto laskurin vähentämiselle. Mallin \emph{value} -arvoa muutetaan, kun request-oliosta löytyy tietty parametri. Funktio palauttaa paluuarvona Mallin arvon, joka tuodaan käsiteltäväksi templateen. Funktio siis ottaa vastaan syötteitä ja niiden perusteella lähettää viestejä
+Määritellään funktiolle URL-osoite sekä liitetään siihen template-tiedosto (2). Tämän jälkeen rekisteröidään Malli mukaan funktioon (8). Koska tarkastelemme funktiota ohjaimena, voimme tulkita templaten Näkymäksi. Tällöin funktioon rekisteröidään Malli sekä Näkymä, jolloin rekisteröinnin puolesta se toteuttaa Ohjaimelle tarkoitetut ominaisuudet MVC:ssä. Funktioon lisätään myös toiminto laskurin vähentämiselle. Mallin \emph{value} -arvoa muutetaan, kun request-oliosta löytyy tietty parametri. Funktio palauttaa paluuarvona Mallin arvon, joka tuodaan käsiteltäväksi templateen. Funktio siis ottaa vastaan syötteitä ja niiden perusteella lähettää viestejä
 Mallille sekä Näkymälle. Tämän perusteella todetaan, että se täyttää rajauksessa määrätyt ohjaimen ominaisuudet. 
 
 Templatessa yhdistetään HTML-merkkauskieli ja sovelluksen ohjelmakoodi. Tästä generoidaan HTML-sivu, joka näytetään selaimelle. Koska Malli sekä Ohjain on jo määritelty, täytyy selvittää täyttääkö template Näkymälle määritellyt ominaisuudet.
@@ -1021,7 +1021,7 @@ Templatessa yhdistetään HTML-merkkauskieli ja sovelluksen ohjelmakoodi. Täst�
 \end{lstlisting}
 Templatessa luodaan lomake kahdelle painikkeelle, joista kumpikin lähettää lomakkeen eteenpäin \emph{counter\_view} -funktiolle. Lomakkeen tiedot tulevat funktiolle request-oliossa, joka sisältää tässä tapauksessa \emph{plus}- tai \emph{minus}-parametrin riippuen siitä kumpaa painiketta on painettu. Lomakkeen tiedot lähetetään samaan osoitteeseen (3), mistä sitä on alunperin kutsuttukin. Eron tuo kuitenkin request-oliossa tuodut parametrit.  Otsikossa (2) tuodaan näkyviin laskurin sen hetkinen arvo, joka saadaan tietoon ohjaimelta.
 
-Templatessa hoidetaan sovelluksen graafinen puoli, joten se vastaa ominaisuuksiltaan näkymää. \\ Ongelmaksi muodostuu kuitenkin näkymän ja Mallin välinen kommunikointi. Näkymä ei ole yhteydessä Malliin suoraan, vaan tarvitsee Ohjaimen kautta tiedon Mallin tilasta.  Näkymä ei siis sellaisenaan toteuta sille asetettuja ominaisuuksia. \\
+Templatessa hoidetaan sovelluksen graafinen puoli, joten se vastaa ominaisuuksiltaan Näkymää. \\ Ongelmaksi muodostuu kuitenkin Näkymän ja Mallin välinen kommunikointi. Näkymä ei ole yhteydessä Malliin suoraan, vaan tarvitsee Ohjaimen kautta tiedon Mallin tilasta.  Näkymä ei siis sellaisenaan toteuta sille asetettuja ominaisuuksia. \\
 
 \section{Sovelluksen toiminta}
 Alla olevassa kuvassa esitellään visuaalisesti miten laskurisovellus muodostaa HTML-sivun, kun käyttäjä painaa sivulla \emph{Increment} -painiketta. Kuvan
@@ -1047,8 +1047,8 @@ escapeinside={/*@}{@*/},
 \end{lstlisting}
 
 \section{Yhteenveto}
-Malli sekä ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta näkymään tai ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan ohjaimelle ja näkymälle omista muutoksistaan, koska kaikki muutokset tulevat näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii request-oliossa tulevista syötteistä ja vaikuttaa Malliin sekä Näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä näkymän tarkoitus on kommunikoida suoraan Mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa näkymä on yhteydessä vain ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu. Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \parencite{krasner_desc}.
-Alla esitellyssä kuvassa havainnollisestetaan, kuinka Mallin ja Näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan Ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan ohjaimelle ja näkymälle vaan tarvitsee aina erillisen HTTP-pyynnön.
+Malli sekä ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta Näkymään tai Ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan Ohjaimelle ja Näkymälle omista muutoksistaan, koska kaikki muutokset tulevat Näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii request-oliossa tulevista syötteistä ja vaikuttaa Malliin sekä Näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä Näkymän tarkoitus on kommunikoida suoraan Mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa Näkymä on yhteydessä vain ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu. Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \parencite{krasner_desc}.
+Alla esitellyssä kuvassa havainnollisestetaan, kuinka Mallin ja Näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan Ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan Ohjaimelle ja Näkymälle vaan tarvitsee aina erillisen HTTP-pyynnön.
 
 \begin{figure}[h]
 \centering/
@@ -1061,9 +1061,9 @@ sekä muuttujaa. Samalla se pyytää Mallilta tietoa sovelluksen tilasta ja väl
 
 Alunperin Pyramidin dokumentaatiossa kyseenalaistettiin Mallin sekä Ohjaimen toteutus \parencite{pyramid_intr}. Tutkimuksen pohjalta voidaan kuitenkin
 todeta, että ongelmaksi ei muodostu yksittäisien komponenttien toteutus, vaan komponenttien välinen kommunikointi. Erityisesti Näkymän ja Mallin yhteistyö jää
-kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelmän kanssa \parencite[s. 1]{reenskaug_orig}. Tämä johtuu siitä, että Pyramidissa \emph{views.py} -tiedoston sisältämä ohjelmakoodi on nimensä mukaisesti tarkoitettu näkymäksi ja
+kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelmän kanssa \parencite[s. 1]{reenskaug_orig}. Tämä johtuu siitä, että Pyramidissa \emph{views.py} -tiedoston sisältämä ohjelmakoodi on nimensä mukaisesti tarkoitettu Näkymäksi ja
 \emph{template.pt} -tiedosto katsotaan osaksi samaa komponenttia. Tutkimuksen tuloksien perusteella voidaan kuitenkin todeta, että \emph{views.py} -tiedoston näkymä-funktio toteuttaa kaikki
-ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä näkymää. Template ei kuitenkaan riitä toteuttamaan näkymän ominaisuuksia, koska se on täysin riippuvainen ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan näkymälle ja ohjaimelle ilman, että ohjain/näkymä pyytää Mallilta nykyistä tilaa.
+ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä Näkymää. Template ei kuitenkaan riitä toteuttamaan Näkymän ominaisuuksia, koska se on täysin riippuvainen ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan Näkymälle ja Ohjaimelle ilman, että Ohjain tai Näkymä pyytää Mallilta nykyistä tilaa.
 
 \chapter{MVC \& Django}
 Django luokitellaan MVC-arkkitehtuurin toteuttavaksi web-sovelluskehykseksi, mutta sen toteutus kuitenkin poikkeaa alkuperäisestä MVC-toteutuksesta samalla tavalla kuin Pyramidissa. Djangosta löytyvät samat tiedostot  ja luokat MVC:n toteuttamiselle, kuin Pyramidista. Siinä on vastaavasti \emph{models.py}, \emph{views.py} sekä \emph{template.html}. Näistä \emph{models.py} sisältää mallit, \emph{views.py} ohjaimet ja \emph{template.html} näkymät selaimelle. Tässä tutkielmassa  käytetään Djangon versiota 1.11. Seuraavaksi esitellään lyhesti Mallin, Näkymän sekä Ohjaimen toteutus Djangossa, jotka on myös esitelty Djangon dokumentaatiossa \parencite{django_docs}.
@@ -1078,7 +1078,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=30)
 \end{lstlisting}
 
-Ohjaimen toiminta toteutuu Djangossa näkymien kautta vastaavasti kuin Pyramidissakin, koska näkymät käsittelevät pyyntöjä ja syötteitä, jotka tulevat selaimelta. Tästä syystä myös ohjaimen määritelmä toteutuu  sovelluksehyksessä määriteltyjen näkymien kautta \parencite{django_view}.
+Ohjaimen toiminta toteutuu Djangossa näkymien kautta vastaavasti kuin Pyramidissakin, koska näkymät käsittelevät pyyntöjä ja syötteitä, jotka tulevat selaimelta. Tästä syystä myös Ohjaimen määritelmä toteutuu  sovelluksehyksessä määriteltyjen näkymien kautta \parencite{django_view}.
 
 \begin{lstlisting}[language=Python]
 from django.http import HttpResponse
@@ -1115,7 +1115,7 @@ Djangossa määritellään MVC samalla tavalla kuin Pyramidissakin. Tästä syys
 
 
 \chapter{Web-soketit \& Tornado}
-Pyramid-sovelluskehystä ja MVC:tä tutkiessa todettiin MVC:n alkuperäisen toteutuksen vaativan reaaliaikaista kommunikoita Mallin sekä näkymän välillä siten, että Malli kommunikoi suoraan Näkymälle muutoksistaan. Tämä ei pelkällä Pyramidilla toteutetun web-sovelluksen avulla onnistu, koska kommunikointi toteutetaan aina HTTP-pyynnön kautta ja muutoksien näkeminen vaatii aina uuden HTTP-pyynnön. Web 2.0 teknologiat kuten AJAX (Asynchronous JavaScript and XML) ovat tuonneet uuden tavan loppukäyttäjille kommunikoida web-sovelluksien kanssa. Sen sijaan, että muodostetaan useita sivuja sekä takaisinkutsuja tuomaan sisältö loppukäyttäjälle, voidaan sisältöä tuoda reaaliaikaisesti. Loppukäyttäjän ei tällöin tarvitse päivittää sivua nähdäkseen sisällössä muutoksia. AJAX vaatii kuitenkin useiden päivityspyyntöjen lähettämistä palvelimelle yhteyden aikana, jotta käyttäjälle voidaan päivittää sisältöä. Tätä kutsutaan pollaukseksi (polling). Tästä syystä jokainen tapahtuma luo ylimääräistä kuormaa palvelimelle\parencite{websocket_ajax}. AJAX ei siis riitä toteuttamaan MVC:ssä Mallin suoraa kommunikointia Näkymälle ja Ohjaimelle, koska erillinen pyyntö päivitysten tarkastamiseen tarvitaan edelleen. AJAX:n kanssa ei kuitenkaan tarvita sivun lataamista uudelleen muutoksien näkemiseksi, koska pollaus toteutetaan taustalla yhteyden aikana.  Web-socketit ratkaisevat pollauksen ongelman ja mahdollistavat yhteyden molempiin suuntiin \parencite[s. 1.1]{websocket}.
+Pyramid-sovelluskehystä ja MVC:tä tutkiessa todettiin MVC:n alkuperäisen toteutuksen vaativan reaaliaikaista kommunikoita Mallin sekä Näkymän välillä siten, että Malli kommunikoi suoraan Näkymälle muutoksistaan. Tämä ei pelkällä Pyramidilla toteutetun web-sovelluksen avulla onnistu, koska kommunikointi toteutetaan aina HTTP-pyynnön kautta ja muutoksien näkeminen vaatii aina uuden HTTP-pyynnön. Web 2.0 teknologiat kuten AJAX (Asynchronous JavaScript and XML) ovat tuonneet uuden tavan loppukäyttäjille kommunikoida web-sovelluksien kanssa. Sen sijaan, että muodostetaan useita sivuja sekä takaisinkutsuja tuomaan sisältö loppukäyttäjälle, voidaan sisältöä tuoda reaaliaikaisesti. Loppukäyttäjän ei tällöin tarvitse päivittää sivua nähdäkseen sisällössä muutoksia. AJAX vaatii kuitenkin useiden päivityspyyntöjen lähettämistä palvelimelle yhteyden aikana, jotta käyttäjälle voidaan päivittää sisältöä. Tätä kutsutaan pollaukseksi (polling). Tästä syystä jokainen tapahtuma luo ylimääräistä kuormaa palvelimelle\parencite{websocket_ajax}. AJAX ei siis riitä toteuttamaan MVC:ssä Mallin suoraa kommunikointia Näkymälle ja Ohjaimelle, koska erillinen pyyntö päivitysten tarkastamiseen tarvitaan edelleen. AJAX:n kanssa ei kuitenkaan tarvita sivun lataamista uudelleen muutoksien näkemiseksi, koska pollaus toteutetaan taustalla yhteyden aikana.  Web-socketit ratkaisevat pollauksen ongelman ja mahdollistavat yhteyden molempiin suuntiin \parencite[s. 1.1]{websocket}.
 
 \section{Esimerkkisovellus}
 
@@ -1178,7 +1178,7 @@ Koodin ajaminen selaimessa luo HTTP:n kautta kättelyn ja tämän jälkeen siirt
 
 
 \chapter{MVC:n toteutus Tornadolla}
-Tornadon avulla toteutetaan vastaava laskurisovellus kuin aikaisemminkin Pyramid- ja Smalltalk-osioissa. Tällä kertaa kuitenkin HTTP:ta käytetään vain kättelyssä ja kommunikaatio komponenttejen välillä sovelluksen ajonaikana hoidetaan web-sokettejen avulla. Sovelluksessa ohjain ja näkymä toteutetaan selaimen puolella käyttäen HTML:ää sekä Javascript ohjelmointikieltä. Malli kirjoitetaan palvelimen puolelle, jossa käytetään Tornadoa. Ohjain voidaan myös toteuttaa Palvelimen puolelle, jolloin ohjaimen logiikka voidaan piilottaa käyttäjältä. Tässä tutkimuksesa keskitytään toteutukseen, jossa ohjaimen logiikka on nähtävillä web-selaimen puolella. Tutkimuksen kannalta oleellisinta on kuitenkin selvittää voidaanko web-sokettejen avulla toteuttaa MVC web-sovelluksessa. Jotta esimerkkisovellus saadaan esiteltyä selkeästi, on joitain paloja ohjelmasta jätetty näyttämättä. Täysin toimiva sovellus löytyy liitteet -osiosta. 
+Tornadon avulla toteutetaan vastaava laskurisovellus kuin aikaisemminkin Pyramid- ja Smalltalk-osioissa. Tällä kertaa kuitenkin HTTP:ta käytetään vain kättelyssä ja kommunikaatio komponenttejen välillä sovelluksen ajonaikana hoidetaan web-sokettejen avulla. Sovelluksessa ohjain ja Näkymä toteutetaan selaimen puolella käyttäen HTML:ää sekä Javascript ohjelmointikieltä. Malli kirjoitetaan palvelimen puolelle, jossa käytetään Tornadoa. Ohjain voidaan myös toteuttaa Palvelimen puolelle, jolloin ohjaimen logiikka voidaan piilottaa käyttäjältä. Tässä tutkimuksesa keskitytään toteutukseen, jossa ohjaimen logiikka on nähtävillä web-selaimen puolella. Tutkimuksen kannalta oleellisinta on kuitenkin selvittää voidaanko web-sokettejen avulla toteuttaa MVC web-sovelluksessa. Jotta esimerkkisovellus saadaan esiteltyä selkeästi, on joitain paloja ohjelmasta jätetty näyttämättä. Täysin toimiva sovellus löytyy liitteet -osiosta. 
 
 \section{Mallin toteutus}
 
@@ -1201,7 +1201,7 @@ class Model(websocket.WebSocketHandler):
 
 \end{lstlisting}
 
-Malli määritellään yhdessä luokassa, joka peritään \emph{WebSocketHandler} -luokasta, joka löytyy Tornadon tarjoamasta \emph{websocket} -kirjastosta. Luokalle alustetaan \emph{counter} -muuttuja, joka määrittää Mallin tilan. Lisäksi luokalle määritellään metodit \emph{increase} ja \emph{decrease}. Näiden metodejen avulla muutetaan laskurin tilaa. Lisäksi tulee ylikirjoittaa \emph{WebSocketHandler} -luokasta peritty \emph{on\_message} -metodi. Sen tarkoituksena on käsitellä web-sokettiyhteyden kautta tulevat viestit. Viestin perusteella, joko vähennetään (decrease) tai kasvatetaan (increase) laskurin arvoa. Yhteyden muodostuksen aikana lähetetään näkymältä Mallille myös "get" -viesti, jossa nykyinen arvo päivitetään selaimelle. Jokaisella kutsulla \emph{on\_message} lähettää viestin yhdistetyille soketeille, jossa lähetetään Mallin nykyinen arvo. Alla esitellään ohjelmakoodit, joilla Tornadon web-palvelin alustetaan ja käynnistetään vastaanottamaan yhteyksiä:
+Malli määritellään yhdessä luokassa, joka peritään \emph{WebSocketHandler} -luokasta, joka löytyy Tornadon tarjoamasta \emph{websocket} -kirjastosta. Luokalle alustetaan \emph{counter} -muuttuja, joka määrittää Mallin tilan. Lisäksi luokalle määritellään metodit \emph{increase} ja \emph{decrease}. Näiden metodejen avulla muutetaan laskurin tilaa. Lisäksi tulee ylikirjoittaa \emph{WebSocketHandler} -luokasta peritty \emph{on\_message} -metodi. Sen tarkoituksena on käsitellä web-sokettiyhteyden kautta tulevat viestit. Viestin perusteella, joko vähennetään (decrease) tai kasvatetaan (increase) laskurin arvoa. Yhteyden muodostuksen aikana lähetetään Näkymältä Mallille myös "get" -viesti, jossa nykyinen arvo päivitetään selaimelle. Jokaisella kutsulla \emph{on\_message} lähettää viestin yhdistetyille soketeille, jossa lähetetään Mallin nykyinen arvo. Alla esitellään ohjelmakoodit, joilla Tornadon web-palvelin alustetaan ja käynnistetään vastaanottamaan yhteyksiä:
 
 \begin{lstlisting}[language=Python]
 def make_app():
@@ -1232,7 +1232,7 @@ var controller = (function (modelSocket) {
 });
 \end{lstlisting}
 
-Ohjain toteutetaan web-selaimen puolella, jolla on viite Mallin sokettiin. Ohjaimella on vastaavat metodit kuin Mallilla (\emph{increase} ja \emph{decrease}). Kummankin toteutuksessa lähetetään joko viesti "increase" tai "decrease", joka käsitellään Mallin puolella kasvattaen tai vähentäen laskurin arvoa. Ohjaimelle voidaan myös antaa viite näkymään, jos ohjaimen tulisi kommunikoida näkymän kanssa. Kuitenkin toteutetussa laskurisovelluksessa tälle ei ole tarvetta, koska muutokset tilasta tulevat Mallin kautta. Lisäksi Mallilta tulevat viestit voidaan käsitellä ohjaimessa \emph{modelSocket} -instanssin kautta, mutta tähänkään ei ole tarvetta, koska viestejä ei tarvitse Ohjaimessa käsitellä. Riittää, että ohjain vain lähettää viestejä napin painalluksista Mallille.
+Ohjain toteutetaan web-selaimen puolella, jolla on viite Mallin sokettiin. Ohjaimella on vastaavat metodit kuin Mallilla (\emph{increase} ja \emph{decrease}). Kummankin toteutuksessa lähetetään joko viesti "increase" tai "decrease", joka käsitellään Mallin puolella kasvattaen tai vähentäen laskurin arvoa. Ohjaimelle voidaan myös antaa viite Näkymään, jos ohjaimen tulisi kommunikoida Näkymän kanssa. Kuitenkin toteutetussa laskurisovelluksessa tälle ei ole tarvetta, koska muutokset tilasta tulevat Mallin kautta. Lisäksi Mallilta tulevat viestit voidaan käsitellä ohjaimessa \emph{modelSocket} -instanssin kautta, mutta tähänkään ei ole tarvetta, koska viestejä ei tarvitse Ohjaimessa käsitellä. Riittää, että ohjain vain lähettää viestejä napin painalluksista Mallille.
 
 
 \section{Näkymä}
@@ -1250,7 +1250,7 @@ Ohjain toteutetaan web-selaimen puolella, jolla on viite Mallin sokettiin. Ohjai
 </div>
 \end{lstlisting}
 
-Yllä esitellään HTML:llä kirjoitettu näkymä, jossa määritellään divisioona (\emph{div}) tunnisteella \emph{counterView}. Tunnisteen avulla voidaan yksilöidä divisioona, jolloin sitä on helpompi käsitellä Javascriptillä. Päädivisioonan sisälle lisätään kaikki mitä halutaan  näytettävän laskurissa. Laskurin kaksi painiketta \emph{increase} ja \emph{decrease} liitetään ohjaimen funktioihin. Jokainen painallus kutsuu ohjaimessa määriteltyjä \emph{increase} ja \emph{decrease} funktioita riippuen valitusta painikkeesta. Muuttujat  \emph{ctrl} ja \emph{view} alustetaan funktioilla, joiden kautta websocket -yhteys suoritetaan. Lisäksi tulee varmistaa, että yhteys on muodostettu varmasti ennenkuin mitään toimintoja voidaan tehdä. Tästä syystä \emph{refresh} -funktiossa on toteutettu tarkistus yhteyden tilalle ja sitä kutsutaan alustamisen mukana.
+Yllä esitellään HTML:llä kirjoitettu Näkymä, jossa määritellään divisioona (\emph{div}) tunnisteella \emph{counterView}. Tunnisteen avulla voidaan yksilöidä divisioona, jolloin sitä on helpompi käsitellä Javascriptillä. Päädivisioonan sisälle lisätään kaikki mitä halutaan  näytettävän laskurissa. Laskurin kaksi painiketta \emph{increase} ja \emph{decrease} liitetään ohjaimen funktioihin. Jokainen painallus kutsuu ohjaimessa määriteltyjä \emph{increase} ja \emph{decrease} funktioita riippuen valitusta painikkeesta. Muuttujat  \emph{ctrl} ja \emph{view} alustetaan funktioilla, joiden kautta websocket -yhteys suoritetaan. Lisäksi tulee varmistaa, että yhteys on muodostettu varmasti ennenkuin mitään toimintoja voidaan tehdä. Tästä syystä \emph{refresh} -funktiossa on toteutettu tarkistus yhteyden tilalle ja sitä kutsutaan alustamisen mukana.
 
 \begin{lstlisting}[language=Javascript]
 var view = (function (modelSocket) {
@@ -1279,7 +1279,7 @@ var view = (function (modelSocket) {
 })
 \end{lstlisting}
 
-Yllä esitellään useita funktioita joiden avulla yhdistetään näkymä vastaanottamaan websocket-yhteydestä tulevia viestejä. Lisäksi määritellään \emph{refresh} -funktio, jota kutsumalla varmistetaan yhteyden alustus. Alustuksen yhteydessä myös lähetetään Mallille viesti, jossa pyydetään lähettämään alkutila. Serveriltä tulevat viestit käsitellään \emph{onmessage} -funktiossa, jota kutsutaan aina yksittäisen viestin saapuessa. Viestin sisältö löytyy \emph{evt}:n \emph{data} -muuttujasta. Muuttujan oletetaan olevan kokonaislukuarvo, joten se puretaan sellaiseksi ja asetetaan \emph{counterView} divisioonan ensimmäiseen lapsielementtiin, joka on tässä tapauksessa \emph{number} -tunnisteella esiintyvä divisioona. Serveriltä tullut viesti laitetaan tällöin suoraan divisioonan sisältöön, jolloin muutos näkyy suoraan selaimessa. 
+Yllä esitellään useita funktioita joiden avulla yhdistetään Näkymä vastaanottamaan websocket-yhteydestä tulevia viestejä. Lisäksi määritellään \emph{refresh} -funktio, jota kutsumalla varmistetaan yhteyden alustus. Alustuksen yhteydessä myös lähetetään Mallille viesti, jossa pyydetään lähettämään alkutila. Serveriltä tulevat viestit käsitellään \emph{onmessage} -funktiossa, jota kutsutaan aina yksittäisen viestin saapuessa. Viestin sisältö löytyy \emph{evt}:n \emph{data} -muuttujasta. Muuttujan oletetaan olevan kokonaislukuarvo, joten se puretaan sellaiseksi ja asetetaan \emph{counterView} divisioonan ensimmäiseen lapsielementtiin, joka on tässä tapauksessa \emph{number} -tunnisteella esiintyvä divisioona. Serveriltä tullut viesti laitetaan tällöin suoraan divisioonan sisältöön, jolloin muutos näkyy suoraan selaimessa. 
 
 \section{Yhteenveto}
 Tornado ei ota kantaa MVC:n toteutukseen, joten se antaa vapauden sovelluksen kehittäjälle määrittää sovelluksen arkkitehtuurin rakenne. Jakamalla sovellus Malliin, Näkymään ja Ohjaimeen siten, että Ohjain ja Näkymä toteutetaan selaimen puolella ja Malli palvelimen puolella on mahdollista toteuttaa MVC-arkkitehtuuri niinkuin se on tarkoitettu. Komponenttejen kommunikaatio hoidetaan web-sokettejen kautta, jolloin mahdollistetaan kaksisuuntainen kommunikaatio komponenttejen välillä. 

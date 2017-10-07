@@ -652,6 +652,12 @@ voidaan ylikirjoittaa, jolloin saavutetaan jokin haluttu ominaisuus kyseisessä 
 \emph{controlLoop} -metodia, joka taas kutsuu \emph{controlActivity} -metodia niin kauan kuin ohjaimella on hallinta.  Metodi \emph{controlActivity} määrää ohjaimen toiminnan hallinnan aikana \parencite[s. 9]{krasner_desc}.
 
 \subsection{Esimerkkiohjelma}
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.85]{counter.png}
+\caption{Kuva CounterView -näkymästä \parencite{krasner_desc}}
+\end{figure}
+
 Seuraavaksi esitellään  Dortmundin yliopistossa kirjoitettu yksinkertainen esimerkkiohjelma Smalltalkilla siitä miten MVC:n toteutus tuodaan sovellukseen käytännössä. Ohjelmakoodi löytyy myös Krasnerin artikkelista \parencite[s. 20]{krasner_desc}. Ohjelmassa toteutetaan yksinkertainen laskuri-ohjelma, joka käyttää MVC-arkkitehtuuria toteutuksessaan. Ohjelmassa esitellään mallina \emph{Counter} -luokka ja näkymänä \emph{CounterView} -luokka. \emph{Counter} perii mallin ominaisuudet ja
 toimii ohjelmassa yksinkertaisen kokonaisluku-muuttujan ylläpitäjänä. \emph{CounterView} perii näkymän ominaisuudet ja esittää mallin arvon ruudulla.
 Ohjaimena toimii \emph{CounterController} -luokka, joka perii ohjaimen käyttäytymisen. Ohjain tarjoaa sovellukselle painikkeet, joista voidaan vähentää
@@ -791,14 +797,6 @@ ikkunointimallia"
 	"Käynnistetään ohjain"
 	topView controller open
 \end{lstlisting}
-
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.85]{counter.png}
-\caption{Kuva CounterView -näkymästä \parencite{krasner_desc}}
-\end{figure}
-
-
 
 \section{Alkuperäisen MVC:n vaatimukset}
 Pyramidin sovellusarkkitehtuuri on toteutettu käyttäen pohjana MVC"-arkkitehtuuria. Tämä ei kuitenkaan tarkoita sitä, että Pyramid toteuttaisi MVC:n teknisesti sellaisena kuin esimerkiksi Krasner \parencite{krasner_desc} ja Reenskaug \parencite{reenskaug_tools} määrittelee. Tärkeimpänä vaatimuksena MVC:n toteutukselle on se, että näkymä ja ohjain luovat rajapinnan, jonka kautta käyttäjä keskustelee mallin kanssa. Malli ei saa olla suorassa yhteydessä käyttäjään \parencite[s. 10]{reenskaug_tools}. Mallin tulee olla riippumaton näkymästä ja ohjaimesta. Sen tulee myös hallita sovelluksen tilaa sekä pystyä antamaan informaatiota sovelluksen tilasta \parencite{burbeck}. Näkymän on keskusteltava mallin kanssa sekä hoitaa mallilta saadun datan graafinen näyttäminen \parencite[s.1]{reenskaug_orig}. Ohjain puolestaan ottaa vastaan syötteitä ja lähettää viestejä tämän perusteella näkymälle ja mallille \parencite{burbeck}.
@@ -1068,9 +1066,9 @@ kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelm�
 ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä näkymää. Template ei kuitenkaan riitä toteuttamaan näkymän ominaisuuksia, koska se on täysin riippuvainen ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan näkymälle ja ohjaimelle ilman, että ohjain/näkymä pyytää Mallilta nykyistä tilaa.
 
 \chapter{MVC \& Django}
-Django luokitellaan MVC-arkkitehtuurin toteuttavaksi web-sovelluskehykseksi, mutta sen toteutus kuitenkin poikkeaa alkuperäisestä MVC-toteutuksesta samalla tavalla kuin Pyramidissa. Djangosta löytyvät samat tiedostot  ja luokat MVC:n toteuttamiselle, kuin Pyramidista. Siinä on vastaavasti \emph{models.py}, \emph{views.py} sekä \emph{template.html}. Näistä \emph{models.py} sisältää mallit, \emph{views.py} ohjaimet ja \emph{template.html} näkymät selaimelle. Tässä tutkielmassa  käytetään Djangon versiota 1.11. Seuraavaksi esitellään lyhesti Mallin, Näkymän sekä Ohjaimen toteutus Djangossa, jotka on myös esitelty Djangon dokumentaatiossa https://docs.djangoproject.com/en/1.11/topics/class-based-views/intro/.
+Django luokitellaan MVC-arkkitehtuurin toteuttavaksi web-sovelluskehykseksi, mutta sen toteutus kuitenkin poikkeaa alkuperäisestä MVC-toteutuksesta samalla tavalla kuin Pyramidissa. Djangosta löytyvät samat tiedostot  ja luokat MVC:n toteuttamiselle, kuin Pyramidista. Siinä on vastaavasti \emph{models.py}, \emph{views.py} sekä \emph{template.html}. Näistä \emph{models.py} sisältää mallit, \emph{views.py} ohjaimet ja \emph{template.html} näkymät selaimelle. Tässä tutkielmassa  käytetään Djangon versiota 1.11. Seuraavaksi esitellään lyhesti Mallin, Näkymän sekä Ohjaimen toteutus Djangossa, jotka on myös esitelty Djangon dokumentaatiossa \parencite{django_docs}.
 
-Mallin toteutetaan luomalla luokka, joka peritään \emph{models.Model} luokasta. Alla esitetyssä esimerkissä luodaan malli, jolla voidaan tallentaa henkilön etu- ja sukunimi.
+Mallin toteutetaan luomalla luokka, joka peritään \emph{models.Model} luokasta. Alla esitetyssä esimerkissä luodaan malli, jolla voidaan tallentaa henkilön etu- ja sukunimi \parencite{django_model}.
 
 \begin{lstlisting}[language=Python]
 from django.db import models
@@ -1080,7 +1078,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=30)
 \end{lstlisting}
 
-Ohjaimen toiminta toteutuu Djangossa näkymien kautta vastaavasti kuin Pyramidissakin, koska näkymät käsittelevät pyyntöjä ja syötteitä, jotka tulevat selaimelta. Tästä syystä myös ohjaimen määritelmä toteutuu  sovelluksehyksessä määriteltyjen näkymien kautta https://docs.djangoproject.com/en/1.11/topics/class-based-views/intro/.
+Ohjaimen toiminta toteutuu Djangossa näkymien kautta vastaavasti kuin Pyramidissakin, koska näkymät käsittelevät pyyntöjä ja syötteitä, jotka tulevat selaimelta. Tästä syystä myös ohjaimen määritelmä toteutuu  sovelluksehyksessä määriteltyjen näkymien kautta \parencite{django_view}.
 
 \begin{lstlisting}[language=Python]
 from django.http import HttpResponse
@@ -1091,7 +1089,7 @@ def my_view(request):
         return HttpResponse('result')
 \end{lstlisting}
 
-Näkymät toteutetaan vastaavasti selaimelle käyttäen templateja. Djangossa on sisäänrakennettuna oma template-kieli, mutta se on hyvin samankaltainen esimerkiksi Jinja2 template-kielen kanssa.
+Näkymät toteutetaan vastaavasti selaimelle käyttäen templateja. Djangossa on sisäänrakennettuna oma template-kieli, mutta se on hyvin samankaltainen esimerkiksi Jinja2 template-kielen kanssa \parencite{django_template}.
 
 \begin{lstlisting}[language=Python]
 {% extends "base_generic.html" %}
@@ -1291,8 +1289,6 @@ Djangossa ja Pyramidissa ei toteudu MVC:n alkuperäinen määritelmä. Kummankin
 
 \printbibliography
 \appendix
-
-
 
 
 

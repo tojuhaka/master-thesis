@@ -25,7 +25,6 @@ morestring=[d]',
 alsoother={_},
 style=SmalltalkStyle,
 columns=fullflexible,
-backgroundcolor=\color{light-gray},
 xleftmargin=.20in,
 showspaces=false,
 numbers=left,
@@ -59,7 +58,6 @@ literate={:=}{{$\gets\ $}}2{^}{{$\uparrow$}}1{_}{{$\gets\ $}}2{ä}{{\"a}}2{ö}{{
 
 \lstset{
    language=JavaScript,
-   backgroundcolor=\color{lightgray},
    extendedchars=true,
    basicstyle=\footnotesize\ttfamily,
    showstringspaces=false,
@@ -326,12 +324,8 @@ Ohjelmistot ovat abstrakteja ja aineettomia. Ne eivät noudata mitään fysiikan
 
 Sommerville jakaa ammatilaisten kehittämät ohjelmistotuotteet kahteen kategoriaan: geneeriset tuotteet ja räätälöidyt tuotteet. Geneeristen tuotteiden määritelmät ovat sitä kehittävän organisaation hallinnassa. Päätäntävalta ominaisuuksista on siis kehittävällä osapuolella. Räätälöidyissä tuotteissa tilaaja määrittelee ohjelmiston tarkoituksen ja sen ominaisuudet. Näitä kahta tyyppiä voidaan kuitenkin yhdistää, mikä on varsin yleistä ohjelmistoille. Pohjana voi olla geneerinen tuote, johon toteutetaan erilaisia tasoja, jotka ovat määritely tilaajan toimesta \parencite[s.1-10]{Sommerville}.
 
-\section{Web-sovellukset}
-World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksessä. Alunperin Web oli yliopistojen käytössä datan tallennusta varten ja sillä oli hyvin vähän vaikutusta sovelluksiin. Webin ympärille kirjoitetut sovellukset olivat käynnissä paikallisissa tietokoneissa ja niihin oli pääsy ainoastaan organisaation sisällä. 2000-luvun alussa Web alkoi kehittyä laajemmin. Selaimiin lisätyt ominaisuudet mahdollistivat web-pohjaisten sovellusten käytön siten, että erillisen sovellukselle tarkoitetun käyttöliittymän sijasta voitiin käyttää selainta. Tämä johti monien erilaisten sovelluksien kehitykseen, jotka tarjosivat innovatiivisia palveluita käytettäväksi selaimen kautta. Webin kehityksen myötä selaimet kehittyivät siten, että ne pystyivät ajamaan myös pieniä sovelluksia paikallisesti. Tämä muutti organisaatioiden sekä liiketoiminnan tapoja käyttää sovelluksia. Sen sijaan, että sovellukset olisi asennettu käyttäjien tietokoneille, ne voitiin asentaa suoraan yhdelle web-palvelimelle. Tämä laski myös kustannuksia tehdä muutoksia sovelluksiin. Suurin osa on liiketoimien harjottajista on siirtynyt käyttämään web-pohjaisia sovelluksia siellä missä se on mahdollista \parencite[s.13]{Sommerville}.
 
-Seuraava vaihe web-sovellusten kehityksessä olivat web-palvelut. Web-palvelut ovat sovelluskomponentteja, jotka tarjoavat hyödyllisiä palveluja käytettäväksi muille sovelluksille. Siinä missä web-sovellus tarjoaa käyttöliittymän sovellukselle, web-palvelu tarjoaa rajapinnan käyttöliittymäsovellukselle käytettäväksi. Web-palvelu on yksittäinen osa sovellusta ja sovelluksella voi olla monia web-palveluja käytettävänä. Web-sovelluksien kehitys on mahdollistanut useiden monoliittisten järjestelmien siirtämisen hajautetusti eri palvelimille ympäri maailmaa. Tämä helpottaa sovellusten uudellleenkäytettävyyttä ilman, että koko järjestelmää tarvitsee rakentaa uudelleen \parencite[s.13]{Sommerville}. 
-
-\chapter{Sovelluksien arkkitehtuuri}
+\section{Sovelluksien arkkitehtuuri}
 Arkkitehtuuri määrittää sovelluksen rakenteen, organisoinnin sekä komponenttejen kommunikaation. Suunnittelun aikana arkkitehtuurilla pyritään kuvaamaan millaisiin osiin sovellus on jaoteltu. Sovelluksen kehityksen alussa on tärkeää, että sovelluksen yleistä arkkitehtuuria noudatetaan. Yksittäisten komponenttejen refaktorointi vaatimusten muuttuessa on usein helppoa, mutta sovelluksen kokonaisarkkitehtuurin muuttaminen on usein kallista. Käytännössä vaatimusten määrittely ja arkkitehtuurin suunnittelu koskettavat toisiaan. Ideaalitilanteessa sovelluksen vaatimukset eivät sisällä mitään arkkitehtuuriin liittyviä suunnitelmia tai vaatimuksia, mutta todellisuudessa tältä ei voida välttyä. Arkkitehtuurin määrittely on usein tarpeen vaatimusten rakentamisessa ja organisoinnissa. Tästä syystä arkkitehtuurin suunnittelu vaatimusmäärittelyjen ohella on usein mahdollista. Tällöin arkkitehtuurista käytetään abstraktia versiota, jossa sovellus on pilkottu erilaisiin osiin vastaamaan vaatimusten määrittelyn ongelmiin. Sommerville jakaa arkkitehtuurin kahteen tasoon: Sovellusarkkitehtuuriin (\emph{Architecture in small}) ja Järjestelmäarkkitehtuuriin (\emph{Architecture in large}). Sovellusarkkitehtuurissa keskitytään yksittäisten sovellusten sisäiseen komponenttijakoon sekä rakenteeseen.  Järjestelmäarkkitehtuuri keskittyy suurien järjestelmien rakenteeseen. Tällaiset järjestelmät koostuvat useista sovelluksista, muista järjestelmistä ja erilaisista komponenteista. Suuret järjestelmät ovat usein jaettu monille tietokoneille, jotka voivat olla myös useiden eri yritysten omistuksessa \parencite[s. 148]{Sommerville}.
 
 Arkkitehtuurin mallinnusta voidaan käyttää kahdella erilaisella tavalla. Sitä voidaan käyttää auttamaan kommunikoinnissa osakkaiden sekä suunnittelijoiden kanssa, jolloin järjestelmän yksityiskohdat piilotetaan abstraktejen komponenttejen taakse arkkitehtuurikaaviossa. Yksinkertaisen kaavion avulla pystytään keskustelemaan useiden ihmisten kanssa siten, että yksityiskohdat eivät häiritse kokonaisuuden suunnittelua. Tällöin myös projektiin osallistuvien ihmisten ei tarvitse olla teknologioista tietoisia. Kaavion avulla myös projektin johto näkee avainkomponentit ja pystyy tämän avulla jakamaan tehtäviä kehittäjille. Toinen tapa on käyttää arkkitehtuurin mallinnusta dokumentaationa arkkitehtuurille, joka on jo etukäteen suunniteltu. Tällaisella on tarkoitus kuvata koko järjestelmä yksityiskohtaisemmin. Tällöin esitellään komponentit, niiden yhteydet toisiinsa sekä rajapinnat. Monissa projekteissa arkkitehtuurin kuvaus jää usein hyvin abstraktille tasolle, koska aina ei katsota yksityiskohtaisen mallinnuksen antavan tarpeeksi lisäarvoa \parencite[s. 150]{Sommerville}.
@@ -345,6 +339,11 @@ Arkkitehtuurit kuvataan usein kaavioilla, joissa komponentit kuvataan lyhyesti n
 \end{figure}
 
 Kaaviossa esitellään robottisovelluksen jako erilaisiin komponmentteihin. Robotti pystyy pakkaamaan kaikenlaisia tavaroita liukuhihnalta. Se käyttää Näkökomponenttia (\emph{Vision System}) valitakseen erilaisia tavaroita ja tunnistamaan Identifiointi-komponentilla (\emph{Object Identification System}) tavaroiden tyypin. Kun tavara on tunnistettu, se annetaan Pakkaus-komponenteille prosessoitavaksi (\emph{Packing Selection System} ja \emph{Packing System}). Tämän jälkeena käsitellään tavara antamalla vastuu käsivarrelle (\emph{Arm Controller}) ja kouralle (\emph{Gripper Controller}), jotka kontrolloivat robotin fysiikka. Lisäksi robotilla tulee olla liukuhihnan hallintakomponentti (\emph{Conveyor Controller}), joka pystyy mahdollisesti pysäyttämään, hidastamaan tai nopeuttamaan linjaston kulkua \parencite[s.148]{Sommerville}.
+
+\section{Web-sovellukset}
+World Wide Web:n kehityksellä on ollut tärkeä rooli sovelluksien kehityksessä. Alunperin Web oli yliopistojen käytössä datan tallennusta varten ja sillä oli hyvin vähän vaikutusta sovelluksiin. Webin ympärille kirjoitetut sovellukset olivat käynnissä paikallisissa tietokoneissa ja niihin oli pääsy ainoastaan organisaation sisällä. 2000-luvun alussa Web alkoi kehittyä laajemmin. Selaimiin lisätyt ominaisuudet mahdollistivat web-pohjaisten sovellusten käytön siten, että erillisen sovellukselle tarkoitetun käyttöliittymän sijasta voitiin käyttää selainta. Tämä johti monien erilaisten sovelluksien kehitykseen, jotka tarjosivat innovatiivisia palveluita käytettäväksi selaimen kautta. Webin kehityksen myötä selaimet kehittyivät siten, että ne pystyivät ajamaan myös pieniä sovelluksia paikallisesti. Tämä muutti organisaatioiden sekä liiketoiminnan tapoja käyttää sovelluksia. Sen sijaan, että sovellukset olisi asennettu käyttäjien tietokoneille, ne voitiin asentaa suoraan yhdelle web-palvelimelle. Tämä laski myös kustannuksia tehdä muutoksia sovelluksiin. Suurin osa on liiketoimien harjottajista on siirtynyt käyttämään web-pohjaisia sovelluksia siellä missä se on mahdollista \parencite[s.13]{Sommerville}.
+
+Seuraava vaihe web-sovellusten kehityksessä olivat web-palvelut. Web-palvelut ovat sovelluskomponentteja, jotka tarjoavat hyödyllisiä palveluja käytettäväksi muille sovelluksille. Siinä missä web-sovellus tarjoaa käyttöliittymän sovellukselle, web-palvelu tarjoaa rajapinnan käyttöliittymäsovellukselle käytettäväksi. Web-palvelu on yksittäinen osa sovellusta ja sovelluksella voi olla monia web-palveluja käytettävänä. Web-sovelluksien kehitys on mahdollistanut useiden monoliittisten järjestelmien siirtämisen hajautetusti eri palvelimille ympäri maailmaa. Tämä helpottaa sovellusten uudellleenkäytettävyyttä ilman, että koko järjestelmää tarvitsee rakentaa uudelleen \parencite[s.13]{Sommerville}. 
 
 \section{Arkkitehtuurin suunnittelu}
 
@@ -506,8 +505,6 @@ HTTP-protokollan alkuperäinen toteutus on tarkoitettu yksisuuntaiseksi, jolloin
 \end{desclist}
 
 Yllä esitetyistä ongelmista johtuen kaksisuuntaista kommunikaatiota HTTP:n päällä ei voi tutkielman kannalta luotettavasti käyttää kaksisuuntaisen kommunikaation toteuttamiseen sen epävarmuuden vuoksi.
-
-
 
 \section{Web-soketti protokolla}
 Koska HTTP:ta ei oltu alunperin tarkoitettu kaksisuuntaiseen kommunikaation, tehtiin useat aiemmat teknologiset ratkaisut tehokkuuden ja toimintavarmuuden väliltä. Tämän pohjalta on kehitetty web-soketti protokolla. Web-soketti protokolla on itsenäinen TCP-pohjainen protokolla. Sen avulla mahdollistetaan kaksisuuntainen kommunikaatio palvelimen ja asiakkaan välillä. Protokollaa voidaan käyttää niin tavallisissa web-sivustoissa kuin peleissäkin.  Se on suunniteltu erityisesti syrjäyttämään olemassa olevia kommunikointiteknologioita, jotka käyttävät HTTP:ta datan siirrossa. Se on myös luotu toimimaan ympäristöissä, joissa käytetään HTTP:tä. Web-soketteja käytetään oletetusti  HTTP-porttejen 443 ja 80 yli. HTTP ei kuitenkaan rajoita web-sokettejen toteutusta.  Web-soketti käyttää yksittäistä TCP-yhteyttä lähettäen dataa kumpaankin suuntaan. Protokollassa on kaksi osaa: kättely ja datan siirto \parencite[s. 1.1]{websocket}.
@@ -837,7 +834,7 @@ liiketoiminta-alueiden sovellukset. Web-pohjaisia sovelluskehyksiä voidaan esim
 
 Sovelluskehykset ovat tehokkaita sovelluksien uudelleenkäytössä, mutta ne ovat myös kalliita tuoda sovelluskehitykseen mukaan. Sovelluskehykset ovat usein hyvin monimutkaisia ja niiden omaksuninen voi kestää kuukausia. Virheiden etsintä on sovelluskehyksien pohjalta tehdyissä sovelluksissa hastaavaa, koska ohjelmoijan tulee ymmärtää millä tavalla sovelluskehys toimii. Lisäksi voi olla vaikeaa valita oikea sovelluskehys monien joukosta. 
 
-\chapter{Python web-sovelluskehykset}
+\chapter{Web-sovelluskehykset \& MVC}
 Web-sovelluskehykset ovat sovelluskehyksiä, jotka tarjoavat ratkaisuja helpottamaan web-sovellusten toteuttamista. Web-sovelluskehyksissä käyttöliittymä näytetään käyttäjille selaimen välityksellä. Sovellus ajetaan joko palvelimella tai suoraan käyttäjän selaimessa. Sovellus määrittää käyttöliittymän sivujen järjestyksen, sisällön sekä mahdollisten toimintojen esittämisen käyttäjälle, jonka kautta käyttäjä voi vaikuttaa palvelimella sijaitsevaan sovellukseen \parencite{vosloo}. 
 
 Yleisimmät teknologiat mitä web-sovelluskehykset tarjoavat ovat erilaiset rajapinnat tietokannalle, template-moottori sekä mahdollisuus käsitellä HTTP-pyyntöjä ohjelmakoodissa. Tietokanta-rajapinnalla tuodaan sovelluskehitykseen taso, jonka avulla helpotetaan kommunikointia tietokannan kanssa. Yleisimmin käytetty ohjelmointitekniikka tähän on ORM (Object-Relational-Mapping), jolla muunnetaan dataa tietokannan ja ohjelmakoodin välillä. Ohjelmoijalle tämä näkyy ns. virtuaalisena olio-tietokantana, jonka avulla voidaan lukea sekä muokata tietokantaa kutsuilla ohjelmakoodista. Tällöin suoria kyselyitä tietokantaan ei tarvita \parencite{Ghandeharizadeh}. Seuraavassa esimerkissä esitellään miten Djangon ORM:ia käytetään.
@@ -912,7 +909,7 @@ Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa 
 \section{Tornado}
 Tornado on Python-pohjainen web-sovelluskehys, joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O) sekä mahdollistaa web-sokettejen käytön \parencite{tornado}. Siirräntä tarkoittaa tässä yhteydessä luku- ja kirjoitusoperaatioita levyllä. Suurella kuormalla toimivat synkroniset TCP/IP-pohjaiset sovellukset voivat jättää useita syklejä prosessorin laskennasta väliin, joka johtuu siirrännän hitaudesta. Nämä syklit voitaisiin käyttää sovelluksen koodin ajamiseen. Mitä enemmän pyyntöjä tulee samanaikaisesti, sitä enemmän prosessorin syklejä jää väliin ja järjestelmään tulee ylimääräistä kuormaa. Siirrännät ovat paljon hitaampia kuin prosessorin laskentateho. Asynkronisessa siirrännässä pyyntöjä voidaan ottaa vastaan käsiteltäväksi, vaikka edellistä pyyntöä ei ole vielä suoritettu loppuun \parencite[s. 1]{async}. Tornado ei toteuta MVC-mallia, vaan tarjoaa vapaammat kädet kehittäjälle toteuttaa haluamansa arkkitehtuuri. 
 
-\chapter{MVC \& Pyramid}
+\section{MVC \& Pyramid}
 Pyramidin kehittäjien dokumenteissa esitellään Pyramid MVC-kehyksenä, mutta samalla myös kyseenalaistetaan tämä väite. Erityisesti Mallin ja Ohjaimen määritelmä puuttuu \parencite{pyramid_intr}. Tässä
 osiossa käsitellään Pyramidia MVC:n näkökulmasta. Tarkastelua varten toteutetaan Pyramidilla vastaava laskuri-sovellus kuin Krasnerin julkaisussa käyttäen Pyramidin tarjoamia ominaisuuksia \parencite{krasner_desc}. Sovellus rajataan käyttämään SQL-tietokantaa Mallin datan tallennukseen sekä \emph{URL dispatch} -tekniikkaa \parencite{urldispatch}. Sovelluksen pohjalta tarkastellaan MVC:n kannalta kolmea oleellisinta tiedostoa: \emph{views.py}, \emph{models.py} ja \emph{template.pt}. Näin tutkielman tarkastelu pystytään rajaamaan mahdollisimman pienelle alueelle, jolloin tutkielma on helpompi keskittää tarkastelemaan yksittäistä tekniikkaa.
 
@@ -920,7 +917,6 @@ Tässä osiossa tarkastellaan Pyramid-sovelluksen tiedostoja sekä niiden sisäl
 Koska Pyramidissa MVC:n määrittely on hyvin epävakaalla pohjalla, tulee tehdä selvästi mitä ominaisuuksia komponenteilta vaaditaan. Esimerkiksi \emph{views.py} ja \emph{template.pt} -tiedostot ovat tarkoitettu toimimaan yhdessä näkymänä, jolloin Ohjaimen toteuttamat tehtävät sisällytettäisiin Näkymään. MVC:tä tutkiessa täytyy sovelluksen komponentit kuitenkin jakaa kolmeen osaan.  Tiedosto \emph{views.py}
 sisältää paljon Ohjaimelle yhteisiä piirteitä, joten se erottuu selvästi \emph{template.pt} -tiedostosta. Tutkielmassa oletetaan, että \emph{models.py} sisältää Mallin, \emph{views.py} Ohjaimen ja \emph{template.pt} Näkymän.
 
-\section{Tiedostojen tarkastelu}
 \lstset{
   literate={ö}{{\"o}}1
            {ä}{{\"a}}1,
@@ -1016,7 +1012,6 @@ Templatessa luodaan lomake kahdelle painikkeelle, joista kumpikin lähettää lo
 
 Templatessa hoidetaan sovelluksen graafinen puoli, joten se vastaa ominaisuuksiltaan Näkymää. \\ Ongelmaksi muodostuu kuitenkin Näkymän ja Mallin välinen kommunikointi. Näkymä ei ole yhteydessä Malliin suoraan, vaan tarvitsee Ohjaimen kautta tiedon Mallin tilasta.  Näkymä ei siis sellaisenaan toteuta sille asetettuja ominaisuuksia. \\
 
-\section{Sovelluksen toiminta}
 Alla olevassa kuvassa esitellään visuaalisesti miten laskurisovellus muodostaa HTML-sivun, kun käyttäjä painaa sivulla \emph{Increment} -painiketta. Kuvan
 vaiheet toteutetaan numerojärjestyksessä alkaen ensimmäisestä.
 \begin{figure}[h]
@@ -1039,26 +1034,8 @@ escapeinside={/*@}{@*/},
 /*@Templatessa generoidaan HTML-sivu, joka tuodaan palvelimelle vastauksena.@*/
 \end{lstlisting}
 
-\section{Yhteenveto}
-Malli sekä Ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta Näkymään tai Ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan Ohjaimelle ja Näkymälle omista muutoksistaan, koska kaikki muutokset tulevat Näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii request-oliossa tulevista syötteistä ja vaikuttaa Malliin sekä Näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä Näkymän tarkoitus on kommunikoida suoraan Mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa Näkymä on yhteydessä vain Ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu. Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \parencite{krasner_desc}.
-Alla esitellyssä kuvassa havainnollisestetaan, kuinka Mallin ja Näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan Ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan Ohjaimelle ja Näkymälle vaan tarvitsee aina erillisen HTTP-pyynnön.
 
-\begin{figure}[h]
-\centering/
-\includegraphics[scale=0.85]{pyramid_mvc.jpg}
-\caption{Pyramidin kommunikointi MVC-komponenttien kesken. Kuva on muokattu Krasnerin esittelemästä kommunikointimallista \parencite{krasner_desc} }
-\end{figure}
-
-Yllä esitetyssä kommunikaatiomallissa Ohjain saa vastaan request-olion, jossa tuodaan kaikki tarvittava tieto käyttäjästä. Tämän perusteella Ohjain käskee Mallia
-sekä muuttujaa. Samalla se pyytää Mallilta tietoa sovelluksen tilasta ja välittää tiedon Näkymälle. Näkymä taas välittää Ohjaimen tuoman datan käyttäjälle graafisena.
-
-Alunperin Pyramidin dokumentaatiossa kyseenalaistettiin Mallin sekä Ohjaimen toteutus \parencite{pyramid_intr}. Tutkimuksen pohjalta voidaan kuitenkin
-todeta, että ongelmaksi ei muodostu yksittäisien komponenttien toteutus, vaan komponenttien välinen kommunikointi. Erityisesti Näkymän ja Mallin yhteistyö jää
-kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelmän kanssa \parencite[s. 1]{reenskaug_orig}. Tämä johtuu siitä, että Pyramidissa \emph{views.py} -tiedoston sisältämä ohjelmakoodi on nimensä mukaisesti tarkoitettu Näkymäksi ja
-\emph{template.pt} -tiedosto katsotaan osaksi samaa komponenttia. Tutkimuksen tuloksien perusteella voidaan kuitenkin todeta, että \emph{views.py} -tiedoston näkymä-funktio toteuttaa kaikki
-Ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä Näkymää. Template ei kuitenkaan riitä toteuttamaan Näkymän ominaisuuksia, koska se on täysin riippuvainen Ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan Näkymälle ja Ohjaimelle ilman, että Ohjain tai Näkymä pyytää Mallilta nykyistä tilaa.
-
-\chapter{MVC \& Django}
+\section{MVC \& Django}
 Django luokitellaan MVC-arkkitehtuurin toteuttavaksi web-sovelluskehykseksi, mutta sen toteutus kuitenkin poikkeaa alkuperäisestä MVC-toteutuksesta samalla tavalla kuin Pyramidissa. Djangosta löytyvät samat tiedostot  ja luokat MVC:n toteuttamiselle, kuin Pyramidista. Siinä on vastaavasti \emph{models.py}, \emph{views.py} sekä \emph{template.html}. Näistä \emph{models.py} sisältää mallit, \emph{views.py} ohjaimet ja \emph{template.html} näkymät selaimelle. Tässä tutkielmassa  käytetään Djangon versiota 1.11. Seuraavaksi esitellään lyhesti Mallin, Näkymän sekä Ohjaimen toteutus Djangossa, jotka on myös esitelty Djangon dokumentaatiossa \parencite{django_docs}.
 
 Mallin toteutetaan luomalla luokka, joka peritään \emph{models.Model} luokasta. Alla esitetyssä esimerkissä luodaan Malli, jolla voidaan tallentaa henkilön etu- ja sukunimi \parencite{django_model}.
@@ -1103,9 +1080,27 @@ Näkymät toteutetaan vastaavasti selaimelle käyttäen templateja. Djangossa on
 {% endblock %}
 \end{lstlisting}
 
+
 \section{Yhteenveto}
+Malli sekä Ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta Näkymään tai Ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan Ohjaimelle ja Näkymälle omista muutoksistaan, koska kaikki muutokset tulevat Näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii request-oliossa tulevista syötteistä ja vaikuttaa Malliin sekä Näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä Näkymän tarkoitus on kommunikoida suoraan Mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa Näkymä on yhteydessä vain Ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu. Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \parencite{krasner_desc}.
+Alla esitellyssä kuvassa havainnollisestetaan, kuinka Mallin ja Näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan Ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan Ohjaimelle ja Näkymälle vaan tarvitsee aina erillisen HTTP-pyynnön.
+
 Djangossa määritellään MVC samalla tavalla kuin Pyramidissakin. Tästä syystä voidaan todeta, että vaikka MVC-komponenttejen vaatimukset toteutuvat yksittäin, tulee samat ongelmat vastaan kuin Pyramidissakin. Kommunikaatiomalli on ristiriidassa MVC:n alkuperäisen toteutuksen kanssa, mikä johtuu HTTP:n päälle rakennetusta toteutuksesta. Lisäksi Näkymä ei kommunikoi suoraan Mallin kanssa, vaan kommunikaatio Mallille toteutetaan Ohjaimen kautta. 
 
+\begin{figure}[h]
+\centering/
+\includegraphics[scale=0.85]{pyramid_mvc.jpg}
+\caption{Pyramidin kommunikointi MVC-komponenttien kesken. Kuva on muokattu Krasnerin esittelemästä kommunikointimallista \parencite{krasner_desc} }
+\end{figure}
+
+Yllä esitetyssä kommunikaatiomallissa Ohjain saa vastaan request-olion, jossa tuodaan kaikki tarvittava tieto käyttäjästä. Tämän perusteella Ohjain käskee Mallia
+sekä muuttujaa. Samalla se pyytää Mallilta tietoa sovelluksen tilasta ja välittää tiedon Näkymälle. Näkymä taas välittää Ohjaimen tuoman datan käyttäjälle graafisena.
+
+Alunperin Pyramidin dokumentaatiossa kyseenalaistettiin Mallin sekä Ohjaimen toteutus \parencite{pyramid_intr}. Tutkimuksen pohjalta voidaan kuitenkin
+todeta, että ongelmaksi ei muodostu yksittäisien komponenttien toteutus, vaan komponenttien välinen kommunikointi. Erityisesti Näkymän ja Mallin yhteistyö jää
+kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelmän kanssa \parencite[s. 1]{reenskaug_orig}. Tämä johtuu siitä, että Pyramidissa \emph{views.py} -tiedoston sisältämä ohjelmakoodi on nimensä mukaisesti tarkoitettu Näkymäksi ja
+\emph{template.pt} -tiedosto katsotaan osaksi samaa komponenttia. Tutkimuksen tuloksien perusteella voidaan kuitenkin todeta, että \emph{views.py} -tiedoston näkymä-funktio toteuttaa kaikki
+Ohjaimelle määritellyt ominaisuudet. Template puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä Näkymää. Template ei kuitenkaan riitä toteuttamaan Näkymän ominaisuuksia, koska se on täysin riippuvainen Ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan Näkymälle ja Ohjaimelle ilman, että Ohjain tai Näkymä pyytää Mallilta nykyistä tilaa.
 
 \chapter{Web-soketit \& Tornado}
 Pyramid-sovelluskehystä ja MVC:tä tutkiessa todettiin MVC:n alkuperäisen toteutuksen vaativan reaaliaikaista kommunikoita Mallin sekä Näkymän välillä siten, että Malli kommunikoi suoraan Näkymälle muutoksistaan. Tämä ei pelkällä Pyramidilla toteutetun web-sovelluksen avulla onnistu, koska kommunikointi toteutetaan aina HTTP-pyynnön kautta ja muutoksien näkeminen vaatii aina uuden HTTP-pyynnön. Web 2.0 teknologiat kuten AJAX (Asynchronous JavaScript and XML) ovat tuonneet uuden tavan loppukäyttäjille kommunikoida web-sovelluksien kanssa. Sen sijaan, että muodostetaan useita sivuja sekä takaisinkutsuja tuomaan sisältö loppukäyttäjälle, voidaan sisältöä tuoda reaaliaikaisesti. Loppukäyttäjän ei tällöin tarvitse päivittää sivua nähdäkseen sisällössä muutoksia. AJAX vaatii kuitenkin useiden päivityspyyntöjen lähettämistä palvelimelle yhteyden aikana, jotta käyttäjälle voidaan päivittää sisältöä. Tätä kutsutaan pollaukseksi (polling). Tästä syystä jokainen tapahtuma luo ylimääräistä kuormaa palvelimelle\parencite{websocket_ajax}. AJAX ei siis riitä toteuttamaan MVC:ssä Mallin suoraa kommunikointia Näkymälle ja Ohjaimelle, koska erillinen pyyntö päivitysten tarkastamiseen tarvitaan edelleen. AJAX:n kanssa ei kuitenkaan tarvita sivun lataamista uudelleen muutoksien näkemiseksi, koska pollaus toteutetaan taustalla yhteyden aikana.  Web-socketit ratkaisevat pollauksen ongelman ja mahdollistavat yhteyden molempiin suuntiin \parencite[s. 1.1]{websocket}.

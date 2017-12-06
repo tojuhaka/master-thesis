@@ -789,7 +789,7 @@ ikkunointimallia"
 	topView controller open
 \end{lstlisting}
 
-\section{Alkuperäisen MVC:n vaatimukset}
+\section{Vaatimukset}
 Pyramidin sekä Djangon sovellusarkkitehtuuri on toteutettu käyttäen pohjana MVC"-arkkitehtuuria. Tämä ei kuitenkaan tarkoita sitä, että ne toteuttaisivat MVC:n teknisesti sellaisena kuin esimerkiksi Krasner \parencite{krasner_desc} ja Reenskaug \parencite{reenskaug_tools} määrittelee. Tärkeimpänä vaatimuksena MVC:n toteutukselle on se, että Näkymä ja Ohjain luovat rajapinnan, jonka kautta käyttäjä keskustelee Mallin kanssa. Malli ei saa olla suorassa yhteydessä käyttäjään \parencite[s. 10]{reenskaug_tools}. Mallin tulee olla riippumaton Näkymästä ja Ohjaimesta. Sen tulee myös hallita sovelluksen tilaa sekä pystyä antamaan informaatiota sovelluksen tilasta \parencite{burbeck}. Näkymän on keskusteltava Mallin kanssa sekä hoitaa Mallilta saadun datan graafinen näyttäminen \parencite[s.1]{reenskaug_orig}. Ohjain puolestaan ottaa vastaan syötteitä ja lähettää viestejä tämän perusteella Näkymälle ja Mallille \parencite{burbeck}.
 
 Vaikka MVC:tä ei ole tarkoitettu alunperin web-sovelluksiin, voivat ne hyötyä MVC:n arkkitehtuurista. Suurin ongelma MVC:n käyttämisessä web-sovelluskehyksissä on palvelimen (palvelin) ja asiakkaan (client) välinen ositus. Näkymä näytetään aina asiakkaan selaimessa sen omalla päätelaitteella. Malli ja Ohjain taas voivat olla ositettu teoriassa miten vain asiakkaan ja palvelimen välillä. Web-sovelluksissa kehittäjä pakotetaan osioimaan sovellus. MVC:n tulee olla riippumaton osioinnista. Osioinnin ei tule määrittää sovelluksen arkkitehtuuria \parencite{ibm_watson}. Osioinnin yhteydessä tulee myös mahdollistaa kaksisuuntainen kommunikaatio palvelimen ja selaimen välille. Reenskaugin mukaan Mallin tulee pystyä lähettämään itsestään muutosviestejä siihen kytketyille komponenteille. Tässä tapauksessa web-sovelluskehyksissä toteutettun Mallin tulee lähettää viestejä suoraan Näkymille ja Ohjaimille \parencite{reenskaug_tools}. 
@@ -1016,7 +1016,7 @@ Alla olevassa kuvassa esitellään visuaalisesti miten laskurisovellus muodostaa
 vaiheet toteutetaan numerojärjestyksessä alkaen ensimmäisestä.
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.87]{laskurisovellus.png}
+\includegraphics[scale=0.7]{laskurisovellus.png}
 \caption{Laskurisovelluksen toiminta}
 \end{figure}
 \lstset{

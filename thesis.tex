@@ -120,10 +120,10 @@ Toni Haka-Risku
 yhdistetään prosessoimaan pyyntöjä.
 \item[Template] Dynaaminen html-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
 \item[Pakettikytkentä] Tiedonsiirtomenetelmä, jossa yhteys data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{kytkenta}.
-\item[Piirikytkentä] Tedonsiirtomenetelmä, jossa yhteys pysyy auki riippumatta siitä, onko osapuolien välillä liikennettä. Piirikytkentä on käytössä esim. puhelinverkoissa \parencite{kytkenta}.
+\item[Piirikytkentä] Tiedonsiirtomenetelmä, jossa yhteys pysyy auki riippumatta siitä, onko osapuolien välillä liikennettä. Piirikytkentä on käytössä esim. puhelinverkoissa \parencite{kytkenta}.
 \item[Asiakas] Alustaa yhteyden lähettääkseen pyyntöjä palvelimelle \parencite{http}.
-\item[HTTP] Yksisuuntainen kommunikaatio-protokolla Web:lle. Määrittelee kahdeksan perusoperaatiota: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE ja CONNECT. Käytetyimmät operaatiot ovat GET ja POST. GET-metodi hakee datan, joka on liitetty pyynnössä annettuun URL:iin. POST lähettää dataa ohjelmalle, joka kuuntelee jotain määriteltyä URL:ia.
-\item[Käyttäjä-agentti] on tietokoneohjelma, joka lähettäää pyynnön jollekin tietylle ohjelmalle. Tällaisia ovat esimerkiksi selaimet \parencite{http}. 
+\item[HTTP] Yksisuuntainen kommunikaatio-protokolla hypertekstidokumenttejen siirtoon. Määrittelee kahdeksan perusoperaatiota: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE ja CONNECT. Käytetyimmät operaatiot ovat GET ja POST. GET-metodi hakee datan, joka on liitetty pyynnössä annettuun URL:iin. POST lähettää dataa ohjelmalle, joka kuuntelee jotain määriteltyä URL:ia.
+\item[Käyttäjä-agentti] on tietokoneohjelma, joka lähettää pyynnön jollekin tietylle ohjelmalle. Tällaisia ovat esimerkiksi selaimet \parencite{http}. 
 \item[Palvelin] Tietokoneohjelma, joka ottaa vastaan yhteyksiä ja lähettää takaisin vastauksia asiakas-sovellukselle. Jokainen ohjelma pystyy olemaan yhtäaikaa asiakas-sovellus ja palvelin \parencite{http}. 
 \item[Web-soketti] TCP:n päällä toimiva protokolla, joka mahdolllistaa kaksisuuntaisen kommunikaation asiakkaan ja palvelimen välillä \parencite{websocket}.
 \item[TCP] Protokolla kahden isännän väliseen luotettavaan tiedonsiirtoon verkossa  \parencite{tcp1_1}.
@@ -150,9 +150,7 @@ Selaimessa käytetty ohjelmointikieli perustuu ECMAScript standardiin, joka on o
 \section{Tutkimuskysymys}
 Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Lisäksi käydään läpi tärkeimmät web-teknologiat, joiden päälle Internet on rakennettu.  Näiden pohjalta tutkitaan millä tavalla 
 Model-View-Controller -arkkitehtuuri (MVC) on toteutettu web-sovelluskehyksissä ja miten se
-eroaa alkuperäisestä arkkitehtuurin määritelmästä, jonka määrittelee Krasner \parencite{krasner} käyttäen pohjana Reenskaugin kehittelemää MVC-arkkitehtuuria \parencite{reenskaug_tools} . Tämän jälkeen pyritään toteuttamaan MVC alkuperäisen
-määritelmään mukaan Tornado-sovelluskehyksellä käyttäen TCP:n päällä toimivaa web-soketti protokollaa kommunikaatiossa HTTP:n sijaan. Havaintojen pohjalta
-selvitetään voidaanko Reenskaugin ja Krasnerin alkuperäinen MVC-malli toteuttaa web-sovelluskehyksellä. 
+eroaa alkuperäisestä arkkitehtuurin määritelmästä, jonka määrittelee Krasner \parencite{krasner} käyttäen pohjana Reenskaugin kehittelemää MVC-arkkitehtuuria \parencite{reenskaug_tools}. Web-sovelluskehyksen voidaan sanoa toteuttavan MVC-arkkitehtuuri, kun sen komponentit pystytään jaottelemaan määritelmän mukaisesti Malliin (Model), Näkymään (View) ja Ohjaimeen (Controller) siten, että ne toteuttavat määritelmän mukaiset roolit. Malli hallitsee sovelluksen tilaa, Ohjain ottaa vastaan syötteitä ja Näkymä huolehtii käyttöliittymän piirtämisestä käyttäjälle. Mallin tulee pystyä lähettämään sekä vastaanottamaan viestejä Ohjaimelta ja Näkymältä. Ohjaimen tulee pystyä lähettämään viestejä näkymälle. MVC-pohjaisten web-sovelluskehyksien tutkimisen jälkeen pyritään toteuttamaan MVC alkuperäisen määritelmään mukaan Tornado-sovelluskehyksellä käyttäen TCP:n päällä toimivaa Web-soketti protokollaa kommunikaatiossa HTTP:n sijaan.  Havaintojen pohjalta selvitetään voidaanko Reenskaugin ja Krasnerin määrittelemä alkuperäinen MVC-malli toteuttaa web-sovelluskehyksellä. 
 
 \section{Tutkimuksen rakenne ja aiheen rajaus}
 Tutkimuksessa käytetään laadullista tutkimusmenetelmää. Hypoteesi on kuitenkin vahvasti läsnä tutkielman aikana, koska tutkielma perustuu olettamukseen MVC:n toteutuksesta web-sovelluskehyksissä. Tutkimus ei todista mitään MVC:n aihealueen ulkopuolelta vaan pyrkii esittämään yleisiä oletuksia 
@@ -224,7 +222,7 @@ Sommerville esittelee MVC-mallin web-sovelluksen näkökulmasta, jossa kommuniko
 Näkymältä itseltään. Käyttäjän pyynnöt voivat tulla niin Ohjaimelle kuin Näkymällekin toisin kuin Krasnerin mallissa, jossa käyttäjän toiminnot tulevat ainoastaan Ohjaimelle.
 Lisäksi Sommervillen määritelmässä Mallilla ei ole kaksisuuntaista yhteyttä Ohjaimeen.
 
-\chapter{Lähdemateriaalin hankinnasta}
+\chapter{Lyhyt kirjallisuuskatsaus}
 
 Kirjallisuuskatsauksessa käydään läpi millä tavalla lähdemateriaalia kerätään tutkielmaa varten. Lähdemateriaalin 
 haku toteutetaan hakukoneilla, jotka ovat tarkoitettu erityisesti 
@@ -867,7 +865,6 @@ Yllä oleva rivi hoitaa kyselyn nimen perusteella \emph{Blog} -nimisestä taulus
 
 
 Template-moottori on teknologia HTML-sivujen tuottamiseen, jolla generoidaan dynaamisia HTML-sivuja yhdistämällä ohjelmalogiikkaa sekä HTML-kieltä. Alla on esitelty Jinja2-kieli, jota käytetään template-kielenä Flask-sovelluskehyksessä.
-\pagebreak
 
 \begin{lstlisting}[language=Smalltalk]
 <title>{% block title %}{% endblock %}</title>

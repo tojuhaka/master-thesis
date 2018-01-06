@@ -901,31 +901,32 @@ muokattu Myghty Python Templating Framework:n pohjalta tarjotakseen MVC-pohjaise
 Koska Pyramid pyrkii tarjoamaan vain välttämättömimmät työkalut web"-sovelluksien kehitykseen, sen kehittäjät
 ovat päätyneet web-kehityksessä neljään yleisimpään ongelmaan ja tarjoavat niihin ratkaisun Pyramidissa:
 
-OIKOLUKU
 
 \begin{description}
 \item [URL Mapping] -\ URL:ien liittäminen ohjelmakoodiin.
-\item[Template] -\ Tuodaan sovelluksen näkymä selaimelle käyttäen sivupohjia, jolla määrätään näkymän rakenne. Sivupohja sisältää usein HTML:än mukana tuotuja loogisia ilmaisuja, joiden perusteella sivupohjamoottori rakentaa HTML-sivun selaimelle. Sivupohjan avulla pystytään erottamaan käyttöliittymä sovelluslogiikasta tehokkaasti.
+\item[Template] -\ Tuodaan sovelluksen näkymä selaimelle käyttäen sivupohjia, jolla määrätään näkymän rakenne. Sivupohja sisältää usein HTML:n mukana tuotuja loogisia ilmaisuja, joiden perusteella sivupohjamoottori rakentaa HTML-sivun selaimelle. Sivupohjan avulla pystytään erottamaan käyttöliittymä sovelluslogiikasta tehokkaasti.
 \item[Security] -\ Perinteiset tietoturvaongelmat tulee olla ratkaistuna valmiiksi jo sovelluskehyksessä. Tämä ei kuitenkaan tarkoita sitä, että kehittäjä voisi täysin unohtaa tietoturvan merkityksen.
-\item[Static Assets] -\ Staattisien resurssejen jakaminen niille tarkoitettuihin paikkoihin tiedostorakenteessa.
+\item[Static Assets] -\ Staattisien resurssien jakaminen niille tarkoitettuihin paikkoihin tiedostorakenteessa.
 \end{description}
 Yllä määriteltyjen neljän ongelman lisäksi Pyramid tarjoaa lisäosien kautta monia erilaisia työkaluja, joiden avulla pystytään laajentamaan sen ominaisuuksia \parencite{pyramid_intr}. Tutkielman aiheen rajauksen vuoksi ei kuitenkaan
-käydä läpi yksityiskohtaisemmin Pyramidin toteutusta ja siihen liitettävissä olevia lisäosia, vaan keskitytään tarkastelemaan MVC:n toteutusta Pyramidissa.
+
 
 \section{Django}
-Djangon läpikäynnissä joudutaan turvautumaan täysin Djangon omiin dokumentaatioihin, jotka löytyvät Djangon web-sivulta. Django on web-sovelluskehys, joka  sai alkunsa kehitysryhmässä Kansaksen osavaltiossa Yhdysvalloissa 2003, kun web-kehittäjät Adrian Holovaty ja Simon Willison alkoivat käyttää Pythonia web-kehityksessä. The World Online -ryhmä (WO), joka oli vastuussa muutamaamasta paikallisesta uutissivustosta, menestyivät ympäristössä, jossa oli tiukat aikarajat. Journalistit vaativat ominaisuuksien ja kokonaisten sovelluksien valmistumista muutamassa päivässä ja joskus jopa tunneissa. Holovaty ja Willison kehittivät web-sovelluskehyksen, jonka avulla he pystyivät vastaamaan journalistisen ympäristön haasteisiin. Kesällä 2005 he saivat kehitettyä sovelluskehyksen siten, että se oli käytössä suurimmassa osassa World Onlinen sivustoja. Tuolloin mukaan kehitykseen tuli Jacob Kaplan-Moss. Kehittäjät päättivät julkaista heinäkuussa 2005 sovelluskehyksen nimellä Django jazz-kitaristi Django Reinhardtin mukaan \parencite{django_history}.
+Djangon läpikäynnissä joudutaan turvautumaan täysin Djangon omiin dokumentaatioihin, jotka löytyvät Djangon web-sivulta. Django on web-sovelluskehys, joka sai alkunsa kehitysryhmässä Kansaksen osavaltiossa Yhdysvalloissa 2003, kun web-kehittäjät Adrian Holovaty ja Simon Willison alkoivat käyttää Pythonia web-kehityksessä. The World Online -ryhmä (WO), joka oli vastuussa muutamasta paikallisesta uutissivustosta, menestyivät ympäristössä, jossa oli tiukat aikarajat. Journalistit vaativat ominaisuuksien ja kokonaisten sovelluksien valmistumista muutamassa päivässä ja joskus jopa tunneissa. Holovaty ja Willison kehittivät web-sovelluskehyksen, jonka avulla he pystyivät vastaamaan journalistisen ympäristön haasteisiin. Kesällä 2005 he saivat kehitettyä sovelluskehyksen siten, että se oli käytössä suurimmassa osassa World Onlinen sivustoja. Tuolloin mukaan kehitykseen tuli Jacob Kaplan-Moss. Kehittäjät päättivät julkaista heinäkuussa 2005 sovelluskehyksen nimellä Django jazz-kitaristi Django Reinhardtin mukaan \parencite{django_history}.
 
-Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa myös ylläpitäjille suunnatun työkalun, josta voidaan hallita sovellusta käyttöliittymätasolta. Lisäksi se tarjoaa lomake-työkalut, käyttäjätasoisen autentikaation sekä tietokanta-abstrahoinnin. Tietokanta-abstraktiolla tarkoitetaan sisäänrakennettua virtuaalista ympäristöä tuomaan yhteys tietokantaan olio-ohjelmoinnin kautta (Object-relational mapping)\parencite{djangobook}. Siinä missä Pyramid pyrkii tarjoamaan kehittäjille valinnanvaraa erilaisten komponenttejen suhteen, Django tarjoaa kokonaisvaltaisen ratkaisun sisältäen kaikki tarvittavat työkalut web-sovellusten rakentamiseen. Djangoon on tarjolla myös paljon erilaisia paketteja täydentämään sitä. 
+Django tarjoaa samat välttämättömät työkalut kuin Pyramidissa. Se tarjoaa myös ylläpitäjille suunnatun työkalun, josta voidaan hallita sovellusta käyttöliittymätasolta. Lisäksi se tarjoaa lomaketyökalut, käyttäjätasoisen varmentamisen sekä tietokanta-abstrahoinnin. Tietokanta-abstraktiolla tarkoitetaan sisäänrakennettua virtuaalista ympäristöä tuomaan yhteys tietokantaan olio-ohjelmoinnin kautta (Object-relational mapping)\parencite{djangobook}. Siinä missä Pyramid pyrkii tarjoamaan kehittäjille valinnanvaraa erilaisten komponenttien suhteen, Django tarjoaa kokonaisvaltaisen ratkaisun sisältäen kaikki tarvittavat työkalut web-sovellusten rakentamiseen. Djangoon on tarjolla myös paljon erilaisia paketteja täydentämään sitä. 
+
 
 \section{Tornado}
-Tornado on Python-pohjainen web-sovelluskehys, joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O) sekä mahdollistaa web-sokettejen käytön \parencite{tornado}. Siirräntä tarkoittaa tässä yhteydessä luku- ja kirjoitusoperaatioita levyllä. Suurella kuormalla toimivat synkroniset TCP/IP-pohjaiset sovellukset voivat jättää useita syklejä prosessorin laskennasta väliin, joka johtuu siirrännän hitaudesta. Nämä syklit voitaisiin käyttää sovelluksen koodin ajamiseen. Mitä enemmän pyyntöjä tulee samanaikaisesti, sitä enemmän prosessorin syklejä jää väliin ja järjestelmään tulee ylimääräistä kuormaa. Siirrännät ovat paljon hitaampia kuin prosessorin laskentateho. Asynkronisessa siirrännässä pyyntöjä voidaan ottaa vastaan käsiteltäväksi, vaikka edellistä pyyntöä ei ole vielä suoritettu loppuun \parencite[s. 1]{async}. Tornado ei toteuta MVC-mallia, vaan tarjoaa vapaammat kädet kehittäjälle toteuttaa haluamansa arkkitehtuuri. 
+Tornado on Python-pohjainen web-sovelluskehys, joka pystyy skaalautumaan kymmenille tuhansille yhtäaikaisille yhteyksille. Se käyttää asynkronista siirräntää (asynchronous non-blocking I/O) sekä mahdollistaa web-sokettejen käytön \parencite{tornado}. Siirräntä tarkoittaa tässä yhteydessä luku- ja kirjoitusoperaatioita levyllä. Suurella kuormalla toimivat synkroniset TCP/IP-sovellukset voivat jättää useita syklejä prosessorin laskennasta väliin, joka johtuu siirrännän hitaudesta. Nämä syklit voitaisiin käyttää sovelluksen koodin ajamiseen. Mitä enemmän pyyntöjä tulee samanaikaisesti, sitä enemmän prosessorin syklejä jää väliin ja järjestelmään tulee ylimääräistä kuormaa. Siirrännät ovat paljon hitaampia kuin prosessorin laskentateho. Asynkronisessa siirrännässä pyyntöjä voidaan ottaa vastaan käsiteltäväksi, vaikka edellistä pyyntöä ei ole vielä suoritettu loppuun \parencite[s. 1]{async}. Tornado ei toteuta MVC-mallia, vaan tarjoaa vapaammat kädet kehittäjälle toteuttaa haluamansa arkkitehtuuri. 
+
 
 \section{MVC \& Pyramid}
-Pyramidin kehittäjien dokumenteissa esitellään Pyramid MVC-kehyksenä, mutta samalla myös kyseenalaistetaan tämä väite. Erityisesti Mallin ja Ohjaimen määritelmä puuttuu \parencite{pyramid_intr}. Tässä
+Pyramidin kehittäjien dokumenteissa esitellään MVC-kehyksenä, mutta samalla myös kyseenalaistetaan tämä väite. Erityisesti Mallin ja Ohjaimen määritelmä puuttuu \parencite{pyramid_intr}. Tässä
 osiossa käsitellään Pyramidia MVC:n näkökulmasta. Tarkastelua varten toteutetaan Pyramidilla vastaava laskuri-sovellus kuin Krasnerin julkaisussa käyttäen Pyramidin tarjoamia ominaisuuksia \parencite{krasner_desc}. Sovellus rajataan käyttämään SQL-tietokantaa Mallin datan tallennukseen sekä \emph{URL dispatch} -tekniikkaa \parencite{urldispatch}. Sovelluksen pohjalta tarkastellaan MVC:n kannalta kolmea oleellisinta tiedostoa: \emph{views.py}, \emph{models.py} ja \emph{template.pt}. Näin tutkielman tarkastelu pystytään rajaamaan mahdollisimman pienelle alueelle, jolloin tutkielma on helpompi keskittää tarkastelemaan yksittäistä tekniikkaa.
 
-Tässä osiossa tarkastellaan Pyramid-sovelluksen tiedostoja sekä niiden sisältöjä MVC-komponentteina. Erityisesti keskitytään Ohjaimen ja Näkymän toteukseen. Samalla tutkitaan voidaanko Pyramid havaintojen perusteella luokitella MVC:n toteuttavaksi sovelluskehykseksi.
-Koska Pyramidissa MVC:n määrittely on hyvin epävakaalla pohjalla, tulee tehdä selvästi mitä ominaisuuksia komponenteilta vaaditaan. Esimerkiksi \emph{views.py} ja \emph{template.pt} -tiedostot ovat tarkoitettu toimimaan yhdessä näkymänä, jolloin Ohjaimen toteuttamat tehtävät sisällytettäisiin Näkymään. MVC:tä tutkiessa täytyy sovelluksen komponentit kuitenkin jakaa kolmeen osaan.  Tiedosto \emph{views.py}
+Tässä osiossa tarkastellaan Pyramid-sovelluksen tiedostoja sekä niiden sisältöjä MVC-komponenttien näkökulmasta. Erityisesti keskitytään Ohjaimen ja Näkymän toteutukseen. Samalla tutkitaan, voidaanko Pyramid havaintojen perusteella luokitella MVC:n toteuttavaksi sovelluskehykseksi.
+Koska Pyramidissa MVC:n määrittely on hyvin epävakaalla pohjalla, tulee tehdä selväksi, mitä ominaisuuksia komponenteilta vaaditaan. Esimerkiksi \emph{views.py} ja \emph{template.pt} -tiedostot ovat tarkoitettu toimimaan yhdessä näkymänä, jolloin Ohjaimen toteuttamat tehtävät sisällytettäisiin Näkymään. MVC:tä tutkiessa täytyy sovelluksen komponentit kuitenkin jakaa kolmeen osaan. Tiedosto \emph{views.py}
 sisältää paljon Ohjaimelle yhteisiä piirteitä, joten se erottuu selvästi \emph{template.pt} -tiedostosta. Tutkielmassa oletetaan, että \emph{models.py} sisältää Mallin, \emph{views.py} Ohjaimen ja \emph{template.pt} Näkymän.
 
 \lstset{
@@ -967,9 +968,9 @@ def populate():
     session.add(model)
 \end{lstlisting}
 \emph{Models.py} -tiedosto sisältää Malliin liittyvän ohjelmakoodin. Jokaiselle Mallille luodaan aina oma luokkansa, jossa määritellään Mallin ominaisuudet. Malli rekisteröidään \emph{populate} -funktion kautta, jota kutsutaan Pyramidin toimesta.
-Ohjelmakoodista nähdään, että Malli ei luo minkäänlaista riippuvuutta Näkymään tai Ohjaimeen. Se myös pitää huolen datan käsittelystä.  Malli on siis Pyramidissa itsenäinen komponentti, joka huolehtii sovelluksen tilasta. Tämän perusteella Malli toteutuu Pyramidissa MVC-arkkitehtuurin mukaisesti.
+Ohjelmakoodista nähdään, että Malli ei luo minkäänlaista riippuvuutta Näkymään tai Ohjaimeen. Se myös pitää huolen datan käsittelystä. Malli on siis Pyramidissa itsenäinen komponentti, joka huolehtii sovelluksen tilasta. Tämän perusteella Malli toteutuu Pyramidissa MVC-arkkitehtuurin mukaisesti.
 \emph{Views.py} -tiedostossa määritellään Näkymän ohjelmakoodi. Pyramidissa on konkreettisesti määritelty ohjelmakooditasolla vain Malli ja Näkymä.
-Jokaista Näkymää kohden on oma funktio, joka ottaa vastaan \emph{request}-olion. Request-oliossa tuodaan sovellukselle kaikki tieto käyttäjästä ja sovelluksen viesteistä. Tämän perusteella tulkitaan request-oliossa tuotu data käyttäjän syötteiksi.
+Jokaista Näkymää kohden on oma funktio, joka ottaa vastaan \emph{request}-olion. Oliossa tuodaan sovellukselle kaikki tieto käyttäjästä ja sovelluksen viesteistä. Tämän perusteella tulkitaan \emph{request}-oliossa tuotu data käyttäjän syötteiksi.
 Vaikka \emph{views.py} nimetään Pyramidissa Näkymäksi, on se toteutukseltaan hyvin lähellä Ohjainta. Tästä syystä tarkastellaan funktion toteutusta mahdollisena Ohjaimena. Tästä eteenpäin puhuttaessa Ohjaimesta Pyramidissa, tarkoitetaan sillä \emph{views.py} -tiedoston sisältämää funktiota.
 
 \lstset{
@@ -1009,22 +1010,23 @@ Mallille sekä Näkymälle. Tämän perusteella todetaan, että se täyttää ra
 
 Sivupohjassa yhdistetään HTML-merkkauskieli ja sovelluksen ohjelmakoodi. Tästä generoidaan HTML-sivu, joka näytetään selaimelle. Koska Malli sekä Ohjain on jo määritelty, täytyy selvittää täyttääkö sivupohja Näkymälle määritellyt ominaisuudet.
 \begin{lstlisting}[language=Python]
-  <body>
-    <h1>${value}</h1>
-    <form action="./" method="get">
-      <button type="submit" name="plus" value="plus">
-		Increment </button>
-      <button type="submit" name="minus" value="minus"> 
-		Decrement </button>
-    </form>
-  </body>
+<body>
+<h1>${value}</h1>
+<form action="./" method="get">
+<button type="submit" name="plus" value="plus">
+Increment </button>
+<button type="submit" name="minus" value="minus"> 
+Decrement </button>
+</form>
+</body>
 \end{lstlisting}
-Sivupohjassa luodaan lomake kahdelle painikkeelle, joista kumpikin lähettää lomakkeen eteenpäin \emph{counter\_view} -funktiolle. Lomakkeen tiedot tulevat funktiolle request-oliossa, joka sisältää tässä tapauksessa \emph{plus}- tai \emph{minus}-parametrin riippuen siitä kumpaa painiketta on painettu. Lomakkeen tiedot lähetetään samaan osoitteeseen (3), mistä sitä on alunperin kutsuttukin. Eron tuo kuitenkin request-oliossa tuodut parametrit.  Otsikossa (2) tuodaan näkyviin laskurin sen hetkinen arvo, joka saadaan tietoon Ohjaimelta.
+Sivupohjassa luodaan lomake kahdelle painikkeelle, joista kumpikin lähettää lomakkeen eteenpäin \emph{counter\_view} -funktiolle. Lomakkeen tiedot tulevat funktiolle \emph{request}-oliossa, joka sisältää tässä tapauksessa \emph{plus}- tai \emph{minus}-parametrin riippuen siitä kumpaa painiketta on painettu. Lomakkeen tiedot lähetetään samaan osoitteeseen (3), mistä sitä on alunperin kutsuttukin. Eron tuo kuitenkin \emph{request}-oliossa tuodut parametrit. Otsikossa (2) tuodaan näkyviin laskurin sen hetkinen arvo, joka saadaan tietoon Ohjaimelta.
 
-Sivupohjassa hoidetaan sovelluksen graafinen puoli, joten se vastaa ominaisuuksiltaan Näkymää. \\ Ongelmaksi muodostuu kuitenkin Näkymän ja Mallin välinen kommunikointi. Näkymä ei ole yhteydessä Malliin suoraan, vaan tarvitsee Ohjaimen kautta tiedon Mallin tilasta.  Näkymä ei siis sellaisenaan toteuta sille asetettuja ominaisuuksia. \\
+Sivupohjassa hoidetaan sovelluksen graafinen puoli, joten se vastaa ominaisuuksiltaan Näkymää. \\ Ongelmaksi muodostuu kuitenkin Näkymän ja Mallin välinen kommunikointi. Näkymä ei ole yhteydessä Malliin suoraan, vaan tarvitsee Ohjaimen kautta tiedon Mallin tilasta. Näkymä ei siis sellaisenaan toteuta sille asetettuja ominaisuuksia. \\
 
 Alla olevassa kuvassa esitellään visuaalisesti miten laskurisovellus muodostaa HTML-sivun, kun käyttäjä painaa sivulla \emph{Increment} -painiketta. Kuvan
 vaiheet toteutetaan numerojärjestyksessä alkaen ensimmäisestä.
+
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.7]{laskurisovellus.png}
@@ -1059,7 +1061,7 @@ class Person(models.Model):
     last_name = models.CharField(max_length=30)
 \end{lstlisting}
 
-Ohjaimen toiminta toteutuu Djangossa näkymien kautta vastaavasti kuin Pyramidissakin, koska näkymät käsittelevät pyyntöjä ja syötteitä, jotka tulevat selaimelta. Tästä syystä myös Ohjaimen määritelmä toteutuu  sovelluksehyksessä määriteltyjen näkymien kautta \parencite{django_view}.
+Ohjaimen toiminta toteutuu Djangossa näkymien kautta vastaavasti kuin Pyramidissakin, koska näkymät käsittelevät pyyntöjä ja syötteitä, jotka tulevat selaimelta. Tästä syystä myös Ohjaimen määritelmä toteutuu sovelluskehyksessä määriteltyjen näkymien kautta \parencite{django_view}.
 
 \begin{lstlisting}[language=Python]
 from django.http import HttpResponse
@@ -1093,8 +1095,8 @@ Näkymät toteutetaan vastaavasti selaimelle käyttäen sivupohjia. Djangossa on
 
 
 \section{Yhteenveto}
-Malli sekä Ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta Näkymään tai Ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan Ohjaimelle ja Näkymälle omista muutoksistaan, koska kaikki muutokset tulevat Näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii request-oliossa tulevista syötteistä ja vaikuttaa Malliin sekä Näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä Näkymän tarkoitus on kommunikoida suoraan Mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa Näkymä on yhteydessä vain Ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu. Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \parencite{krasner_desc}.
-Alla esitellyssä kuvassa havainnollisestetaan, kuinka Mallin ja Näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan Ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan Ohjaimelle ja Näkymälle vaan tarvitsee aina erillisen HTTP-pyynnön.
+Malli sekä Ohjain toteutuvat Pyramidissa MVC:n mukaisesti yksittäisinä komponentteina, mutta kommunikaatio näiden välillä ei mene MVC:n mukaisesti. Malli on itsenäinen komponentti, jolla ei ole riippuvuutta Näkymään tai Ohjaimeen. Se myös huolehtii sovelluksen käsittelemästä datasta ja vastaa tarvittaviin pyyntöihin. Se ei kuitenkaan pysty kertomaan Ohjaimelle ja Näkymälle omista muutoksistaan, koska kaikki muutokset tulevat Näkymälle asti vastauksena vasta HTTP-pyynnön mukana. Ohjain taas huolehtii \emph{request}-oliossa tulevista syötteistä ja vaikuttaa Malliin sekä Näkymään. Näkymä toteuttaa sovelluksen graafisen näyttämisen selaimelle, mutta ei toteuta sille määrättyjä sääntöjä. MVC:ssä Näkymän tarkoitus on kommunikoida suoraan Mallin kanssa. Tämä ei kuitenkaan onnistu Pyramidissa, jossa Näkymä on yhteydessä vain Ohjaimeen. Pyramidin MVC-toteutusta tarkastellessa tulee ottaa huomioon yksittäisten komponenttien toteutus sekä niiden välinen yhteistyö. Yksittäiset komponentit toteutuvat Pyramidissa MVC-arkkitehtuurin mukaisesti, mutta niiden välinen yhteistyö ei toteudu. Pyramidin MVC-komponenttien kommunikointi voidaan esittää käyttäen pohjana muokaten Krasnerin kommunikaatiomallia \parencite{krasner_desc}.
+Alla esitellyssä kuvassa havainnollistetaan, kuinka Mallin ja Näkymän kommunikaatio puuttuu täysin ja kaikki data tuodaan Ohjaimen kautta. Lisäksi Malli ei pysty kommunikoimaan muutoksista suoraan Ohjaimelle ja Näkymälle vaan tarvitsee aina erillisen HTTP-pyynnön.
 
 Djangossa määritellään MVC samalla tavalla kuin Pyramidissakin. Tästä syystä voidaan todeta, että vaikka MVC-komponenttejen vaatimukset toteutuvat yksittäin, tulee samat ongelmat vastaan kuin Pyramidissakin. Kommunikaatiomalli on ristiriidassa MVC:n alkuperäisen toteutuksen kanssa, mikä johtuu HTTP:n päälle rakennetusta toteutuksesta. Lisäksi Näkymä ei kommunikoi suoraan Mallin kanssa, vaan kommunikaatio Mallille toteutetaan Ohjaimen kautta. 
 
@@ -1104,17 +1106,19 @@ Djangossa määritellään MVC samalla tavalla kuin Pyramidissakin. Tästä syys
 \caption{Pyramidin kommunikointi MVC-komponenttien kesken. Kuva on muokattu Krasnerin esittelemästä kommunikointimallista \parencite{krasner_desc} }
 \end{figure}
 
-Yllä esitetyssä kommunikaatiomallissa Ohjain saa vastaan request-olion, jossa tuodaan kaikki tarvittava tieto käyttäjästä. Tämän perusteella Ohjain käskee Mallia
+Yllä esitetyssä kommunikaatiomallissa Ohjain saa vastaan \emph{request}-olion, jossa tuodaan kaikki tarvittava tieto käyttäjästä. Tämän perusteella Ohjain käskee Mallia
 sekä muuttujaa. Samalla se pyytää Mallilta tietoa sovelluksen tilasta ja välittää tiedon Näkymälle. Näkymä taas välittää Ohjaimen tuoman datan käyttäjälle graafisena.
 
-Alunperin Pyramidin dokumentaatiossa kyseenalaistettiin Mallin sekä Ohjaimen toteutus \parencite{pyramid_intr}. Tutkimuksen pohjalta voidaan kuitenkin
+Alun perin Pyramidin dokumentaatiossa kyseenalaistettiin Mallin sekä Ohjaimen toteutus \parencite{pyramid_intr}. Tutkimuksen pohjalta voidaan kuitenkin
 todeta, että ongelmaksi ei muodostu yksittäisien komponenttien toteutus, vaan komponenttien välinen kommunikointi. Erityisesti Näkymän ja Mallin yhteistyö jää
 kokonaan puuttumaan, jolloin saadaan ristiriita MVC:n alkuperäisen määritelmän kanssa \parencite[s. 1]{reenskaug_orig}. Tämä johtuu siitä, että Pyramidissa \emph{views.py} -tiedoston sisältämä ohjelmakoodi on nimensä mukaisesti tarkoitettu Näkymäksi ja
-\emph{template.pt} -tiedosto katsotaan osaksi samaa komponenttia. Tutkimuksen tuloksien perusteella voidaan kuitenkin todeta, että \emph{views.py} -tiedoston näkymä-funktio toteuttaa kaikki
+\emph{template.pt} -tiedosto katsotaan osaksi samaa komponenttia. Tutkimuksen tuloksien perusteella voidaan kuitenkin todeta, että \emph{views.py} -tiedoston näkymäfunktio toteuttaa kaikki
 Ohjaimelle määritellyt ominaisuudet. Sivupohja puolestaan hoitaa sovelluksen graafisen puolen, joten sen ominaisuudet ovat mahdollisimman lähellä Näkymää. Sivupohja ei kuitenkaan riitä toteuttamaan Näkymän ominaisuuksia, koska se on täysin riippuvainen Ohjaimesta. Lisäksi Malli ei pysty kommunikoimaan suoraan Näkymälle ja Ohjaimelle ilman, että Ohjain tai Näkymä pyytää Mallilta nykyistä tilaa.
 
 \chapter{Web-soketit \& Tornado}
-Pyramid-sovelluskehystä ja MVC:tä tutkiessa todettiin MVC:n alkuperäisen toteutuksen vaativan reaaliaikaista kommunikoita Mallin sekä Näkymän välillä siten, että Malli kommunikoi suoraan Näkymälle muutoksistaan. Tämä ei pelkällä Pyramidilla toteutetun web-sovelluksen avulla onnistu, koska kommunikointi toteutetaan aina HTTP-pyynnön kautta ja muutoksien näkeminen vaatii aina uuden HTTP-pyynnön. Web 2.0 teknologiat kuten AJAX (Asynchronous JavaScript and XML) ovat tuonneet uuden tavan loppukäyttäjille kommunikoida web-sovelluksien kanssa. Sen sijaan, että muodostetaan useita sivuja sekä takaisinkutsuja tuomaan sisältö loppukäyttäjälle, voidaan sisältöä tuoda reaaliaikaisesti. Loppukäyttäjän ei tällöin tarvitse päivittää sivua nähdäkseen sisällössä muutoksia. AJAX vaatii kuitenkin useiden päivityspyyntöjen lähettämistä palvelimelle yhteyden aikana, jotta käyttäjälle voidaan päivittää sisältöä. Tätä kutsutaan pollaukseksi (polling). Tästä syystä jokainen tapahtuma luo ylimääräistä kuormaa palvelimelle\parencite{websocket_ajax}. AJAX ei siis riitä toteuttamaan MVC:ssä Mallin suoraa kommunikointia Näkymälle ja Ohjaimelle, koska erillinen pyyntö päivitysten tarkastamiseen tarvitaan edelleen. AJAX:n kanssa ei kuitenkaan tarvita sivun lataamista uudelleen muutoksien näkemiseksi, koska pollaus toteutetaan taustalla yhteyden aikana.  Web-socketit ratkaisevat pollauksen ongelman ja mahdollistavat yhteyden molempiin suuntiin \parencite[s. 1.1]{websocket}.
+Pyramid-sovelluskehystä ja MVC:tä tutkiessa todettiin MVC:n alkuperäisen toteutuksen vaativan reaaliaikaista kommunikointia Mallin sekä Näkymän välillä siten, että Malli kommunikoi suoraan Näkymälle muutoksistaan. Tämä ei pelkällä Pyramidilla toteutetun web-sovelluksen avulla onnistu, koska kommunikointi toteutetaan aina HTTP-pyynnön kautta ja muutoksien näkeminen vaatii aina uuden HTTP-pyynnön. Web 2.0 teknologiat kuten AJAX (Asynchronous JavaScript and XML) ovat tuoneet uuden tavan loppukäyttäjille kommunikoida web-sovelluksien kanssa. Sen sijaan, että muodostetaan useita sivuja sekä takaisinkutsuja tuomaan sisältö loppukäyttäjälle, voidaan sisältöä tuoda reaaliaikaisesti. Loppukäyttäjän ei tällöin tarvitse päivittää sivua nähdäkseen sisällössä muutoksia. AJAX vaatii kuitenkin useiden päivityspyyntöjen lähettämistä palvelimelle yhteyden aikana, jotta käyttäjälle voidaan päivittää sisältöä. Tätä kutsutaan pollaukseksi (polling). Tästä syystä jokainen tapahtuma luo ylimääräistä kuormaa palvelimelle\parencite{websocket_ajax}. AJAX ei siis riitä toteuttamaan MVC:ssä Mallin suoraa kommunikointia Näkymälle ja Ohjaimelle, koska erillinen pyyntö päivitysten tarkastamiseen tarvitaan edelleen. AJAX:n kanssa ei kuitenkaan tarvita sivun lataamista uudelleen muutoksien näkemiseksi, koska pollaus toteutetaan taustalla yhteyden aikana. Web-soketti ratkaisee pollauksen ongelman ja mahdollistavat yhteyden molempiin suuntiin \parencite[s. 1.1]{websocket}.
+
+
 
 \section{Esimerkkisovellus}
 

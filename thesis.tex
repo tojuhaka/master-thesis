@@ -112,19 +112,17 @@ Toni Haka-Risku
 
 
 \begin{thetermlist}
-\item[Sovellusarkkitehtuuri] Määrittää millä tavalla sovellus on rakennettu.
 \item[URL] Tapa nimetä objekteja ja komponentteja sovelluksessa, jolloin ne voidaan yksilöidä ja paikantaa \parencite{trends}.
-\item[MVC] Model-View-Controller sovellusarkkitehtuuri..
+\item[MVC] Model-View-Controller sovellusarkkitehtuuri.
 \item[Sovelluskehys] on sovelluskehitykselle tarkoitettu pohja, joka kutsuu käyttäjän kirjoittamaa ohjelmakoodia ja tarjoaa ratkaisuja yleisimpiin toistuviin ongelmiin
-\item[WSGI] Määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset.
-yhdistetään prosessoimaan pyyntöjä.
+\item[WSGI] Määrittää miten web-palvelin kommunikoi web-sovellusten kanssa ja millä tavalla web-sovellukset yhdistetään prosessoimaan pyyntöjä.
 \item[Template] Dynaaminen HTML-pohja, johon voidaan kirjoittaa ohjelmalogiikkaa
-\item[Pakettikytkentä] Tiedonsiirtomenetelmä, jossa yhteys data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{kytkenta}.
+\item[Pakettikytkentä] Tiedonsiirtomenetelmä, jossa data jaetaan paketeiksi. Osapuolien väliseen viestintään ei varata kaistaa, eikä osapuolien välille luoda katkeamatonta yhteyttä \parencite{kytkenta}.
 \item[Piirikytkentä] Tiedonsiirtomenetelmä, jossa yhteys pysyy auki riippumatta siitä, onko osapuolien välillä liikennettä. Piirikytkentä on käytössä esim. puhelinverkoissa \parencite{kytkenta}.
 \item[Asiakas] Alustaa yhteyden lähettääkseen pyyntöjä palvelimelle \parencite{http}.
-\item[HTTP] Yksisuuntainen kommunikaatio-protokolla hypertekstidokumenttejen siirtoon. Määrittelee kahdeksan perusoperaatiota: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE ja CONNECT. Käytetyimmät operaatiot ovat GET ja POST. GET-metodi hakee datan, joka on liitetty pyynnössä annettuun osoitteseen. POST lähettää dataa ohjelmalle, joka kuuntelee jotain määriteltyä osoitetta.
+\item[HTTP] Yksisuuntainen kommunikaatio-protokolla hypertekstidokumenttejen siirtoon. Määrittelee kahdeksan perusoperaatiota: OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE ja CONNECT. Käytetyimmät operaatiot ovat GET ja POST. 
 \item[Käyttäjä-agentti] on tietokoneohjelma, joka lähettää pyynnön jollekin tietylle ohjelmalle. Tällaisia ovat esimerkiksi selaimet \parencite{http}. 
-\item[Palvelin] Tietokoneohjelma, joka ottaa vastaan yhteyksiä ja lähettää takaisin vastauksia asiakas-sovellukselle. Jokainen ohjelma pystyy olemaan yhtäaikaa asiakas-sovellus ja palvelin \parencite{http}. 
+\item[Palvelin] Tietokoneohjelma, joka ottaa vastaan yhteyksiä ja lähettää takaisin vastauksia asiakassovellukselle. Jokainen ohjelma pystyy olemaan yhtäaikaa asiakassovellus ja palvelin \parencite{http}. 
 \item[Web-soketti] TCP:n päällä toimiva protokolla, joka mahdolllistaa kaksisuuntaisen kommunikaation asiakkaan ja palvelimen välillä \parencite{websocket}.
 \item[TCP] Protokolla kahden isännän väliseen luotettavaan tiedonsiirtoon verkossa  \parencite{tcp1_1}.
 \end{thetermlist}
@@ -133,19 +131,19 @@ yhdistetään prosessoimaan pyyntöjä.
 
 \chapter{Johdanto}
 
-1994-luvulla Internet tuli julkisesti kaikkien saataville ja tämän jälkeen siitä on tullut alusta lukuisille Web-sovelluksille. Web:n ensimmäiset toteutukset koostuivat suurista määristä dokumentteja, joita pystyttiin
+1994-luvulla Internet tuli julkisesti kaikkien saataville ja tämän jälkeen siitä on tullut alusta lukuisille web-sovelluksille. Web:n ensimmäiset toteutukset koostuivat suurista määristä dokumentteja, joita pystyttiin
 yhdistämään toisiinsa hyperlinkeillä. Nämä olivat usein yksinkertaisia tekstitiedostoja, joissa sisältö oli staattista. Yhdessä vuosikymmenessä Web on kuitenkin muuttunut staattisesta arkistosta kattavaksi alustaksi sovellusten toteuttamiseen ja julkaisuun. Uudet web-teknologiat, metodit ja kielet mahdollistavat dynaamisten sovellusten luonnin sekä mallintamisen käyttäjien välille. Web-sovelluksissa tullaan kehittymään sitä mukaan, kun uusia teknologioita otetaan käyttöön web-selaimissa \parencite{trends}. 
 
-Web:n arkkitehtuurissa palvelin tarjoaa asiakassovellukselle web-sivuja, jotka voidaan dynaamisesti luoda palvelimen ohjelmakoodin avulla. Esimerkiksi selaimen pyytäessä web-sivua tulee pyyntö palvelimelle, jonka perusteella palvelin hakee tietokannasta tarvittavat tiedot ja muodostaa niistä sivun, joka palautetaan vastauksena takaisin selaimelle. Palvelimen puolella toteutettu sivujen prosessointi johti CGI-sovelluksiin (Common Gateway Interface), missä sovelluksen yksittäinen URL yhdistetään ohjelmakoodiin. Sovelluksen kasvaessa ohjelmakoodin hallinta osoittautuu kuitenkin vaikeaksi monien dynaamisten sivujen generoinnin osalta. Tämän ongelman ratkaisemiseksi kehittyi hybridimalli, jossa ohjelmakoodin palasia kirjoitetaan esimerkiksi HTML:n sekaan, jolloin halutut osat voidaan muuttaa dynaamiseksi. Pyynnön aikana dynaamiset ohjelmakoodin palaset suoritetaan ja yhdistetään dokumenttiin. PHP-ohjelmointikielellä oli tähän merkittävä vaikutus. Ratkaisu teki sivujen uudelleenkäyttämisen helpommaksi, mutta ajan kuluessa huomattiin koodimuutoksien olevan vaikeasti toteutettavissa, kun ohjelmakoodin palaset olivat käytössä kaikkialla sivuilla. Tämä puolestaan johti lopulta malliin, jossa sovelluksen tietty osa hallitsee pääsyä dataan ja toinen osa hajotetaan palasiin, joilla hallitaan sivujen luontia ja käyttäjien näkymiä \parencite[3.1]{trends}
+Web:n arkkitehtuurissa palvelin tarjoaa asiakassovellukselle web-sivuja, jotka voidaan dynaamisesti luoda palvelimen ohjelmakoodin avulla. Esimerkiksi selaimen pyytäessä web-sivua, tehdään pyyntö palvelimelle. Pyynnön perusteella palvelin hakee tietokannasta tarvittavat tiedot ja muodostaa niistä sivun, joka palautetaan vastauksena takaisin selaimelle. Palvelimen puolella toteutettu sivujen prosessointi johti CGI-sovelluksiin (Common Gateway Interface), missä sovelluksen yksittäinen URL yhdistetään ohjelmakoodiin. Sovelluksen kasvaessa ohjelmakoodin hallinta osoittautuu kuitenkin vaikeaksi monien dynaamisten sivujen generoinnin osalta. Tämän ongelman ratkaisemiseksi kehittyi hybridimalli, jossa ohjelmakoodin palasia kirjoitetaan esimerkiksi HTML:n sekaan, jolloin halutut osat voidaan muuttaa dynaamiseksi. Pyynnön aikana dynaamiset ohjelmakoodin palaset suoritetaan ja yhdistetään dokumenttiin. PHP-ohjelmointikielellä oli tähän merkittävä vaikutus. Ratkaisu teki sivujen uudelleenkäyttämisen helpommaksi, mutta ajan kuluessa huomattiin koodimuutoksien olevan vaikeasti toteutettavissa, kun ohjelmakoodin palaset olivat käytössä kaikkialla sivuilla. Tämä puolestaan johti lopulta malliin, jossa sovelluksen tietty osa hallitsee pääsyä dataan ja toinen osa hajotetaan palasiin, joilla hallitaan sivujen luontia ja käyttäjien näkymiä \parencite[3.1]{trends}
 
 Tyypillinen rakenne web-sovelluksissa koostuu seuraavista osista: 
 \begin{itemize}
-\item HTML-sivujen näyttäminen käyttäjälle
-\item selaimen ohjelmakoodit, jotka ajetaan selaimen puolella
-\item palvelimen ohjelmakoodit, jotka ajetaan palvelimen puolella ja tyypillisesti keskustelevat tietokantojen kanssa
+\item HTML-sivujen näyttäminen käyttäjälle.
+\item Selaimen puolella ajettava ohjelmakoodi.
+\item Palvelimen puolella ajettavat ohjelmakoodi, jotka tyypillisesti keskustelevat tietokantojen kanssa.
 \end{itemize}
 
-Selaimessa käytetty ohjelmointikieli perustuu ECMAScript standardiin, joka on olio-pohjainen ohjelmointikieli ja erityisesti tarkoitettu käyttöön selaimen puolelle. Tunnetuin ECMAScriptin toteutus on JavaScript. Palvelimen puolella ohjelmointikieliä on useita. Tällaisia ovat esimerkiksi PERL, PHP, Python ja Ruby. Palvelinpuolen ohjelmointikielien pohjalta on luotu lukuisia sovelluskehyksiä, joissa pohjana on käytetty MVC-arkkitehtuuria. Näistä tunnetuimpia ovat Ruby-kielellä toteutettu Ruby On Rails sekä Pythonilla toteutettu Django \parencite{trends}. Tässä tutkielmassa käydään Pythonilla toteutettu Pyramid- ja Django-sovelluskehyksen MVC-arkkitehtuurin rakenne läpi ja heijastetaan toteutusta alkuperäiseen MVC:n määritelmään. Lisäksi toteutetaan MVC-arkkitehtuuri käyttäen Tornado-sovelluskehystä.
+Selaimessa käytetty ohjelmointikieli perustuu ECMAScript-standardiin, joka on olio-pohjainen ohjelmointikieli ja erityisesti tarkoitettu käyttöön selaimen puolelle. Tunnetuin ECMAScriptin toteutus on JavaScript. Palvelimen puolella ohjelmointikieliä on useita. Tällaisia ovat esimerkiksi PERL, PHP, Python ja Ruby. Palvelinpuolen ohjelmointikielien pohjalta on luotu lukuisia sovelluskehyksiä, joissa pohjana on käytetty MVC-arkkitehtuuria. Näistä tunnetuimpia ovat Ruby-kielellä toteutettu Ruby On Rails sekä Pythonilla toteutettu Django \parencite{trends}. Tässä tutkielmassa käydään Pythonilla toteutettu Pyramid-sovelluskehyksen MVC-arkkitehtuurin rakenne läpi ja heijastetaan toteutusta alkuperäiseen MVC:n määritelmään. Lisäksi käydään lyhyesti läpi Djangon toteutus, joka on hyvin lähellä Pyramidin toteutusta. Lopuksi toteutetaan MVC-arkkitehtuuri itse käyttäen pohjana Tornado-sovelluskehystä.
 
 \section{Tutkimuskysymys}
 Tutkimuksen tarkoituksena on selvittää ohjelmistokehityksen ja ohjelmistoarkkitehtuurejen taustoja. Lisäksi käydään läpi tärkeimmät web-teknologiat, joiden päälle Internet on rakennettu. Näiden pohjalta tutkitaan millä tavalla 
@@ -182,6 +180,7 @@ alkuperäisen määritelmän mukaan. Tutkimuksen lopuksi koostetaan havainnoista
 pystytäänkö niiden perusteella vastaamaan tutkimuskysymykseen.
 
 
+\pagebreak
 \section{MVC:n ongelmat web-kehityksessä}
 Sovellusarkkitehtuurin tarkoituksena on vastata millä tavalla ohjelmiston eri komponentit ovat organisoitu, rakennettu ja millä tavalla ne kommunikoivat keskenään. Tämä on ensimmäinen vaihe, kun ohjelmistoa lähdetään toteuttamaan. MVC on yksi tapa
 toteuttaa sovelluksen arkkitehtuuri \parencite[s. 148]{Sommerville}. MVC-arkkitehtuuri on saanut paljon huomiota web-sovelluskehyksien
@@ -201,9 +200,7 @@ Pyramidin toteutus onkin hyvin lähellä alkuperäistä MVC:tä
 \parencite{pyramid}. Django on vastaavasti toteutettu MVC:n pohjalta, mutta sen väitetään toteuttavan MVC eri tavalla, kuin MVC:n määritelmässä \parencite{django_mvc}.
 Sommerville \parencite[s. 157]{Sommerville} esittelee MVC:n yhtenä arkkitehtuurimallina, jonka hän luokittelee
 kerrosarkkitehtuurien (Layered architecture) joukkoon. Sommervillen esittelemä MVC-malli kuitenkin poikkeaa Krasnerin \parencite{krasner} määrittelemästä MVC-mallista. Alla esitetään Krasnerin määrittelemä MVC-malli sekä Sommervillen määrittelemä MVC-malli:
-
-
-
+\pagebreak
 
 \begin{figure}[h]
 \centering
@@ -221,8 +218,9 @@ kerrosarkkitehtuurien (Layered architecture) joukkoon. Sommervillen esittelemä 
 Krasnerin esittelemässä MVC:ssä Malliin (Model) on rekisteröity Ohjaimia (Controller) ja Näkymiä (View). Näin Malli pystyy kommunikoimaan muutoksistaan suoraan Ohjaimelle sekä Näkymälle.
 Sommerville esittelee MVC-mallin web-sovelluksen näkökulmasta, jossa kommunikointi komponettejen suhteen toteutetaan erilailla. Sommervillen mallissa tieto käyttäjän toiminnoista voi tulla 
 Näkymältä. Käyttäjän pyynnöt voivat tulla niin Ohjaimelle kuin Näkymällekin toisin kuin Krasnerin mallissa, jossa käyttäjän toiminnot tulevat ainoastaan Ohjaimelle.
-Lisäksi Sommervillen määritelmässä Mallilla ei ole kaksisuuntaista yhteyttä Ohjaimeen.
+Lisäksi Sommervillen määritelmässä Mallilla ei ole kaksisuuntaista yhteyttä Ohjaimeen. 
 
+Kuten nähdään, MVC-arkkitehtuurin toteutukset poikkeavat toisistaan ja sen määritelmä on vuosien saatossa muuttunut erityisesti web-kehityksen myötä. Tästä syystä MVC:stä on monenlaisia toteutuksia. Erityisesti komponenttejen kommunikaatio poikkeaa eri toteutusten välillä. 
 \chapter{Lyhyt kirjallisuuskatsaus}
 
 Kirjallisuuskatsauksessa käydään läpi, millä tavalla lähdemateriaalia kerätään tutkielmaa varten. Lähdemateriaalin 
@@ -414,7 +412,7 @@ Tärkeimpänä etuna asiakas-palvelin-arkkitehtuurissa on komponenttien itsenäi
 Yllä esitetyssä mallissa esitellään monen käyttäjän web-pohjainen järjestelmä elokuvien ja kuvien tarjontaan. Järjestelmässä useat palvelimet hallitsevat ja tarjoavat erityyppisiä multimediatiedostoja. Videotiedostojen tarjonta tulee olla erittäin nopeaa ja synkronista. Jotta tähän pystytään, tulee videotiedosto pakata pienemmäksi ja tarjota pienemmällä resoluutiolla. Lisäksi videoiden formaatit voivat vaihdella, jolloin videoille tarkoitetun palvelimen tulee pystyä tarjoamaan palvelua, jossa erilaisia videoformaatteja voidaan pakata ja purkaa. Kuvia on kuitenkin sopivaa tarjota suurilla resoluutioilla, joten niiden käsittely voidaan hoitaa erillisellä palvelimella. Näin ei tarvitse kuormittaa yhtä palvelinta kahdella toisistaan poikkeavalla prosessilla. Katalogin tulee pystyä käsittelemään useita erilaisia kyselyjä sekä tarjota yhteyksiä järjestelmiin, jotka hallitsevat esimerkiksi elokuvien tietoja sekä valokuvien myyntiä. Asiakassovellus on yksinkertainen käyttöliittymä, joka on rakennettu web-selaimeen ottamaan yhteyksiä palveluihin \parencite[s. 163]{Sommerville}. 
 
 \chapter{Internet}
-Internet ja sen arkkitehtuuri on syntynyt hyvin pienistä saavutuksista. Internetin taustalla ei ole alun perin ollut minkäänlaista suurempaa suunnitelmaa. Tutkiessamme Internetin arkkitehtuuria tulee muistaa, että tekniset muutokset ovat jatkuvia tietotekniikan alalla. Monet arkkitehtuurilliset ratkaisut, jotka olivat suosiossa muutamia vuosia sitten, ovat nyt jo vanhentuneet. Toisaalta ratkaisut, jotka tänä päivänä nähdään hyvinä, voivat jo huomenna olla huonoja. Voidaan sanoa, että ainut asia joka Internetin suhteen pysyy on jatkuva muutos. Internet yhteisöjen monet jäsenet väittävät, että Internetillä ei ole arkkitehtuuria, mutta kuitenkin eräänlaisia perinteitä, johon koko Internet pohjautuu \parencite{constant_change}. Väite voidaan kuitenkin kumota, sillä Internet perustuu asiakas-palvelin-arkkitehtuuriin \parencite[s. 162]{Sommerville}.
+Internet ja sen arkkitehtuuri on syntynyt hyvin pienistä saavutuksista. Internetin taustalla ei ole alun perin ollut minkäänlaista suurempaa suunnitelmaa. Tutkiessamme Internetin arkkitehtuuria tulee muistaa, että tekniset muutokset ovat jatkuvia tietotekniikan alalla. Monet arkkitehtuurilliset ratkaisut, jotka olivat suosiossa muutamia vuosia sitten, ovat nyt jo vanhentuneet. Toisaalta ratkaisut, jotka tänä päivänä nähdään hyvinä, voivat jo huomenna olla huonoja. Voidaan sanoa, että ainut asia joka Internetin suhteen pysyy on jatkuva muutos. Internet-yhteisön  monet jäsenet väittävät, että Internetillä ei ole arkkitehtuuria, mutta kuitenkin eräänlaisia perinteitä, johon koko Internet pohjautuu \parencite{constant_change}. Väite voidaan kuitenkin kumota, sillä Internet perustuu asiakas-palvelin-arkkitehtuuriin \parencite[s. 162]{Sommerville}.
 Internetin tavoite on tarjota yhteydet, jossa käytetään pohjana Internet Protokollaa (IP). Monien Internet-yhteisön jäsenien mielestä tärkeää ei ole se millä tavalla yhteydet luodaan verkon sisällä, vaan se millä tavalla yhteyksien alku- ja loppupää käyttäytyvät. Tähän tärkeimpänä argumenttina pidetään sitä, että useat tarvittavat toiminnallisuudet voidaan toteuttaa vain IP:tä käyttävien systeemien puolella. Jokainen hyvin suunniteltu verkko sisältää mahdollisuuden jollakin tasolla epäonnistua viestin kuljettamisessa. Tällaisen ongelman kanssa tulisi toimia siten, että vastuu kommunikaation eheydestä annetaan ulkopuolisille sovelluksille. Nykyinen Internetin eksponentaalinen kasvu näyttää kuitenkin sen, että yhteydet ovat paljon arvokkaampia kuin yksittäiset sovellukset. Tällaiset yhteydet vaativat yhteistyötä palveluntarjoajien ja televiestintäympäristöjen välille \parencite{constant_change}. 
 
 Yleisesti on haluttua, että olisi vain yksi protokolla, jonka kautta yhteydet voidaan muodostaa. Tämän protokollan päälle voidaan kuitenkin rakentaa monia muita protokollia, jotka hoitavat muita erilaisia tarpeita. Käytännössä on ainakin kaksi syytä, miksi verkkoprotokollien tasoja tarvitaan useita. Esimerkiksi eri IP:stä voidaan haluta vaihtaa toiseen versioon. Myös uudet vaatimukset voivat synnyttää uusia protokollia. Internetin protokollien tulee olla täysin riippumattomia laitteistosta. Tällöin Internet voidaan toteuttaa minkä tahansa digitaalisen teknologian päälle \parencite{constant_change}.

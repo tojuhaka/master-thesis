@@ -90,7 +90,6 @@ sovelluskehykset ovat Django, Pyramid ja Tornado. Django ja Pyramid eivät toteu
 }
 \abstract{%
   This thesis goes through MVC-architecture implementation in Python-based MVC web-frameworks and answers the question if the original MVC is properly implemented. The original MVC is defined in Kranser's article \parencite{krasner} which is based on model founded by Trygve Reenskaug. The web-frameworks used thesis are Pyramid, Django and Tornado. Django and Pyramid did not implement the MVC properly. With Tornado and web-sockets the MVC-architecture is possible to implement.
-uld usually say exactly the same
 }
 
 \author{Toni Haka-Risku}
@@ -103,7 +102,7 @@ uld usually say exactly the same
 \maketitle
 
 \preface
-Tutkielman aiheen valintaan vaikutti aiempi kokemus ohjelmoinnista niin vapaa-ajalla kuin työelämässäkin. Suurimmassa osassa ohjelmistoprojekteja, joissa olen työskennellyt, on ollut käytössä MVC-pohjainen sovelluskehys työkaluna. Django-sovelluskehyksen sivuilla kuitenkin kyseenalaistetaan MVC:n toteutus sellaisenaan. Tästä sain idean kirjoittaa Pro Gradu tutkielman löytääkseni vastauksen kyseiseen ongelmaan. 
+Tutkielman aiheen valintaan vaikutti aiempi kokemus ohjelmoinnista niin vapaa-ajalla kuin työelämässäkin. Suurimmassa osassa ohjelmistoprojekteja, joissa olen työskennellyt, on ollut käytössä MVC-pohjainen sovelluskehys työkaluna. Django-sovelluskehyksen sivuilla kuitenkin kyseenalaistetaan MVC:n toteutus sellaisenaan. Tästä sain idean kirjoittaa Pro Gradu -tutkielman löytääkseni vastauksen kyseiseen ongelmaan. 
 Jyväskylässä \today
 
 \bigskip
@@ -327,6 +326,8 @@ Arkkitehtuurin mallinnusta voidaan käyttää kahdella erilaisella tavalla. Sit�
 
 Arkkitehtuurit kuvataan usein kaavioilla, joissa komponentit kuvataan lyhyesti nimetyillä lohkoilla. Jokainen lohko esittää yksittäistä komponenttia. Lohkojen sisällä olevat lohkot kuvaavat komponentin hajautusta useampaan alikomponenttiin. Nuolet komponenttien välillä kuvaavat miten dataa ja signaaleja siirretään komponenttien välillä. Kaavioiden avulla järjestelmän toteuttamiseen osallistuvat henkilöt ymmärtävät järjestelmän rakenteen korkealla tasolla \parencite[s. 150]{Sommerville}. Sommervillen kirjassa esitellään esimerkkikaavio sovelluksen arkkitehtuurista. Kaaviossa esitellään arkkitehtuurimalli siitä miten pakkausrobottisovellus tulisi toteuttaa.
 
+\pagebreak
+
 
 \begin{figure}[h]
 \centering
@@ -506,7 +507,6 @@ HTTP-protokollan alkuperäinen toteutus on tarkoitettu yksisuuntaiseksi, jolloin
 
 Yllä esitetyistä ongelmista johtuen kaksisuuntaista kommunikaatiota HTTP:n päällä ei voi tutkielman kannalta luotettavasti käyttää kaksisuuntaisen kommunikaation toteuttamiseen sen epävarmuuden vuoksi.
 
-!
 \section{Web-soketti protokolla}
 Koska HTTP:ta ei oltu alun perin tarkoitettu kaksisuuntaiseen kommunikaation, tehtiin useat aiemmat teknologiset ratkaisut tehokkuuden ja toimintavarmuuden väliltä. Tämän pohjalta on kehitetty web-soketti protokolla. Web-soketti protokolla on itsenäinen TCP-pohjainen protokolla. Sen avulla mahdollistetaan kaksisuuntainen kommunikaatio palvelimen ja asiakkaan välillä. Protokollaa voidaan käyttää niin tavallisissa web-sivustoissa kuin peleissäkin. Se on suunniteltu erityisesti syrjäyttämään olemassa olevia kommunikointiteknologioita, jotka käyttävät HTTP:ta datan siirrossa. Se on myös luotu toimimaan ympäristöissä, joissa käytetään HTTP:tä. Web-soketteja käytetään oletetusti HTTP-porttejen 443 ja 80 yli. HTTP ei kuitenkaan rajoita web-sokettejen toteutusta. Web-soketti käyttää yksittäistä TCP-yhteyttä lähettäen dataa kumpaankin suuntaan. Protokollassa on kaksi osaa: kättely ja datan siirto \parencite[s. 1.1]{websocket}.
 
@@ -562,7 +562,7 @@ Suurin merkitys MVC:llä on luoda silta ihmismielen hahmottamalle mallille ja ti
 
 
 \section{Historia}
-MVC:n esitteli Norjalainen Trygve Reenskaug ollessaan mukana Xerox PARC -tutkimushankkeessa. 
+MVC:n esitteli Norjalainen Trygve Reenskaug  Xerox PARC -tutkimushankkeessa.
 Ensimmäinen julkaisu MVC:stä kirjoitettiin vuonna 1978 samassa tutkimuskeskuksessa. 
 Tuolloin julkaisussa esiteltiin kolmen komponentin sijasta neljä komponenttia: 
 Malli (Model), Näkymä(View), Ohjain(Controller) sekä Muokkaaja(Editor). Muokkaaja on 
@@ -895,7 +895,7 @@ Pyramid on Python-pohjainen web-sovelluskehys, jonka tehtävänä on helpottaa w
 kehittäjälle valmiita työkaluja avuksi kehitykseen. Pyramid on suunniteltu siten, että kehittäjän ei tarvitse tietää suuria määriä erilaisia malleja ja tekniikoita pystyäkseen tuottamaan web-sovelluksia. Se ei myöskään pakota käyttämään kehityksessä mitään erityistä tekniikkaa, vaan pyrkii olemaan mahdollisimman yksinkertainen ja helposti laajennettavissa erilaisiin käyttötarkoituksiin. Laajentamisella tarkoitetaan erilaisten lisäosien liittämistä Pyramidiin. Yksinkertaisuuden ja minimaalisuuden ansiosta se on myös nopeampi kuin monet muut Python-pohjaiset web-sovelluskehykset. Tämä johtuu Pyramidin poikkeuksellisen pienestä kutsupinosta ajamisen aikana \parencite{pyramid_intr}. 
 
 Pyramid sai alkunsa Pylons-projektista syyskuussa vuonna 2005, jolloin jo yli 30 Python-sovelluskehystä kilpaili käyttäjistä. Ben Bangert ja James Gardner alkoivat yhdessä kehittää sovelluskehystä, josta tuli lopulta Pylons. Alunperin Pylons oli
-muokattu Myghty Python Templating Framework:n pohjalta tarjotakseen MVC-pohjaisen web-sovelluskehyksen. Myghty -sovelluskehystä ajettiin mod\_pythonin päällä, mutta Pylonsin pyrkimys oli käyttää WSGI:tä hyödyntämään joustavaa komponenttipohjaista lähestymistapaa web-sovelluksissa \parencite{pylons_history}. Pylons projektin tarkoituksena ei ole keskittyä yhden yksittäisen web-sovelluskehyksen kehittämiseen vaan tarjota kokoelma erilaisia teknologioita \parencite{pylons_about}. Vuonna 2008 Pyramid tunnettiin nimellä repoze.bfg. Joulukuun alussa tapahtui ohjelmakoodin uudelleen nimeäminen ja ominaisuuksien lisääminen sekä poistaminen \parencite{pyramid_about}.
+muokattu Myghty Python Templating Framework:n pohjalta tarjotakseen MVC-pohjaisen web-sovelluskehyksen. Myghty -sovelluskehystä ajettiin mod\_pythonin päällä, mutta Pylonsin pyrkimys oli käyttää WSGI:tä hyödyntämään joustavaa komponenttipohjaista lähestymistapaa web-sovelluksissa \parencite{pylons_history}. Pylons projektin tarkoituksena ei ole keskittyä yhden yksittäisen web-sovel"-luskehyksen kehittämiseen vaan tarjota kokoelma erilaisia teknologioita \parencite{pylons_about}. Vuonna 2008 Pyramid tunnettiin nimellä repoze.bfg. Joulukuun alussa tapahtui ohjelmakoodin uudelleen nimeäminen ja ominaisuuksien lisääminen sekä poistaminen \parencite{pyramid_about}.
 
 Koska Pyramid pyrkii tarjoamaan vain välttämättömimmät työkalut web"-sovelluksien kehitykseen, sen kehittäjät
 ovat päätyneet web-kehityksessä neljään yleisimpään ongelmaan ja tarjoavat niihin ratkaisun Pyramidissa:
@@ -924,7 +924,7 @@ Tornado on Python-pohjainen web-sovelluskehys, joka pystyy skaalautumaan kymmeni
 Pyramidin kehittäjien dokumenteissa esitellään MVC-kehyksenä, mutta samalla myös kyseenalaistetaan tämä väite. Erityisesti Mallin ja Ohjaimen määritelmä puuttuu \parencite{pyramid_intr}. Tässä
 osiossa käsitellään Pyramidia MVC:n näkökulmasta. Tarkastelua varten toteutetaan Pyramidilla vastaava laskuri-sovellus kuin Krasnerin julkaisussa käyttäen Pyramidin tarjoamia ominaisuuksia \parencite{krasner_desc}. Sovellus rajataan käyttämään SQL-tietokantaa Mallin datan tallennukseen sekä \emph{URL dispatch} -tekniikkaa \parencite{urldispatch}. Sovelluksen pohjalta tarkastellaan MVC:n kannalta kolmea oleellisinta tiedostoa: \emph{views.py}, \emph{models.py} ja \emph{template.pt}. Näin tutkielman tarkastelu pystytään rajaamaan mahdollisimman pienelle alueelle, jolloin tutkielma on helpompi keskittää tarkastelemaan yksittäistä tekniikkaa.
 
-Tässä osiossa tarkastellaan Pyramid-sovelluksen tiedostoja sekä niiden sisältöjä MVC-komponenttien näkökulmasta. Erityisesti keskitytään Ohjaimen ja Näkymän toteutukseen. Samalla tutkitaan, voidaanko Pyramid havaintojen perusteella luokitella MVC:n toteuttavaksi sovelluskehykseksi.
+Tässä osiossa tarkastellaan Pyramid-sovelluksen tiedostoja sekä niiden sisältöjä MVC-kom"-ponenttien näkökulmasta. Erityisesti keskitytään Ohjaimen ja Näkymän toteutukseen. Samalla tutkitaan, voidaanko Pyramid havaintojen perusteella luokitella MVC:n toteuttavaksi sovelluskehykseksi.
 Koska Pyramidissa MVC:n määrittely on hyvin epävakaalla pohjalla, tulee tehdä selväksi, mitä ominaisuuksia komponenteilta vaaditaan. Esimerkiksi \emph{views.py} ja \emph{template.pt} -tiedostot ovat tarkoitettu toimimaan yhdessä näkymänä, jolloin Ohjaimen toteuttamat tehtävät sisällytettäisiin Näkymään. MVC:tä tutkiessa täytyy sovelluksen komponentit kuitenkin jakaa kolmeen osaan. Tiedosto \emph{views.py}
 sisältää paljon Ohjaimelle yhteisiä piirteitä, joten se erottuu selvästi \emph{template.pt} -tiedostosta. Tutkielmassa oletetaan, että \emph{models.py} sisältää Mallin, \emph{views.py} Ohjaimen ja \emph{template.pt} Näkymän.
 
@@ -1177,7 +1177,7 @@ Alla esitellään selaimelle toteutettu JavaScript-koodi, jonka avulla yhdistet�
 Koodin ajaminen selaimessa luo HTTP:n kautta kättelyn ja tämän jälkeen siirtää viestinnän web-soketti protokollalle. Koodissa lähetetään yksinkertainen "Hello World!" -viesti yhteyden avautuessa Tornadossa luotuun käsittelijään. Käsittelijässä \emph{on\_message} -metodi saa kyseisen viestin ja lähettää tämän takaisin selaimelle web-soketin yhteyttä pitkin. JavaScriptillä toteutetussa koodissa käsitellään viesti \emph{onmessage} -metodissa, jossa viestin sisällön perusteella näytetään selaimessa ponnahdusikkuna. 
 
 \chapter{MVC:n toteutus Tornadolla}
-Tornadon avulla toteutetaan vastaava laskurisovellus kuin aikaisemminkin Pyramid- ja Smalltalk-osioissa. Tällä kertaa kuitenkin HTTP:ta käytetään vain kättelyssä ja kommunikaatio komponenttien välillä sovelluksen ajonaikana hoidetaan web-sokettien avulla. Sovelluksessa Ohjain ja Näkymä toteutetaan selaimen puolella käyttäen HTML:ää sekä Javascript ohjelmointikieltä. Malli kirjoitetaan palvelimen puolelle, jossa käytetään Tornadoa. Ohjain voidaan myös toteuttaa Palvelimen puolelle, jolloin ohjaimen logiikka voidaan piilottaa käyttäjältä. Tässä tutkielmassa keskitytään toteutukseen, jossa ohjaimen logiikka on nähtävillä web-selaimen puolella. Tutkimuksen kannalta oleellisinta on kuitenkin selvittää, voidaanko web-sokettien avulla toteuttaa MVC web-sovelluksessa. Jotta esimerkkisovellus saadaan esiteltyä selkeästi, on joitain paloja ohjelmasta jätetty näyttämättä. Täysin toimiva sovellus löytyy liitteet -osiosta. 
+Tornadon avulla toteutetaan vastaava laskurisovellus kuin aikaisemminkin Pyramid- ja Small"-talk-osioissa. Tällä kertaa kuitenkin HTTP:ta käytetään vain kättelyssä ja kommunikaatio komponenttien välillä sovelluksen ajonaikana hoidetaan web-sokettien avulla. Sovelluksessa Ohjain ja Näkymä toteutetaan selaimen puolella käyttäen HTML:ää sekä Javascript ohjelmointikieltä. Malli kirjoitetaan palvelimen puolelle, jossa käytetään Tornadoa. Ohjain voidaan myös toteuttaa Palvelimen puolelle, jolloin ohjaimen logiikka voidaan piilottaa käyttäjältä. Tässä tutkielmassa keskitytään toteutukseen, jossa ohjaimen logiikka on nähtävillä web-selaimen puolella. Tutkimuksen kannalta oleellisinta on kuitenkin selvittää, voidaanko web-sokettien avulla toteuttaa MVC web-sovelluksessa. Jotta esimerkkisovellus saadaan esiteltyä selkeästi, on joitain paloja ohjelmasta jätetty näyttämättä. Täysin toimiva sovellus löytyy liitteet -osiosta. 
 
 
 \section{Mallin toteutus}
@@ -1215,7 +1215,7 @@ if __name__ == "__main__":
     tornado.ioloop.IOLoop.current().start()
 \end{lstlisting}
 
-Web-soketit rekisteröidään Tornadolle antamalla \emph{Application} -luokan instanssille parametrina lista luokkia, jotka on peritty \emph{WebSocketHandkler} -luokasta. Lisäksi jokaista luokkaa kohden annetaan polku, josta sokettiin voidaan ottaa yhteyttä. Varsinainen sovellus rakennetaan \emph{make\_app} -funktion paluuarvon perusteella, joka palauttaa instanssin Tornado-sovelluksesta. Sovellus alustetaan kuuntelemaan porttia 8888, jonka jälkeen käynnistetään silmukka kuuntelemaan tapahtumia. Tämän jälkeen Malliin voidaan ottaa yhteyttä osoitteesta \emph{ws://localhost:8888/model} web-soketin avulla, jossa \emph{localhost} viittaa lokaalin osoitteeseen. Lisäksi Malli voi lähettää viestejä sokettiin kytketyille ohjaimille ja näkymille. 
+Web-soketit rekisteröidään Tornadolle antamalla \emph{Application} -luokan instanssille parametrina lista luokkia, jotka on peritty \emph{WebSocketHandkler} -luokasta. Lisäksi jokaista luokkaa kohden annetaan polku, josta sokettiin voidaan ottaa yhteyttä. Varsinainen sovellus rakennetaan \emph{make\_app} -funktion paluuarvon perusteella, joka palauttaa instanssin Tornado-sovelluksesta. Sovellus alustetaan kuuntelemaan porttia 8888, jonka jälkeen käynnistetään silmukka kuuntelemaan tapahtumia. Tämän jälkeen Malliin voidaan ottaa yhteyttä osoitteesta web-soketin avulla. Lisäksi Malli voi lähettää viestejä sokettiin kytketyille ohjaimille ja näkymille. 
 
 
 \section{Ohjain}
@@ -1279,16 +1279,16 @@ var view = (function (modelSocket) {
 })
 \end{lstlisting}
 
-Yllä esitellään useita funktioita, joiden avulla yhdistetään Näkymä vastaanottamaan web-sokettiyhteydestä tulevia viestejä. Lisäksi määritellään \emph{refresh} -funktio, jota kutsumalla varmistetaan yhteyden alustus. Alustuksen yhteydessä myös lähetetään Mallille viesti, jossa pyydetään lähettämään alkutila. Palvelimelta tulevat viestit käsitellään \emph{onmessage} -funktiossa, jota kutsutaan aina yksittäisen viestin saapuessa. Viestin sisältö löytyy \emph{evt}:n \emph{data} -muuttujasta. Muuttujan oletetaan olevan kokonaislukuarvo, joten se puretaan sellaiseksi ja asetetaan \emph{counterView} divisioonan ensimmäiseen lapsielementtiin, joka on tässä tapauksessa \emph{number} -tunnisteella esiintyvä divisioona. Palvelimelta tullut viesti laitetaan tällöin suoraan divisioonan sisältöön, jolloin muutos näkyy suoraan selaimessa. 
+Yllä esitellään useita funktioita, joiden avulla yhdistetään Näkymä vastaanottamaan web-sokettiyhteydestä tulevia viestejä. Lisäksi määritellään \emph{refresh} -funktio, jota kutsumalla varmistetaan yhteyden alustus. Alustuksen yhteydessä myös lähetetään Mallille viesti, jossa pyydetään lähettämään alkutila. Palvelimelta tulevat viestit käsitellään \emph{onmessage} -funktiossa, jota kutsutaan aina yksittäisen viestin saapuessa. Viestin sisältö löytyy \emph{evt}:n \emph{data} -muuttujasta. Muuttujan oletetaan olevan kokonaislukuarvo, joten se puretaan sellaiseksi ja asetetaan \emph{counterView} divisioonan ensimmäiseen lapsielementtiin, joka on tässä tapauksessa \emph{number} -tun"-nisteella esiintyvä divisioona. Palvelimelta tullut viesti laitetaan tällöin suoraan divisioonan sisältöön, jolloin muutos näkyy suoraan selaimessa. 
 
 
 \section{Yhteenveto}
 Tornado ei ota kantaa MVC:n toteutukseen, joten se antaa vapauden sovelluksen kehittäjälle määrittää sovelluksen arkkitehtuurin rakenne. Jakamalla sovellus Malliin, Näkymään ja Ohjaimeen siten, että Ohjain ja Näkymä toteutetaan selaimen puolella ja Malli palvelimen puolella, on mahdollista toteuttaa MVC-arkkitehtuuri sen määritelmän mukaisesti. Komponenttien kommunikaatio hoidetaan web-sokettien kautta, jolloin mahdollistetaan kaksisuuntainen kommunikaatio komponenttien välillä. 
 
 \chapter{Tulokset}
-Vaikka Django ja Pyramid määritellään MVC-sovelluskehyksiksi, eivät ne toteuta MVC:n määritelmää. Kummankin MVC toteutuksessa kommunikaatio Mallin ja Näkymän välillä toteutuu ohjaimen kautta, vaikka alkuperäisessä määrittelyssä myös Mallin tulisi olla suoraan yhteydessä Näkymään. Lisäksi vaaditaan kaksisuuntainen kommunikaatio komponenttien välillä ja tämä ei toteudu HTTP:n päälle rakennetuissa web-sovelluksissa. Voidaan siis väittää, että kaikki HTTP:n päälle rakennetut web-sovellukset eivät toteudu alkuperäisen MVC:n määritelmän mukaisesti. 
+Internetin arkkitehtuuri koostuu erilaisista kerroksista protokollia. Web-sovellukset rakennetaan protokollien ylimmälle tasolle, jossa on vapaus toteuttaa sovellus sellaisena kuin sovelluksen kehittäjät näkevät parhaaksi. Tästä syystä mahdolliset esteet arkkitehtuurin toteutukselle tulee purkaa alempien kerroksien protokollista lähtien. MVC:n alkuperäinen toteutus vaatii kaksisuuntaista kommunikaatiota, jolloin kommunikaatio-ongelma on ratkaistava alemman tason protokollissa. TCP- ja IP-protokolla pitävät huolen yhteyden muodostamisesta ja tiedon siirtämisestä sovelluksien välillä, mutta eivät rajoita millään tavalla kommunikaation suuntaa. MVC-arkkitehtuurille ei siis ole rajoituksia TCP- ja IP-protokollassa. Tällöin voidaan siirtyä kerroksissa ylemmäksi, jolloin vastaan tulee HTTP-protokolla, jonka päälle useimmat web-sovellukset on rakennettu. HTTP-protokollan luonne kuitenkin rajoittaa kommunikaatiota sovelluskomponenttien välillä yksisuuntaiseksi.  Voidaan siis väittää, että kaikki HTTP:n päälle rakennetut web-sovellukset eivät toteuta MVC:tä alkuperäisen määritelmän mukaisesti. Vaikka Django ja Pyramid määritellään MVC-sovelluskehyksiksi, eivät ne toteuta MVC:n määritelmää. Kummankin MVC-toteutuksessa kommunikaatio Mallin ja Näkymän välillä toteutuu ohjaimen kautta, vaikka alkuperäisessä määrittelyssä myös Mallin tulisi olla suoraan yhteydessä Näkymään. Lisäksi vaaditaan kaksisuuntainen kommunikaatio komponenttien välillä ja tämä ei toteudu HTTP:n päälle rakennetuissa web-sovelluksissa. 
 
-Web-sokettien päälle rakennetuissa web-sovelluksissa mahdollistuu kaksisuuntainen kommunikaatio, jolloin MVC:n toteutuksen esteeksi ei tule sovelluskerroksen tiedonsiirtoprotokolla toisin kuin HTTP:n kanssa. Tällöin tiedonsiirtoprotokollien yläpuolella oleva sovelluksen arkkitehtuurillinen rakenne on vapaasti määriteltävissä ja mahdollistaa MVC:n toteutuksen sen määritelmän mukaisesti ilman alempien kerroksien teknisiä esteitä. Mallin ja Näkymän kommunikaatio määritelmän mukaisesti on toteutettavissa Tornadolla, koska se ottaa hyvin kevyesti kantaa sovelluksen arkkitehtuuriin. Tornadon ja web-sokettien avulla voidaan toteuttaa MVC alkuperäisen määritelmän mukaisesti.
+Web-soketti -protokollan päälle rakennetuissa web-sovelluksissa mahdollistetaan kaksisuuntainen kommunikaatio, jolloin MVC:n toteutuksen esteeksi ei tule sovelluskerroksen tiedonsiirtoprotokolla toisin kuin HTTP:n kanssa. Tällöin tiedonsiirtoprotokollien yläpuolella oleva sovelluksen arkkitehtuurillinen rakenne on vapaasti määriteltävissä ja mahdollistaa MVC:n toteutuksen alkuperäisen määritelmän mukaisesti ilman alempien kerroksien teknisiä esteitä. MVC-arkkitehtuuri on toteutettavissa Tornadolla, koska Tornado ottaa hyvin kevyesti kantaa sovelluksen arkkitehtuuriin sekä mahdollistaa sovelluksen toteutuksen web-sokettien päälle. Tästä syystä Tornadon ja web-sokettien avulla voidaan toteuttaa MVC alkuperäisen määritelmän mukaisesti. 
 
 
 \printbibliography
